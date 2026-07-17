@@ -39,6 +39,10 @@ a{color:inherit;text-decoration:none}
 .btn-play:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(255,157,46,.45)}
 .btn-ghost{background:var(--raised);color:var(--text);border:1px solid var(--border2)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent2)}
+/* "Coming soon" — looks deliberate, not broken: no hover lift, not clickable. */
+.btn-soon{background:var(--raised);color:var(--muted);border:1px dashed var(--border2);cursor:not-allowed;box-shadow:none}
+.btn-soon:hover{transform:none;box-shadow:none}
+.btn-big{font-size:17px;padding:16px 34px}
 
 /* hero */
 .hero{position:relative;padding:90px 0 40px;text-align:center;overflow:hidden}
@@ -105,6 +109,8 @@ a{color:inherit;text-decoration:none}
 /* cta */
 .cta{text-align:center;background:linear-gradient(160deg,rgba(91,140,255,.14),var(--surface));
   border:1px solid var(--border2);border-radius:26px;padding:64px 28px}
+.soon-badge{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,180,60,.12);
+  border:1px solid rgba(255,180,60,.35);color:var(--play1);font-size:13px;font-weight:600;margin-bottom:18px}
 .cta h2{font-family:var(--display);font-weight:800;font-size:clamp(24px,3.4vw,36px)}
 .cta p{color:var(--muted);margin:14px auto 30px;max-width:520px}
 .dl-row{display:flex;flex-direction:column;align-items:center;gap:14px}

@@ -1,21 +1,26 @@
 /* Events Client landing — tiny progressive enhancements, no dependencies. */
 (function () {
-  var RELEASES = 'https://github.com/EventsTeamMC/events-client/releases/latest';
   var DISCORD = 'https://discord.gg/eventsclient'; // ← cámbialo por tu invitación real
+  // Cuando el cliente esté listo: publica una release y sustituye los
+  // <span class="btn btn-soon"> de index.html por enlaces a esta URL.
+  var RELEASES = 'https://github.com/EventsTeamMC/events-client-releases/releases/latest';
+  void RELEASES;
 
   // Year in the footer.
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // Discord link.
-  var fd = document.getElementById('foot-discord');
-  if (fd) fd.href = DISCORD;
+  // Discord links.
+  ['foot-discord', 'cta-discord'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.href = DISCORD;
+  });
 
-  // Point the main download button at the visitor's OS.
+  // Downloads aren't live yet — we only name the visitor's OS in the copy.
   var ua = navigator.userAgent;
   var os = /Macintosh|Mac OS X/i.test(ua) ? 'macOS' : /Linux|X11/i.test(ua) && !/Android/i.test(ua) ? 'Linux' : 'Windows';
-  var main = document.getElementById('dl-main');
-  if (main) { main.textContent = '▶ Descargar para ' + os; main.href = RELEASES; }
+  var osEl = document.getElementById('dl-os');
+  if (osEl) osEl.textContent = os;
 
   // Sticky nav border once scrolled.
   var nav = document.getElementById('nav');
