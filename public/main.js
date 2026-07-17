@@ -1,6 +1,6 @@
 /* Events Client landing — tiny progressive enhancements, no dependencies. */
 (function () {
-  var DISCORD = 'https://discord.gg/eventsclient'; // ← cámbialo por tu invitación real
+  var DISCORD = 'https://discord.gg/2T7DDmpxYr';
   // Cuando el cliente esté listo: publica una release y sustituye los
   // <span class="btn btn-soon"> de index.html por enlaces a esta URL.
   var RELEASES = 'https://github.com/EventsTeamMC/events-client-releases/releases/latest';
