@@ -1,10 +1,14 @@
 /* Events Client landing — tiny progressive enhancements, no dependencies. */
 (function () {
   var DISCORD = 'https://discord.gg/2T7DDmpxYr';
-  // Cuando el cliente esté listo: publica una release y sustituye los
-  // <span class="btn btn-soon"> de index.html por enlaces a esta URL.
-  var RELEASES = 'https://github.com/EventsTeamMC/events-client-releases/releases/latest';
-  void RELEASES;
+  // Stable "latest" download URLs — GitHub always serves the newest release's
+  // asset from this path, so the landing never needs updating per version.
+  var DL_BASE = 'https://github.com/EventsTeamMC/events-client-releases/releases/latest/download/';
+  var DOWNLOADS = {
+    windows: { file: 'Events-Client-win.exe', label: 'Windows' },
+    mac: { file: 'Events-Client-mac-universal.dmg', label: 'macOS' },
+    linux: { file: 'Events-Client-linux-x86_64.AppImage', label: 'Linux' },
+  };
 
   // Year in the footer.
   var y = document.getElementById('year');
@@ -16,11 +20,25 @@
     if (el) el.href = DISCORD;
   });
 
-  // Downloads aren't live yet — we only name the visitor's OS in the copy.
+  // Detect the visitor's OS.
   var ua = navigator.userAgent;
-  var os = /Macintosh|Mac OS X/i.test(ua) ? 'macOS' : /Linux|X11/i.test(ua) && !/Android/i.test(ua) ? 'Linux' : 'Windows';
+  var osKey = /Macintosh|Mac OS X/i.test(ua) ? 'mac' : (/Linux|X11/i.test(ua) && !/Android/i.test(ua)) ? 'linux' : 'windows';
+  var dl = DOWNLOADS[osKey];
+
+  // Home page copy: name the visitor's OS.
   var osEl = document.getElementById('dl-os');
-  if (osEl) osEl.textContent = os;
+  if (osEl) osEl.textContent = dl.label;
+
+  // Download page: highlight the matching card, wire the hero button.
+  var primary = document.getElementById('dl-primary');
+  if (primary) {
+    primary.href = DL_BASE + dl.file;
+    primary.textContent = 'Descargar para ' + dl.label;
+  }
+  var detected = document.getElementById('dl-detected');
+  if (detected) detected.textContent = 'Detectado: ' + dl.label;
+  var card = document.querySelector('.dl-card[data-os="' + osKey + '"]');
+  if (card) card.classList.add('detected');
 
   // Sticky nav border once scrolled.
   var nav = document.getElementById('nav');
