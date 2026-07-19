@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidad — Events Blacklist</title>
+<meta name="description" content="Política de Privacidad del bot de Discord Events Blacklist: qué datos recopila y cómo protege el origen de los reportes.">
+<link rel="icon" href="/icon.png">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span></a>
+  <nav class="nav-links">
+    <a href="/blacklist/terms">Condiciones</a>
+    <a href="/blacklist/privacy">Privacidad</a>
+  </nav>
+  <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
+</header>
+
+<main id="top">
+
+  <section class="legal-hero">
+    <div class="wrap">
+      <span class="eyebrow">✦ Events Blacklist</span>
+      <h1>Política de Privacidad</h1>
+      <p class="legal-updated">Última actualización: 19 de julio de 2026</p>
+    </div>
+  </section>
+
+  <article class="legal">
+
+    <h2>1. Qué datos recopilamos</h2>
+    <p>Events Blacklist almacena únicamente lo necesario para funcionar como sistema de reputación:</p>
+    <ul>
+      <li><strong>ID de Discord</strong> del usuario reportado (nunca su nombre, avatar ni mensajes).</li>
+      <li>Categoría, severidad, motivo y, si se aporta, un enlace de evidencia de cada reporte.</li>
+      <li>Un identificador <strong>irreversible</strong> del servidor que originó el reporte (ver punto 3).</li>
+      <li>La configuración que el staff de cada servidor define (canal de alertas, roles autorizados, umbral
+        de aviso).</li>
+      <li>Mensajes de apelación que un usuario envía sobre su propio historial.</li>
+    </ul>
+
+    <h2>2. Qué NO hacemos</h2>
+    <ul>
+      <li>No leemos ni almacenamos el contenido de tus mensajes en ningún servidor.</li>
+      <li>No accedemos a canales privados ni a mensajes directos.</li>
+      <li>No vendemos ni compartimos datos con terceros ajenos al Bot.</li>
+      <li>No usamos los datos para publicidad ni perfiles fuera del propio sistema de reputación.</li>
+    </ul>
+
+    <h2>3. Cómo protegemos el origen de un reporte</h2>
+    <p>El identificador del servidor que hace un reporte se transforma mediante una función criptográfica de
+      un solo sentido antes de guardarse. Esto significa que ni el propio sistema puede revertirlo para saber
+      qué servidor originó un reporte concreto: solo sirve internamente para evitar reportes duplicados y para
+      calcular estadísticas como "cuántas comunidades distintas han reportado a este usuario". Ningún comando,
+      para ningún nivel de acceso, expone esta información.</p>
+
+    <h2>4. Para qué usamos los datos</h2>
+    <ul>
+      <li>Calcular un nivel de riesgo agregado por usuario.</li>
+      <li>Avisar al staff de un servidor cuando entra un usuario con antecedentes relevantes.</li>
+      <li>Mostrar estadísticas agregadas y anónimas (nunca desglosadas por servidor).</li>
+      <li>Gestionar apelaciones y mantener un registro interno de auditoría del sistema.</li>
+    </ul>
+
+    <h2>5. Cuánto tiempo conservamos los datos</h2>
+    <p>Los reportes de severidad baja que no se refuerzan con nuevos reportes expiran automáticamente pasado
+      un tiempo, dejando de contar en el historial del usuario. Los reportes de mayor severidad se conservan
+      mientras sigan activos, salvo que se anulen o se apruebe una apelación sobre ellos.</p>
+
+    <h2>6. Tus derechos</h2>
+    <p>Si el Bot tiene un registro sobre tu cuenta de Discord, puedes:</p>
+    <ul>
+      <li>Solicitar la revisión de tu historial mediante <code>/appeal submit</code>.</li>
+      <li>Pedir información sobre qué datos tenemos asociados a tu ID de Discord.</li>
+      <li>Solicitar la eliminación de tus datos escribiendo al contacto indicado más abajo, salvo que exista
+        un motivo legítimo para conservarlos (por ejemplo, un reporte activo aún no resuelto).</li>
+    </ul>
+
+    <h2>7. Seguridad</h2>
+    <p>Los identificadores de servidores reportantes se cifran con una clave que solo controla quien opera la
+      infraestructura del Bot, y el acceso a las herramientas de administración está restringido. Aun así,
+      ningún sistema es infalible al 100%; si detectas una vulnerabilidad, contáctanos.</p>
+
+    <h2>8. Menores de edad</h2>
+    <p>Events Blacklist sigue los mismos requisitos de edad mínima que Discord. No solicitamos ni verificamos
+      activamente la edad de los usuarios más allá de lo que la propia plataforma de Discord ya exige.</p>
+
+    <h2>9. Cambios en esta política</h2>
+    <p>Si actualizamos esta política de forma relevante, lo anunciaremos a través de los canales oficiales del
+      Bot. La fecha de "última actualización" en esta página siempre refleja la versión vigente.</p>
+
+    <h2>10. Contacto</h2>
+    <p>Para cualquier duda sobre privacidad o para ejercer tus derechos, escribe a
+      <a href="mailto:rauuul.dev@gmail.com">rauuul.dev@gmail.com</a>.</p>
+
+    <div class="legal-nav">
+      <a class="btn btn-ghost btn-sm" href="/blacklist/terms">Ver Condiciones del Servicio</a>
+      <a class="btn btn-ghost btn-sm" href="/">Volver al inicio</a>
+    </div>
+
+  </article>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-inner">
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span><p>Sistema de reputación anónimo para comunidades de Discord.</p></div>
+    <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones del Servicio</a><a href="/blacklist/privacy">Política de Privacidad</a></nav>
+    <nav><h4>Events</h4><a href="/">Events Client</a><a href="https://github.com/EventsTeamMC">GitHub</a></nav>
+  </div>
+  <div class="wrap foot-legal">
+    <span>© <span id="year"></span> Events Blacklist</span>
+    <span>No afiliado a Discord Inc.</span>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>
