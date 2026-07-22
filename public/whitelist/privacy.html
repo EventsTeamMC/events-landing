@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidad — Events Whitelist</title>
+<meta name="description" content="Política de Privacidad del bot de Discord Events Whitelist: qué datos recopila y cómo funciona la verificación de cuentas Premium.">
+<link rel="icon" href="/icon.png">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="wl">
+
+<header class="nav" id="nav">
+  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events <b>Whitelist</b></span></a>
+  <nav class="nav-links">
+    <a href="/whitelist/terms">Condiciones</a>
+    <a href="/whitelist/privacy">Privacidad</a>
+  </nav>
+  <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
+</header>
+
+<main id="top">
+
+  <section class="legal-hero">
+    <div class="wrap">
+      <span class="eyebrow">✦ Events Whitelist</span>
+      <h1>Política de Privacidad</h1>
+      <p class="legal-updated">Última actualización: 22 de julio de 2026</p>
+    </div>
+  </section>
+
+  <article class="legal">
+
+    <p>Events Whitelist (el "Bot") es un bot de Discord que registra nicks de Minecraft en whitelists de
+      servidor. Esta política explica qué datos maneja el Bot, cómo funciona la verificación de cuentas
+      Premium y qué ocurre con los datos si activas la vinculación con un servidor de Minecraft.</p>
+
+    <h2>1. Qué datos recopilamos</h2>
+    <p>El Bot almacena únicamente lo necesario para gestionar tus whitelists:</p>
+    <ul>
+      <li>Tu <strong>ID de Discord</strong> (nunca tu nombre de usuario, avatar ni el contenido de otros mensajes
+        tuyos fuera de los canales de registro).</li>
+      <li>El <strong>nick de Minecraft</strong> que escribas en un canal de registro, junto con su
+        <strong>UUID de Mojang</strong> si corresponde a una cuenta Premium.</li>
+      <li>El tipo de cuenta confirmado (Premium o No Premium) y la whitelist a la que pertenece el registro.</li>
+      <li>La configuración que el staff de cada servidor define (canales de registro, tipo de cuenta admitido,
+        límites por persona, roles requeridos).</li>
+      <li>Si un servidor activa la vinculación con Minecraft: un identificador de la clave de acceso generada
+        (nunca la clave en claro, que solo se muestra una vez al crearla) y, si se configura, la URL de un
+        webhook al que se notifican los cambios.</li>
+      <li>Un registro interno de auditoría de las acciones administrativas (creación de whitelists, altas y
+        bajas manuales, generación de claves de acceso).</li>
+    </ul>
+
+    <h2>2. Qué NO hacemos</h2>
+    <ul>
+      <li>El Bot solo lee los mensajes de los canales que el staff configura explícitamente como canales de
+        registro; no lee ni almacena el resto de tu actividad en el servidor.</li>
+      <li>No accedemos a canales privados ni a mensajes directos.</li>
+      <li>No vendemos ni compartimos tus datos con terceros ajenos al propio sistema de whitelist.</li>
+      <li>No usamos tus datos para publicidad ni para perfiles fuera del propio sistema de registro.</li>
+    </ul>
+
+    <h2>3. Verificación de cuentas Premium</h2>
+    <p>Cuando escribes un nick, el Bot consulta la API pública de Mojang (y, como respaldo, PlayerDB) para saber
+      si ese nick corresponde a una cuenta Premium existente. Esta consulta solo envía el nick escrito; no se
+      comparte tu ID de Discord con esos servicios externos. El resultado se guarda en caché unos minutos para
+      no saturar esas APIs.</p>
+
+    <h2>4. Vinculación con servidores de Minecraft</h2>
+    <p>Si el staff de un servidor activa la vinculación, se genera una clave de acceso que permite a un plugin o
+      mod externo consultar la whitelist y recibir notificaciones de altas y bajas en tiempo real. Solo se
+      guarda el <strong>hash</strong> de esa clave, nunca la clave en claro. Si se configura un webhook, los
+      eventos enviados se firman digitalmente para que el destinatario pueda verificar que proceden del Bot.
+      Esta función es opcional y depende de que el propio servidor la active.</p>
+
+    <h2>5. Para qué usamos los datos</h2>
+    <ul>
+      <li>Verificar y registrar los nicks de Minecraft en la whitelist correspondiente.</li>
+      <li>Aplicar los límites y restricciones que configura cada servidor.</li>
+      <li>Generar las exportaciones de whitelist que solicite el staff.</li>
+      <li>Notificar en tiempo real a un servidor de Minecraft vinculado, si esa función está activada.</li>
+      <li>Auditar las acciones administrativas del Bot.</li>
+    </ul>
+
+    <h2>6. Cuánto tiempo conservamos los datos</h2>
+    <p>Un nick permanece registrado mientras la whitelist a la que pertenece exista y no se elimine
+      manualmente (por ti, con <code>/mis-nicks</code>, o por el staff del servidor). Si el Bot es
+      <strong>expulsado</strong> de un servidor o se elimina una whitelist, todos sus registros se eliminan.</p>
+
+    <h2>7. Tus derechos</h2>
+    <p>Si el Bot tiene un registro sobre tu cuenta de Discord, puedes:</p>
+    <ul>
+      <li>Consultar tus propios nicks registrados en un servidor con <code>/mis-nicks</code>.</li>
+      <li>Eliminar tú mismo un nick registrado, o solicitar al staff del servidor que lo haga.</li>
+      <li>Pedir información sobre qué datos tenemos asociados a tu ID de Discord escribiendo al contacto
+        indicado más abajo.</li>
+    </ul>
+
+    <h2>8. Seguridad</h2>
+    <p>Las claves de acceso de vinculación se guardan siempre como hash, nunca en claro, y los eventos salientes
+      hacia un servidor de Minecraft se firman digitalmente. Aun así, ningún sistema es infalible al 100%; si
+      detectas una vulnerabilidad, contáctanos.</p>
+
+    <h2>9. Menores de edad</h2>
+    <p>Events Whitelist sigue los mismos requisitos de edad mínima que Discord. No solicitamos ni verificamos
+      activamente la edad de los usuarios más allá de lo que la propia plataforma de Discord ya exige.</p>
+
+    <h2>10. Cambios en esta política</h2>
+    <p>Si actualizamos esta política de forma relevante, lo anunciaremos a través de los canales oficiales del
+      Bot. La fecha de "última actualización" en esta página siempre refleja la versión vigente.</p>
+
+    <h2>11. Contacto</h2>
+    <p>Para cualquier duda sobre privacidad o para ejercer tus derechos, escribe a
+      <a href="mailto:support@eventsmc.xyz">support@eventsmc.xyz</a>.</p>
+
+    <div class="legal-nav">
+      <a class="btn btn-ghost btn-sm" href="/whitelist/terms">Ver Condiciones del Servicio</a>
+      <a class="btn btn-ghost btn-sm" href="/whitelist">Volver a Events Whitelist</a>
+    </div>
+
+  </article>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-inner">
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events <b>Whitelist</b></span><p>Registro de whitelists de Minecraft desde Discord.</p></div>
+    <nav><h4>Legal</h4><a href="/whitelist/terms">Condiciones del Servicio</a><a href="/whitelist/privacy">Política de Privacidad</a></nav>
+    <nav><h4>Events</h4><a href="/whitelist">Events Whitelist</a><a href="/">Todos los productos</a><a href="https://github.com/EventsTeamMC">GitHub</a></nav>
+  </div>
+  <div class="wrap foot-legal">
+    <span>© <span id="year"></span> Events Whitelist</span>
+    <span>No afiliado a Discord Inc. ni a Mojang/Microsoft.</span>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
