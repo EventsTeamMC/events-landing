@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events Blacklist — Baneos sincronizados y anónimos para Discord</title>
+<meta name="description" content="Bot de Discord que sincroniza baneos entre servidores y mantiene una base de datos compartida y anónima. Protege tu comunidad sin revelar nunca quién reportó a quién.">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="Events Blacklist — Baneos sincronizados y anónimos">
+<meta property="og:description" content="Cuando un usuario con baneos activos entra en tu servidor, tu staff se entera. Sin apelaciones interminables, sin exponer el origen de los reportes.">
+<meta property="og:image" content="/shots/launcher-home.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bl">
+
+<header class="nav" id="nav">
+  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span></a>
+  <nav class="nav-links">
+    <a href="/">← Todos los productos</a>
+    <a href="#features">Características</a>
+    <a href="#privacy">Privacidad</a>
+    <a href="#commands">Comandos</a>
+  </nav>
+  <a class="btn btn-primary btn-sm" href="#add">Añadir al servidor</a>
+  <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">✦ Bot de Discord · Sincronización de baneos</span>
+      <h1>Un baneo en un servidor,<br><span class="grad">un aviso en todos</span></h1>
+      <p class="lead">Events Blacklist conecta comunidades para compartir una base de datos anónima de baneos activos.
+        Cuando alguien conflictivo intenta reincidir en tu evento, tu staff lo sabe al instante — sin revelar nunca
+        quién lo reportó.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#add">Añadir al servidor</a>
+        <a class="btn btn-ghost" href="#how">Cómo funciona</a>
+      </div>
+      <div class="hero-meta">
+        <span>discord.js v14</span><i></i><span>PostgreSQL + Redis</span><i></i><span>HMAC-SHA256</span><i></i><span>Sin leer mensajes</span>
+      </div>
+
+      <!-- animated orbit -->
+      <div class="bl-orbit" aria-hidden="true">
+        <div class="bl-shield">🛡️</div>
+        <span class="bl-chip c1"><span class="dot r"></span>Baneo detectado</span>
+        <span class="bl-chip c2"><span class="dot g"></span>Staff avisado</span>
+        <span class="bl-chip c3"><span class="dot b"></span>Origen oculto</span>
+        <span class="bl-chip c4"><span class="dot y"></span>3 comunidades</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM → SOLUTION -->
+  <section class="wrap section">
+    <h2 class="h2">El mismo problemático, rebotando de servidor en servidor.</h2>
+    <p class="sub">Lo banean en una comunidad, se une a la siguiente con otro nombre y el staff empieza de cero. Sin memoria compartida, siempre vas un paso por detrás.</p>
+    <div class="cols2">
+      <div class="card bad">
+        <h3>Sin Events Blacklist</h3>
+        <ul>
+          <li>Cada servidor descubre a los conflictivos por las malas</li>
+          <li>Listas de baneos en hojas de cálculo que nadie mantiene</li>
+          <li>Compartir baneos expone quién señaló a quién → represalias</li>
+          <li>Nadie sabe si un usuario ya la lió en otra comunidad</li>
+          <li>El staff repite el mismo drama una y otra vez</li>
+        </ul>
+      </div>
+      <div class="card good">
+        <h3>Con Events Blacklist</h3>
+        <ul>
+          <li>El baneo se sincroniza solo leyendo el audit log</li>
+          <li>Una base de datos común, siempre al día</li>
+          <li>El origen del reporte se cifra: nadie sabe quién reportó</li>
+          <li>Alerta automática si entra alguien con baneos activos</li>
+          <li>Tu staff reacciona antes de que pase nada</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="wrap section" id="features">
+    <h2 class="h2">Simple a propósito. Potente donde importa.</h2>
+    <p class="sub">Nada de sistemas de apelaciones enrevesados ni "risk scores" mágicos. Solo sincroniza baneos y avisa a quien tiene que avisar.</p>
+    <div class="grid">
+      <article class="feat">
+        <span class="fic">🔄</span><h3>Sincronización automática</h3>
+        <p>Cuando baneas a alguien y el bot tiene permiso, lee el audit log y registra el baneo en la red compartida. Sin comandos manuales.</p>
+      </article>
+      <article class="feat">
+        <span class="fic">🚨</span><h3>Alertas al entrar</h3>
+        <p>Si un usuario con baneos activos se une a tu servidor, tu staff recibe un aviso en el canal que elijas, con el nivel de riesgo.</p>
+      </article>
+      <article class="feat">
+        <span class="fic">🕵️</span><h3>Origen irreversible</h3>
+        <p>El servidor que reporta se transforma con HMAC-SHA256. Ni el superusuario global puede saber quién originó un reporte.</p>
+      </article>
+      <article class="feat">
+        <span class="fic">📊</span><h3>Estadísticas agregadas</h3>
+        <p>Consulta cuántas comunidades distintas han reportado a un usuario y su nivel de riesgo — siempre en cifras, nunca por servidor.</p>
+      </article>
+      <article class="feat">
+        <span class="fic">⚙️</span><h3>Configurable por servidor</h3>
+        <p>Canal de alertas, rol de staff autorizado y opción de no participar (opt-out). Cada comunidad manda en la suya.</p>
+      </article>
+      <article class="feat">
+        <span class="fic">📜</span><h3>Auditoría global</h3>
+        <p>Cada acción relevante queda registrada para trazabilidad interna, también con el origen cifrado. Transparencia sin exponer a nadie.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="wrap section" id="how">
+    <h2 class="h2">Cómo funciona, en 3 pasos.</h2>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><h3>Invita el bot</h3><p>Añádelo a tu servidor con el Server Members Intent y elige el canal donde quieres las alertas.</p></div>
+      <div class="step"><span class="num">02</span><h3>Banea como siempre</h3><p>Cuando expulsas a un problemático, el bot lo detecta por el audit log y lo sincroniza con el origen cifrado.</p></div>
+      <div class="step"><span class="num">03</span><h3>Recibe avisos</h3><p>Si esa persona intenta colarse en otra comunidad de la red, su staff recibe la alerta al instante.</p></div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="wrap section" id="privacy">
+    <span class="eyebrow" style="display:block;text-align:center;margin:0 auto 4px;width:fit-content">La parte más importante</span>
+    <h2 class="h2">Privacidad por diseño, no por promesa.</h2>
+    <p class="sub">Todo el sistema parte de una premisa: <b>ningún comando, para ningún rol, puede revelar qué servidor originó un reporte</b>.</p>
+    <div class="priv-grid">
+      <div class="priv">
+        <span class="fic">#️⃣</span>
+        <h3>El origen se hashea</h3>
+        <p>El ID del servidor que reporta pasa por HMAC-SHA256 antes de guardarse. Es irreversible: solo sirve para deduplicar y para contar "N comunidades distintas".</p>
+      </div>
+      <div class="priv">
+        <span class="fic">💬</span>
+        <h3>No leemos mensajes</h3>
+        <p>El bot no necesita ni pide el Message Content Intent. No accede a tus canales privados ni a mensajes directos. Solo guarda IDs de Discord de usuarios baneados.</p>
+      </div>
+      <div class="priv">
+        <span class="fic">📈</span>
+        <h3>Solo datos agregados</h3>
+        <p><code>/lookup</code>, <code>/stats</code> y compañía devuelven nivel de riesgo, categorías y fechas. Nunca un desglose por servidor.</p>
+      </div>
+      <div class="priv">
+        <span class="fic">⏳</span>
+        <h3>Los datos caducan</h3>
+        <p>Los reportes de baja severidad que no se refuerzan expiran solos y dejan de contar. Se guarda lo mínimo, el tiempo mínimo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMANDS -->
+  <section class="wrap section" id="commands">
+    <h2 class="h2">Los comandos que necesitas, y ni uno más.</h2>
+    <p class="sub">Tres niveles de acceso, cada uno con lo justo para su rol.</p>
+    <div class="cmds">
+      <div class="cmd-card">
+        <h3>Públicos · cualquiera</h3>
+        <ul>
+          <li><code>/lookup</code><small>Consulta el nivel de riesgo de un usuario</small></li>
+          <li><code>/stats</code><small>Estadísticas agregadas de la red</small></li>
+          <li><code>/info</code><small>Qué es el bot y cómo funciona</small></li>
+        </ul>
+      </div>
+      <div class="cmd-card">
+        <h3>Staff del servidor</h3>
+        <ul>
+          <li><code>/config setup</code><small>Configura alertas, roles y opt-out</small></li>
+          <li><code>/config alert-channel</code><small>Elige el canal de avisos</small></li>
+          <li><code>/alerts test</code><small>Prueba que las alertas llegan bien</small></li>
+        </ul>
+      </div>
+      <div class="cmd-card">
+        <h3>Superusuario global</h3>
+        <ul>
+          <li><code>/admin global-stats</code><small>Panorama de toda la red</small></li>
+          <li><code>/admin guild-list</code><small>Servidores participantes</small></li>
+          <li><code>/admin remove-ban</code><small>Retira un baneo de la base</small></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD / CTA -->
+  <section class="wrap section" id="add">
+    <div class="cta">
+      <span class="soon-badge">Gratis y de código abierto</span>
+      <h2>Protege tu comunidad hoy.</h2>
+      <p>Despliega tu propia instancia con Docker en minutos, o únete a la red compartida. El código está en GitHub, listo para leer y auditar.</p>
+      <div class="dl-row">
+        <a class="btn btn-primary btn-big" href="https://github.com/EventsTeamMC">Ver en GitHub</a>
+        <div class="dl-alt">
+          <a href="/blacklist/privacy">Política de privacidad</a>
+          <span>·</span>
+          <a href="/blacklist/terms">Condiciones</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-inner">
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span><p>Sincronización de baneos anónima para comunidades de Discord.</p></div>
+    <nav><h4>Producto</h4><a href="#features">Características</a><a href="#privacy">Privacidad</a><a href="#commands">Comandos</a></nav>
+    <nav><h4>Ecosistema</h4><a href="/">Todos los productos</a><a href="/client">Events Client</a><a href="https://github.com/EventsTeamMC">GitHub</a></nav>
+    <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones</a><a href="/blacklist/privacy">Privacidad</a></nav>
+  </div>
+  <div class="wrap foot-legal">
+    <span>© <span id="year"></span> Events Blacklist</span>
+    <span>No afiliado a Discord Inc.</span>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>

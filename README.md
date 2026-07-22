@@ -1,18 +1,26 @@
-# Events Client — Landing
+# Events — Landing
 
 Sitio estático e **independiente** (sin backend, sin build step). Pensado para Vercel.
+Es un *hub* multi-producto: la home lista todos los productos del ecosistema Events y cada
+uno tiene su propia página de presentación.
 
 ```
 landing/
 ├── vercel.json        # headers + cleanUrls
 └── public/            # ← lo que se publica
-    ├── index.html
+    ├── index.html     # hub: todos los productos (Blacklist, Client, y "Próximamente")
+    ├── blacklist.html # presentación de Events Blacklist (/blacklist)
+    ├── client.html    # presentación de Events Client (/client)
+    ├── download.html  # descargas de Events Client (/download)
+    ├── blacklist/     # legales de Blacklist (terms, privacy)
     ├── styles.css
     ├── main.js
     ├── icon.png
     ├── logo.svg
     └── shots/         # capturas reales del launcher/panel
 ```
+
+> `cleanUrls: true` sirve `client.html` en `/client`, `blacklist.html` en `/blacklist`, etc.
 
 ## Desplegar en Vercel
 

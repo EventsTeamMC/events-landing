@@ -53,7 +53,7 @@
   });
 
   // Reveal sections as they enter the viewport.
-  var targets = document.querySelectorAll('.section > .h2, .section > .sub, .card, .feat, .step, .cta, .shot-row figure, .panel-shot, .checks');
+  var targets = document.querySelectorAll('.section > .h2, .section > .sub, .products-head, .product, .card, .feat, .step, .cta, .shot-row figure, .panel-shot, .checks, .priv, .cmd-card');
   targets.forEach(function (el) { el.classList.add('reveal'); });
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
