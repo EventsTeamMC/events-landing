@@ -18,14 +18,14 @@
 <body class="bl">
 
 <header class="nav" id="nav">
-  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span></a>
+  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events <b>Blacklist</b></span></a>
   <nav class="nav-links">
     <a href="/">← Todos los productos</a>
     <a href="#features">Características</a>
     <a href="#privacy">Privacidad</a>
     <a href="#commands">Comandos</a>
   </nav>
-  <a class="btn btn-primary btn-sm" href="#add">Añadir al servidor</a>
+  <a class="btn btn-primary btn-sm" href="https://discord.com/oauth2/authorize?client_id=1528203943367151706">Añadir al servidor</a>
   <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
 </header>
 
@@ -41,7 +41,7 @@
         Cuando alguien conflictivo intenta reincidir en tu evento, tu staff lo sabe al instante — sin revelar nunca
         quién lo reportó.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#add">Añadir al servidor</a>
+        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1528203943367151706">Añadir al servidor</a>
         <a class="btn btn-ghost" href="#how">Cómo funciona</a>
       </div>
       <div class="hero-meta">
@@ -54,7 +54,7 @@
         <span class="bl-chip c1"><span class="dot r"></span>Baneo detectado</span>
         <span class="bl-chip c2"><span class="dot g"></span>Staff avisado</span>
         <span class="bl-chip c3"><span class="dot b"></span>Origen oculto</span>
-        <span class="bl-chip c4"><span class="dot y"></span>3 comunidades</span>
+        <span class="bl-chip c4"><span class="dot y"></span>Red compartida</span>
       </div>
     </div>
   </section>
@@ -68,7 +68,7 @@
         <h3>Sin Events Blacklist</h3>
         <ul>
           <li>Cada servidor descubre a los conflictivos por las malas</li>
-          <li>Listas de baneos en hojas de cálculo que nadie mantiene</li>
+          <li>Una lista interminable de baneos que nadie usa ni mantiene</li>
           <li>Compartir baneos expone quién señaló a quién → represalias</li>
           <li>Nadie sabe si un usuario ya la lió en otra comunidad</li>
           <li>El staff repite el mismo drama una y otra vez</li>
@@ -93,24 +93,24 @@
     <p class="sub">Nada de sistemas de apelaciones enrevesados ni "risk scores" mágicos. Solo sincroniza baneos y avisa a quien tiene que avisar.</p>
     <div class="grid">
       <article class="feat">
-        <span class="fic">🔄</span><h3>Sincronización automática</h3>
-        <p>Cuando baneas a alguien y el bot tiene permiso, lee el audit log y registra el baneo en la red compartida. Sin comandos manuales.</p>
+        <span class="fic">🔄</span><h3>Sincronización obligatoria</h3>
+        <p>Cada baneo se comparte con la red automáticamente — es obligatorio para todo servidor activo, y es justo lo que la mantiene útil para todos. Sin comandos manuales.</p>
       </article>
       <article class="feat">
         <span class="fic">🚨</span><h3>Alertas al entrar</h3>
-        <p>Si un usuario con baneos activos se une a tu servidor, tu staff recibe un aviso en el canal que elijas, con el nivel de riesgo.</p>
+        <p>Si un usuario con baneos activos se une a tu servidor, tu staff recibe un aviso en el canal que elijas, con el número de baneos.</p>
       </article>
       <article class="feat">
-        <span class="fic">🕵️</span><h3>Origen irreversible</h3>
-        <p>El servidor que reporta se transforma con HMAC-SHA256. Ni el superusuario global puede saber quién originó un reporte.</p>
+        <span class="fic">🕵️</span><h3>Origen anónimo</h3>
+        <p>El servidor que reporta se cifra. Ningún comando lo muestra: tu comunidad reporta sin exponerse a represalias.</p>
       </article>
       <article class="feat">
         <span class="fic">📊</span><h3>Estadísticas agregadas</h3>
-        <p>Consulta cuántas comunidades distintas han reportado a un usuario y su nivel de riesgo — siempre en cifras, nunca por servidor.</p>
+        <p>Consulta cuántas comunidades distintas han baneado a un usuario y cuántos baneos acumula — siempre en cifras, nunca por servidor.</p>
       </article>
       <article class="feat">
         <span class="fic">⚙️</span><h3>Configurable por servidor</h3>
-        <p>Canal de alertas, rol de staff autorizado y opción de no participar (opt-out). Cada comunidad manda en la suya.</p>
+        <p>Canal de alertas, roles de staff autorizados, umbral de aviso y auto-ban. Cada comunidad decide cuándo saltan las alertas.</p>
       </article>
       <article class="feat">
         <span class="fic">📜</span><h3>Auditoría global</h3>
@@ -133,7 +133,7 @@
   <section class="wrap section" id="privacy">
     <span class="eyebrow" style="display:block;text-align:center;margin:0 auto 4px;width:fit-content">La parte más importante</span>
     <h2 class="h2">Privacidad por diseño, no por promesa.</h2>
-    <p class="sub">Todo el sistema parte de una premisa: <b>ningún comando, para ningún rol, puede revelar qué servidor originó un reporte</b>.</p>
+    <p class="sub">Todo el sistema parte de una premisa: <b>ningún comando revela a las comunidades qué servidor originó un baneo</b>. Reportas sin exponerte.</p>
     <div class="priv-grid">
       <div class="priv">
         <span class="fic">#️⃣</span>
@@ -148,12 +148,12 @@
       <div class="priv">
         <span class="fic">📈</span>
         <h3>Solo datos agregados</h3>
-        <p><code>/lookup</code>, <code>/stats</code> y compañía devuelven nivel de riesgo, categorías y fechas. Nunca un desglose por servidor.</p>
+        <p><code>/lookup</code>, <code>/stats</code> y compañía devuelven número de baneos, motivos y fechas. Nunca un desglose por servidor.</p>
       </div>
       <div class="priv">
-        <span class="fic">⏳</span>
-        <h3>Los datos caducan</h3>
-        <p>Los reportes de baja severidad que no se refuerzan expiran solos y dejan de contar. Se guarda lo mínimo, el tiempo mínimo.</p>
+        <span class="fic">🪪</span>
+        <h3>Auditable contra abusos</h3>
+        <p>Cada baneo lleva un ID propio. Si alguien intentara inflar baneos falsos, el operador puede rastrear su origen para frenarlo — y cada consulta queda registrada.</p>
       </div>
     </div>
   </section>
@@ -161,12 +161,12 @@
   <!-- COMMANDS -->
   <section class="wrap section" id="commands">
     <h2 class="h2">Los comandos que necesitas, y ni uno más.</h2>
-    <p class="sub">Tres niveles de acceso, cada uno con lo justo para su rol.</p>
+    <p class="sub">Cada rol, con lo justo. Sin menús interminables.</p>
     <div class="cmds">
       <div class="cmd-card">
         <h3>Públicos · cualquiera</h3>
         <ul>
-          <li><code>/lookup</code><small>Consulta el nivel de riesgo de un usuario</small></li>
+          <li><code>/lookup</code><small>Consulta los baneos de un usuario</small></li>
           <li><code>/stats</code><small>Estadísticas agregadas de la red</small></li>
           <li><code>/info</code><small>Qué es el bot y cómo funciona</small></li>
         </ul>
@@ -174,17 +174,10 @@
       <div class="cmd-card">
         <h3>Staff del servidor</h3>
         <ul>
-          <li><code>/config setup</code><small>Configura alertas, roles y opt-out</small></li>
-          <li><code>/config alert-channel</code><small>Elige el canal de avisos</small></li>
-          <li><code>/alerts test</code><small>Prueba que las alertas llegan bien</small></li>
-        </ul>
-      </div>
-      <div class="cmd-card">
-        <h3>Superusuario global</h3>
-        <ul>
-          <li><code>/admin global-stats</code><small>Panorama de toda la red</small></li>
-          <li><code>/admin guild-list</code><small>Servidores participantes</small></li>
-          <li><code>/admin remove-ban</code><small>Retira un baneo de la base</small></li>
+          <li><code>/config setup</code><small>Configura el canal de alertas y roles</small></li>
+          <li><code>/config alert-threshold</code><small>Con cuántos baneos se avisa</small></li>
+          <li><code>/config auto-ban</code><small>Banea solo a los reincidentes</small></li>
+          <li><code>/scan</code><small>Revisa a todos tus miembros de golpe</small></li>
         </ul>
       </div>
     </div>
@@ -193,11 +186,11 @@
   <!-- ADD / CTA -->
   <section class="wrap section" id="add">
     <div class="cta">
-      <span class="soon-badge">Gratis y de código abierto</span>
+      <span class="soon-badge">Gratis para tu comunidad</span>
       <h2>Protege tu comunidad hoy.</h2>
-      <p>Despliega tu propia instancia con Docker en minutos, o únete a la red compartida. El código está en GitHub, listo para leer y auditar.</p>
+      <p>Añade el bot a tu servidor, elige un canal de alertas y listo. En cuanto lo configures, empezarás a recibir avisos de usuarios con baneos en la red.</p>
       <div class="dl-row">
-        <a class="btn btn-primary btn-big" href="https://github.com/EventsTeamMC">Ver en GitHub</a>
+        <a class="btn btn-primary btn-big" href="https://discord.com/oauth2/authorize?client_id=1528203943367151706">Invitar al bot</a>
         <div class="dl-alt">
           <a href="/blacklist/privacy">Política de privacidad</a>
           <span>·</span>
@@ -211,7 +204,7 @@
 
 <footer class="footer">
   <div class="wrap foot-inner">
-    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span><p>Sincronización de baneos anónima para comunidades de Discord.</p></div>
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events <b>Blacklist</b></span><p>Sincronización de baneos anónima para comunidades de Discord.</p></div>
     <nav><h4>Producto</h4><a href="#features">Características</a><a href="#privacy">Privacidad</a><a href="#commands">Comandos</a></nav>
     <nav><h4>Ecosistema</h4><a href="/">Todos los productos</a><a href="/client">Events Client</a><a href="https://github.com/EventsTeamMC">GitHub</a></nav>
     <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones</a><a href="/blacklist/privacy">Privacidad</a></nav>
