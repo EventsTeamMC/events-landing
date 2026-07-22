@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Events Client — El launcher de los eventos de Minecraft</title>
-<meta name="description" content="Accede a las instancias de Minecraft creadas por los Studios: un código y a jugar. Sin configurar mods, sin versiones, sin líos. Windows, macOS y Linux.">
+<title>Events — Herramientas para eventos de Minecraft</title>
+<meta name="description" content="El ecosistema Events: herramientas para creadores de eventos de Minecraft. Events Blacklist, Events Client y más proyectos en camino.">
 <link rel="icon" href="/icon.png">
-<meta property="og:title" content="Events Client — El launcher de los eventos de Minecraft">
-<meta property="og:description" content="Un código y a jugar. Instancias listas, mods sincronizados y actualizaciones automáticas.">
+<meta property="og:title" content="Events — Herramientas para eventos de Minecraft">
+<meta property="og:description" content="Events Blacklist, Events Client y más. Todo lo que un Studio necesita para montar eventos sin complicaciones.">
 <meta property="og:image" content="/shots/launcher-home.png">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,143 +18,157 @@
 <body>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top"><img src="/icon.png" alt=""><span>Events<b>Client</b></span></a>
+  <a class="brand" href="#top"><img src="/icon.png" alt=""><span>Events<b>Team</b></span></a>
   <nav class="nav-links">
-    <a href="#features">Características</a>
-    <a href="#how">Cómo funciona</a>
-    <a href="#studios">Para Studios</a>
+    <a href="#products">Productos</a>
+    <a href="/client">Client</a>
+    <a href="/blacklist">Blacklist</a>
   </nav>
-  <a class="btn btn-primary btn-sm" href="/download">Descargar</a>
+  <a class="btn btn-primary btn-sm" href="https://github.com/EventsTeamMC">GitHub</a>
   <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
 </header>
 
 <main id="top">
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero hub-hero">
     <div class="hero-glow"></div>
     <div class="wrap hero-inner">
-      <span class="eyebrow">✦ Hecho por y para creadores de eventos</span>
-      <h1>El launcher de los<br><span class="grad">eventos de Minecraft</span></h1>
-      <p class="lead">Olvídate de instalar mods a mano, cuadrar versiones y perseguir archivos por Discord.
-        Introduce el código del evento y juega. Nosotros nos encargamos del resto.</p>
+      <span class="eyebrow">✦ El ecosistema para eventos de Minecraft</span>
+      <h1>Una caja de herramientas<br><span class="grad">para tus eventos</span></h1>
+      <p class="lead">Desde sincronizar baneos entre comunidades hasta repartir instancias listas para jugar.
+        Cada pieza resuelve un dolor real de montar eventos con cientos de jugadores.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" id="hero-dl" href="/download">Descargar gratis</a>
-        <a class="btn btn-ghost" href="#how">Ver cómo funciona</a>
+        <a class="btn btn-primary" href="#products">Ver productos</a>
+        <a class="btn btn-ghost" href="https://github.com/EventsTeamMC">GitHub del equipo</a>
       </div>
-      <div class="hero-meta">
-        <span>Windows · macOS · Linux</span><i></i><span>Vanilla · Forge · Fabric · NeoForge · Quilt</span><i></i><span>Microsoft y offline</span>
-      </div>
-      <div class="hero-shot">
-        <img src="/shots/launcher-home.png" alt="Events Client — pantalla principal" loading="eager">
+      <div class="hub-logos">
+        <span>Sincronización de baneos</span><i></i><span>Launcher de instancias</span><i></i><span>Whitelist federada</span><i></i><span>Alianzas entre servidores</span>
       </div>
     </div>
   </section>
 
-  <!-- PROBLEM → SOLUTION -->
-  <section class="wrap section">
-    <h2 class="h2">Entrar a un evento no debería ser un examen técnico.</h2>
-    <p class="sub">Cada evento, el mismo ritual: descargar un .zip, buscar la versión de Forge, copiar mods a mano y rezar.</p>
-    <div class="cols2">
-      <div class="card bad">
-        <h3>Sin Events Client</h3>
-        <ul>
-          <li>Un .zip por Discord y pasos de instalación en un mensaje fijado</li>
-          <li>Cuadrar la versión exacta de Forge/Fabric a mano</li>
-          <li>Un mod cambia → todos vuelven a descargar todo</li>
-          <li>Configuraciones que se pisan cada actualización</li>
-          <li>“A mí no me abre” × 200 personas</li>
-        </ul>
+  <!-- PRODUCTS -->
+  <section class="wrap section" id="products">
+    <div class="products-head">
+      <h2>Disponibles ahora</h2>
+      <span class="tag">Listos para usar en tu servidor</span>
+    </div>
+
+    <div class="products">
+
+      <!-- BLACKLIST -->
+      <a class="product live" href="/blacklist" style="--pc:#f0456b">
+        <span class="product-glow"></span>
+        <div class="product-top">
+          <span class="product-ic">🛡️</span>
+          <div>
+            <div class="product-name">Events<b>Blacklist</b></div>
+            <div class="product-kind">Bot de Discord</div>
+          </div>
+        </div>
+        <p>Sincroniza baneos entre servidores y comparte una base de datos anónima de baneos activos.
+          Cuando un usuario reportado entra en tu comunidad, tu staff se entera al instante — sin revelar nunca quién lo reportó.</p>
+        <div class="product-foot">
+          <span class="product-go">Ver presentación →</span>
+          <span class="product-pill on">Activo</span>
+        </div>
+      </a>
+
+      <!-- CLIENT -->
+      <a class="product live" href="/client" style="--pc:#5b8cff">
+        <span class="product-glow"></span>
+        <div class="product-top">
+          <span class="product-ic">🎮</span>
+          <div>
+            <div class="product-name">Events<b>Client</b></div>
+            <div class="product-kind">Launcher de escritorio</div>
+          </div>
+        </div>
+        <p>El launcher de los eventos de Minecraft. Un código de acceso y a jugar: instancias listas,
+          mods sincronizados y actualizaciones automáticas. Windows, macOS y Linux.</p>
+        <div class="product-foot">
+          <span class="product-go">Ver y descargar →</span>
+          <span class="product-pill on">Activo</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="products-head" style="margin-top:52px">
+      <h2>Próximamente</h2>
+      <span class="tag">En diseño y desarrollo</span>
+    </div>
+
+    <div class="products">
+
+      <!-- WHITELIST -->
+      <div class="product soon" style="--pc:#22c55e">
+        <span class="product-glow"></span>
+        <div class="product-top">
+          <span class="product-ic">✅</span>
+          <div>
+            <div class="product-name">Events<b>Whitelist</b></div>
+            <div class="product-kind">Whitelist federada</div>
+          </div>
+        </div>
+        <p>Gestiona el acceso a tus servidores desde un único sitio. Whitelists compartidas entre
+          comunidades aliadas, verificación por Discord y control de quién entra a cada evento.</p>
+        <div class="product-foot">
+          <span class="product-go">En camino</span>
+          <span class="product-pill soon">Próximamente</span>
+        </div>
       </div>
-      <div class="card good">
-        <h3>Con Events Client</h3>
-        <ul>
-          <li>Un código de acceso y estás dentro</li>
-          <li>Versión y loader se configuran solos</li>
-          <li>Mods sincronizados al abrir, sin reinstalar nada</li>
-          <li>Tus configs (VoiceChat, opciones) se conservan</li>
-          <li>Todos con exactamente los mismos archivos</li>
-        </ul>
+
+      <!-- ALLYS -->
+      <div class="product soon" style="--pc:#a78bfa">
+        <span class="product-glow"></span>
+        <div class="product-top">
+          <span class="product-ic">🤝</span>
+          <div>
+            <div class="product-name">Events<b>Allys</b></div>
+            <div class="product-kind">Red de alianzas</div>
+          </div>
+        </div>
+        <p>Conecta tu comunidad con otras de confianza. Comparte recursos, coordina eventos conjuntos
+          y construye una red de servidores aliados que se apoyan entre sí.</p>
+        <div class="product-foot">
+          <span class="product-go">En camino</span>
+          <span class="product-pill soon">Próximamente</span>
+        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="wrap section" id="features">
-    <h2 class="h2">Todo lo que necesitas, ya dentro.</h2>
-    <p class="sub">Pensado para eventos con cientos de jugadores y cero paciencia para soporte técnico.</p>
+  <!-- WHY -->
+  <section class="wrap section" id="why">
+    <h2 class="h2">Una sola filosofía detrás de todo.</h2>
+    <p class="sub">Herramientas que quitan fricción, respetan la privacidad y se configuran solas. Hecho por gente que organiza eventos, no por un comité.</p>
     <div class="grid">
       <article class="feat">
-        <span class="fic">🎟️</span><h3>Acceso por código</h3>
-        <p>Las instancias son privadas. El Studio reparte códigos y solo entra quien debe entrar.</p>
+        <span class="fic">🧩</span><h3>Encajan entre sí</h3>
+        <p>Diseñadas para trabajar juntas: los códigos, las whitelists y los baneos hablan el mismo idioma.</p>
       </article>
       <article class="feat">
-        <span class="fic">⚡</span><h3>Sincronización inteligente</h3>
-        <p>Descarga solo lo que cambió, verificado por hash. Los mods de Modrinth vienen de su CDN.</p>
+        <span class="fic">🔐</span><h3>Privacidad primero</h3>
+        <p>Nada de espiar mensajes ni vender datos. Solo lo mínimo necesario, y cifrado cuando importa.</p>
       </article>
       <article class="feat">
-        <span class="fic">🧩</span><h3>Todos los loaders</h3>
-        <p>Vanilla, Forge, Fabric, NeoForge y Quilt. Tú eliges la versión; el launcher la monta.</p>
-      </article>
-      <article class="feat">
-        <span class="fic">🔐</span><h3>Cuentas protegidas</h3>
-        <p>Microsoft oficial, o cuenta offline vinculada a Discord con código de un solo uso.</p>
-      </article>
-      <article class="feat">
-        <span class="fic">💾</span><h3>Tus configs se quedan</h3>
-        <p>Marca carpetas para preservar: tu VoiceChat y tus opciones sobreviven a cada update.</p>
-      </article>
-      <article class="feat">
-        <span class="fic">🔄</span><h3>Siempre al día</h3>
-        <p>El cliente se actualiza solo. Nadie se queda con una versión vieja el día del evento.</p>
+        <span class="fic">⚡</span><h3>Cero configuración pesada</h3>
+        <p>Instala, mete un token o un código y listo. Sin manuales de 40 páginas ni servidores que cuadrar.</p>
       </article>
     </div>
   </section>
 
-  <!-- HOW -->
-  <section class="wrap section" id="how">
-    <h2 class="h2">De cero a jugando, en 3 pasos.</h2>
-    <div class="steps">
-      <div class="step"><span class="num">01</span><h3>Descarga e instala</h3><p>Windows, macOS o Linux. Inicia sesión con Microsoft o crea una cuenta offline.</p></div>
-      <div class="step"><span class="num">02</span><h3>Mete tu código</h3><p>El del evento. La instancia aparece en tu barra lateral al instante.</p></div>
-      <div class="step"><span class="num">03</span><h3>Dale a Jugar</h3><p>Se descarga todo, se configura solo y Minecraft se abre. Ya está.</p></div>
-    </div>
-    <div class="shot-row">
-      <figure><img src="/shots/onboarding.png" alt="Onboarding" loading="lazy"><figcaption>Configura tu cuenta en 30 segundos</figcaption></figure>
-      <figure><img src="/shots/instance.png" alt="Instancia" loading="lazy"><figcaption>Cada evento, con su identidad</figcaption></figure>
-    </div>
-  </section>
-
-  <!-- STUDIOS -->
-  <section class="wrap section" id="studios">
-    <div class="cols2 align">
-      <div>
-        <span class="eyebrow">Para Studios y creadores</span>
-        <h2 class="h2 left">Un panel para gobernarlo todo.</h2>
-        <p class="sub left">Crea la instancia, sube los archivos y reparte códigos. Sin tocar un servidor.</p>
-        <ul class="checks">
-          <li>Importa un <b>.mrpack</b> de Modrinth y queda configurado solo</li>
-          <li>Editor de archivos con carpetas, drag &amp; drop y edición en vivo</li>
-          <li>Whitelist, códigos de acceso, baneos por jugador e IP</li>
-          <li>Ve quién está jugando y desconéctalo si hace falta</li>
-          <li>Personaliza logo, fondos, colores y botones de enlace</li>
-        </ul>
-      </div>
-      <figure class="panel-shot"><img src="/shots/webhost.png" alt="Panel WebHost" loading="lazy"></figure>
-    </div>
-  </section>
-
-  <!-- DOWNLOAD -->
-  <section class="wrap section" id="download">
+  <!-- CTA -->
+  <section class="wrap section">
     <div class="cta">
-      <h2>Descárgalo gratis y entra a tu primer evento.</h2>
-      <p>Disponible para <b id="dl-os">tu sistema</b>, y también Windows, macOS y Linux.
-        Siempre la última versión. Sin cuentas de más ni tarjetas.</p>
-      <div class="dl-row">
-        <a class="btn btn-primary btn-big" href="/download">Descargar Events Client</a>
-        <div class="dl-alt">
-          <a href="#" id="cta-discord">Únete al Discord →</a>
-        </div>
+      <h2>Elige por dónde empezar.</h2>
+      <p>Protege tu comunidad con Blacklist o reparte tu próximo evento con Client. Los dos, gratis.</p>
+      <div class="hero-cta" style="margin-top:8px">
+        <a class="btn btn-primary" href="/blacklist">Events Blacklist</a>
+        <a class="btn btn-ghost" href="/client">Events Client</a>
       </div>
     </div>
   </section>
@@ -163,13 +177,13 @@
 
 <footer class="footer">
   <div class="wrap foot-inner">
-    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events<b>Client</b></span><p>El launcher de los eventos de Minecraft.</p></div>
-    <nav><h4>Producto</h4><a href="#features">Características</a><a href="#how">Cómo funciona</a><a href="#download">Descargar</a></nav>
-    <nav><h4>Comunidad</h4><a href="#" id="foot-discord">Discord</a><a href="https://github.com/EventsTeamMC">GitHub</a></nav>
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events<b>Team</b></span><p>Herramientas para creadores de eventos de Minecraft.</p></div>
+    <nav><h4>Productos</h4><a href="/blacklist">Events Blacklist</a><a href="/client">Events Client</a><a href="#products">Próximamente</a></nav>
+    <nav><h4>Comunidad</h4><a href="https://github.com/EventsTeamMC">GitHub</a></nav>
   </div>
   <div class="wrap foot-legal">
-    <span>© <span id="year"></span> Events Client</span>
-    <span>No afiliado a Mojang ni Microsoft. Minecraft es marca de Mojang Studios.</span>
+    <span>© <span id="year"></span> Events Team</span>
+    <span>No afiliado a Mojang, Microsoft ni Discord.</span>
   </div>
 </footer>
 
