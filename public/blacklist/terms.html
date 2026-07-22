@@ -15,7 +15,7 @@
 <body>
 
 <header class="nav" id="nav">
-  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span></a>
+  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events <b>Blacklist</b></span></a>
   <nav class="nav-links">
     <a href="/blacklist/terms">Condiciones</a>
     <a href="/blacklist/privacy">Privacidad</a>
@@ -29,7 +29,7 @@
     <div class="wrap">
       <span class="eyebrow">✦ Events Blacklist</span>
       <h1>Condiciones del Servicio</h1>
-      <p class="legal-updated">Última actualización: 19 de julio de 2026</p>
+      <p class="legal-updated">Última actualización: 22 de julio de 2026</p>
     </div>
   </section>
 
@@ -41,48 +41,58 @@
       condiciones también en nombre de tu comunidad. Si no estás de acuerdo, no añadas ni utilices el Bot.</p>
 
     <h2>2. Qué es Events Blacklist</h2>
-    <p>Events Blacklist es un sistema de reputación compartido entre servidores de Discord. Registra reportes
-      sobre usuarios con comportamientos conflictivos (baneos, estafas, acoso, etc.), calcula un nivel de
-      riesgo agregado y avisa al staff de un servidor cuando entra un usuario con antecedentes. El Bot nunca
-      revela qué servidor concreto originó un reporte: solo se muestran datos agregados y anónimos.</p>
+    <p>Events Blacklist es un sistema de <strong>sincronización de baneos</strong> entre servidores de Discord.
+      Cuando un servidor de la red banea a alguien, el Bot registra ese baneo en una base de datos compartida y
+      avisa al staff de otros servidores si ese usuario entra o ya está dentro. No hay sistema de apelaciones,
+      ni reportes manuales, ni cálculos de "nivel de riesgo": el Bot únicamente sincroniza baneos reales. El
+      origen de cada baneo es anónimo para las comunidades (ver la Política de Privacidad).</p>
 
-    <h2>3. Uso aceptable</h2>
-    <p>Al usar los comandos de reporte (<code>/report</code>, <code>/blacklist add</code>) te comprometes a:</p>
+    <h2>3. Sincronización obligatoria de baneos</h2>
+    <p>Participar en la red implica <strong>compartir</strong>. Mientras el Bot esté habilitado en tu servidor,
+      los baneos que ejecutes se sincronizan automáticamente con la base de datos compartida: no existe una
+      opción para recibir baneos de otros sin aportar los tuyos. Esta reciprocidad es lo que mantiene la red
+      útil para todas las comunidades. Si no deseas compartir tus baneos, no utilices el Bot.</p>
+
+    <h2>4. Uso aceptable</h2>
+    <p>Al usar el Bot te comprometes a:</p>
     <ul>
-      <li>Reportar solo comportamientos reales y verificables, con un motivo honesto.</li>
-      <li>No usar el sistema para acosar, difamar o perjudicar a otra persona sin causa legítima.</li>
-      <li>No crear reportes en nombre de terceros sin base real (los reportes manuales pasan por revisión del
-        staff del servidor antes de afectar al historial público, precisamente para evitar abusos).</li>
+      <li>Banear solo por comportamientos reales, según las normas de tu comunidad.</li>
+      <li>No usar el sistema para acosar, difamar o perjudicar a una persona sin causa legítima.</li>
+      <li>No registrar baneos falsos ni coordinar baneos en masa contra alguien para inflar artificialmente su
+        historial.</li>
     </ul>
-    <p>Nos reservamos el derecho de anular reportes, suspender el acceso al Bot en un servidor, o restringir
-      el uso de un usuario que abuse del sistema.</p>
+    <p>Nos reservamos el derecho de anular baneos, suspender el acceso al Bot en un servidor o expulsar de la
+      red a una comunidad que abuse del sistema.</p>
 
-    <h2>4. Responsabilidad de los servidores</h2>
+    <h2>5. Identificador y auditoría de cada baneo</h2>
+    <p>Cada baneo sincronizado tiene un <strong>identificador propio</strong>. Para prevenir los abusos
+      descritos en el punto 4, el operador de la infraestructura (superusuario) puede consultar, a través de
+      una herramienta interna de administración, el <strong>servidor de origen</strong> de un baneo concreto.
+      Este acceso está restringido exclusivamente al superusuario, queda registrado en la auditoría del sistema
+      y se usa únicamente para detectar y frenar abusos. Ningún servidor ni miembro de staff puede acceder al
+      origen de un baneo. Los detalles técnicos se describen en la Política de Privacidad.</p>
+
+    <h2>6. Responsabilidad de los servidores</h2>
     <p>Cada servidor es responsable de configurar el Bot de forma acorde a sus propias normas (canal de
-      alertas, roles de staff, umbrales) y de los reportes que su equipo cree o apruebe. Events Blacklist es
-      una herramienta de apoyo a la moderación, no sustituye el criterio humano del staff de cada comunidad.</p>
+      alertas, roles de staff, umbrales, auto-ban) y de los baneos que ejecute. Events Blacklist es una
+      herramienta de apoyo a la moderación; no sustituye el criterio humano del staff de cada comunidad.</p>
 
-    <h2>5. Apelaciones</h2>
-    <p>Cualquier usuario reportado puede solicitar la revisión de su historial mediante
-      <code>/appeal submit</code>. Las apelaciones se resuelven de forma centralizada y, si se aprueban, el
-      reporte correspondiente deja de contar en el historial público.</p>
-
-    <h2>6. Disponibilidad del servicio</h2>
+    <h2>7. Disponibilidad del servicio</h2>
     <p>El Bot se ofrece "tal cual", sin garantías de disponibilidad continua. Puede sufrir interrupciones por
-      mantenimiento, incidencias técnicas o cambios en la plataforma de Discord. No garantizamos que el
-      historial de un usuario esté siempre completo o libre de errores.</p>
+      mantenimiento, incidencias técnicas o cambios en la plataforma de Discord. No garantizamos que la base de
+      datos de baneos esté siempre completa o libre de errores.</p>
 
-    <h2>7. Limitación de responsabilidad</h2>
+    <h2>8. Limitación de responsabilidad</h2>
     <p>Events Blacklist no se hace responsable de las decisiones de moderación que un servidor tome basándose
-      en la información del Bot (por ejemplo, expulsar o banear a un usuario). Esas decisiones son siempre
-      responsabilidad del staff de cada servidor.</p>
+      en la información del Bot (por ejemplo, expulsar o banear a un usuario, o activar el auto-ban). Esas
+      decisiones son siempre responsabilidad del staff de cada servidor.</p>
 
-    <h2>8. Cambios en estas condiciones</h2>
+    <h2>9. Cambios en estas condiciones</h2>
     <p>Podemos actualizar estas condiciones cuando el servicio evolucione. Los cambios relevantes se anunciarán
       a través de los canales oficiales del Bot. El uso continuado del Bot tras un cambio implica su
       aceptación.</p>
 
-    <h2>9. Contacto</h2>
+    <h2>10. Contacto</h2>
     <p>Para dudas sobre estas condiciones, escribe a
       <a href="mailto:rauuul.dev@gmail.com">rauuul.dev@gmail.com</a>.</p>
 
@@ -97,7 +107,7 @@
 
 <footer class="footer">
   <div class="wrap foot-inner">
-    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events<b>Blacklist</b></span><p>Sistema de reputación anónimo para comunidades de Discord.</p></div>
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events <b>Blacklist</b></span><p>Sistema de reputación anónimo para comunidades de Discord.</p></div>
     <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones del Servicio</a><a href="/blacklist/privacy">Política de Privacidad</a></nav>
     <nav><h4>Events</h4><a href="/blacklist">Events Blacklist</a><a href="/">Todos los productos</a><a href="https://github.com/EventsTeamMC">GitHub</a></nav>
   </div>
