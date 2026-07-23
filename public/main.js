@@ -52,6 +52,109 @@
     a.addEventListener('click', function () { nav.classList.remove('open'); });
   });
 
+  // ---- Buzón de sugerencias (botón 💡 en el nav + popup, en todas las páginas) ----
+  (function () {
+    var modalHtml =
+      '<div class="suggest-overlay" id="suggest-overlay" aria-hidden="true">' +
+        '<div class="suggest-modal" role="dialog" aria-modal="true" aria-labelledby="suggest-modal-title">' +
+          '<button type="button" class="suggest-close" id="suggest-close" aria-label="Cerrar">✕</button>' +
+          '<span class="suggest-modal-ic">💡</span>' +
+          '<h3 id="suggest-modal-title">¿Tienes una sugerencia?</h3>' +
+          '<p>Cuéntanos qué te gustaría ver en el ecosistema Events. Se envía de forma anónima.</p>' +
+          '<form id="suggest-modal-form" class="suggest-form">' +
+            '<textarea name="message" maxlength="500" rows="4" placeholder="Tu idea o sugerencia..." required></textarea>' +
+            '<input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">' +
+            '<button type="submit" class="btn btn-primary btn-sm">Enviar sugerencia</button>' +
+            '<p class="suggest-status" aria-live="polite"></p>' +
+          '</form>' +
+        '</div>' +
+      '</div>';
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    var overlay = document.getElementById('suggest-overlay');
+    var closeBtn = document.getElementById('suggest-close');
+
+    function openModal() {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      var ta = overlay.querySelector('textarea');
+      if (ta) ta.focus();
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
+    // Botón 💡 en el nav de cualquier página que lo tenga.
+    if (nav) {
+      var trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'nav-suggest';
+      trigger.setAttribute('aria-label', 'Enviar una sugerencia');
+      trigger.title = 'Enviar una sugerencia';
+      trigger.textContent = '💡';
+      trigger.addEventListener('click', openModal);
+      var burgerEl = document.getElementById('burger');
+      if (burgerEl) nav.insertBefore(trigger, burgerEl); else nav.appendChild(trigger);
+    }
+
+    window.EventsSuggest = { open: openModal, close: closeModal };
+  })();
+
+  // Envía el texto de un formulario de sugerencia a /api/suggest y actualiza su
+  // propio estado (deshabilita el botón mientras envía, muestra éxito/error).
+  function wireSuggestForm(form) {
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var textarea = form.querySelector('textarea[name="message"]');
+      var honeypot = form.querySelector('input[name="website"]');
+      var button = form.querySelector('button[type="submit"]');
+      var status = form.querySelector('.suggest-status');
+      var message = textarea ? textarea.value.trim() : '';
+
+      if (message.length < 3) {
+        if (status) { status.textContent = 'Escribe un poco más antes de enviar.'; status.className = 'suggest-status err'; }
+        return;
+      }
+
+      if (button) button.disabled = true;
+      if (status) { status.textContent = 'Enviando…'; status.className = 'suggest-status'; }
+
+      fetch('/api/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message, website: honeypot ? honeypot.value : '' }),
+      })
+        .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+        .then(function (result) {
+          if (result.ok) {
+            if (status) { status.textContent = '¡Gracias! La sugerencia se ha enviado.'; status.className = 'suggest-status ok'; }
+            form.reset();
+            setTimeout(function () {
+              if (window.EventsSuggest) window.EventsSuggest.close();
+              if (status) status.textContent = '';
+            }, 1800);
+          } else {
+            if (status) { status.textContent = (result.data && result.data.error) || 'No se pudo enviar. Inténtalo de nuevo.'; status.className = 'suggest-status err'; }
+          }
+        })
+        .catch(function () {
+          if (status) { status.textContent = 'No se pudo enviar. Revisa tu conexión.'; status.className = 'suggest-status err'; }
+        })
+        .finally(function () {
+          if (button) button.disabled = false;
+        });
+    });
+  }
+
+  wireSuggestForm(document.getElementById('suggest-modal-form'));
+  wireSuggestForm(document.getElementById('suggest-card-form'));
+
   // Reveal sections as they enter the viewport.
   var targets = document.querySelectorAll('.section > .h2, .section > .sub, .products-head, .product, .card, .feat, .step, .cta, .shot-row figure, .panel-shot, .checks, .priv, .cmd-card');
   targets.forEach(function (el) { el.classList.add('reveal'); });
