@@ -40,6 +40,86 @@
   var card = document.querySelector('.dl-card[data-os="' + osKey + '"]');
   if (card) card.classList.add('detected');
 
+  /* ---------------- Contador de descargas ----------------
+     El total = descargas históricas de GitHub (base) + las que contamos aquí.
+     Contamos nosotros, y no leemos el contador de GitHub en vivo, porque GitHub
+     suma CADA petición: no sabe distinguir a alguien que descarga tres veces
+     seguidas. El backend aplica una espera de 1 h por usuario.
+     Los enlaces siguen apuntando directos a GitHub: si nuestra API está caída, la
+     descarga funciona igual y lo único que se pierde es el recuento. */
+  var COUNTER_API = 'https://api.eventsmc.xyz/api';
+  var counterEls = document.querySelectorAll('[data-dl-count]');
+
+  function renderCount(n) {
+    if (!counterEls.length || typeof n !== 'number') return;
+    counterEls.forEach(function (el) {
+      var from = parseInt(String(el.textContent).replace(/\D/g, ''), 10);
+      if (!isFinite(from) || !from) { el.textContent = n.toLocaleString('es-ES'); return; }
+      if (from === n) return;
+      // Cuenta hacia el nuevo valor para que se vea que sube.
+      var start = performance.now(), dur = 700;
+      (function step(t) {
+        var k = Math.min(1, (t - start) / dur);
+        var eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(from + (n - from) * eased).toLocaleString('es-ES');
+        if (k < 1) requestAnimationFrame(step);
+      })(start);
+    });
+  }
+
+  function refreshCount() {
+    if (!counterEls.length) return;
+    fetch(COUNTER_API + '/downloads', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j && j.data) renderCount(j.data.total); })
+      .catch(function () { /* contador caído: la página sigue funcionando */ });
+  }
+
+  if (counterEls.length) {
+    refreshCount();
+    setInterval(refreshCount, 20000);                       // "en directo"
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) refreshCount();
+    });
+  }
+
+  // Id anónimo y estable para aplicar la espera de 1 h. No identifica a nadie: es
+  // un número aleatorio que solo vive en este navegador. Hace falta porque el
+  // servidor está detrás de Cloudflare y ve una IP de borde distinta en cada
+  // petición, así que por IP no se puede distinguir a un usuario de otro.
+  function clientId() {
+    try {
+      var k = 'ec_dl_id', v = localStorage.getItem(k);
+      if (!v) {
+        v = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now());
+        localStorage.setItem(k, v);
+      }
+      return v;
+    } catch (_) { return ''; }   // navegación privada: contará por IP
+  }
+
+  // Al pulsar cualquier botón de descarga, registra el hit y enseña tu número.
+  document.querySelectorAll('a[href*="events-client-releases/releases"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      fetch(COUNTER_API + '/downloads/hit', {
+        method: 'POST', keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cid: clientId() }),
+      })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) {
+          if (!j || !j.data) return;
+          renderCount(j.data.total);
+          // Solo damos las gracias si de verdad ha sumado; si estás en la espera
+          // de 1 h no fingimos que ha contado.
+          if (j.data.counted) {
+            document.querySelectorAll('[data-dl-thanks]').forEach(function (el) { el.hidden = false; });
+          }
+        })
+        .catch(function () {});
+    });
+  });
+
   // Sticky nav border once scrolled.
   var nav = document.getElementById('nav');
   var onScroll = function () { nav.classList.toggle('stuck', window.scrollY > 8); };
