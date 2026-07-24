@@ -127,6 +127,18 @@ a{color:inherit;text-decoration:none}
 .dl-card.detected{border-color:var(--accent);box-shadow:0 16px 44px rgba(91,140,255,.22)}
 .dl-card.detected::before{content:"Tu sistema";display:inline-block;padding:4px 12px;border-radius:999px;
   background:var(--accent-soft);color:var(--accent2);font-size:12px;font-weight:600;margin-bottom:14px}
+/* Contador de descargas en directo */
+.dl-counter{display:inline-flex;align-items:baseline;gap:10px;flex-wrap:wrap;justify-content:center;
+  margin:6px 0 18px;padding:10px 18px;border-radius:999px;
+  background:color-mix(in srgb,var(--accent) 10%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+.dl-counter-num{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;
+  color:var(--accent2);font-variant-numeric:tabular-nums}
+.dl-counter-label{font-size:14px;color:var(--muted)}
+.dl-counter-thanks{font-size:13px;font-weight:600;color:var(--accent2);
+  animation:dl-pop .45s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes dl-pop{from{opacity:0;transform:translateY(6px) scale(.9)}to{opacity:1;transform:none}}
+
 .dl-ic{font-size:44px;line-height:1;margin-bottom:12px}
 .dl-ic svg{width:44px;height:44px;display:block;color:var(--accent2)}
 .beta-eyebrow{background:color-mix(in srgb,#f0a92e 14%,transparent);border-color:color-mix(in srgb,#f0a92e 40%,transparent);color:#f0a92e}
