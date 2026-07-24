@@ -48,11 +48,14 @@
         <a class="btn btn-primary btn-big" id="dl-primary" href="#all">Descargar</a>
         <a class="btn btn-ghost" href="#all">Ver todas las plataformas</a>
       </div>
-      <div class="dl-counter">
-        <span class="dl-counter-num" data-dl-count>—</span>
-        <span class="dl-counter-label">descargas hasta ahora</span>
-        <span class="dl-counter-thanks" data-dl-thanks hidden>¡Gracias! Ya cuentas tú 🎉</span>
+      <div class="dl-counter" aria-live="polite">
+        <span class="dl-live"><i></i>En directo</span>
+        <span class="dl-counter-copy">
+          <span class="dl-counter-num" data-dl-count>—</span>
+          <span class="dl-counter-label">descargas y subiendo</span>
+        </span>
       </div>
+      <p class="dl-counter-thanks" data-dl-thanks hidden>¡Gracias! Ya cuentas tú 🎉</p>
       <div class="hero-meta">
         <span id="dl-detected">Detectando tu sistema…</span><i></i><span>Windows · macOS · Linux</span>
       </div>
