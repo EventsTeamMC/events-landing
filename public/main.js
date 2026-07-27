@@ -1,13 +1,11 @@
 /* Events Client landing — tiny progressive enhancements, no dependencies. */
 (function () {
   var DISCORD = 'https://discord.gg/2T7DDmpxYr';
-  // Stable "latest" download URLs — GitHub always serves the newest release's
-  // asset from this path, so the landing never needs updating per version.
-  var DL_BASE = 'https://github.com/EventsTeamMC/events-client-releases/releases/latest/download/';
+  // Descargas en mantenimiento: no exponemos URLs de descarga reales.
   var DOWNLOADS = {
-    windows: { file: 'Events-Client-win.exe', label: 'Windows' },
-    mac: { file: 'Events-Client-mac-universal.dmg', label: 'macOS' },
-    linux: { file: 'Events-Client-linux-x86_64.AppImage', label: 'Linux' },
+    windows: { label: 'Windows' },
+    mac: { label: 'macOS' },
+    linux: { label: 'Linux' },
   };
 
   // Year in the footer.
@@ -29,13 +27,8 @@
   var osEl = document.getElementById('dl-os');
   if (osEl) osEl.textContent = dl.label;
 
-  // Download page: highlight the matching card, wire the hero button.
+  // Download page: highlight the matching card.
   // Descargas en mantenimiento: no tocamos el botón, se queda deshabilitado.
-  var primary = document.getElementById('dl-primary');
-  if (primary && primary.getAttribute('aria-disabled') !== 'true') {
-    primary.href = DL_BASE + dl.file;
-    primary.textContent = 'Descargar para ' + dl.label;
-  }
   var detected = document.getElementById('dl-detected');
   if (detected) detected.textContent = 'Detectado: ' + dl.label;
   var card = document.querySelector('.dl-card[data-os="' + osKey + '"]');
@@ -100,7 +93,8 @@
   }
 
   // Al pulsar cualquier botón de descarga, registra el hit y enseña tu número.
-  document.querySelectorAll('a[href*="events-client-releases/releases"]').forEach(function (a) {
+  // (En mantenimiento no hay enlaces de descarga reales, así que esto no encuentra nada.)
+  document.querySelectorAll('a.dl-main:not(.disabled)').forEach(function (a) {
     a.addEventListener('click', function () {
       fetch(COUNTER_API + '/downloads/hit', {
         method: 'POST', keepalive: true,
