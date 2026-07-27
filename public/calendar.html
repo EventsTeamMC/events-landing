@@ -45,7 +45,7 @@
       </p>
       <div class="cl-cta">
         <a class="btn btn-play btn-lg" href="https://calendar.eventsmc.xyz">Acceder al calendario →</a>
-        <a class="btn btn-ghost btn-lg" href="#studios">Publicar mis eventos</a>
+        <button class="btn btn-ghost btn-lg" data-request-access>Publicar mis eventos</button>
       </div>
       <div class="cl-stats" id="cl-stats" aria-live="polite">
         <div class="cl-stat"><b id="cl-n-events">—</b><span>eventos próximos</span></div>
@@ -99,7 +99,7 @@
         <h3>Sin montar nada</h3>
         <p>No necesitas web, ni bot, ni servidor. Si ya usas el panel de Events, tus eventos ya se pueden publicar.
           Y si solo quieres el calendario, existe una cuenta que <b>únicamente</b> publica eventos.</p>
-        <a class="btn btn-secondary" href="https://panel.eventsmc.xyz">Ir al panel</a>
+        <button class="btn btn-secondary" data-request-access>Solicitar acceso</button>
       </div>
     </div>
   </section>
@@ -125,6 +125,7 @@
   </div>
 </footer>
 
+<script src="/access-request.js"></script>
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('burger')?.addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
