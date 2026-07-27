@@ -8,9 +8,56 @@
  * Any element with [data-request-access] opens it.
  */
 (function () {
-    // www, not the apex: the apex 308-redirects, and a CORS preflight that gets
+  // www, not the apex: the apex 308-redirects, and a CORS preflight that gets
   // redirected fails outright — the calendar calls this cross-origin.
   var ENDPOINT = 'https://www.eventsmc.xyz/api/access-request';
+
+  /* The widget ships its OWN styles.
+   *
+   * These rules used to live in the landing's stylesheet, which the calendar
+   * never loads — so on calendar.eventsmc.xyz the dialog rendered as raw,
+   * unstyled HTML. A cross-origin widget cannot assume the host page has its
+   * CSS; carrying it here is the only way it looks the same everywhere.
+   * Values are literal rather than var(--…) for exactly the same reason. */
+  var CSS = [
+    '.ar-veil{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:20px;',
+    'background:rgba(4,6,12,.72);backdrop-filter:blur(6px);overflow-y:auto;',
+    'font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}',
+    '.ar-modal{position:relative;width:min(520px,100%);max-height:92vh;overflow-y:auto;background:#111729;',
+    'border:1px solid #2a3552;border-radius:16px;padding:28px 26px;box-shadow:0 30px 80px rgba(0,0,0,.6);color:#eef2fb}',
+    '.ar-modal *{box-sizing:border-box}',
+    '.ar-modal h2{font-family:"Outfit",system-ui,sans-serif;font-size:23px;margin:0 0 6px;font-weight:800;color:#eef2fb}',
+    '.ar-sub{color:#93a0bd;font-size:14px;margin:0 0 20px}',
+    '.ar-x{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;background:#1e2740;',
+    'border:1px solid #2a3552;color:#eef2fb;cursor:pointer;font-size:14px;line-height:1;padding:0}',
+    '.ar-x:hover{border-color:#22d3ee;color:#67e8f9}',
+    '.ar-f{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}',
+    '.ar-f>span{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#5f6b8a}',
+    '.ar-f input,.ar-f textarea{padding:11px 13px;background:#0b1020;border:1px solid #2a3552;border-radius:10px;',
+    'color:#eef2fb;font-size:14px;font-family:inherit;resize:vertical;width:100%}',
+    '.ar-f input:focus,.ar-f textarea:focus{outline:none;border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.16)}',
+    '.ar-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}',
+    '.ar-msg{min-height:18px;font-size:13px;margin-bottom:6px}',
+    '.ar-msg.bad{color:#ff8080}',
+    '.ar-send{width:100%;padding:13px;border-radius:10px;border:0;cursor:pointer;font-weight:700;font-size:15px;',
+    'font-family:inherit;background:linear-gradient(135deg,#67e8f9,#22d3ee);color:#04222a}',
+    '.ar-send:hover{filter:brightness(1.06)}',
+    '.ar-send:disabled{opacity:.6;cursor:default}',
+    '.ar-alt{background:#1e2740!important;color:#eef2fb!important;margin-top:10px}',
+    '.ar-alt:hover{background:#26304d!important}',
+    '.ar-done{text-align:center;padding:10px 0}',
+    '.ar-done-ic{font-size:40px;margin-bottom:10px}',
+    '.ar-done h3{font-family:"Outfit",system-ui,sans-serif;font-size:19px;margin:0 0 8px}',
+    '.ar-done p{color:#93a0bd;font-size:14px;margin:0 0 18px}',
+    '@media (max-width:520px){.ar-modal{padding:22px 18px}}',
+  ].join('');
+  function ensureStyles() {
+    if (document.getElementById('ar-styles')) return;
+    var st = document.createElement('style');
+    st.id = 'ar-styles';
+    st.textContent = CSS;
+    document.head.appendChild(st);
+  }
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -26,6 +73,7 @@
 
   function open() {
     if (document.getElementById('ar-veil')) return;
+    ensureStyles();
     var v = document.createElement('div');
     v.id = 'ar-veil';
     v.className = 'ar-veil';
@@ -94,5 +142,7 @@
     if (t) { e.preventDefault(); open(); }
   });
 
-  window.EventsAccessRequest = { open: open, close: close };
+  // ensureStyles is exposed so the calendar can reuse the same look for its
+  // own small "do you already have an account?" step.
+  window.EventsAccessRequest = { open: open, close: close, ensureStyles: ensureStyles };
 })();
