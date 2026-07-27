@@ -8,7 +8,9 @@
  * Any element with [data-request-access] opens it.
  */
 (function () {
-  var ENDPOINT = 'https://eventsmc.xyz/api/access-request';
+    // www, not the apex: the apex 308-redirects, and a CORS preflight that gets
+  // redirected fails outright — the calendar calls this cross-origin.
+  var ENDPOINT = 'https://www.eventsmc.xyz/api/access-request';
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
