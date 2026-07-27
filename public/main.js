@@ -30,8 +30,9 @@
   if (osEl) osEl.textContent = dl.label;
 
   // Download page: highlight the matching card, wire the hero button.
+  // Descargas en mantenimiento: no tocamos el botón, se queda deshabilitado.
   var primary = document.getElementById('dl-primary');
-  if (primary) {
+  if (primary && primary.getAttribute('aria-disabled') !== 'true') {
     primary.href = DL_BASE + dl.file;
     primary.textContent = 'Descargar para ' + dl.label;
   }
