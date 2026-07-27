@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events Calendar — El calendario de los eventos de Minecraft</title>
+<meta name="description" content="Un calendario abierto donde cada studio publica sus torneos, series y eventos de Minecraft. Consúltalo sin registrarte.">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="Events Calendar — El calendario de los eventos de Minecraft">
+<meta property="og:description" content="Cada studio publica sus torneos, series y eventos. Todos juntos, en un solo calendario, abierto para cualquiera.">
+<meta property="og:image" content="/icon.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Events Calendar">
+<meta name="twitter:description" content="El calendario abierto de los eventos de Minecraft de la comunidad Events.">
+<meta name="twitter:image" content="/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="cal-landing">
+
+<header class="nav" id="nav">
+  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events <b>Calendar</b></span></a>
+  <nav class="nav-links">
+    <a href="/">Events Team</a>
+    <a href="#como">Cómo funciona</a>
+    <a href="#studios">Para studios</a>
+  </nav>
+  <a class="btn btn-primary btn-sm" href="https://calendar.eventsmc.xyz">Abrir calendario</a>
+  <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
+</header>
+
+<main id="top">
+
+  <!-- El calendario es el producto: el botón va primero y grande. -->
+  <section class="cl-hero">
+    <div class="wrap cl-hero-in">
+      <span class="cl-eyebrow">📅 Calendario comunitario · abierto a todos</span>
+      <h1>Todo lo que pasa en Events,<br><span class="grad">en un solo calendario</span></h1>
+      <p class="cl-lead">
+        Cada studio publica sus propios torneos, series y eventos. Aquí aparecen todos juntos,
+        para que cualquiera pueda ver qué hay programado y cuándo. Sin cuenta, sin registro.
+      </p>
+      <div class="cl-cta">
+        <a class="btn btn-play btn-lg" href="https://calendar.eventsmc.xyz">Acceder al calendario →</a>
+        <a class="btn btn-ghost btn-lg" href="#studios">Publicar mis eventos</a>
+      </div>
+      <div class="cl-stats" id="cl-stats" aria-live="polite">
+        <div class="cl-stat"><b id="cl-n-events">—</b><span>eventos próximos</span></div>
+        <div class="cl-stat"><b id="cl-n-series">—</b><span>series activas</span></div>
+        <div class="cl-stat"><b id="cl-n-studios">—</b><span>studios publicando</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="como">
+    <div class="products-head">
+      <h2>Cómo funciona</h2>
+      <span class="tag">Tres pasos, ninguno tuyo si solo quieres mirar</span>
+    </div>
+    <div class="cl-steps">
+      <div class="cl-step">
+        <span class="cl-step-n">1</span>
+        <h3>Un studio publica</h3>
+        <p>Desde su panel elige fecha, hora, nombre y color. Si el evento dura varios días, marca cuándo empieza y cuándo acaba.</p>
+      </div>
+      <div class="cl-step">
+        <span class="cl-step-n">2</span>
+        <h3>Aparece al instante</h3>
+        <p>El calendario se actualiza solo. No hay revisión ni aprobación: cada studio es dueño de lo que publica y responsable de ello.</p>
+      </div>
+      <div class="cl-step">
+        <span class="cl-step-n">3</span>
+        <h3>La comunidad lo ve</h3>
+        <p>Cualquiera puede consultarlo, abrir un evento y ver quién lo organiza, a qué hora empieza y por dónde entrar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="studios">
+    <div class="products-head">
+      <h2>Para studios</h2>
+      <span class="tag">Gratis, y tuyo</span>
+    </div>
+    <div class="cl-two">
+      <div class="cl-panel">
+        <h3>Tu evento, con tu nombre</h3>
+        <p>Cada evento se publica <b>a nombre de tu studio</b>, con tu logo y tu Discord — no el de Events Team.
+          Quien lo vea sabrá quién lo organiza y dónde encontrarte.</p>
+        <ul class="cl-list">
+          <li>Color propio para distinguirlo de un vistazo</li>
+          <li>Eventos de un día o series que se extienden varias jornadas</li>
+          <li>Enlace directo a tu Discord, y al del evento si es distinto</li>
+        </ul>
+      </div>
+      <div class="cl-panel">
+        <h3>Sin montar nada</h3>
+        <p>No necesitas web, ni bot, ni servidor. Si ya usas el panel de Events, tus eventos ya se pueden publicar.
+          Y si solo quieres el calendario, existe una cuenta que <b>únicamente</b> publica eventos.</p>
+        <a class="btn btn-secondary" href="https://panel.eventsmc.xyz">Ir al panel</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section cl-final">
+    <h2>¿Vemos qué hay esta semana?</h2>
+    <p class="cl-lead">El calendario es público. No hace falta cuenta para consultarlo.</p>
+    <a class="btn btn-play btn-lg" href="https://calendar.eventsmc.xyz">Acceder al calendario →</a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-inner">
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events <b>Team</b></span><p>Herramientas para creadores de eventos de Minecraft.</p></div>
+    <nav><h4>Productos</h4><a href="/blacklist">Events Blacklist</a><a href="/client">Events Client</a><a href="/whitelist">Events Whitelist</a><a href="/calendar">Events Calendar</a></nav>
+    <nav><h4>Comunidad</h4><a href="https://github.com/EventsTeamMC">GitHub</a>
+      <a class="foot-status" href="https://status.eventsmc.xyz" target="_blank" rel="noopener"><span class="foot-status-dot"></span>Estado del servicio</a></nav>
+  </div>
+  <div class="wrap foot-legal">
+    <span>© <span id="year"></span> Events Team</span>
+    <span>No afiliado a Mojang, Microsoft ni Discord.</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('burger')?.addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
+
+/* Live counters straight from the public API.
+ * Deliberately best-effort: if the API is unreachable the placeholders simply
+ * stay as "—" rather than showing zeros, which would read as "nothing is
+ * happening" and be worse than saying nothing. */
+(async () => {
+  try {
+    const r = await fetch('https://api.eventsmc.xyz/api/events');
+    const events = (await r.json()).data || [];
+    const now = Date.now();
+    const upcoming = events.filter((e) => {
+      const end = e.endDate || e.date;
+      return end && new Date(end + 'T23:59:59').getTime() >= now;
+    });
+    const set = (id, n) => { document.getElementById(id).textContent = n; };
+    set('cl-n-events', upcoming.filter((e) => e.type !== 'series').length);
+    set('cl-n-series', upcoming.filter((e) => e.type === 'series').length);
+    set('cl-n-studios', new Set(upcoming.map((e) => e.studioId).filter(Boolean)).size);
+  } catch (_) { /* leave the dashes */ }
+})();
+</script>
+</body>
+</html>
