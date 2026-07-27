@@ -49,6 +49,18 @@
     '.ar-done-ic{font-size:40px;margin-bottom:10px}',
     '.ar-done h3{font-family:"Outfit",system-ui,sans-serif;font-size:19px;margin:0 0 8px}',
     '.ar-done p{color:#93a0bd;font-size:14px;margin:0 0 18px}',
+    // Motion: the veil fades, the card rises. Short enough to feel like a
+    // response rather than a wait, and dropped for reduced-motion users.
+    '@keyframes ar-veil-in{from{opacity:0}to{opacity:1}}',
+    '@keyframes ar-card-in{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}',
+    '.ar-veil{animation:ar-veil-in .18s ease both}',
+    '.ar-modal{animation:ar-card-in .3s cubic-bezier(.16,1,.3,1) both}',
+    '.ar-send,.ar-x{transition:transform .13s,filter .13s,background .13s,border-color .13s}',
+    '.ar-send:active,.ar-x:active{transform:scale(.97)}',
+    '.ar-f input,.ar-f textarea{transition:border-color .14s,box-shadow .14s,background .14s}',
+    '@keyframes ar-pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}',
+    '.ar-done-ic{display:inline-block;animation:ar-pop .45s cubic-bezier(.16,1,.3,1) both}',
+    '@media (prefers-reduced-motion:reduce){.ar-veil,.ar-modal,.ar-done-ic{animation:none!important}}',
     '@media (max-width:520px){.ar-modal{padding:22px 18px}}',
   ].join('');
   function ensureStyles() {

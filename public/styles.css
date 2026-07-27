@@ -483,3 +483,36 @@ a{color:inherit;text-decoration:none}
 .suggest-card .suggest-form{flex:1;display:flex;flex-direction:column}
 .suggest-card .suggest-form textarea{flex:1;min-height:96px}
 .suggest-card .product-foot{margin-top:14px}
+
+/* ---- /calendar landing: motion ----
+   Content arrives as you scroll to it, and the primary buttons react. Kept
+   short; a landing that makes you wait for its own animation is worse than one
+   with none. Fully disabled for reduced-motion users. */
+@keyframes cl-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.cal-landing .cl-eyebrow{animation:cl-rise .5s cubic-bezier(.16,1,.3,1) both}
+.cal-landing .cl-hero h1{animation:cl-rise .5s cubic-bezier(.16,1,.3,1) .06s both}
+.cal-landing .cl-lead{animation:cl-rise .5s cubic-bezier(.16,1,.3,1) .12s both}
+.cal-landing .cl-cta{animation:cl-rise .5s cubic-bezier(.16,1,.3,1) .18s both}
+.cal-landing .cl-stats{animation:cl-rise .5s cubic-bezier(.16,1,.3,1) .26s both}
+.cal-landing .cl-stat b{transition:transform .2s}
+.cal-landing .cl-stat:hover b{transform:translateY(-2px)}
+
+.cl-step,.cl-panel{transition:transform .2s cubic-bezier(.16,1,.3,1),border-color .2s,box-shadow .2s}
+.cl-step:hover,.cl-panel:hover{transform:translateY(-4px);border-color:var(--border-strong,#2a3552);
+  box-shadow:0 18px 40px rgba(0,0,0,.32)}
+.cl-step-n{transition:transform .2s}
+.cl-step:hover .cl-step-n{transform:scale(1.12) rotate(-6deg)}
+
+/* Primary calls to action get a single sheen pass on hover. */
+.cal-landing .btn-play,.cal-landing .btn-secondary{position:relative;overflow:hidden}
+.cal-landing .btn-play::after,.cal-landing .btn-secondary::after{content:"";position:absolute;top:0;left:-120%;
+  width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);
+  transition:left .6s ease;pointer-events:none}
+.cal-landing .btn-play:hover::after,.cal-landing .btn-secondary:hover::after{left:150%}
+.cal-landing .btn{transition:transform .14s,box-shadow .2s,filter .14s}
+.cal-landing .btn:active{transform:scale(.97)}
+
+@media (prefers-reduced-motion:reduce){
+  .cal-landing *,.cal-landing *::before,.cal-landing *::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
