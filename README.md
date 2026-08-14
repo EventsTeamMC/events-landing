@@ -44,13 +44,17 @@ añadirlas o cambiarlas hay que **redeploy**: las funciones leen `process.env` a
 
 ### Apelaciones (`/appeal`)
 
-Un solo formulario para las tres categorías: baneo del Discord de Events, sanción de
-Events Client y baneo falso en la red de Blacklist. Se puede enlazar con la categoría
-ya elegida: `/appeal?type=discord`, `?type=launcher`, `?type=blacklist`.
+Una página normal de la web, no un producto: sin hero ni color propios. Es un solo
+formulario para las tres categorías —baneo del Discord de Events, sanción de Events
+Client y baneo falso en la red de Blacklist—, y se puede enlazar con la categoría ya
+elegida: `/appeal?type=discord`, `?type=launcher`, `?type=blacklist`. Desde
+`/client` y `/blacklist` se enlaza con una banda al final de la página.
 
 Límite de **una apelación cada 5 minutos por IP** (`WINDOW_MS` en `api/appeal.js`),
 más un campo trampa anti-bots y `allowed_mentions: []` para que ningún texto de un
-desconocido pueda pingar al canal.
+desconocido pueda pingar al canal. La ventana **no se dice en ningún sitio de la
+web**: los mensajes de error hablan de "hace poco", nunca de minutos, para no darle
+el cronómetro a quien esté midiendo cada cuánto puede reenviar.
 
 ## Desplegar en Vercel
 

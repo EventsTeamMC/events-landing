@@ -111,8 +111,9 @@ module.exports = async (req, res) => {
   const now = Date.now();
   const last = lastSubmission.get(ip);
   if (last && now - last < WINDOW_MS) {
-    const wait = Math.ceil((WINDOW_MS - (now - last)) / 60_000);
-    res.status(429).json({ error: `Ya has enviado una apelación hace poco. Espera ${wait} min antes de enviar otra.` });
+    // El mensaje no dice cuánto queda ni cuál es la ventana: ese dato solo le
+    // sirve a quien está midiendo cada cuánto puede reenviar.
+    res.status(429).json({ error: 'Ya has enviado una apelación hace poco. Inténtalo de nuevo más tarde.' });
     return;
   }
   prune(now);

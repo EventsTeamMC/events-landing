@@ -2,15 +2,17 @@
  *
  * Aquí no se decide nada: el formulario solo manda la apelación a /api/appeal,
  * que la reenvía a un canal privado del staff. Toda la validación se repite en
- * el servidor; la de aquí existe para no gastar un envío (y el rate limit de
- * 5 min) en un formulario a medio rellenar. */
+ * el servidor; la de aquí existe para no gastar un envío en un formulario a
+ * medio rellenar.
+ *
+ * El límite de reenvíos lo aplica SOLO el servidor: este archivo se sirve tal
+ * cual y cualquiera lo lee, así que una copia del contador aquí sería publicar
+ * cada cuánto se puede reintentar. */
 (function () {
   var form = document.getElementById('appeal-form');
   if (!form) return;
 
   var ENDPOINT = '/api/appeal';
-  var COOLDOWN_MS = 5 * 60 * 1000;      // el mismo que aplica el servidor por IP
-  var COOLDOWN_KEY = 'ev_appeal_last';
 
   var status = document.getElementById('ap-status');
   var button = document.getElementById('ap-send');
@@ -61,15 +63,6 @@
     updateCount();
   }
 
-  function remainingCooldown() {
-    try {
-      var last = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0', 10);
-      if (!last) return 0;
-      var left = COOLDOWN_MS - (Date.now() - last);
-      return left > 0 ? left : 0;
-    } catch (_) { return 0; }   // navegación privada: lo frena el servidor
-  }
-
   function fail(message, name) {
     say(message, 'err');
     var field = name && form.querySelector('[name="' + name + '"]');
@@ -111,11 +104,6 @@
     if (body.evidence && !/^https?:\/\/[^\s]+$/i.test(body.evidence)) return fail('El enlace de pruebas debe empezar por https://', 'evidence');
     if (!body.agree) return fail('Confirma que lo que cuentas es cierto', 'agree');
 
-    var left = remainingCooldown();
-    if (left) {
-      return fail('Ya has enviado una apelación hace poco. Espera ' + Math.ceil(left / 60000) + ' min antes de enviar otra.');
-    }
-
     button.disabled = true;
     var label = button.textContent;
     button.textContent = 'Enviando…';
@@ -129,7 +117,6 @@
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (r) {
         if (!r.ok) throw new Error(r.j.error || 'No se pudo enviar la apelación');
-        try { localStorage.setItem(COOLDOWN_KEY, String(Date.now())); } catch (_) {}
         form.innerHTML =
           '<div class="ap-done">' +
             '<div class="ap-done-ic">✅</div>' +
