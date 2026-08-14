@@ -137,7 +137,7 @@
 
     </div>
 
-    <div class="products-head" style="margin-top:52px">
+    <div class="products-head next">
       <h2>Próximamente</h2>
       <span class="tag">En diseño y desarrollo</span>
     </div>
@@ -198,33 +198,31 @@
         </div>
       </div>
 
+    </div>
 
-      <!-- SUGGESTIONS -->
-      <div class="product suggest-card" style="--pc:#ffd44d">
-        <span class="product-glow"></span>
-        <div class="product-top">
-          <span class="product-ic">💡</span>
-          <div>
-            <div class="product-name">¿Tienes <b>sugerencias</b>?</div>
-            <div class="product-kind">Buzón anónimo</div>
-          </div>
-        </div>
+    <!-- SUGGESTIONS — a form, not a product: it gets its own band instead of a
+         slot in the product grid, where it never aligned with anything. -->
+    <section class="suggest" aria-labelledby="suggest-h">
+      <span class="suggest-glow"></span>
+      <div class="suggest-copy">
+        <span class="suggest-ic">💡</span>
+        <h2 id="suggest-h">¿Tienes <b>sugerencias</b>?</h2>
         <p>Cuéntanos qué te gustaría ver en el ecosistema Events: una herramienta que te falta, algo que
-          arreglarías de las que ya usas, o una idea que se te haya ocurrido montando tu evento.
-          Se envía de forma <b>anónima</b> — no guardamos tu nombre, tu IP ni nada tuyo.</p>
-        <form id="suggest-card-form" class="suggest-form">
-          <textarea name="message" maxlength="500" rows="4" placeholder="Tu idea o sugerencia..." required></textarea>
-          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+          arreglarías de las que ya usas, o una idea que se te haya ocurrido montando tu evento.</p>
+        <p class="suggest-fine">Se envía de forma <b>anónima</b>: no guardamos tu nombre, tu IP ni nada tuyo.
+          Las leemos todas.</p>
+      </div>
+      <form id="suggest-card-form" class="suggest-form">
+        <label class="suggest-label" for="suggest-msg">Tu idea o sugerencia</label>
+        <textarea id="suggest-msg" name="message" maxlength="500" rows="4"
+          placeholder="Me gustaría que Events tuviera…" required></textarea>
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+        <div class="suggest-send">
           <button type="submit" class="btn btn-primary btn-sm">Enviar sugerencia</button>
           <p class="suggest-status" aria-live="polite"></p>
-        </form>
-        <div class="product-foot">
-          <span class="product-go">Leemos todas</span>
-          <span class="product-pill soon">Anónimo</span>
         </div>
-      </div>
-
-    </div>
+      </form>
+    </section>
   </section>
 
   <!-- WHY -->

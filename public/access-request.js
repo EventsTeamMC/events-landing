@@ -28,7 +28,9 @@
     '.ar-modal *{box-sizing:border-box}',
     '.ar-modal h2{font-family:"Outfit",system-ui,sans-serif;font-size:23px;margin:0 0 6px;font-weight:800;color:#eef2fb}',
     '.ar-sub{color:#93a0bd;font-size:14px;margin:0 0 20px}',
-    '.ar-x{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;background:#1e2740;',
+    // 36px, not 30: the recommended control size is 44pt on touch and 28pt on
+    // desktop, and this dialog is used on both.
+    '.ar-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:10px;background:#1e2740;',
     'border:1px solid #2a3552;color:#eef2fb;cursor:pointer;font-size:14px;line-height:1;padding:0}',
     '.ar-x:hover{border-color:#22d3ee;color:#67e8f9}',
     '.ar-f{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}',
@@ -70,9 +72,13 @@
     '@keyframes ar-pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}',
     '.ar-done-ic{display:inline-block;animation:ar-pop .45s cubic-bezier(.16,1,.3,1) both}',
     // Reduced motion keeps the fade — the thing that says something happened —
-    // and drops only the travel.
+    // and drops the travel. The blur is applied outright rather than animated:
+    // moving in and out of a blur is itself a motion trigger.
     '@media (prefers-reduced-motion:reduce){.ar-modal,.ar-done-ic{animation:none!important}',
-    '.ar-veil,.ar-veil.ar-out{animation-duration:.12s!important}}',
+    '@keyframes ar-veil-in-flat{from{opacity:0}to{opacity:1}}',
+    '@keyframes ar-veil-out-flat{from{opacity:1}to{opacity:0}}',
+    '.ar-veil{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:ar-veil-in-flat .12s linear both}',
+    '.ar-veil.ar-out{animation:ar-veil-out-flat .12s linear both}}',
     '@media (max-width:520px){.ar-modal{padding:22px 18px}}',
   ].join('');
   function ensureStyles() {
