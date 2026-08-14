@@ -49,18 +49,30 @@
     '.ar-done-ic{font-size:40px;margin-bottom:10px}',
     '.ar-done h3{font-family:"Outfit",system-ui,sans-serif;font-size:19px;margin:0 0 8px}',
     '.ar-done p{color:#93a0bd;font-size:14px;margin:0 0 18px}',
-    // Motion: the veil fades, the card rises. Short enough to feel like a
-    // response rather than a wait, and dropped for reduced-motion users.
-    '@keyframes ar-veil-in{from{opacity:0}to{opacity:1}}',
-    '@keyframes ar-card-in{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}',
-    '.ar-veil{animation:ar-veil-in .18s ease both}',
-    '.ar-modal{animation:ar-card-in .3s cubic-bezier(.16,1,.3,1) both}',
-    '.ar-send,.ar-x{transition:transform .13s,filter .13s,background .13s,border-color .13s}',
+    // Motion. The blur and the scale animate together so the veil reads as a
+    // material arriving rather than a grey box fading in, and the dialog leaves
+    // along the path it came by instead of vanishing — if it grew out of the
+    // middle of the screen, that is where it has to shrink back to.
+    '@keyframes ar-veil-in{from{opacity:0;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px)}',
+    'to{opacity:1;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}}',
+    '@keyframes ar-veil-out{from{opacity:1;backdrop-filter:blur(6px)}to{opacity:0;backdrop-filter:blur(0px)}}',
+    '@keyframes ar-card-in{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}',
+    '@keyframes ar-card-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(16px) scale(.96)}}',
+    // Enter and exit are the same curve read in opposite directions, so the way
+    // back retraces the way in.
+    '.ar-veil{animation:ar-veil-in .2s cubic-bezier(.32,.72,0,1) both}',
+    '.ar-modal{animation:ar-card-in .34s cubic-bezier(.32,.72,0,1) both}',
+    '.ar-veil.ar-out{animation:ar-veil-out .2s cubic-bezier(1,0,.68,.28) both}',
+    '.ar-veil.ar-out .ar-modal{animation:ar-card-out .24s cubic-bezier(1,0,.68,.28) both}',
+    '.ar-send,.ar-x{transition:transform .1s cubic-bezier(.32,.72,0,1),filter .13s,background .13s,border-color .13s}',
     '.ar-send:active,.ar-x:active{transform:scale(.97)}',
     '.ar-f input,.ar-f textarea{transition:border-color .14s,box-shadow .14s,background .14s}',
     '@keyframes ar-pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}',
     '.ar-done-ic{display:inline-block;animation:ar-pop .45s cubic-bezier(.16,1,.3,1) both}',
-    '@media (prefers-reduced-motion:reduce){.ar-veil,.ar-modal,.ar-done-ic{animation:none!important}}',
+    // Reduced motion keeps the fade — the thing that says something happened —
+    // and drops only the travel.
+    '@media (prefers-reduced-motion:reduce){.ar-modal,.ar-done-ic{animation:none!important}',
+    '.ar-veil,.ar-veil.ar-out{animation-duration:.12s!important}}',
     '@media (max-width:520px){.ar-modal{padding:22px 18px}}',
   ].join('');
   function ensureStyles() {
@@ -77,10 +89,21 @@
     });
   }
 
+  var onKey = null;
+
   function close() {
     var v = document.getElementById('ar-veil');
-    if (v) v.remove();
+    if (onKey) { document.removeEventListener('keydown', onKey); onKey = null; }
     document.documentElement.style.overflow = '';
+    if (!v || v.classList.contains('ar-out')) return;
+    // Let it leave the way it arrived. The id goes first so a second open()
+    // during those 200ms builds a fresh dialog instead of being refused.
+    v.id = '';
+    v.classList.add('ar-out');
+    var gone = false;
+    var drop = function () { if (!gone) { gone = true; v.remove(); } };
+    v.addEventListener('animationend', drop);
+    setTimeout(drop, 400);   // animation cancelled or never ran
   }
 
   function open() {
@@ -111,9 +134,10 @@
 
     document.getElementById('ar-x').addEventListener('click', close);
     v.addEventListener('click', function (e) { if (e.target === v) close(); });
-    document.addEventListener('keydown', function onKey(e) {
-      if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onKey); }
-    });
+    // Held on the module so closing by any route unbinds it — closing with the
+    // ✕ used to leave this listener behind for the rest of the session.
+    onKey = function (e) { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
     setTimeout(function () { var i = v.querySelector('input'); if (i) i.focus(); }, 40);
 
     document.getElementById('ar-form').addEventListener('submit', function (e) {
