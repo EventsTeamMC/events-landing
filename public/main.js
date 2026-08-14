@@ -200,6 +200,16 @@
   scrim.className = 'nav-scrim';
   nav.appendChild(scrim);
 
+  /* The bar's call to action does not fit next to the wordmark on a phone, so
+     the narrow layout hides it there. It still has to be reachable once you
+     have scrolled past the hero, so a copy goes to the top of the sheet. */
+  var navCta = nav.querySelector(':scope > .btn');
+  if (navCta && sheet) {
+    var cta = navCta.cloneNode(true);
+    cta.removeAttribute('id');
+    sheet.insertBefore(cta, sheet.firstChild);
+  }
+
   var cancelSpring = null;   // running spring, if any
   var open = false;
 

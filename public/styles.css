@@ -81,12 +81,21 @@ a{color:inherit;text-decoration:none}
   letter-spacing:-.01em;padding:4px 6px;margin-left:-6px;border-radius:10px;
   transition:transform var(--t-press) var(--ease-out)}
 .brand:active{transform:scale(.96)}
-.brand img{width:28px;height:28px;border-radius:7px}
+/* The transparent mark, not the app icon: icon.png carries its own dark rounded
+   tile, which read as a sticker pasted onto the bar. logo.svg is the mark alone,
+   so it sits on the glass instead of on top of it. icon.png stays the favicon,
+   where a background is exactly what you want. */
+.brand img{width:30px;height:30px;flex:none}
+.brand span{white-space:nowrap}
 .brand b{color:var(--accent2);font-weight:800}
 /* Vibrancy: text over a blurred surface needs more weight and a touch more
    tracking than the same text on a solid one, or it dissolves into the blur. */
 .nav-links{display:flex;gap:26px;margin-left:auto;font-size:.875rem;font-weight:600;letter-spacing:.005em;color:var(--muted)}
 .nav-links a{padding:6px 2px;border-radius:8px;transition:color var(--t-press) var(--ease-out)}
+/* The copy of the page's call to action that JS puts inside the sheet exists in
+   the DOM at every width, but it only belongs to the narrow layout — the wide
+   bar already has the real one. */
+.nav-links > .btn{display:none}
 @media (hover:hover){.nav-links a:hover{color:var(--text)}}
 .nav-links a:active{color:var(--accent2)}
 .nav .btn{margin-left:8px}
@@ -241,12 +250,46 @@ a{color:inherit;text-decoration:none}
 
 /* cta */
 .cta{text-align:center;background:linear-gradient(160deg,rgba(91,140,255,.14),var(--surface));
-  border:1px solid var(--border2);border-radius:26px;padding:64px 28px}
+  border:1px solid var(--border2);border-radius:26px;padding:56px 28px}
 .soon-badge{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,180,60,.12);
   border:1px solid rgba(255,180,60,.35);color:var(--play1);font-size:0.8125rem;font-weight:600;margin-bottom:18px}
 .cta h2{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,3.4vw,2.25rem);line-height:1.16;
   letter-spacing:clamp(-.756px,.648px - .133vw,-.288px);text-wrap:balance}
 .cta p{color:var(--muted);margin:14px auto 30px;max-width:520px;text-wrap:pretty}
+/* Entry points named after the problem the reader arrived with, not after the
+   product. Four of them, because four products exist — the old pair of buttons
+   offered half the catalogue and made the other half look unfinished. */
+.start-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;text-align:left;
+  max-width:760px;margin:0 auto}
+.start{--press:1;position:relative;display:flex;flex-direction:column;gap:5px;padding:20px 22px;
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  transform:scale(var(--press));
+  transition:transform var(--t-snap) var(--spring),border-color var(--t-snap) var(--spring),
+             box-shadow var(--t-snap) var(--spring)}
+.start::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(closest-side at 20% 0%,color-mix(in srgb,var(--pc) 22%,transparent),transparent 70%);
+  transition:opacity var(--t-snap) var(--spring)}
+.start-ic{font-size:1.375rem;line-height:1}
+.start-t{position:relative;font-family:var(--display);font-weight:700;font-size:1rem;line-height:1.25;
+  letter-spacing:-.01em;color:var(--text)}
+.start-d{position:relative;color:var(--muted);font-size:0.84375rem;line-height:1.45}
+.start::after{content:"→";position:absolute;top:20px;right:20px;color:var(--pc);font-weight:700;
+  opacity:0;transform:translateX(-4px);
+  transition:opacity var(--t-snap) var(--spring),transform var(--t-flick) var(--spring-bounce)}
+@media (hover:hover){
+  .start:hover{border-color:color-mix(in srgb,var(--pc) 50%,var(--border2));box-shadow:0 18px 44px rgba(0,0,0,.4)}
+  .start:hover::before{opacity:1}
+  .start:hover::after{opacity:1;transform:none}
+}
+.start:active{--press:.985;transition-duration:var(--t-press)}
+/* Beats `.cta p`, which was adding its own 30px below the last line and left a
+   pocket of empty panel under the grid. */
+.cta .cta-fine{margin:26px auto 0;color:var(--faint);font-size:0.875rem}
+.cta-fine a{color:var(--accent2);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:640px){
+  .start-grid{grid-template-columns:1fr}
+  .cta{padding:44px 20px}
+}
 .dl-row{display:flex;flex-direction:column;align-items:center;gap:14px}
 .dl-alt{color:var(--faint);font-size:0.875rem;display:flex;gap:10px}
 .dl-alt a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
@@ -299,21 +342,43 @@ a{color:inherit;text-decoration:none}
 .dl-foot{text-align:center;margin-top:34px;color:var(--muted);font-size:0.90625rem}
 .dl-foot a{color:var(--accent2);text-decoration:underline;text-underline-offset:3px}
 
-/* footer */
-.footer{border-top:1px solid var(--border);padding:52px 0 26px;margin-top:40px}
-.foot-inner{display:flex;flex-wrap:wrap;gap:32px}
-.foot-brand{display:flex;flex-direction:column;gap:8px;flex:1 1 260px;min-width:220px}
-.footer nav{flex:0 0 auto;min-width:120px}
-.foot-brand img{width:32px;height:32px;border-radius:8px}
-.foot-brand span{font-family:var(--display);font-weight:700}
+/* footer
+   A grid, not a wrapping flex row: with four columns the flex version reflowed
+   into a different shape at every width, and every page had invented its own
+   column set anyway — the home page carried two columns both titled
+   "Productos". Same four columns everywhere now, in the same order. */
+.footer{border-top:1px solid var(--border);padding:56px 0 26px;margin-top:40px}
+.foot-inner{display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,1fr));gap:32px}
+.foot-brand{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.foot-mark{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.0625rem}
+.foot-brand img{width:32px;height:32px;flex:none}
 .foot-brand b{color:var(--accent2)}
 .foot-brand p{color:var(--faint);font-size:0.875rem;max-width:280px}
-.footer nav{display:flex;flex-direction:column;gap:9px}
-.footer h4{font-family:var(--display);font-size:0.875rem;margin-bottom:4px}
-.footer nav a{color:var(--muted);font-size:0.875rem}
-.footer nav a:hover{color:var(--accent2)}
+/* The Discord invite lived on exactly one page before. It is the community's
+   front door, so it is on all of them now, and it looks like a way in. */
+.foot-discord{display:inline-flex;align-items:center;gap:9px;margin-top:4px;padding:9px 15px;border-radius:999px;
+  background:var(--raised);border:1px solid var(--border2);color:var(--text);font-size:0.84375rem;font-weight:600;
+  transition:border-color var(--t-snap) var(--spring),color var(--t-snap) var(--spring),transform var(--t-press) var(--ease-out)}
+.foot-discord svg{flex:none;color:#8ea1ff}
+@media (hover:hover){.foot-discord:hover{border-color:var(--accent);color:var(--accent2)}}
+.foot-discord:active{transform:scale(.97)}
+.footer nav{display:flex;flex-direction:column;gap:2px;min-width:0}
+.footer h4{font-family:var(--display);font-size:0.875rem;margin-bottom:8px;letter-spacing:-.005em}
+/* Padded rows rather than bare text: a footer link used to be a 14px target,
+   which is under the recommended minimum for a finger. */
+.footer nav a{display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:4px 0;
+  color:var(--muted);font-size:0.875rem;transition:color var(--t-press) linear}
+@media (hover:hover){.footer nav a:hover{color:var(--accent2)}}
+.footer nav a:active{color:var(--accent2)}
 .foot-legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:22px;
   border-top:1px solid var(--border);color:var(--faint);font-size:0.78125rem}
+.foot-legal span:last-child{max-width:58ch;text-align:right}
+@media (max-width:900px){
+  .foot-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 28px}
+  .foot-brand{grid-column:1/-1;margin-bottom:6px}
+  .foot-legal span:last-child{text-align:left}
+}
+@media (max-width:480px){.foot-inner{grid-template-columns:1fr}}
 
 /* Reveal on scroll.
    The offset composes with the card's own lift/press instead of replacing its
@@ -358,6 +423,13 @@ a{color:inherit;text-decoration:none}
   .nav.open .nav-links,.nav.open .nav-scrim{touch-action:none}
   .nav-links a{padding:13px 0;border-bottom:1px solid var(--border);font-size:.9375rem}
   .nav-links a:last-child{border-bottom:0}
+  /* The bar keeps the mark and the menu button, nothing else. The page's call
+     to action was being squeezed between them until it touched the wordmark;
+     JS moves a copy of it into the sheet, where it gets a full-width target. */
+  .nav{gap:12px;padding:14px 18px}
+  .nav > .btn{display:none}
+  .nav-links > .btn{display:inline-flex;width:100%;padding:13px 20px;margin:10px 0 6px;border-bottom:0}
+  .nav-links > .btn + a{border-top:1px solid var(--border)}
   /* Tapping outside closes it: a menu must never be a trap. */
   .nav-scrim{position:fixed;inset:0;z-index:-1;background:rgba(4,6,12,.4);
     opacity:0;visibility:hidden;pointer-events:none;
@@ -365,7 +437,7 @@ a{color:inherit;text-decoration:none}
   .nav.open .nav-scrim{opacity:1;visibility:visible;pointer-events:auto;transition-delay:0s}
   .nav-burger{display:block}
   .nav .btn{margin-left:0}
-  .cols2,.shot-row,.foot-inner{grid-template-columns:1fr}
+  .cols2,.shot-row{grid-template-columns:1fr}
   .section{padding-block:60px}
   .hero{padding:56px 0 20px}
 }
@@ -559,10 +631,6 @@ a{color:inherit;text-decoration:none}
   background:var(--raised);border:1px solid var(--border);border-radius:8px;padding:6px 10px;width:fit-content}
 .cmd-card small{color:var(--faint);font-size:0.8125rem;padding-left:2px}
 
-@media (max-width:900px){
-  .bl-chip.c1{left:0}.bl-chip.c3{left:0}
-}
-
 /* legal pages (terms / privacy) */
 .legal-hero{padding:64px 0 8px;text-align:center}
 .legal-hero .eyebrow{margin-bottom:18px}
@@ -623,9 +691,6 @@ a{color:inherit;text-decoration:none}
 .wl-chip.c3{bottom:16%;left:6%;animation-delay:.7s}
 .wl-chip.c4{bottom:4%;right:8%;animation-delay:1.6s}
 
-@media (max-width:900px){
-  .wl-chip.c1{left:0}.wl-chip.c3{left:0}
-}
 
 /* ============================================================
    SUGGESTIONS — banda propia bajo los productos
@@ -703,6 +768,15 @@ a{color:inherit;text-decoration:none}
 .cl-lead{color:var(--muted);font-size:1.0625rem;line-height:1.6;max-width:640px;margin:0 auto}
 .cl-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 .cl-stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin-top:46px}
+.cl-stats[hidden]{display:none}
+/* Once they wrap, two buttons of different widths stacked off-centre read as a
+   mistake. Below this width they stack to the same full width instead. */
+@media (max-width:560px){
+  .cl-cta{flex-direction:column;align-items:stretch;gap:10px}
+  .cl-cta .btn{width:100%}
+  .cl-stats{gap:0;justify-content:space-between;margin-top:38px}
+  .cl-stat{flex:1;align-items:center;text-align:center}
+}
 .cl-stat{display:flex;flex-direction:column;gap:2px}
 .cl-stat b{font-family:var(--display);font-size:1.875rem;color:#67e8f9}
 .cl-stat span{font-size:0.8125rem;color:var(--muted)}
@@ -874,4 +948,20 @@ a{color:inherit;text-decoration:none}
 }
 @media (prefers-reduced-motion:reduce){
   .ap-done-ic{animation:none!important}
+}
+
+/* Below this width the orbit has no room left to be an orbit: the container is
+   narrower than the badge plus a chip on each side, so the chips landed on top
+   of the very thing they are meant to surround. They become a 2×2 block under
+   the badge instead — same four facts, no collisions, and it rhymes with the
+   product grid on the home page. Shared by both product pages. */
+@media (max-width:760px){
+  .bl-orbit,.wl-orbit{height:auto;max-width:420px;margin-top:38px;
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+    justify-items:center;align-items:stretch}
+  .bl-shield,.wl-shield{position:static;grid-column:1/-1;
+    width:clamp(104px,28vw,132px);height:clamp(104px,28vw,132px);
+    font-size:clamp(46px,12vw,58px);margin-bottom:8px}
+  .bl-chip,.wl-chip{position:static;animation:none;width:100%;justify-content:center;
+    font-size:.8125rem;padding:11px 12px}
 }

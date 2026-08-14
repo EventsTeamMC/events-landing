@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Las funciones serverless no son páginas.
+Disallow: /api/
+
+Sitemap: https://www.eventsmc.xyz/sitemap.xml

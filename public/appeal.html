@@ -4,16 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Apelar un baneo — Events</title>
-<meta name="description" content="Formulario para apelar un baneo del Discord de Events, una sanción de Events Client o un baneo que consideras falso en la red de Events Blacklist.">
+<meta name="description" content="Formulario para apelar un baneo del Discord de Events, una sanción de Events Client o un baneo falso en la red de Events Blacklist. Lo revisa una persona.">
+<link rel="canonical" href="https://www.eventsmc.xyz/appeal">
+
 <link rel="icon" href="/icon.png">
-<meta property="og:title" content="Apelar un baneo — Events">
-<meta property="og:description" content="Rellena el formulario y el staff de Events revisa tu caso a mano.">
-<meta property="og:image" content="/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#070a12">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:site_name" content="Events">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://www.eventsmc.xyz/appeal">
+<meta property="og:title" content="Apelar un baneo — Events">
+<meta property="og:description" content="Si crees que la sanción es un error, cuéntanoslo. Lo revisa una persona del staff.">
+<meta property="og:image" content="https://www.eventsmc.xyz/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Events — herramientas para eventos de Minecraft">
+
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Apelar un baneo — Events">
-<meta name="twitter:description" content="Rellena el formulario y el staff de Events revisa tu caso a mano.">
-<meta name="twitter:image" content="/icon.png">
+<meta name="twitter:description" content="Si crees que la sanción es un error, cuéntanoslo. Lo revisa una persona del staff.">
+<meta name="twitter:image" content="https://www.eventsmc.xyz/og.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -22,7 +37,7 @@
 <body>
 
 <header class="nav" id="nav">
-  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events <b>Team</b></span></a>
+  <a class="brand" href="/"><img src="/logo.svg" alt="" width="28" height="28"><span>Events <b>Team</b></span></a>
   <nav class="nav-links">
     <a href="/">← Todos los productos</a>
     <a href="#despues">Qué pasa después</a>
@@ -183,14 +198,18 @@
 
 <footer class="footer">
   <div class="wrap foot-inner">
-    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events <b>Team</b></span><p>Herramientas para creadores de eventos de Minecraft.</p></div>
-    <nav><h4>Productos</h4><a href="/">Todos los productos</a><a href="/blacklist">Events Blacklist</a><a href="/client">Events Client</a></nav>
-    <nav><h4>Esta página</h4><a href="#form">Formulario</a><a href="#despues">Qué pasa después</a></nav>
-    <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones Blacklist</a><a href="/client/terms">Condiciones Client</a></nav>
+    <div class="foot-brand">
+      <span class="foot-mark"><img src="/logo.svg" alt="" width="32" height="32"><span>Events <b>Team</b></span></span>
+      <p>Herramientas para creadores de eventos de Minecraft.</p>
+      <a class="foot-discord" id="foot-discord" href="https://discord.gg/2T7DDmpxYr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="16" height="16"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a15.7 15.7 0 0 1 3.7 1.2 12.9 12.9 0 0 0-11.2 0A15.7 15.7 0 0 1 11.1 4.4L10.9 4a16.9 16.9 0 0 0-4.2 1.3C4 9.3 3.3 13.2 3.6 17a17 17 0 0 0 5.2 2.6l.8-1.2a11 11 0 0 1-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.4 0l.4.3a11 11 0 0 1-1.7.8l.8 1.2a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-3.1-11.7ZM9.7 14.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2Z"/></svg>Comunidad en Discord</a>
+    </div>
+    <nav><h4>Productos</h4><a href="/blacklist">Events Blacklist</a><a href="/client">Events Client</a><a href="/whitelist">Events Whitelist</a><a href="/calendar">Events Calendar</a></nav>
+    <nav><h4>Recursos</h4><a href="/download">Descargar Client</a><a href="/appeal">Apelar un baneo</a><a href="https://calendar.eventsmc.xyz" target="_blank" rel="noopener">Abrir el calendario</a><a class="foot-status" href="https://status.eventsmc.xyz" target="_blank" rel="noopener"><span class="foot-status-dot"></span>Estado del servicio</a></nav>
+    <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones · Blacklist</a><a href="/client/terms">Condiciones · Client</a><a href="/whitelist/terms">Condiciones · Whitelist</a><a href="/client/data-deletion">Eliminar mis datos</a></nav>
   </div>
   <div class="wrap foot-legal">
-    <span>© <span id="year"></span> Events Team</span>
-    <span>No afiliado a Mojang, Microsoft ni Discord.</span>
+    <span>© <span id="year"></span> Events Team · Todos los derechos reservados</span>
+    <span>Producto no oficial. No afiliado a Mojang Studios, Microsoft ni Discord. Minecraft es una marca de Mojang Studios.</span>
   </div>
 </footer>
 
