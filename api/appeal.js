@@ -8,7 +8,13 @@
 // cualquiera puede leer este archivo, pero no puede extraer la URL ni usarla
 // para spamear el canal.
 
-const WEBHOOK_URL = process.env.APPEAL_WEBHOOK_URL;
+// Un pegado desde el panel de Vercel se trae a veces un salto de línea final o
+// las comillas alrededor. Con eso fetch() lanza «Invalid URL» y el formulario
+// devolvía un 502 sin más pista, así que lo normalizamos aquí.
+const WEBHOOK_URL = (process.env.APPEAL_WEBHOOK_URL || '').trim().replace(/^["']|["']$/g, '');
+if (WEBHOOK_URL && !/^https:\/\/(canary\.|ptb\.)?discord\.com\/api\/webhooks\/\d+\/[\w-]+$/.test(WEBHOOK_URL)) {
+  console.error('[appeal] APPEAL_WEBHOOK_URL no tiene forma de webhook de Discord — revisa la variable en Vercel');
+}
 
 // Rate limit best-effort en memoria: se reinicia en cada cold start, pero
 // mientras la instancia esté caliente frena reenvíos rápidos desde la misma IP.
@@ -46,7 +52,14 @@ const str = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
 // El texto lo escribe un desconocido y acaba dentro de un embed: cortamos los
 // caracteres que romperían el formato o simularían menciones/enlaces del staff.
-const clean = (s) => s.replace(/[`*_~|]/g, '').replace(/\s{3,}/g, '  ');
+//
+// El fallback no es cosmético: un campo de embed vacío es un 400 de Discord, y
+// un texto como "***" se queda en nada después de limpiarlo. Sin esto, esa
+// apelación se perdía con un 502 que no explicaba nada.
+const clean = (s, fallback) => {
+  const out = String(s == null ? '' : s).replace(/[`*_~|]/g, '').replace(/\s{3,}/g, '  ').trim();
+  return out || fallback || '(sin contenido legible)';
+};
 
 // La tabla de rate limit crece con cada IP nueva; sin esto una instancia caliente
 // acabaría reteniendo memoria indefinidamente.
@@ -151,9 +164,18 @@ module.exports = async (req, res) => {
         }],
       }),
     });
-    if (!r.ok) { res.status(502).json({ error: 'No se pudo enviar la apelación' }); return; }
+    if (!r.ok) {
+      // Sin esto el 502 no dice nada: Discord explica en el cuerpo qué campo
+      // del embed no le gusta, y ese texto es lo único que permite arreglarlo.
+      // Se lee en Vercel → Logs (o `vercel logs <deployment>`).
+      const detail = await r.text().catch(() => '');
+      console.error('[appeal] Discord rechazó el webhook:', r.status, detail.slice(0, 800));
+      res.status(502).json({ error: 'No se pudo enviar la apelación' });
+      return;
+    }
     res.status(200).json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.error('[appeal] fallo al llamar al webhook:', (err && err.message) || err);
     res.status(502).json({ error: 'No se pudo enviar la apelación' });
   }
 };
