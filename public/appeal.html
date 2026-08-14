@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apelar un baneo — Events</title>
+<meta name="description" content="Formulario único para apelar un baneo del Discord de Events, una sanción de Events Client o un baneo que consideras falso en la red de Events Blacklist.">
+<link rel="icon" href="/icon.png">
+<meta property="og:title" content="Apelar un baneo — Events">
+<meta property="og:description" content="¿Crees que tu baneo no es justo? Cuéntanoslo en un formulario y el staff lo revisa a mano.">
+<meta property="og:image" content="/icon.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apelar un baneo — Events">
+<meta name="twitter:description" content="Un solo formulario para apelar baneos de Discord, del launcher o de la red Blacklist.">
+<meta name="twitter:image" content="/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="ap">
+
+<header class="nav" id="nav">
+  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events <b>Apelaciones</b></span></a>
+  <nav class="nav-links">
+    <a href="/">← Todos los productos</a>
+    <a href="#que">Qué puedes apelar</a>
+    <a href="#como">Cómo funciona</a>
+  </nav>
+  <a class="btn btn-primary btn-sm" href="#form">Apelar ahora</a>
+  <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">✦ Apelaciones · Se revisan a mano</span>
+      <h1>¿Crees que tu baneo<br><span class="grad">no es justo?</span></h1>
+      <p class="lead">Un único formulario para las tres cosas: el Discord de Events, una sanción del launcher
+        o un baneo que consideras falso dentro de la red de Events Blacklist. Lo lee una persona, no un bot.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#form">Rellenar apelación</a>
+        <a class="btn btn-ghost" href="#como">Cómo funciona</a>
+      </div>
+      <div class="hero-meta">
+        <span>Una respuesta por Discord</span><i></i><span>Sin cuenta ni registro</span><i></i><span>Una apelación cada 5 min</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUÉ SE PUEDE APELAR -->
+  <section class="wrap section" id="que">
+    <h2 class="h2">Tres tipos de baneo, un solo sitio.</h2>
+    <p class="sub">Elige abajo el que te afecta. Si no estás seguro de cuál es tu caso, elige el que más se parezca
+      y explícalo en el mensaje — no descartamos apelaciones por marcar la casilla equivocada.</p>
+    <div class="grid">
+      <article class="feat">
+        <span class="fic">💬</span><h3>Discord de Events</h3>
+        <p>Te han baneado del servidor de Discord de Events y quieres que se revise. Necesitamos tu ID de Discord
+          para localizar el baneo.</p>
+      </article>
+      <article class="feat">
+        <span class="fic">🎮</span><h3>Events Client</h3>
+        <p>Tu cuenta tiene una sanción en el launcher y no puedes entrar a las instancias. Cuéntanos tu nick de
+          Minecraft y qué pasó.</p>
+      </article>
+      <article class="feat">
+        <span class="fic">🛡️</span><h3>Events Blacklist</h3>
+        <p>Un servidor de la red te baneó y crees que el reporte es falso o injusto. Revisamos el registro del
+          baneo con la comunidad que lo originó.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- FORMULARIO -->
+  <section class="wrap section" id="form">
+    <h2 class="h2">Tu apelación</h2>
+    <p class="sub">Cuanto más concreto seas, más rápido se resuelve. Los campos con * son obligatorios.</p>
+
+    <form id="appeal-form" class="ap-form" novalidate>
+
+      <!-- 1 · categoría -->
+      <fieldset class="ap-step">
+        <legend><span class="ap-n">01</span> ¿Qué quieres apelar?</legend>
+        <div class="ap-cats">
+          <label class="ap-cat">
+            <input type="radio" name="category" value="discord">
+            <span class="ap-cat-in">
+              <span class="ap-cat-ic">💬</span>
+              <span class="ap-cat-t">Baneo del Discord</span>
+              <span class="ap-cat-d">Servidor de Discord de Events</span>
+            </span>
+          </label>
+          <label class="ap-cat">
+            <input type="radio" name="category" value="launcher">
+            <span class="ap-cat-in">
+              <span class="ap-cat-ic">🎮</span>
+              <span class="ap-cat-t">Sanción del launcher</span>
+              <span class="ap-cat-d">Events Client</span>
+            </span>
+          </label>
+          <label class="ap-cat">
+            <input type="radio" name="category" value="blacklist">
+            <span class="ap-cat-in">
+              <span class="ap-cat-ic">🛡️</span>
+              <span class="ap-cat-t">Baneo falso</span>
+              <span class="ap-cat-d">Red de Events Blacklist</span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- 2 · quién eres -->
+      <fieldset class="ap-step">
+        <legend><span class="ap-n">02</span> ¿Quién eres?</legend>
+        <div class="ap-row">
+          <label class="ap-f">
+            <span>Tu usuario de Discord *</span>
+            <input name="discord" maxlength="60" placeholder="usuario" autocomplete="off">
+          </label>
+          <label class="ap-f">
+            <span>Tu ID de Discord *</span>
+            <input name="discordId" inputmode="numeric" maxlength="20" placeholder="123456789012345678" autocomplete="off">
+            <small class="ap-help">Ajustes → Avanzado → Modo desarrollador, y luego clic derecho en tu perfil → Copiar ID de usuario.</small>
+          </label>
+        </div>
+
+        <div class="ap-only" data-only="launcher" hidden>
+          <label class="ap-f">
+            <span>Tu nick de Minecraft *</span>
+            <input name="mcnick" maxlength="16" placeholder="Notch" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="ap-only" data-only="blacklist" hidden>
+          <label class="ap-f">
+            <span>Servidor que te baneó *</span>
+            <input name="guild" maxlength="100" placeholder="Nombre del servidor o su ID" autocomplete="off">
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- 3 · el baneo -->
+      <fieldset class="ap-step">
+        <legend><span class="ap-n">03</span> El baneo</legend>
+        <div class="ap-row">
+          <label class="ap-f">
+            <span>Motivo que te dieron *</span>
+            <input name="reason" maxlength="300" placeholder="Spam en el canal general / No lo sé" autocomplete="off">
+          </label>
+          <label class="ap-f">
+            <span>¿Cuándo fue? (opcional)</span>
+            <input name="when" maxlength="60" placeholder="Hace 2 semanas · 12/07/2026" autocomplete="off">
+          </label>
+        </div>
+        <label class="ap-f">
+          <span>Tu apelación *</span>
+          <textarea name="appeal" rows="6" maxlength="1500"
+            placeholder="Qué pasó desde tu punto de vista, por qué crees que el baneo es injusto o desproporcionado y qué ha cambiado desde entonces."></textarea>
+          <small class="ap-help"><span id="ap-count">0</span>/1500 · mínimo 40 caracteres</small>
+        </label>
+        <label class="ap-f">
+          <span>Pruebas (opcional)</span>
+          <input name="evidence" maxlength="300" placeholder="https://… capturas, vídeo o mensaje" autocomplete="off">
+          <small class="ap-help">Un enlace público: Imgur, YouTube, Google Drive con permiso de lectura…</small>
+        </label>
+      </fieldset>
+
+      <!-- 4 · enviar -->
+      <label class="ap-check">
+        <input type="checkbox" name="agree">
+        <span>Confirmo que todo lo que cuento es cierto y que soy la persona baneada. Enviar apelaciones falsas
+          o repetidas puede cerrar la vía de apelación.</span>
+      </label>
+
+      <!-- Campo trampa anti-bots -->
+      <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <p class="ap-status" id="ap-status" role="alert" aria-live="polite"></p>
+      <button type="submit" class="btn btn-primary btn-big" id="ap-send">Enviar apelación</button>
+      <p class="ap-fine">Solo se envía lo que escribes aquí y se publica en un canal privado del staff.
+        No guardamos tu IP ni te creamos ninguna cuenta.</p>
+    </form>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section class="wrap section" id="como">
+    <h2 class="h2">Qué pasa después de enviarla.</h2>
+    <div class="steps">
+      <div class="step"><span class="num">01</span><h3>Llega al staff</h3><p>Tu apelación aparece en un canal privado del equipo de Events, con tu ID para localizar el baneo.</p></div>
+      <div class="step"><span class="num">02</span><h3>Se revisa el caso</h3><p>Miramos el registro del baneo y, si viene de otra comunidad, hablamos con ella. Puede llevar unos días.</p></div>
+      <div class="step"><span class="num">03</span><h3>Te respondemos</h3><p>Te escribimos por Discord con la decisión. Si se acepta, el baneo se retira de la red; si no, te decimos por qué.</p></div>
+    </div>
+
+    <div class="cols2" style="margin-top:44px">
+      <div class="card good">
+        <h3>Ayuda que tu apelación</h3>
+        <ul>
+          <li>Explique qué pasó, aunque no te deje bien</li>
+          <li>Incluya fecha aproximada y contexto</li>
+          <li>Traiga pruebas si las tienes</li>
+          <li>Sea concreta: 5 líneas útiles valen más que 50</li>
+        </ul>
+      </div>
+      <div class="card bad">
+        <h3>No ayuda</h3>
+        <ul>
+          <li>"Desbaneadme" y nada más</li>
+          <li>Enviar la misma apelación 10 veces</li>
+          <li>Insultar al staff o al servidor que te baneó</li>
+          <li>Usar una cuenta o un ID que no son tuyos</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap foot-inner">
+    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events <b>Team</b></span><p>Apelaciones de baneos del ecosistema Events.</p></div>
+    <nav><h4>Apelaciones</h4><a href="#que">Qué puedes apelar</a><a href="#form">Formulario</a><a href="#como">Cómo funciona</a></nav>
+    <nav><h4>Ecosistema</h4><a href="/">Todos los productos</a><a href="/blacklist">Events Blacklist</a><a href="/client">Events Client</a></nav>
+    <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones Blacklist</a><a href="/client/terms">Condiciones Client</a></nav>
+  </div>
+  <div class="wrap foot-legal">
+    <span>© <span id="year"></span> Events Team</span>
+    <span>No afiliado a Mojang, Microsoft ni Discord.</span>
+  </div>
+</footer>
+
+<script src="/main.js"></script>
+<script src="/appeal.js"></script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
