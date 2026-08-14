@@ -4,25 +4,41 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Events Calendar — El calendario de los eventos de Minecraft</title>
-<meta name="description" content="Un calendario abierto donde cada studio publica sus torneos, series y eventos de Minecraft. Consúltalo sin registrarte.">
+<meta name="description" content="Calendario abierto donde cada studio publica sus torneos, series y eventos de Minecraft. Consúltalo sin registrarte.">
+<link rel="canonical" href="https://www.eventsmc.xyz/calendar">
+
 <link rel="icon" href="/icon.png">
-<meta property="og:title" content="Events Calendar — El calendario de los eventos de Minecraft">
-<meta property="og:description" content="Cada studio publica sus torneos, series y eventos. Todos juntos, en un solo calendario, abierto para cualquiera.">
-<meta property="og:image" content="/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#070a12">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:site_name" content="Events">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Events Calendar">
-<meta name="twitter:description" content="El calendario abierto de los eventos de Minecraft de la comunidad Events.">
-<meta name="twitter:image" content="/icon.png">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://www.eventsmc.xyz/calendar">
+<meta property="og:title" content="Events Calendar — Todo lo que pasa, en un solo calendario">
+<meta property="og:description" content="Cada studio publica sus torneos y series. Todos juntos, abierto para cualquiera.">
+<meta property="og:image" content="https://www.eventsmc.xyz/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Events — herramientas para eventos de Minecraft">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Events Calendar — Todo lo que pasa, en un solo calendario">
+<meta name="twitter:description" content="Cada studio publica sus torneos y series. Todos juntos, abierto para cualquiera.">
+<meta name="twitter:image" content="https://www.eventsmc.xyz/og.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Events Calendar","url":"https://www.eventsmc.xyz/calendar","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"es","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"publisher":{"@type":"Organization","name":"Events Team","url":"https://www.eventsmc.xyz/"}}</script>
 </head>
 <body class="cal-landing">
 
 <header class="nav" id="nav">
-  <a class="brand" href="/"><img src="/icon.png" alt=""><span>Events <b>Calendar</b></span></a>
+  <a class="brand" href="/"><img src="/logo.svg" alt="" width="28" height="28"><span>Events <b>Calendar</b></span></a>
   <nav class="nav-links">
     <a href="/">Events Team</a>
     <a href="#como">Cómo funciona</a>
@@ -114,26 +130,33 @@
 
 <footer class="footer">
   <div class="wrap foot-inner">
-    <div class="foot-brand"><img src="/icon.png" alt=""><span>Events <b>Team</b></span><p>Herramientas para creadores de eventos de Minecraft.</p></div>
+    <div class="foot-brand">
+      <span class="foot-mark"><img src="/logo.svg" alt="" width="32" height="32"><span>Events <b>Calendar</b></span></span>
+      <p>El calendario público de los eventos de Minecraft.</p>
+      <a class="foot-discord" id="foot-discord" href="https://discord.gg/2T7DDmpxYr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="16" height="16"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a15.7 15.7 0 0 1 3.7 1.2 12.9 12.9 0 0 0-11.2 0A15.7 15.7 0 0 1 11.1 4.4L10.9 4a16.9 16.9 0 0 0-4.2 1.3C4 9.3 3.3 13.2 3.6 17a17 17 0 0 0 5.2 2.6l.8-1.2a11 11 0 0 1-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.4 0l.4.3a11 11 0 0 1-1.7.8l.8 1.2a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-3.1-11.7ZM9.7 14.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2Z"/></svg>Comunidad en Discord</a>
+    </div>
     <nav><h4>Productos</h4><a href="/blacklist">Events Blacklist</a><a href="/client">Events Client</a><a href="/whitelist">Events Whitelist</a><a href="/calendar">Events Calendar</a></nav>
-    <nav><h4>Comunidad</h4>
-      <a class="foot-status" href="https://status.eventsmc.xyz" target="_blank" rel="noopener"><span class="foot-status-dot"></span>Estado del servicio</a></nav>
+    <nav><h4>Recursos</h4><a href="/download">Descargar Client</a><a href="/appeal">Apelar un baneo</a><a href="https://calendar.eventsmc.xyz" target="_blank" rel="noopener">Abrir el calendario</a><a class="foot-status" href="https://status.eventsmc.xyz" target="_blank" rel="noopener"><span class="foot-status-dot"></span>Estado del servicio</a></nav>
+    <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones · Blacklist</a><a href="/client/terms">Condiciones · Client</a><a href="/whitelist/terms">Condiciones · Whitelist</a><a href="/client/data-deletion">Eliminar mis datos</a></nav>
   </div>
   <div class="wrap foot-legal">
-    <span>© <span id="year"></span> Events Team</span>
-    <span>No afiliado a Mojang, Microsoft ni Discord.</span>
+    <span>© <span id="year"></span> Events Team · Todos los derechos reservados</span>
+    <span>Producto no oficial. No afiliado a Mojang Studios, Microsoft ni Discord. Minecraft es una marca de Mojang Studios.</span>
   </div>
 </footer>
 
+<!-- Same script as every other page: this one used to roll its own one-line
+     burger toggle, which is why its menu was the only one without the sheet,
+     the scrim, Escape or a drag to dismiss. -->
+<script src="/main.js"></script>
 <script src="/access-request.js"></script>
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-document.getElementById('burger')?.addEventListener('click', () => document.getElementById('nav').classList.toggle('open'));
-
 /* Live counters straight from the public API.
  * Deliberately best-effort: if the API is unreachable the placeholders simply
  * stay as "—" rather than showing zeros, which would read as "nothing is
- * happening" and be worse than saying nothing. */
+ * happening" and be worse than saying nothing. The same reasoning applies when
+ * the API answers with an empty calendar, so a row of three zeros hides the
+ * whole strip instead of announcing that there is nothing to see. */
 (async () => {
   try {
     const r = await fetch('https://api.eventsmc.xyz/api/events');
@@ -143,10 +166,14 @@ document.getElementById('burger')?.addEventListener('click', () => document.getE
       const end = e.endDate || e.date;
       return end && new Date(end + 'T23:59:59').getTime() >= now;
     });
-    const set = (id, n) => { document.getElementById(id).textContent = n; };
-    set('cl-n-events', upcoming.filter((e) => e.type !== 'series').length);
-    set('cl-n-series', upcoming.filter((e) => e.type === 'series').length);
-    set('cl-n-studios', new Set(upcoming.map((e) => e.studioId).filter(Boolean)).size);
+    const counts = {
+      'cl-n-events': upcoming.filter((e) => e.type !== 'series').length,
+      'cl-n-series': upcoming.filter((e) => e.type === 'series').length,
+      'cl-n-studios': new Set(upcoming.map((e) => e.studioId).filter(Boolean)).size,
+    };
+    const strip = document.getElementById('cl-stats');
+    if (!Object.values(counts).some((n) => n > 0)) { strip.hidden = true; return; }
+    Object.entries(counts).forEach(([id, n]) => { document.getElementById(id).textContent = n; });
   } catch (_) { /* leave the dashes */ }
 })();
 </script>

@@ -1,0 +1,16 @@
+{
+  "name": "Events — Herramientas para eventos de Minecraft",
+  "short_name": "Events",
+  "description": "Baneos sincronizados, whitelist desde Discord, launcher de instancias y calendario público para tus eventos de Minecraft.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "es",
+  "dir": "ltr",
+  "background_color": "#070a12",
+  "theme_color": "#070a12",
+  "icons": [
+    { "src": "/icon.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "monochrome" }
+  ]
+}
