@@ -456,7 +456,8 @@ a{color:inherit;text-decoration:none}
   /* A drag is not animation — it is the reader's own hand. It keeps tracking
      here; only the spring that would fly off afterwards is dropped. */
   .nav.dragging .nav-links{transform:translateY(var(--sheet-y,0px))!important}
-  .btn,.feat,.step,.priv,.dl-card,.product,.cl-step,.cl-panel,.brand,.nav-burger,.fic{transform:none!important}
+  .btn,.feat,.step,.priv,.dl-card,.product,.cl-step,.cl-panel,.brand,.nav-burger,.fic,
+  .plus-perk,.plus-ic{transform:none!important}
   .bl-shield,.bl-chip,.wl-shield,.wl-chip,.hero-glow,.dl-live i,.product-pill.dev::before,.foot-status-dot{animation:none!important}
   /* Moving in and out of a blur is a motion trigger in its own right, not just
      a decoration on one — the sheet's material is simply there, never arriving. */
@@ -955,6 +956,86 @@ a{color:inherit;text-decoration:none}
    of the very thing they are meant to surround. They become a 2×2 block under
    the badge instead — same four facts, no collisions, and it rhymes with the
    product grid on the home page. Shared by both product pages. */
+/* ============================================================
+   EVENTS+ — banda de suscripción (home)
+   No es un producto: no tiene tarjeta en el grid de productos ni página propia,
+   porque no es una herramienta que instales — es una capa que atraviesa todas.
+   Por eso ocupa una banda a lo ancho y estrena su propio par de colores
+   (violeta → oro), para que no se confunda con ninguno de los cuatro productos
+   ni con la banda amarilla de sugerencias.
+   ============================================================ */
+.plus{--pc:#a78bfa;--pc2:#ffd44d;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--pc) 13%,transparent),var(--surface));
+  border:1px solid color-mix(in srgb,var(--pc) 30%,var(--border2));border-radius:26px;
+  padding:42px 38px}
+.plus-glow{position:absolute;top:-140px;right:-80px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(closest-side,var(--pc),transparent 70%);
+  filter:blur(70px);opacity:.3;pointer-events:none}
+/* La cabecera es copy a la izquierda y el estado comercial a la derecha: qué es
+   y cuándo llega se leen juntos, sin que el "Próximamente" quede al final de
+   todo, cuando ya te has hecho ilusiones. */
+.plus-head{position:relative;display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
+@media (min-width:860px){
+  .plus-head{grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center}
+  .plus-status{text-align:right}
+}
+.plus-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
+  background:color-mix(in srgb,var(--pc2) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--pc2) 34%,transparent);
+  color:var(--pc2);font-size:.8125rem;font-weight:600;letter-spacing:.01em;margin-bottom:16px}
+.plus h2{font-family:var(--display);font-weight:800;font-size:clamp(1.75rem,3.6vw,2.375rem);line-height:1.1;
+  letter-spacing:-.02em}
+/* El "+" es parte del nombre, no un adorno: mismo peso, distinto color. */
+.plus h2 b{background:linear-gradient(100deg,var(--pc),var(--pc2));-webkit-background-clip:text;background-clip:text;
+  color:transparent;font-weight:800}
+.plus-lead{margin-top:12px;max-width:58ch;color:var(--muted);font-size:1rem;text-wrap:pretty}
+.plus-lead b{color:var(--text);font-weight:600}
+.plus-status{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+@media (min-width:860px){.plus-status{align-items:flex-end}}
+.plus-price{font-family:var(--display);font-weight:800;font-size:1.125rem;color:var(--text);white-space:nowrap}
+.plus-price span{display:block;color:var(--faint);font-family:var(--body);font-weight:400;font-size:.8125rem;
+  margin-top:4px}
+/* El botón no lleva a ningún sitio a propósito: aún no hay nada que comprar.
+   El enlace de al lado es la única acción real de la banda. */
+.plus-status .btn-soon{width:100%;justify-content:center}
+.plus-notify{display:inline-flex;align-items:center;gap:7px;color:var(--pc);font-weight:700;font-size:.875rem;
+  transition:color var(--t-press) linear}
+.plus-notify::after{content:"→";display:inline-block;transition:transform var(--t-flick) var(--spring-bounce)}
+@media (hover:hover){.plus-notify:hover{color:var(--pc2)}.plus-notify:hover::after{transform:translateX(4px)}}
+
+.plus-perks{position:relative;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:14px;margin-top:32px}
+.plus-perk{--lift:0px;--press:1;display:flex;gap:14px;padding:20px 20px;
+  background:color-mix(in srgb,var(--raised) 70%,transparent);
+  border:1px solid var(--border);border-radius:16px;
+  transform:translateY(var(--lift)) scale(var(--press));
+  transition:transform var(--t-snap) var(--spring),border-color var(--t-snap) var(--spring),
+             box-shadow var(--t-snap) var(--spring)}
+.plus-perk .plus-ic{display:grid;place-items:center;width:42px;height:42px;flex:none;border-radius:12px;
+  font-size:1.1875rem;background:color-mix(in srgb,var(--pc) 16%,transparent);
+  border:1px solid color-mix(in srgb,var(--pc) 28%,transparent);
+  transition:transform var(--t-flick) var(--spring-bounce)}
+.plus-perk h3{font-family:var(--display);font-size:1rem;line-height:1.3;letter-spacing:-.008em;margin-bottom:5px}
+.plus-perk p{color:var(--muted);font-size:.875rem;line-height:1.55;text-wrap:pretty}
+@media (hover:hover){
+  .plus-perk:hover{--lift:-3px;border-color:color-mix(in srgb,var(--pc) 45%,var(--border2))}
+  .plus-perk:hover .plus-ic{transform:scale(1.08) rotate(-4deg)}
+}
+.plus-perk:active{--press:.985;transition-duration:var(--t-press)}
+
+.plus-extra{position:relative;margin-top:22px;padding-top:20px;border-top:1px solid var(--border);
+  color:var(--muted);font-size:.90625rem;text-wrap:pretty}
+.plus-extra b{color:var(--text);font-weight:600}
+/* La promesa que hace que la banda no dé miedo: nada de lo que hoy es gratis
+   deja de serlo. Va en su propia línea, en pequeño, al final. */
+.plus-free{position:relative;margin-top:12px;color:var(--faint);font-size:.8125rem;text-wrap:pretty}
+.plus-free b{color:var(--muted);font-weight:600}
+
+@media (max-width:600px){
+  .plus{padding:30px 22px;border-radius:20px}
+  .plus-status{width:100%}
+}
+
 @media (max-width:760px){
   .bl-orbit,.wl-orbit{height:auto;max-width:420px;margin-top:38px;
     display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
