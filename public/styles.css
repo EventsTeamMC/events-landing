@@ -1087,3 +1087,79 @@ a{color:inherit;text-decoration:none}
   background:var(--surface);border:1px dashed var(--border2);
   color:var(--faint);font-size:.84375rem;line-height:1.65;text-wrap:pretty}
 .pl-fine b{color:var(--muted);font-weight:600}
+
+/* ---- /plus: los planes ----
+   Tres precios cerrados y dos que se hablan. Las tarjetas cerradas van en una
+   fila propia y las de contacto en otra, porque comparar "3,99 €" con "hablamos"
+   en la misma rejilla hace que la segunda parezca la cara. */
+.pl-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:40px}
+.pl-plan{--lift:0px;position:relative;display:flex;flex-direction:column;padding:28px 24px;
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;
+  transform:translateY(var(--lift));
+  transition:transform var(--t-snap) var(--spring),border-color var(--t-snap) var(--spring),
+             box-shadow var(--t-snap) var(--spring)}
+@media (hover:hover){.pl-plan:hover{--lift:-4px;border-color:color-mix(in srgb,var(--pc) 40%,var(--border2))}}
+/* El del medio es el que casi todo el mundo va a querer, así que se ve que lo es
+   sin necesidad de que ponga "el más popular" cuando aún no lo ha comprado nadie. */
+.pl-plan.pick{border-color:color-mix(in srgb,var(--pc) 45%,transparent);
+  background:linear-gradient(165deg,color-mix(in srgb,var(--pc) 12%,transparent),var(--surface))}
+.pl-plan-tag{position:absolute;top:0;right:0;padding:5px 13px;border-bottom-left-radius:12px;
+  background:color-mix(in srgb,var(--pc) 22%,transparent);color:var(--pc);
+  font-size:.6875rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.pl-plan h3{font-family:var(--display);font-weight:800;font-size:1.1875rem;letter-spacing:-.015em}
+.pl-plan h3 b{color:var(--pc);font-weight:800}
+.pl-plan-what{margin-top:4px;color:var(--faint);font-size:.8125rem;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase}
+.pl-plan-cost{display:flex;align-items:baseline;gap:7px;margin:18px 0 4px;font-family:var(--display);
+  font-weight:800;font-size:2.125rem;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pl-plan-cost span{font-family:var(--body);font-weight:400;font-size:.875rem;color:var(--muted);
+  letter-spacing:0}
+.pl-plan-cost.talk{font-size:1.375rem}
+.pl-plan-note{color:var(--faint);font-size:.78125rem}
+.pl-plan ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:20px 0 22px;flex:1}
+.pl-plan li{position:relative;padding-left:23px;color:var(--muted);font-size:.875rem;line-height:1.5}
+.pl-plan li::before{content:"✓";position:absolute;left:0;color:var(--pc);font-weight:700}
+.pl-plan li.off{color:var(--faint)}
+.pl-plan li.off::before{content:"—";color:var(--border2)}
+.pl-plan .btn{width:100%}
+
+/* Las dos que no tienen precio: más anchas, porque lo que venden es una
+   conversación y no cabe en una columna estrecha. */
+.pl-talk{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px}
+@media (min-width:840px){.pl-talk{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pl-talk .pl-plan{border-style:dashed}
+
+/* ---- /plus: la comparativa ----
+   Una tabla de verdad (encabezados, ámbitos), no una rejilla de divs: es la
+   página donde alguien compara cinco columnas y necesita que su lector de
+   pantalla le diga de qué plan es cada celda. En pantallas estrechas se
+   desplaza dentro de su propia caja y la primera columna se queda fija, para
+   no perder de vista qué fila estás leyendo. */
+.pl-table-wrap{margin-top:34px;overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);-webkit-overflow-scrolling:touch}
+.pl-table{width:100%;min-width:820px;border-collapse:collapse;font-size:.875rem}
+.pl-table th,.pl-table td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--border);
+  vertical-align:middle}
+.pl-table thead th{position:sticky;top:0;z-index:2;background:var(--raised);color:var(--text);
+  font-family:var(--display);font-weight:700;font-size:.90625rem;letter-spacing:-.005em;white-space:nowrap}
+.pl-table thead th small{display:block;margin-top:3px;font-family:var(--body);font-weight:400;
+  font-size:.75rem;color:var(--faint);letter-spacing:0}
+.pl-table thead th.pick{color:var(--pc)}
+.pl-table tbody th{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;
+  color:var(--text);font-weight:600;white-space:nowrap;
+  box-shadow:1px 0 0 var(--border)}
+.pl-table td{color:var(--muted)}
+.pl-table tbody tr:hover th,.pl-table tbody tr:hover td{background:color-mix(in srgb,var(--pc) 6%,var(--surface))}
+.pl-table tbody tr:last-child th,.pl-table tbody tr:last-child td{border-bottom:0}
+/* Fila de sección dentro de la tabla: la comparativa es larga y sin estos
+   descansos se lee como una lista de la compra. */
+.pl-table .sec th{background:var(--bg2);color:var(--faint);font-family:var(--display);font-size:.75rem;
+  font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.pl-table .sec th{position:static;box-shadow:none}
+.tyes{color:var(--pc);font-weight:700}
+.tno{color:var(--border2)}
+.pl-table b{color:var(--text);font-weight:600}
+.pl-table-hint{margin-top:10px;color:var(--faint);font-size:.78125rem;text-align:center}
+@media (max-width:900px){
+  .pl-table-hint::before{content:"← Desliza la tabla para ver todos los planes · "}
+}
