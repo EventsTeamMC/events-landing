@@ -15,6 +15,7 @@ landing/
     ├── index.html     # hub: todos los productos (Blacklist, Client, y "Próximamente")
     ├── blacklist.html # presentación de Events Blacklist (/blacklist)
     ├── client.html    # presentación de Events Client (/client)
+    ├── plus.html      # Events+, la suscripción para Studios (/plus)
     ├── download.html  # descargas de Events Client (/download)
     ├── appeal.html    # apelar un baneo: Discord, launcher o Blacklist (/appeal)
     ├── appeal.js      # lógica del formulario de apelaciones
@@ -49,6 +50,18 @@ formulario para las tres categorías —baneo del Discord de Events, sanción de
 Client y baneo falso en la red de Blacklist—, y se puede enlazar con la categoría ya
 elegida: `/appeal?type=discord`, `?type=launcher`, `?type=blacklist`. Desde
 `/client` y `/blacklist` se enlaza con una banda al final de la página.
+
+### Events+ (`/plus`)
+
+La **suscripción para Studios**, todavía sin precio ni fecha. No es un producto:
+por eso no tiene tarjeta en el grid de la home — allí solo hay un guiño
+(`.plus-teaser`) que lleva aquí. La página entera vive de `styles.css` con el
+tema `.pl` (violeta → oro) sobre los mismos componentes de las páginas de
+producto (`.hero`, `.feat`, `.cols2`, `.steps`, `.priv`, `.cta`).
+
+Como no hay nada que comprar, **no lleva `Product`/`Offer` en el JSON-LD** ni
+botón de pago: la única acción real es el Discord. La letra pequeña del final
+(`.pl-fine`) es parte del trato — describe intenciones, no una oferta.
 
 Límite de **una apelación cada 5 minutos por IP** (`WINDOW_MS` en `api/appeal.js`),
 más un campo trampa anti-bots y `allowed_mentions: []` para que ningún texto de un
