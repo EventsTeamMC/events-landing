@@ -42,6 +42,7 @@
   <a class="brand" href="#top"><img src="/logo.svg" alt="" width="28" height="28"><span>Events <b>Team</b></span></a>
   <nav class="nav-links">
     <a href="#products">Productos</a>
+    <a href="#plus">Events+</a>
     <a href="/client">Client</a>
     <a href="/blacklist">Blacklist</a>
     <a href="/whitelist">Whitelist</a>
@@ -242,6 +243,86 @@
     </section>
   </section>
 
+  <!-- EVENTS+ — una suscripción, no un producto: no tiene tarjeta en el grid de
+       arriba ni página propia, porque no es una herramienta que instales. Es una
+       capa que atraviesa el ecosistema entero, así que va en su propia banda. -->
+  <section class="wrap section" id="plus" aria-labelledby="plus-h">
+    <div class="plus">
+      <span class="plus-glow"></span>
+
+      <div class="plus-head">
+        <div>
+          <span class="plus-badge">✦ Próximamente</span>
+          <h2 id="plus-h">Events<b>+</b></h2>
+          <p class="plus-lead">La suscripción del ecosistema Events. No es otro producto que instalar: es una
+            capa que se nota en todo lo que ya usas — <b>más rendimiento en el launcher, prioridad cuando hay
+            cola y las novedades antes que nadie</b>.</p>
+        </div>
+        <div class="plus-status">
+          <div class="plus-price">Precio por anunciar<span>Aún no está a la venta</span></div>
+          <span class="btn btn-soon" aria-disabled="true">Próximamente</span>
+          <a class="plus-notify" href="https://discord.gg/2T7DDmpxYr" target="_blank" rel="noopener">Avísame cuando salga</a>
+        </div>
+      </div>
+
+      <ul class="plus-perks">
+        <li class="plus-perk">
+          <span class="plus-ic">🧠</span>
+          <div>
+            <h3>Carga de instancias en RAM</h3>
+            <p>La instancia se monta en memoria en vez de leerse del disco: el juego abre antes y los chunks
+              cargan sin tirones, aunque el evento lleve doscientos mods encima.</p>
+          </div>
+        </li>
+        <li class="plus-perk">
+          <span class="plus-ic">⏭️</span>
+          <div>
+            <h3>Saltar la cola</h3>
+            <p>Cuando un evento se llena, entras por la cola prioritaria en vez de esperar turno. Tu sitio
+              sigue ahí aunque te caiga la conexión a mitad.</p>
+          </div>
+        </li>
+        <li class="plus-perk">
+          <span class="plus-ic">🚀</span>
+          <div>
+            <h3>Descargas prioritarias</h3>
+            <p>Ancho de banda reservado al sincronizar mods. El día del estreno, mientras el resto descarga la
+              instancia, tú ya estás dentro.</p>
+          </div>
+        </li>
+        <li class="plus-perk">
+          <span class="plus-ic">⏳</span>
+          <div>
+            <h3>Antes de tiempo</h3>
+            <p>Funciones nuevas del launcher en beta, eventos que ves en el calendario antes de anunciarse y
+              códigos de acceso repartidos primero entre suscriptores.</p>
+          </div>
+        </li>
+        <li class="plus-perk">
+          <span class="plus-ic">🎨</span>
+          <div>
+            <h3>Personaliza tu launcher</h3>
+            <p>Temas, fondos y capas exclusivas, más una insignia junto a tu nombre en el launcher y tu propio
+              rol en el Discord de Events.</p>
+          </div>
+        </li>
+        <li class="plus-perk">
+          <span class="plus-ic">🛟</span>
+          <div>
+            <h3>Soporte prioritario</h3>
+            <p>Tus dudas y tus apelaciones se revisan primero, con una persona del staff al otro lado en vez
+              de un formulario que se pierde.</p>
+          </div>
+        </li>
+      </ul>
+
+      <p class="plus-extra"><b>Y además:</b> eventos y sorteos solo para suscriptores, más instancias y más
+        espacio en el panel si organizas eventos, y voz directa en qué construimos después.</p>
+      <p class="plus-free">Todo lo que hoy es gratis <b>seguirá siendo gratis</b>. Events+ añade cosas encima;
+        no quita ninguna. Anunciaremos precio y fecha en el Discord.</p>
+    </div>
+  </section>
+
   <!-- WHY -->
   <section class="wrap section" id="why">
     <h2 class="h2">Una sola filosofía detrás de todo.</h2>
@@ -307,7 +388,7 @@
       <a class="foot-discord" id="foot-discord" href="https://discord.gg/2T7DDmpxYr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="16" height="16"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a15.7 15.7 0 0 1 3.7 1.2 12.9 12.9 0 0 0-11.2 0A15.7 15.7 0 0 1 11.1 4.4L10.9 4a16.9 16.9 0 0 0-4.2 1.3C4 9.3 3.3 13.2 3.6 17a17 17 0 0 0 5.2 2.6l.8-1.2a11 11 0 0 1-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.4 0l.4.3a11 11 0 0 1-1.7.8l.8 1.2a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-3.1-11.7ZM9.7 14.6c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2Zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.9.9 1.8 2c0 1.1-.8 2-1.8 2Z"/></svg>Comunidad en Discord</a>
     </div>
     <nav><h4>Productos</h4><a href="/blacklist">Events Blacklist</a><a href="/client">Events Client</a><a href="/whitelist">Events Whitelist</a><a href="/calendar">Events Calendar</a></nav>
-    <nav><h4>Recursos</h4><a href="/download">Descargar Client</a><a href="/appeal">Apelar un baneo</a><a href="https://calendar.eventsmc.xyz" target="_blank" rel="noopener">Abrir el calendario</a><a class="foot-status" href="https://status.eventsmc.xyz" target="_blank" rel="noopener"><span class="foot-status-dot"></span>Estado del servicio</a></nav>
+    <nav><h4>Recursos</h4><a href="/download">Descargar Client</a><a href="/#plus">Events+ · Próximamente</a><a href="/appeal">Apelar un baneo</a><a href="https://calendar.eventsmc.xyz" target="_blank" rel="noopener">Abrir el calendario</a><a class="foot-status" href="https://status.eventsmc.xyz" target="_blank" rel="noopener"><span class="foot-status-dot"></span>Estado del servicio</a></nav>
     <nav><h4>Legal</h4><a href="/blacklist/terms">Condiciones · Blacklist</a><a href="/client/terms">Condiciones · Client</a><a href="/whitelist/terms">Condiciones · Whitelist</a><a href="/client/data-deletion">Eliminar mis datos</a></nav>
   </div>
   <div class="wrap foot-legal">

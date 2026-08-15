@@ -337,7 +337,7 @@
      Cards answer the pointer the whole time it is over them, not only when it
      arrives and leaves. Position is written straight to the element as a custom
      property, so the highlight is glued to the cursor. */
-  var spotSel = '.product, .feat, .step, .priv, .cmd-card, .dl-card, .cl-step, .cl-panel, .card';
+  var spotSel = '.product, .feat, .step, .priv, .cmd-card, .dl-card, .cl-step, .cl-panel, .card, .plus-perk';
   if (matchMedia('(hover:hover)').matches && !reduceMotion.matches) {
     document.querySelectorAll(spotSel).forEach(function (el) {
       el.setAttribute('data-spot', '');
@@ -406,7 +406,7 @@
      the order it reads, and then gives up its classes — a card that has landed
      should not keep a 0.59s transition it will only ever fight with. */
   var candidates = document.querySelectorAll(
-    '.section > .h2, .section > .sub, .products-head, .product, .card, .feat, .step, .cta,' +
+    '.section > .h2, .section > .sub, .products-head, .product, .card, .feat, .step, .cta, .plus,' +
     '.shot-row figure, .panel-shot, .checks, .priv, .cmd-card');
   var targets = [];
   var groups = new Map();
