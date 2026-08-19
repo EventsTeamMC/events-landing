@@ -561,6 +561,19 @@ a{color:inherit;text-decoration:none}
   border:1px solid rgba(240,169,46,.32);border-radius:var(--radius);padding:16px 18px;margin:28px 0 36px;text-align:left}
 .maint-banner b{color:#f0a92e}
 .maint-banner p{margin:0;color:var(--muted);font-size:0.90625rem;line-height:1.6}
+/* La caja del canal beta reutiliza el estilo del banner pero tiene VARIOS
+   bloques (dos párrafos y un botón). Como .maint-banner es un flex en fila, los
+   tres se repartían en columnas: los textos estrechos y el botón reducido a una
+   palabra por línea. Aquí se apilan, que es lo que un bloque de varios párrafos
+   necesita. */
+.maint-banner.is-stack{flex-direction:column;align-items:stretch;gap:0}
+.maint-banner.is-stack .dl-row{flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+/* Un enlace-botón dentro de un flex se encoge hasta partir su texto; que ocupe
+   lo que ocupa su contenido y nada menos. */
+.maint-banner.is-stack .btn{flex:0 0 auto;width:auto;white-space:nowrap}
+@media (max-width:520px){
+  .maint-banner.is-stack .btn{white-space:normal}
+}
 .dl-card.maint-locked{opacity:.55}
 .dl-card.maint-locked .dl-main{pointer-events:none;filter:grayscale(.4)}
 .btn.disabled,a.btn[aria-disabled="true"]{pointer-events:none;opacity:.5;filter:grayscale(.3)}
