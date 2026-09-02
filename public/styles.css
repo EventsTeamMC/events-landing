@@ -457,7 +457,7 @@ a{color:inherit;text-decoration:none}
      here; only the spring that would fly off afterwards is dropped. */
   .nav.dragging .nav-links{transform:translateY(var(--sheet-y,0px))!important}
   .btn,.feat,.step,.priv,.dl-card,.product,.cl-step,.cl-panel,.brand,.nav-burger,.fic,
-
+  .plus-teaser,.plus-teaser-ic{transform:none!important}
   .bl-shield,.bl-chip,.wl-shield,.wl-chip,.hero-glow,.dl-live i,.product-pill.dev::before,.foot-status-dot{animation:none!important}
   /* Moving in and out of a blur is a motion trigger in its own right, not just
      a decoration on one — the sheet's material is simply there, never arriving. */
@@ -705,6 +705,7 @@ a{color:inherit;text-decoration:none}
 .wl-chip.c3{bottom:16%;left:6%;animation-delay:.7s}
 .wl-chip.c4{bottom:4%;right:8%;animation-delay:1.6s}
 
+
 /* ============================================================
    SUGGESTIONS — banda propia bajo los productos
    Es un formulario, no un producto: tiene su propia banda a lo ancho en vez de
@@ -872,6 +873,7 @@ a{color:inherit;text-decoration:none}
   .cal-landing .btn-play:hover::after,.cal-landing .btn-secondary:hover::after{left:150%}
 }
 
+
 /* ============================================================
    APPEAL — /appeal, apelaciones de baneos
    No es un producto: no tiene color ni hero propios. Es una página
@@ -982,12 +984,195 @@ a{color:inherit;text-decoration:none}
    EVENTS+ — suscripción para Studios
    No es un producto: no tiene tarjeta en el grid de la home, porque no es una
    herramienta que instales — es una capa sobre las que ya usas, y se paga.
+   En la home solo deja un guiño (.plus-teaser) que lleva a /plus, donde está
+   contado entero. Color propio (violeta → oro) para que no se confunda con
+   ninguno de los cuatro productos ni con la banda amarilla de sugerencias.
+   ============================================================ */
 
+/* ---- El guiño de la home ----
+   Una sola fila: qué es, para quién, y por dónde se sigue leyendo. Todo lo que
+   no cabe en esa fila pertenece a /plus, no aquí. */
+.plus-teaser{--pc:#a78bfa;--pc2:#ffd44d;--lift:0px;--press:1;
+  position:relative;display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+  margin-top:34px;padding:24px 28px;overflow:hidden;
+  background:linear-gradient(120deg,color-mix(in srgb,var(--pc) 12%,transparent),var(--surface) 60%);
+  border:1px solid color-mix(in srgb,var(--pc) 26%,var(--border));border-radius:20px;
+  transform:translateY(var(--lift)) scale(var(--press));
+  transition:transform var(--t-snap) var(--spring),border-color var(--t-snap) var(--spring),
+             box-shadow var(--t-snap) var(--spring)}
+.plus-teaser .plus-glow{position:absolute;top:-120px;left:-40px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(closest-side,var(--pc),transparent 70%);
+  filter:blur(60px);opacity:.28;pointer-events:none}
+.plus-teaser-ic{position:relative;display:grid;place-items:center;width:52px;height:52px;flex:none;border-radius:15px;
+  font-family:var(--display);font-weight:800;font-size:1.5rem;line-height:1;
+  background:color-mix(in srgb,var(--pc) 16%,transparent);
+  border:1px solid color-mix(in srgb,var(--pc) 32%,transparent);color:var(--pc);
+  transition:transform var(--t-flick) var(--spring-bounce)}
+.plus-teaser-copy{position:relative;flex:1 1 320px;min-width:0}
+.plus-teaser h2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-family:var(--display);font-weight:800;font-size:1.1875rem;line-height:1.2;letter-spacing:-.015em}
+.plus-teaser h2 b{background:linear-gradient(100deg,var(--pc),var(--pc2));-webkit-background-clip:text;
+  background-clip:text;color:transparent;font-weight:800}
+.plus-teaser p{margin-top:6px;color:var(--muted);font-size:.90625rem;text-wrap:pretty}
+.plus-soon{padding:4px 11px;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.01em;
+  background:color-mix(in srgb,var(--pc2) 11%,transparent);
+  border:1px solid color-mix(in srgb,var(--pc2) 32%,transparent);color:var(--pc2)}
+.plus-teaser .plus-go{position:relative;flex:none;display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--display);font-weight:700;font-size:.9375rem;color:var(--pc)}
+.plus-teaser .plus-go::after{content:"→";display:inline-block;
+  transition:transform var(--t-flick) var(--spring-bounce)}
 @media (hover:hover){
-
+  .plus-teaser:hover{--lift:-4px;border-color:color-mix(in srgb,var(--pc) 50%,var(--border2));
+    box-shadow:0 22px 54px rgba(0,0,0,.42)}
+  .plus-teaser:hover .plus-teaser-ic{transform:scale(1.07) rotate(-4deg)}
+  .plus-teaser:hover .plus-go::after{transform:translateX(5px)}
 }
-
+.plus-teaser:active{--press:.99;transition-duration:var(--t-press)}
 @media (max-width:600px){
-
+  .plus-teaser{padding:22px 20px;gap:16px}
+  .plus-teaser .plus-go{width:100%}
 }
 
+/* ---- La página /plus ----
+   Mismo esqueleto que las páginas de producto (hero, .grid/.feat, .cols2, .cta):
+   lo único propio es el par de colores y las piezas que ningún producto tiene,
+   porque ninguno se vende. */
+.pl{--pc:#a78bfa;--pc2:#ffd44d}
+/* #a78bfa bajo texto blanco es 2.71:1. El violeta claro se queda donde va sobre
+   fondo oscuro (6.57:1 sobre --surface); el botón relleno usa este otro, 4.80:1. */
+.pl{--pc-solid:#7c5cd6}
+.pl .grad{background:linear-gradient(100deg,var(--pc),var(--pc2) 70%,#f0a92e);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:200% auto;animation:hue 8s linear infinite}
+.pl .hero-glow{background:radial-gradient(closest-side,rgba(167,139,250,.26),transparent 70%);
+  animation:pulseGlow 7s ease-in-out infinite}
+.pl .eyebrow{background:color-mix(in srgb,var(--pc) 12%,transparent);
+  border-color:color-mix(in srgb,var(--pc) 34%,transparent);color:var(--pc)}
+.pl .brand b{color:var(--pc)}
+.pl .btn-primary{background:var(--pc-solid)}
+.pl .btn-ghost:hover{border-color:var(--pc);color:var(--pc)}
+.pl .fic{background:color-mix(in srgb,var(--pc) 15%,transparent)}
+.pl .num{color:var(--pc)}
+.pl .checks li::before{color:var(--pc)}
+.pl .good{border-color:color-mix(in srgb,var(--pc) 35%,transparent);
+  background:linear-gradient(160deg,color-mix(in srgb,var(--pc) 8%,transparent),var(--surface))}
+.pl .good li::before{content:"✓";color:var(--pc)}
+.pl .good h3{color:var(--pc)}
+.pl .cta{background:linear-gradient(160deg,color-mix(in srgb,var(--pc) 16%,transparent),var(--surface));
+  border-color:color-mix(in srgb,var(--pc) 30%,transparent)}
+.pl .footer nav a:hover,.pl .foot-brand b{color:var(--pc)}
+.pl .soon-badge{background:color-mix(in srgb,var(--pc2) 12%,transparent);
+  border-color:color-mix(in srgb,var(--pc2) 35%,transparent);color:var(--pc2)}
+.pl .feat:hover{border-color:color-mix(in srgb,var(--pc) 40%,var(--border2))}
+
+/* El estado comercial del hero: precio, disponibilidad y la única acción real
+   que hay hoy. Va junto al titular y no al final, para que nadie termine de
+   leer la página entera antes de enterarse de que todavía no se puede comprar. */
+.pl-status{display:flex;align-items:center;justify-content:center;gap:14px 22px;flex-wrap:wrap;
+  margin-top:30px;padding:16px 22px;border-radius:18px;
+  background:var(--surface);border:1px solid var(--border2)}
+.pl-price{font-family:var(--display);font-weight:800;font-size:1.0625rem;color:var(--text);text-align:left}
+.pl-price span{display:block;margin-top:3px;font-family:var(--body);font-weight:400;font-size:.8125rem;color:var(--faint)}
+.pl-status .btn{flex:none}
+@media (max-width:560px){
+  .pl-status{flex-direction:column;align-items:stretch;text-align:center}
+  .pl-price{text-align:center}
+  .pl-status .btn{width:100%}
+}
+
+/* Los grupos de ventajas. Cada uno es un titular pequeño con su rótulo, no un
+   <h2> más: la página ya tiene una jerarquía y esto son sus capítulos. */
+.pl-group{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  margin-top:56px}
+.pl-group:first-of-type{margin-top:44px}
+.pl-group h3{font-family:var(--display);font-weight:800;font-size:1.25rem;letter-spacing:-.015em}
+.pl-group span{color:var(--faint);font-size:.875rem}
+.pl-group + .grid{margin-top:20px}
+/* Una ventaja que todavía no existe no puede presumir de estar lista: cada
+   tarjeta dice a qué producto pertenece, y nada más. */
+.pl-where{display:inline-block;margin-top:12px;padding:3px 10px;border-radius:999px;
+  background:color-mix(in srgb,var(--pc) 10%,transparent);
+  border:1px solid color-mix(in srgb,var(--pc) 24%,transparent);
+  color:var(--pc);font-size:.6875rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+
+/* La letra pequeña que hace honesta a toda la página. */
+.pl-fine{max-width:720px;margin:34px auto 0;padding:20px 24px;border-radius:var(--radius);
+  background:var(--surface);border:1px dashed var(--border2);
+  color:var(--faint);font-size:.84375rem;line-height:1.65;text-wrap:pretty}
+.pl-fine b{color:var(--muted);font-weight:600}
+
+/* ---- /plus: los planes ----
+   Tres precios cerrados y dos que se hablan. Las tarjetas cerradas van en una
+   fila propia y las de contacto en otra, porque comparar "3,99 €" con "hablamos"
+   en la misma rejilla hace que la segunda parezca la cara. */
+.pl-plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:40px}
+.pl-plan{--lift:0px;position:relative;display:flex;flex-direction:column;padding:28px 24px;
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;
+  transform:translateY(var(--lift));
+  transition:transform var(--t-snap) var(--spring),border-color var(--t-snap) var(--spring),
+             box-shadow var(--t-snap) var(--spring)}
+@media (hover:hover){.pl-plan:hover{--lift:-4px;border-color:color-mix(in srgb,var(--pc) 40%,var(--border2))}}
+/* El del medio es el que casi todo el mundo va a querer, así que se ve que lo es
+   sin necesidad de que ponga "el más popular" cuando aún no lo ha comprado nadie. */
+.pl-plan.pick{border-color:color-mix(in srgb,var(--pc) 45%,transparent);
+  background:linear-gradient(165deg,color-mix(in srgb,var(--pc) 12%,transparent),var(--surface))}
+.pl-plan-tag{position:absolute;top:0;right:0;padding:5px 13px;border-bottom-left-radius:12px;
+  background:color-mix(in srgb,var(--pc) 22%,transparent);color:var(--pc);
+  font-size:.6875rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.pl-plan h3{font-family:var(--display);font-weight:800;font-size:1.1875rem;letter-spacing:-.015em}
+.pl-plan h3 b{color:var(--pc);font-weight:800}
+.pl-plan-what{margin-top:4px;color:var(--faint);font-size:.8125rem;font-weight:600;
+  letter-spacing:.05em;text-transform:uppercase}
+.pl-plan-cost{display:flex;align-items:baseline;gap:7px;margin:18px 0 4px;font-family:var(--display);
+  font-weight:800;font-size:2.125rem;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pl-plan-cost span{font-family:var(--body);font-weight:400;font-size:.875rem;color:var(--muted);
+  letter-spacing:0}
+.pl-plan-cost.talk{font-size:1.375rem}
+.pl-plan-note{color:var(--faint);font-size:.78125rem}
+.pl-plan ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin:20px 0 22px;flex:1}
+.pl-plan li{position:relative;padding-left:23px;color:var(--muted);font-size:.875rem;line-height:1.5}
+.pl-plan li::before{content:"✓";position:absolute;left:0;color:var(--pc);font-weight:700}
+.pl-plan li.off{color:var(--faint)}
+.pl-plan li.off::before{content:"—";color:var(--border2)}
+.pl-plan .btn{width:100%}
+
+/* Las dos que no tienen precio: más anchas, porque lo que venden es una
+   conversación y no cabe en una columna estrecha. */
+.pl-talk{display:grid;grid-template-columns:1fr;gap:18px;margin-top:18px}
+@media (min-width:840px){.pl-talk{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pl-talk .pl-plan{border-style:dashed}
+
+/* ---- /plus: la comparativa ----
+   Una tabla de verdad (encabezados, ámbitos), no una rejilla de divs: es la
+   página donde alguien compara cinco columnas y necesita que su lector de
+   pantalla le diga de qué plan es cada celda. En pantallas estrechas se
+   desplaza dentro de su propia caja y la primera columna se queda fija, para
+   no perder de vista qué fila estás leyendo. */
+.pl-table-wrap{margin-top:34px;overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);
+  background:var(--surface);-webkit-overflow-scrolling:touch}
+.pl-table{width:100%;min-width:820px;border-collapse:collapse;font-size:.875rem}
+.pl-table th,.pl-table td{padding:13px 16px;text-align:center;border-bottom:1px solid var(--border);
+  vertical-align:middle}
+.pl-table thead th{position:sticky;top:0;z-index:2;background:var(--raised);color:var(--text);
+  font-family:var(--display);font-weight:700;font-size:.90625rem;letter-spacing:-.005em;white-space:nowrap}
+.pl-table thead th small{display:block;margin-top:3px;font-family:var(--body);font-weight:400;
+  font-size:.75rem;color:var(--faint);letter-spacing:0}
+.pl-table thead th.pick{color:var(--pc)}
+.pl-table tbody th{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;
+  color:var(--text);font-weight:600;white-space:nowrap;
+  box-shadow:1px 0 0 var(--border)}
+.pl-table td{color:var(--muted)}
+.pl-table tbody tr:hover th,.pl-table tbody tr:hover td{background:color-mix(in srgb,var(--pc) 6%,var(--surface))}
+.pl-table tbody tr:last-child th,.pl-table tbody tr:last-child td{border-bottom:0}
+/* Fila de sección dentro de la tabla: la comparativa es larga y sin estos
+   descansos se lee como una lista de la compra. */
+.pl-table .sec th{background:var(--bg2);color:var(--faint);font-family:var(--display);font-size:.75rem;
+  font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.pl-table .sec th{position:static;box-shadow:none}
+.tyes{color:var(--pc);font-weight:700}
+.tno{color:var(--border2)}
+.pl-table b{color:var(--text);font-weight:600}
+.pl-table-hint{margin-top:10px;color:var(--faint);font-size:.78125rem;text-align:center}
+@media (max-width:900px){
+  .pl-table-hint::before{content:"← Desliza la tabla para ver todos los planes · "}
+}
