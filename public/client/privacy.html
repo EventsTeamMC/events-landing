@@ -52,7 +52,7 @@
     <div class="wrap">
       <span class="eyebrow">✦ Events Client</span>
       <h1>Política de Privacidad</h1>
-      <p class="legal-updated">Última actualización: 29 de julio de 2026 · Entrada en vigor: 23 de julio de 2026 · Versión 1.1</p>
+      <p class="legal-updated">Última actualización: 27 de septiembre de 2026 · Entrada en vigor: 27 de septiembre de 2026 · Versión 1.2</p>
     </div>
   </section>
 
@@ -103,13 +103,17 @@
 
     <h3>Proveedores</h3>
     <p>Events Team utiliza o puede utilizar servicios de: Microsoft y Mojang Studios, Discord, OVHcloud,
-      Cloudflare, GitHub, Modrinth y Zoho. Events Team no vende datos personales ni los utiliza para publicidad
-      personalizada.</p>
+      Cloudflare, GitHub, Modrinth, Zoho y, para cobrar los planes de los Studios, PayPal. Events Team no vende
+      datos personales ni los utiliza para publicidad personalizada.</p>
 
     <h3>Conservación general</h3>
     <ul>
       <li>Vinculaciones inactivas: hasta 90 días.</li>
       <li>Direcciones IP, sesiones y registros ordinarios: hasta 30 días desde el último uso.</li>
+      <li>Nombres de Minecraft en las estadísticas diarias de una instancia: hasta 30 días. Después solo queda
+        el número de jugadores de cada día, sin nombres.</li>
+      <li>Código de referido vinculado: mientras la cuenta lo mantenga vinculado o hasta que se pida su eliminación.</li>
+      <li>Datos de facturación de los Studios: el plazo que exija la legislación fiscal y mercantil (hasta 6 años).</li>
       <li>Informes de errores: hasta 30 días.</li>
       <li>Comunicaciones de soporte y apelaciones: hasta 30 días después de cerrar el caso.</li>
       <li>Copias de seguridad: hasta 7 días adicionales.</li>
@@ -165,7 +169,11 @@
     <h3>5. Almacenamiento de tokens de Microsoft</h3>
     <p>Los tokens de acceso y renovación de Microsoft se almacenan localmente en el dispositivo del usuario
       mediante el almacenamiento interno de Events Client. Events Team no ha identificado ningún proceso mediante
-      el cual estos tokens sean enviados a su backend.</p>
+      el cual estos tokens sean almacenados en su backend.</p>
+    <p>Hay una única excepción, y solo si el usuario la inicia: al vincular un código de referido (apartado 10 bis),
+      el Client envía una vez el token de acceso de Minecraft al backend para que este pregunte a la API oficial
+      de Minecraft a qué cuenta Premium pertenece. El token se usa solo para esa consulta y no se guarda, no se
+      registra y no se comparte.</p>
     <p>Los tokens se utilizan para: a) mantener la sesión; b) evitar que el usuario tenga que iniciar sesión
       repetidamente; c) permitir la ejecución de Minecraft; d) consultar y actualizar funciones autorizadas del
       perfil, como la skin.</p>
@@ -198,7 +206,9 @@
     <p>Un Studio podrá consultar, únicamente respecto de su propia instancia: a) nombre de Minecraft; b) estado
       de conexión cuando sea necesario para administrar la instancia; c) inclusión en listas de acceso o
       whitelist; d) fecha de aceptación o autorización; e) uso de códigos de invitación; f) información necesaria
-      para administrar los permisos de la instancia.</p>
+      para administrar los permisos de la instancia; g) estadísticas de su instancia: número de jugadores por día y,
+      durante 30 días, los nombres de Minecraft de quienes jugaron y cuántos días lo hicieron; h) el nombre de
+      Minecraft y la fecha de quienes vincularon el código de referido de ese Studio.</p>
     <p>Events Client no facilitará a los Studios mediante su panel: dirección IP, UUID, Discord ID, nombre de
       Discord, correo electrónico, tokens de Microsoft, registros privados, ni datos pertenecientes a otros
       Studios o instancias. Cada Studio será responsable de los datos que obtenga por sus propios medios,
@@ -220,6 +230,22 @@
       ofrecer funciones como «Último jugado». Events Team no mantiene un historial general de los servidores de
       Minecraft visitados por el usuario. El backend puede conservar información sobre las instancias en las que
       el usuario se encuentra autorizado, mientras dicha autorización o vinculación continúe vigente.</p>
+
+    <h3>10 bis. Códigos de referido</h3>
+    <p>Un Studio puede tener un código de referido. Un usuario con cuenta Premium puede vincularlo, de forma
+      voluntaria y una sola vez, desde los ajustes de Events Client. Para comprobar que la cuenta es Premium, el
+      backend consulta la API oficial de Minecraft con el token de acceso (apartado 5), que no se guarda.</p>
+    <p>Se guardan: el UUID y el nombre de Minecraft, el código, el Studio y la fecha. No se guarda la dirección IP.
+      La finalidad es saber cuántos jugadores trae cada Studio para poder concederle ventajas. El Studio ve el
+      nombre de Minecraft y la fecha; Events Team ve además el UUID. La vinculación no se puede cambiar desde el
+      Client; puedes pedir su eliminación en support@eventsmc.xyz. Base jurídica: consentimiento.</p>
+
+    <h3>10 ter. Estadísticas de las instancias</h3>
+    <p>Para cada instancia se guarda, por día, el número máximo de jugadores a la vez y la hora, cuántas veces se
+      entró a jugar, cuántos jugadores distintos hubo y cuántas partidas se cerraron inesperadamente. Estos números
+      no identifican a nadie y se conservan sin límite. Los nombres de Minecraft de quienes jugaron cada día se
+      conservan 30 días y después se eliminan, dejando solo el recuento. Base jurídica: interés legítimo en operar y
+      mejorar el servicio y en informar a cada Studio de la actividad de su instancia.</p>
 
     <h3>11. Datos del dispositivo</h3>
     <p>Events Client no recopila de forma general información destinada a crear un perfil del hardware o del
@@ -308,9 +334,13 @@
       b) avatar; c) nombre del Studio; d) miembros autorizados; e) instancias creadas; f) configuración del plan;
       g) historial de activación o finalización; h) comunicaciones de soporte; i) datos de contratación y
       facturación cuando se habiliten los planes de pago.</p>
-    <p>Actualmente no se ha configurado un proveedor de pagos definitivo. Antes de comenzar a procesar pagos,
-      Events Team actualizará esta política para identificar el proveedor, los datos tratados, las finalidades, la
-      conservación, la información fiscal y las posibles transferencias internacionales.</p>
+    <p><strong>Contratación de planes (Events+).</strong> Los planes se contratan en el área de clientes
+      clientes.eventsmc.xyz, un servicio propio de Events Team alojado en OVHcloud. Allí se tratan: nombre, correo
+      electrónico, datos de facturación que se introduzcan, el código del Studio que se vincula al plan, pedidos,
+      facturas y estado de los pagos. El pago lo procesa PayPal, que actúa como responsable independiente de los
+      datos de pago: Events Team no recibe ni guarda números de tarjeta ni credenciales de PayPal. Finalidades:
+      ejecutar el contrato, facturar y cumplir obligaciones fiscales. Conservación: la exigida por la legislación
+      fiscal y mercantil (hasta 6 años). Base jurídica: ejecución del contrato y obligación legal.</p>
 
     <h3>20. Bases jurídicas del tratamiento</h3>
     <p><strong>Ejecución de los Términos y Condiciones:</strong> se aplica a los tratamientos necesarios para
@@ -336,7 +366,13 @@
       técnicos e información de Studios. <strong>Cloudflare:</strong> proxy, seguridad y distribución de la API;
       puede procesar datos técnicos de conexión, incluida la IP. <strong>GitHub:</strong> distribución de
       actualizaciones y componentes. <strong>Modrinth:</strong> fuente de descarga de mods. <strong>Zoho:</strong>
-      gestión del correo support@eventsmc.xyz.</p>
+      gestión del correo support@eventsmc.xyz. <strong>PayPal:</strong> procesamiento de los pagos de los planes.
+      <strong>mc-heads.net:</strong> imagen de la cabeza de la skin de un jugador en el panel de los Studios y de
+      Events Team, a partir de su nombre de Minecraft, que es público.</p>
+    <p><strong>Nodos de los Studios.</strong> Un Studio puede servir los archivos de sus instancias desde su propio
+      servidor. En ese caso, Events Client descarga esos archivos desde el servidor del Studio, que recibe la
+      dirección IP del usuario como en cualquier descarga; el launcher indica cuándo una instancia se sirve desde
+      un servidor que no gestiona Events Team.</p>
 
     <h3>22. Studios y terceros independientes</h3>
     <p>Los Studios pueden administrar servidores, eventos, bots, Discords, webs o formularios independientes.
@@ -362,7 +398,8 @@
       el último uso. <strong>Logs e informes:</strong> hasta 30 días desde su recepción o último uso relacionado.
       <strong>Soporte y apelaciones:</strong> hasta 30 días después de cerrar el caso. <strong>Tokens
       locales:</strong> hasta que el usuario cierre sesión, caduquen, sean revocados o se eliminen los datos
-      locales del Client. <strong>Copias de seguridad:</strong> hasta 7 días adicionales, sin uso ordinario.
+      locales del Client. <strong>Nombres en estadísticas diarias:</strong> 30 días. <strong>Estadísticas sin
+      nombres:</strong> sin límite. <strong>Código de referido:</strong> mientras siga vinculado. <strong>Copias de seguridad:</strong> hasta 7 días adicionales, sin uso ordinario.
       <strong>Sanciones:</strong> según los plazos del apartado 18. <strong>Datos fiscales:</strong> cuando
       comiencen a ofrecerse servicios de pago, durante los periodos exigidos por la legislación fiscal y
       contable.</p>
