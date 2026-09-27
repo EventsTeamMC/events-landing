@@ -170,10 +170,6 @@
     <p>Los tokens de acceso y renovación de Microsoft se almacenan localmente en el dispositivo del usuario
       mediante el almacenamiento interno de Events Client. Events Team no ha identificado ningún proceso mediante
       el cual estos tokens sean almacenados en su backend.</p>
-    <p>Hay una única excepción, y solo si el usuario la inicia: al vincular un código de referido (apartado 10 bis),
-      el Client envía una vez el token de acceso de Minecraft al backend para que este pregunte a la API oficial
-      de Minecraft a qué cuenta Premium pertenece. El token se usa solo para esa consulta y no se guarda, no se
-      registra y no se comparte.</p>
     <p>Los tokens se utilizan para: a) mantener la sesión; b) evitar que el usuario tenga que iniciar sesión
       repetidamente; c) permitir la ejecución de Minecraft; d) consultar y actualizar funciones autorizadas del
       perfil, como la skin.</p>
@@ -234,7 +230,7 @@
     <h3>10 bis. Códigos de referido</h3>
     <p>Un Studio puede tener un código de referido. Un usuario con cuenta Premium puede vincularlo, de forma
       voluntaria y una sola vez, desde los ajustes de Events Client. Para comprobar que la cuenta es Premium, el
-      backend consulta la API oficial de Minecraft con el token de acceso (apartado 5), que no se guarda.</p>
+      Client se identifica directamente ante los servidores de Mojang, como al entrar en un servidor de Minecraft, y el backend solo pregunta a Mojang si esa cuenta lo ha hecho. El token no se envía a Events Team.</p>
     <p>Se guardan: el UUID y el nombre de Minecraft, el código, el Studio y la fecha. No se guarda la dirección IP.
       La finalidad es saber cuántos jugadores trae cada Studio para poder concederle ventajas. El Studio ve el
       nombre de Minecraft y la fecha; Events Team ve además el UUID. La vinculación no se puede cambiar desde el

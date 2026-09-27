@@ -481,7 +481,7 @@
 <p>i) Imágenes, skins o capturas subidas.</p>
 <p>j) Un <strong>identificador técnico del dispositivo</strong> (huella derivada de características del hardware) utilizado exclusivamente para aplicar y hacer cumplir los bloqueos de seguridad descritos en la cláusula 31.</p>
 <p>k) Información técnica necesaria para seguridad e integridad.</p>
-<p>l) El código de referido que el usuario vincule voluntariamente, junto con el UUID y el nombre de su cuenta Premium. Para comprobar que la cuenta es Premium, el Client envía una sola vez su token de acceso de Minecraft al backend, que lo usa para esa consulta a la API oficial y no lo guarda.</p>
+<p>l) El código de referido que el usuario vincule voluntariamente, junto con el UUID y el nombre de su cuenta Premium. Para comprobar que la cuenta es Premium, el Client se identifica directamente ante los servidores de Mojang, como al entrar en un servidor de Minecraft, y el backend solo pregunta a Mojang si esa cuenta lo ha hecho. El token de acceso no se envía a Events Team.</p>
 <p>m) Estadísticas diarias de las instancias: número de jugadores y, durante 30 días, los nombres de Minecraft de quienes jugaron.</p>
 <p>La Política de Privacidad deberá informar sobre:</p>
 <ul>
