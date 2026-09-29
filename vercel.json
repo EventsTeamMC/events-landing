@@ -16,6 +16,10 @@
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {
+      "source": "/splash.js",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+    },
+    {
       "source": "/(og.png|icon.png|logo.svg)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
     },
