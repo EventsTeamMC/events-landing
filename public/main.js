@@ -435,3 +435,77 @@
     targets.forEach(land);
   }
 })();
+
+/* Barra de desplazamiento propia (estilos en styles.css, .ev-sb).
+   La nativa ocupaba sitio y, al aparecer mientras cargaba la página, movía
+   todo unos píxeles; esta flota encima. Arrastrar el pulgar desplaza la
+   página; un clic en la pista avanza una pantalla hacia ese lado. */
+(function () {
+  if (!window.matchMedia || !matchMedia('(pointer: fine)').matches) return;
+  var root = document.documentElement;
+  var bar = document.createElement('div');
+  var thumb = document.createElement('div');
+  bar.className = 'ev-sb';
+  bar.setAttribute('aria-hidden', 'true');
+  thumb.className = 'ev-sb-thumb';
+  bar.appendChild(thumb);
+  document.body.appendChild(bar);
+
+  var MIN = 36, PAD = 4, raf = 0, idle = 0, drag = null;
+  var suave = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function medir() {
+    raf = 0;
+    var vh = root.clientHeight, sh = root.scrollHeight, max = sh - vh;
+    if (max <= 1) { bar.classList.remove('on'); return; }
+    bar.classList.add('on');
+    var track = vh - PAD * 2;
+    var h = Math.max(MIN, Math.round(track * vh / sh));
+    var y = PAD + Math.round((track - h) * Math.min(1, Math.max(0, window.scrollY / max)));
+    thumb.style.height = h + 'px';
+    thumb.style.transform = 'translateY(' + y + 'px)';
+  }
+  function pedir() { if (!raf) raf = requestAnimationFrame(medir); }
+  function avivar() {
+    bar.classList.add('vivo');
+    clearTimeout(idle);
+    idle = setTimeout(function () { if (!drag) bar.classList.remove('vivo'); }, 1200);
+  }
+
+  window.addEventListener('scroll', function () { pedir(); avivar(); }, { passive: true });
+  window.addEventListener('resize', pedir);
+  window.addEventListener('load', pedir);
+  if ('ResizeObserver' in window) new ResizeObserver(pedir).observe(document.body);
+
+  thumb.addEventListener('pointerdown', function (e) {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    thumb.setPointerCapture(e.pointerId);
+    drag = { y: e.clientY, s: window.scrollY };
+    bar.classList.add('drag');
+    root.style.scrollBehavior = 'auto';   // el scroll suave de la página iría a tirones
+  });
+  thumb.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var vh = root.clientHeight, sh = root.scrollHeight;
+    var libre = Math.max(1, vh - PAD * 2 - thumb.offsetHeight);
+    window.scrollTo(0, drag.s + (e.clientY - drag.y) * (sh - vh) / libre);
+  });
+  function soltar() {
+    if (!drag) return;
+    drag = null;
+    bar.classList.remove('drag');
+    root.style.scrollBehavior = '';
+    avivar();
+  }
+  thumb.addEventListener('pointerup', soltar);
+  thumb.addEventListener('pointercancel', soltar);
+
+  bar.addEventListener('pointerdown', function (e) {
+    if (e.target !== bar || e.button !== 0) return;
+    var r = thumb.getBoundingClientRect();
+    window.scrollBy({ top: (e.clientY < r.top ? -1 : 1) * root.clientHeight * 0.9, behavior: suave ? 'smooth' : 'auto' });
+  });
+
+  medir();
+})();
