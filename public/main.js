@@ -438,8 +438,7 @@
 
 /* Barra de desplazamiento propia (estilos en styles.css, .ev-sb).
    La nativa ocupaba sitio y, al aparecer mientras cargaba la página, movía
-   todo unos píxeles; esta flota encima. Arrastrar el pulgar desplaza la
-   página; un clic en la pista avanza una pantalla hacia ese lado. */
+   todo unos píxeles; esta flota encima. Se agarra por cualquier punto. */
 (function () {
   if (!window.matchMedia || !matchMedia('(pointer: fine)').matches) return;
   var root = document.documentElement;
@@ -452,7 +451,6 @@
   document.body.appendChild(bar);
 
   var MIN = 36, PAD = 4, raf = 0, idle = 0, drag = null;
-  var suave = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function medir() {
     raf = 0;
@@ -477,15 +475,27 @@
   window.addEventListener('load', pedir);
   if ('ResizeObserver' in window) new ResizeObserver(pedir).observe(document.body);
 
-  thumb.addEventListener('pointerdown', function (e) {
+  /* Pulsar en CUALQUIER punto de la barra agarra el pulgar: si es en la pista,
+     el pulgar salta ahí primero y se sigue arrastrando sin soltar. Antes un
+     clic en la pista bajaba una pantalla, y como el pulgar es estrecho, al ir a
+     arrastrarlo muchas veces se pulsaba la pista y la página se iba abajo. */
+  bar.addEventListener('pointerdown', function (e) {
     if (e.button !== 0) return;
-    e.preventDefault();
-    thumb.setPointerCapture(e.pointerId);
+    e.preventDefault();                   // sin esto, un clic rápido selecciona texto
+    bar.setPointerCapture(e.pointerId);
+    root.style.scrollBehavior = 'auto';   // el scroll suave iría a tirones al arrastrar
+    root.classList.add('ev-sb-arrastrando');
+    if (e.target !== thumb) {
+      var vh = root.clientHeight, max = root.scrollHeight - vh;
+      var h = thumb.offsetHeight, libre = Math.max(1, vh - PAD * 2 - h);
+      var y = Math.min(libre, Math.max(0, e.clientY - PAD - h / 2));
+      window.scrollTo(0, (y / libre) * max);
+      medir();
+    }
     drag = { y: e.clientY, s: window.scrollY };
     bar.classList.add('drag');
-    root.style.scrollBehavior = 'auto';   // el scroll suave de la página iría a tirones
   });
-  thumb.addEventListener('pointermove', function (e) {
+  bar.addEventListener('pointermove', function (e) {
     if (!drag) return;
     var vh = root.clientHeight, sh = root.scrollHeight;
     var libre = Math.max(1, vh - PAD * 2 - thumb.offsetHeight);
@@ -495,17 +505,13 @@
     if (!drag) return;
     drag = null;
     bar.classList.remove('drag');
+    root.classList.remove('ev-sb-arrastrando');
     root.style.scrollBehavior = '';
     avivar();
   }
-  thumb.addEventListener('pointerup', soltar);
-  thumb.addEventListener('pointercancel', soltar);
-
-  bar.addEventListener('pointerdown', function (e) {
-    if (e.target !== bar || e.button !== 0) return;
-    var r = thumb.getBoundingClientRect();
-    window.scrollBy({ top: (e.clientY < r.top ? -1 : 1) * root.clientHeight * 0.9, behavior: suave ? 'smooth' : 'auto' });
-  });
+  bar.addEventListener('pointerup', soltar);
+  bar.addEventListener('pointercancel', soltar);
+  bar.addEventListener('lostpointercapture', soltar);
 
   medir();
 })();
