@@ -30,13 +30,16 @@
         if (ring) { ring.style.strokeDashoffset = String(1 - r); ring.style.visibility = r > 0 ? 'visible' : 'hidden'; }
     }
     function tick(now) {
-        var dt = Math.min(50, now - last); last = now;
+        // Paso limitado: tras un bloqueo del hilo (el JS de la página) el logo
+        // sigue desde donde estaba en vez de saltar para recuperar el tiempo.
+        var dt = Math.min(34, now - last); last = now;
         if (done && !fin) {
             var D = 1 - p, v0 = Math.max(0, v);
-            fin = { t: now - dt, p0: p, v0: v0, T: Math.max(0.28, Math.min(v0 > 0.001 ? 2 * D / v0 : Infinity, TFULL * (0.4 + 0.6 * D))) };
+            fin = { el: 0, p0: p, v0: v0, T: Math.max(0.28, Math.min(v0 > 0.001 ? 2 * D / v0 : Infinity, TFULL * (0.4 + 0.6 * D))) };
         }
         if (fin) {
-            var s = Math.min(1, (now - fin.t) / 1000 / fin.T), s2 = s * s, s3 = s2 * s;
+            fin.el += dt;
+            var s = Math.min(1, fin.el / 1000 / fin.T), s2 = s * s, s3 = s2 * s;
             p = (2 * s3 - 3 * s2 + 1) * fin.p0 + (s3 - 2 * s2 + s) * fin.T * fin.v0 + (3 * s2 - 2 * s3);
             draw(p);
             if (s >= 1) { setTimeout(salir, 80); return; }
