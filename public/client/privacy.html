@@ -53,7 +53,7 @@
     <div class="wrap">
       <span class="eyebrow">✦ Events Client</span>
       <h1>Política de Privacidad</h1>
-      <p class="legal-updated">Última actualización: 29 de septiembre de 2026 · Entrada en vigor: 29 de septiembre de 2026 · Versión 1.4</p>
+      <p class="legal-updated">Última actualización: 1 de octubre de 2026 · Entrada en vigor: 1 de octubre de 2026 · Versión 1.5</p>
     </div>
   </section>
 
@@ -232,12 +232,17 @@
     <p><b>Events ModGuard</b> comprueba dentro del juego que los mods cargados son los del modpack y que no se han
       añadido, quitado ni modificado archivos del Studio en las carpetas gestionadas. Se comunica con Events Client
       por una conexión local del propio equipo.</p>
-    <p><b>EVAC</b> revisa, mientras la instancia está abierta, los procesos del sistema (nombre del ejecutable y
-      línea de comandos) para detectar programas de trampa o autoclickers, comparándolos con una lista de firmas.
-      Esta comprobación es local. A Events Team <b>solo</b> se le envía la coincidencia detectada (qué firma o qué
-      archivo ajeno), junto con el nombre de Minecraft, la instancia y la marca de tiempo; <b>nunca</b> se envía la
-      lista de procesos del equipo, ni los archivos personales, ni el contenido del dispositivo fuera de las carpetas
-      de Events Client y sus instancias.</p>
+    <p><b>EVAC</b> revisa, mientras la instancia está abierta: los procesos del sistema (nombre del ejecutable,
+      título de la ventana y línea de comandos), para detectar programas de trampa o autoclickers comparándolos con una
+      lista de firmas; los mods y los paquetes de recursos y de shaders de la carpeta de la instancia, comparándolos con
+      los del Studio; y las librerías cargadas en el proceso del juego. Antes de abrir la instancia, los mods que no son
+      del Studio se apartan a una carpeta dentro de la propia instancia (no se borran), y el juego se inicia sin las
+      variables de entorno que permiten cargar agentes de Java. Durante la partida, Events Client comunica
+      periódicamente a Events Team que EVAC está activo. Estas comprobaciones son locales. A Events Team <b>solo</b> se
+      le envía la coincidencia detectada (qué firma, o qué archivo de la instancia se ha añadido o modificado), junto con
+      el nombre de Minecraft, la instancia y la marca de tiempo; <b>nunca</b> se envía la lista de procesos ni de
+      librerías del equipo, ni los archivos personales, ni el contenido del dispositivo fuera de las carpetas de Events
+      Client y sus instancias.</p>
     <p>Según lo que haya configurado el Studio, una detección puede quedar solo registrada y notificada, o provocar el
       cierre de la sesión de juego en esa instancia. El Studio ve las detecciones de sus instancias. Los registros de
       detección se conservan de forma acotada por instancia. Base jurídica: interés legítimo en garantizar el juego
