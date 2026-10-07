@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Horizon from '../components/Horizon.astro';
+import Steps from '../components/Steps.astro';
+import { DOWNLOADS, LINKS } from '../data/site';
+import { getDownloads } from '../data/live';
+
+const downloads = await getDownloads();
+const order = ['windows', 'mac', 'linux'] as const;
+---
+<Base
+    title="Descargar Events Client · Windows, macOS y Linux"
+    description="Descarga Events Client gratis. Siempre la última versión, con actualización automática."
+>
+    <section class="dl-hero">
+        <div class="wrap dl-wrap">
+            <h1 class="h1">Descarga Events Client.</h1>
+            <p class="lead">Gratis. Siempre la última versión, y se actualiza solo.</p>
+
+            <div class="primary" data-primary>
+                <span class="primary-ic" data-os-icon><Icon name="windows" size={30} /></span>
+                <div class="primary-copy">
+                    <span class="primary-os" data-os-name>Windows</span>
+                    <span class="primary-req small muted" data-os-req>{DOWNLOADS.windows.req}</span>
+                </div>
+                <a class="btn btn-primary btn-lg" data-dl="primary" data-os-href href={DOWNLOADS.windows.href}><Icon name="download" /> <span data-os-label>Descargar (.exe)</span></a>
+            </div>
+            <p class="dl-thanks small" data-dl-thanks hidden>Gracias por descargar Events Client.</p>
+            {downloads !== null && (
+                <p class="dl-count small"><span class="live" aria-hidden="true"></span><b class="tnum" data-dl-count>{downloads.toLocaleString('es-ES')}</b> descargas</p>
+            )}
+        </div>
+        <Horizon id="hz-dl" />
+    </section>
+
+    <section class="section-tight" id="todas">
+        <div class="wrap-narrow">
+            <h2 class="h3 list-h">Todas las plataformas</h2>
+            <ul role="list" class="plat">
+                {order.map((k) => {
+                    const d = DOWNLOADS[k];
+                    return (
+                        <li class="plat-row" data-os-row={k}>
+                            <span class="plat-ic"><Icon name={k === 'mac' ? 'apple' : k} size={22} /></span>
+                            <span class="plat-copy"><b>{d.label}</b><span class="small muted">{d.req}</span></span>
+                            <span class="plat-actions">
+                                {d.alt && <a class="link small" data-dl={`${k}-alt`} href={d.alt.href}>{d.alt.label}</a>}
+                                <a class="btn btn-secondary btn-sm" data-dl={k} href={d.href}><Icon name="download" size={16} /> {d.file}</a>
+                            </span>
+                        </li>
+                    );
+                })}
+            </ul>
+            <p class="small muted linux-hint">En Linux, dale permisos de ejecución y ábrelo: <code class="kbd-code">chmod +x Events-Client-*.AppImage</code></p>
+
+            <details class="beta">
+                <summary><span>Canal Beta</span><Icon name="chevron-down" size={18} /></summary>
+                <div class="beta-body">
+                    <p>Versiones de prueba antes que nadie. Pueden fallar: repórtalo con <span class="kbd-code">F1</span> desde el launcher.</p>
+                    <p>No hay que descargar nada distinto: instala Events Client y ve a <b>Ajustes → Acerca de → Canal de actualizaciones → Beta</b>. Puedes volver a Estable cuando quieras.</p>
+                    <a class="go" href={LINKS.releases} target="_blank" rel="noopener">Todas las versiones en GitHub <Icon name="arrow-up-right" /></a>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <section class="section-tight">
+        <div class="wrap">
+            <div class="section-head" data-reveal><h2 class="h2">Ya casi estás dentro.</h2></div>
+            <Steps steps={[
+                { title: 'Instala y abre', text: 'Entra con Microsoft o crea una cuenta offline vinculada a Discord.' },
+                { title: 'Escribe tu código', text: 'El del evento. La instancia aparece en la barra lateral.' },
+                { title: 'Pulsa Jugar', text: 'Se descarga, se configura y se abre Minecraft.' },
+            ]} />
+        </div>
+    </section>
+</Base>
+
+<style>
+    .dl-hero { position: relative; padding-top: clamp(48px, 7vw, 104px); padding-bottom: clamp(170px, 22vw, 290px); overflow: clip; text-align: center; }
+    .dl-wrap { position: relative; z-index: 1; display: grid; justify-items: center; gap: 18px; }
+    .primary {
+        display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px;
+        width: min(100%, 640px); margin-top: 28px; padding: 18px 18px 18px 22px; text-align: left;
+        border-radius: var(--r-xl); background: rgba(13, 17, 34, 0.85); backdrop-filter: blur(10px);
+        box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-4), 0 0 100px -30px rgba(107, 60, 255, 0.5);
+    }
+    .primary-ic { display: grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; color: var(--text); background: rgba(255, 255, 255, 0.05); }
+    .primary-copy { display: grid; gap: 2px; }
+    .primary-os { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--text); letter-spacing: -0.015em; }
+    .dl-count { display: inline-flex; align-items: center; gap: 8px; color: var(--text-3); }
+    .dl-count b { color: var(--text); }
+    .live { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); }
+    .dl-thanks { color: var(--success); font-weight: 600; }
+    @media (max-width: 600px) { .primary { grid-template-columns: auto 1fr; } .primary .btn { grid-column: 1 / -1; } }
+
+    .list-h { margin-bottom: 14px; }
+    .plat { border-radius: var(--r-lg); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+    .plat-row { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 18px 20px; }
+    .plat-row + .plat-row { border-top: 1px solid var(--border); }
+    .plat-row.current { background: rgba(91, 140, 255, 0.05); }
+    .plat-ic { color: var(--text-2); }
+    .plat-copy { display: grid; }
+    .plat-copy b { font-weight: 600; }
+    .plat-actions { display: flex; align-items: center; gap: 16px; }
+    .linux-hint { margin-top: 14px; }
+    @media (max-width: 560px) { .plat-row { grid-template-columns: auto 1fr; } .plat-actions { grid-column: 1 / -1; justify-content: flex-end; } }
+
+    .beta { margin-top: 28px; border-radius: var(--r-lg); box-shadow: inset 0 0 0 1px var(--border); }
+    .beta summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 20px; cursor: pointer; list-style: none; color: var(--text); font-weight: 600; border-radius: var(--r-lg); }
+    .beta summary::-webkit-details-marker { display: none; }
+    .beta summary :global(svg) { color: var(--text-3); transition: transform var(--t-fast) var(--ease-out); }
+    .beta[open] summary :global(svg) { transform: rotate(180deg); }
+    .beta-body { display: grid; gap: 12px; padding: 0 20px 20px; }
+</style>
+
+<script>
+    import { refreshDownloads, countDownloadClicks } from '../scripts/live';
+    // Show the visitor's system first. The full list stays below either way.
+    const DL = {
+        windows: { name: 'Windows', icon: 'windows', label: 'Descargar (.exe)' },
+        mac: { name: 'macOS', icon: 'apple', label: 'Descargar (.dmg)' },
+        linux: { name: 'Linux', icon: 'linux', label: 'Descargar (.AppImage)' },
+    } as const;
+    const ua = navigator.userAgent;
+    const os: keyof typeof DL = /Mac/i.test(ua) && !/iPhone|iPad/i.test(ua) ? 'mac' : /Linux/i.test(ua) && !/Android/i.test(ua) ? 'linux' : 'windows';
+    const row = document.querySelector<HTMLElement>(`[data-os-row="${os}"]`);
+    if (row && os !== 'windows') {
+        const href = row.querySelector<HTMLAnchorElement>(`a[data-dl="${os}"]`)!.href;
+        const req = row.querySelector('.plat-copy .small')!.textContent!;
+        document.querySelector('[data-os-name]')!.textContent = DL[os].name;
+        document.querySelector('[data-os-req]')!.textContent = req;
+        document.querySelector('[data-os-label]')!.textContent = DL[os].label;
+        document.querySelector<HTMLAnchorElement>('[data-os-href]')!.href = href;
+        document.querySelector('[data-os-icon]')!.innerHTML = row.querySelector('.plat-ic')!.innerHTML;
+    }
+    row?.classList.add('current');
+    refreshDownloads();
+    countDownloadClicks();
+</script>

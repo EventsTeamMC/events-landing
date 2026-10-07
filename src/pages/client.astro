@@ -1,0 +1,128 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import FeatureList from '../components/FeatureList.astro';
+import Steps from '../components/Steps.astro';
+import Callout from '../components/Callout.astro';
+import { product, LINKS } from '../data/site';
+import { getDownloads } from '../data/live';
+import home from '../assets/shots/launcher-home.png';
+import onboarding from '../assets/shots/onboarding.png';
+import instance from '../assets/shots/instance.png';
+import explore from '../assets/shots/explore.png';
+import webhost from '../assets/shots/webhost.png';
+
+const p = product('client');
+const downloads = await getDownloads();
+---
+<Base
+    title="Events Client · El launcher de los eventos de Minecraft"
+    description="Escribe el código del evento y juega. Versión, loader y mods se instalan solos. Gratis para Windows, macOS y Linux."
+    jsonld={[{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Events Client', applicationCategory: 'GameApplication', operatingSystem: 'Windows, macOS, Linux', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, url: 'https://www.eventsmc.xyz/client' }]}
+>
+    <div style={`--tone:${p.tone}`}>
+        <PageHero product={p} title="El launcher de los eventos de Minecraft." lead="Escribe el código del evento y juega. Versión, loader y mods se instalan solos, y cada jugador tiene exactamente los mismos archivos.">
+            <Fragment slot="actions">
+                <a class="btn btn-primary btn-lg" href="/download"><Icon name="download" /> Descargar gratis</a>
+                <a class="btn btn-ghost btn-lg" href="#como">Cómo funciona</a>
+            </Fragment>
+            <Fragment slot="meta">
+                {downloads !== null && <span><b class="tnum" data-dl-count>{downloads.toLocaleString('es-ES')}</b> descargas</span>}
+                <span>Windows, macOS y Linux</span>
+                <span>Vanilla, Forge, Fabric, NeoForge y Quilt</span>
+            </Fragment>
+            <figure slot="visual" class="shot shot-hero">
+                <Image src={home} alt="Inicio de Events Client con la instancia reciente y los próximos eventos" widths={[640, 960, 1280]} sizes="(max-width: 960px) 100vw, 640px" loading="eager" fetchpriority="high" />
+            </figure>
+        </PageHero>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2 class="h2">Entrar a un evento no debería ser un examen técnico.</h2>
+                    <p class="lead">Sin launcher, cada evento es un .zip por Discord, la versión exacta de Forge a mano y doscientas personas diciendo «a mí no me abre».</p>
+                </div>
+                <FeatureList items={[
+                    { icon: 'key', title: 'Acceso por código', text: 'Las instancias son privadas. El studio reparte códigos y solo entra quien debe.' },
+                    { icon: 'refresh', title: 'Sincronización por hash', text: 'Solo se descarga lo que cambió. Los mods de Modrinth llegan desde su CDN.' },
+                    { icon: 'layers', title: 'Todos los loaders', text: 'Vanilla, Forge, Fabric, NeoForge y Quilt. El studio elige la versión y el launcher la monta.' },
+                    { icon: 'lock', title: 'Cuentas protegidas', text: 'Microsoft, o una cuenta offline vinculada a Discord con un código de un solo uso.' },
+                    { icon: 'folder', title: 'Tus ajustes se quedan', text: 'Las carpetas que marques sobreviven a cada actualización: tu VoiceChat, tus opciones.' },
+                    { icon: 'download', title: 'Siempre al día', text: 'El launcher se actualiza solo. Nadie llega al evento con una versión vieja.' },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section" id="como">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">De cero a jugando.</h2></div>
+                <Steps steps={[
+                    { title: 'Descarga e instala', text: 'Windows, macOS o Linux. Entra con Microsoft o crea una cuenta offline.' },
+                    { title: 'Escribe el código', text: 'El que te pasa el studio. La instancia aparece en la barra lateral.' },
+                    { title: 'Pulsa Jugar', text: 'Se descarga, se configura y se abre Minecraft.' },
+                ]} />
+                <div class="gallery" data-reveal>
+                    <figure class="shot"><Image src={onboarding} alt="Primer arranque de Events Client" widths={[480, 800]} sizes="(max-width: 760px) 85vw, 380px" /><figcaption>La cuenta, en un minuto.</figcaption></figure>
+                    <figure class="shot"><Image src={instance} alt="Página de una instancia con su arte y el botón Jugar" widths={[480, 800]} sizes="(max-width: 760px) 85vw, 380px" /><figcaption>Cada evento, con su identidad.</figcaption></figure>
+                    <figure class="shot"><Image src={explore} alt="Explorar, con los próximos eventos de los studios" widths={[480, 800]} sizes="(max-width: 760px) 85vw, 380px" /><figcaption>Los próximos eventos de todos los studios.</figcaption></figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="studios">
+            <div class="wrap studio-grid">
+                <div data-reveal>
+                    <h2 class="h2">Detrás, un panel para el studio.</h2>
+                    <p class="lead" style="margin-top:16px">Crea la instancia, sube los archivos y reparte códigos sin tocar un servidor.</p>
+                    <ul role="list" class="checks">
+                        <li><Icon name="check" /> Importa un .mrpack de Modrinth y queda configurado</li>
+                        <li><Icon name="check" /> Editor de archivos con carpetas y arrastrar y soltar</li>
+                        <li><Icon name="check" /> Whitelist, códigos de acceso y baneos por jugador o por IP</li>
+                        <li><Icon name="check" /> Quién está jugando, y desconectarlo si hace falta</li>
+                        <li><Icon name="check" /> Logo, fondos, colores y enlaces propios</li>
+                    </ul>
+                    <a class="go" href={LINKS.panel} target="_blank" rel="noopener" style="margin-top:28px">Abrir el panel <Icon name="arrow-up-right" /></a>
+                </div>
+                <figure class="shot shot-panel" data-reveal style="--i:1">
+                    <Image src={webhost} alt="Panel de Events con la lista de instancias y su estado" widths={[720, 1200]} sizes="(max-width: 960px) 100vw, 620px" />
+                </figure>
+            </div>
+        </section>
+
+        <section class="section-tight">
+            <div class="wrap end">
+                <div class="end-row" data-reveal>
+                    <h2 class="h2">Descárgalo y entra a tu primer evento.</h2>
+                    <a class="btn btn-primary btn-lg" href="/download"><Icon name="download" /> Descargar Events Client</a>
+                </div>
+                <Callout icon="scale" title="¿Tienes una sanción en el launcher?" text="Si crees que es un error, apélala. La revisa una persona del staff y te respondemos por Discord." href="/appeal?type=launcher" cta="Apelar una sanción" />
+            </div>
+        </section>
+    </div>
+</Base>
+
+<style>
+    .shot { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-3); }
+    .shot :global(img) { width: 100%; height: auto; }
+    .shot-hero { box-shadow: 0 0 0 1px rgba(170, 182, 255, 0.16), var(--shadow-4), 0 0 120px -30px rgba(107, 60, 255, 0.45); }
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: clamp(40px, 5vw, 64px); }
+    .gallery figcaption { padding: 14px 16px; font-size: var(--fs-small); color: var(--text-2); }
+    @media (max-width: 760px) {
+        .gallery { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 85%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+        .gallery .shot { scroll-snap-align: start; }
+    }
+    .studio-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .checks { display: grid; gap: 12px; margin-top: 28px; }
+    .checks li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; }
+    .checks :global(svg) { color: var(--success); margin-top: 3px; width: 18px; height: 18px; }
+    @media (max-width: 960px) { .studio-grid { grid-template-columns: 1fr; } }
+    .end { display: grid; gap: 32px; }
+    .end-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+</style>
+
+<script>
+    import { refreshDownloads } from '../scripts/live';
+    refreshDownloads();
+</script>

@@ -1,0 +1,36 @@
+---
+/*
+ * Features as rows on hairlines, two columns on wide screens. Not cards: the
+ * reader scans titles down the page instead of reading boxes.
+ */
+import Icon from './Icon.astro';
+
+interface Item { icon: string; title: string; text: string; tag?: string }
+interface Props { items: Item[]; cols?: 1 | 2 }
+const { items, cols = 2 } = Astro.props;
+---
+<ul role="list" class:list={['fl', `fl-${cols}`]}>
+    {items.map((it, i) => (
+        <li class="fl-row" data-reveal style={`--i:${i % 2}`}>
+            <span class="fl-ic"><Icon name={it.icon as any} /></span>
+            <div class="fl-copy">
+                <h3 class="fl-t">{it.title}{it.tag && <span class="status soon fl-tag">{it.tag}</span>}</h3>
+                <p>{it.text}</p>
+            </div>
+        </li>
+    ))}
+</ul>
+
+<style>
+    .fl { display: grid; column-gap: clamp(32px, 5vw, 72px); }
+    .fl-2 { grid-template-columns: 1fr 1fr; }
+    .fl-row { display: grid; grid-template-columns: 40px 1fr; gap: 18px; padding-block: 26px; border-top: 1px solid var(--border); }
+    .fl-ic {
+        display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
+        color: var(--tone, var(--action)); background: color-mix(in oklab, var(--tone, var(--action)) 11%, transparent);
+    }
+    .fl-copy { display: grid; gap: 6px; }
+    .fl-t { font-family: var(--font-sans); font-size: 1.02rem; font-weight: 600; letter-spacing: -0.005em; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+    .fl-copy p { max-width: 54ch; }
+    @media (max-width: 760px) { .fl-2 { grid-template-columns: 1fr; } }
+</style>

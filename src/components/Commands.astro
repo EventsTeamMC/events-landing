@@ -1,0 +1,27 @@
+---
+/* Slash commands as a reference list, grouped by who uses them. */
+interface Group { title: string; items: [string, string][] }
+interface Props { groups: Group[] }
+const { groups } = Astro.props;
+---
+<div class="cmds">
+    {groups.map((g, gi) => (
+        <div class="cmd-group" data-reveal style={`--i:${gi}`}>
+            <h3 class="cmd-h">{g.title}</h3>
+            <dl>
+                {g.items.map(([c, d]) => (
+                    <div class="cmd"><dt><code>{c}</code></dt><dd>{d}</dd></div>
+                ))}
+            </dl>
+        </div>
+    ))}
+</div>
+
+<style>
+    .cmds { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(24px, 4vw, 56px); }
+    .cmd-h { font-family: var(--font-sans); font-size: var(--fs-small); font-weight: 600; color: var(--text-3); letter-spacing: 0; margin-bottom: 8px; }
+    .cmd { display: grid; grid-template-columns: minmax(150px, auto) 1fr; gap: 16px; align-items: baseline; padding-block: 14px; border-top: 1px solid var(--border); }
+    .cmd dt code { color: var(--tone, var(--action)); font-size: 0.9rem; }
+    .cmd dd { margin: 0; color: var(--text-2); font-size: 0.94rem; }
+    @media (max-width: 480px) { .cmd { grid-template-columns: 1fr; gap: 4px; } }
+</style>

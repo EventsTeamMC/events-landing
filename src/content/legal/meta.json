@@ -1,0 +1,74 @@
+{
+  "client/terms": {
+    "title": "Términos y Condiciones · Events Client",
+    "description": "Términos y Condiciones de uso de Events Client.",
+    "noindex": false,
+    "h1": "Términos y Condiciones",
+    "updated": "Estos son los Términos que aceptas al usar Events Client. También se muestran dentro del propio launcher durante la primera configuración.",
+    "productName": "Events Client",
+    "productId": "client"
+  },
+  "client/privacy": {
+    "title": "Política de Privacidad · Events Client",
+    "description": "Qué datos trata Events Client y con qué finalidad.",
+    "noindex": false,
+    "h1": "Política de Privacidad",
+    "updated": "Última actualización: 1 de octubre de 2026 · Entrada en vigor: 1 de octubre de 2026 · Versión 1.5",
+    "productName": "Events Client",
+    "productId": "client"
+  },
+  "client/data-deletion": {
+    "title": "Eliminar mis datos · Events Client",
+    "description": "Cómo solicitar la eliminación de tus datos en Events Client.",
+    "noindex": false,
+    "h1": "Eliminación de datos",
+    "updated": "Ejerce tu derecho de supresión (RGPD)",
+    "productName": "Events Client",
+    "productId": "client"
+  },
+  "plus/condiciones": {
+    "title": "Condiciones de contratación de Events+",
+    "description": "Condiciones de contratación, pago, renovación, desistimiento y reembolsos de los planes Events+ para Studios.",
+    "noindex": true,
+    "h1": "Condiciones de contratación de Events+",
+    "updated": "Última actualización: 27 de septiembre de 2026 · Versión 1.0",
+    "productName": "Events+",
+    "productId": "plus"
+  },
+  "whitelist/terms": {
+    "title": "Términos y Condiciones · Events Whitelist",
+    "description": "Términos y Condiciones de uso de Events Whitelist.",
+    "noindex": false,
+    "h1": "Condiciones del Servicio",
+    "updated": "Última actualización: 22 de julio de 2026",
+    "productName": "Events Whitelist",
+    "productId": "whitelist"
+  },
+  "whitelist/privacy": {
+    "title": "Política de Privacidad · Events Whitelist",
+    "description": "Qué datos trata Events Whitelist y con qué finalidad.",
+    "noindex": false,
+    "h1": "Política de Privacidad",
+    "updated": "Última actualización: 22 de julio de 2026",
+    "productName": "Events Whitelist",
+    "productId": "whitelist"
+  },
+  "blacklist/terms": {
+    "title": "Términos y Condiciones · Events Blacklist",
+    "description": "Términos y Condiciones de uso de Events Blacklist.",
+    "noindex": false,
+    "h1": "Condiciones del Servicio",
+    "updated": "Última actualización: 22 de julio de 2026",
+    "productName": "Events Blacklist",
+    "productId": "blacklist"
+  },
+  "blacklist/privacy": {
+    "title": "Política de Privacidad · Events Blacklist",
+    "description": "Qué datos trata Events Blacklist y con qué finalidad.",
+    "noindex": false,
+    "h1": "Política de Privacidad",
+    "updated": "Última actualización: 22 de julio de 2026",
+    "productName": "Events Blacklist",
+    "productId": "blacklist"
+  }
+}

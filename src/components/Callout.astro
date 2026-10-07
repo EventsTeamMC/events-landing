@@ -1,0 +1,26 @@
+---
+/* A closing row: one sentence and its action. Used for appeals and handoffs. */
+import Icon from './Icon.astro';
+interface Props { icon: string; title: string; text: string; href: string; cta: string; external?: boolean }
+const { icon, title, text, href, cta, external } = Astro.props;
+---
+<div class="co" data-reveal>
+    <span class="co-ic"><Icon name={icon as any} /></span>
+    <div class="co-copy">
+        <h3 class="co-t">{title}</h3>
+        <p>{text}</p>
+    </div>
+    <a class="btn btn-secondary" href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>{cta}</a>
+</div>
+
+<style>
+    .co {
+        display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
+        padding: 22px 24px; border-radius: var(--r-lg);
+        background: var(--surface); box-shadow: inset 0 0 0 1px var(--border);
+    }
+    .co-ic { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; color: var(--text-2); background: rgba(255, 255, 255, 0.04); }
+    .co-t { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+    .co-copy p { font-size: var(--fs-small); margin-top: 2px; }
+    @media (max-width: 640px) { .co { grid-template-columns: 1fr; } .co-ic { display: none; } }
+</style>

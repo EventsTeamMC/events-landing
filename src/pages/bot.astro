@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import Steps from '../components/Steps.astro';
+import { product, BOT, LINKS, eur } from '../data/site';
+
+const p = product('bot');
+// Pack Completo bought piece by piece: the Base licence plus every module.
+const separate = BOT.licenses[0].price + BOT.modules.reduce((s, m) => s + m.price, 0);
+---
+<Base
+    title="Events BOT · Tu propio bot de Discord"
+    description="Tickets, logging, niveles, sorteos y más, con tu nombre y tus colores. Licencia de pago único y hosting a 2 € al mes."
+    jsonld={[{ '@context': 'https://schema.org', '@type': 'Product', name: 'Events BOT', offers: { '@type': 'Offer', price: '3.00', priceCurrency: 'EUR' } }]}
+>
+    <div style={`--tone:${p.tone}`}>
+        <PageHero product={p} title="Tu propio bot de Discord." titleDim="Con tu nombre y tus colores." lead="Tickets, logging, niveles, sorteos y más. Eliges los módulos, pagas la licencia una vez y el bot corre en nuestro hosting, siempre actualizado.">
+            <Fragment slot="actions">
+                <a class="btn btn-primary btn-lg" href="#precios">Ver precios</a>
+                <a class="btn btn-ghost btn-lg" href="#modulos">Módulos</a>
+            </Fragment>
+            <div slot="visual" class="bot-card" aria-hidden="true">
+                <div class="bc-head">
+                    <span class="bc-avatar"><Icon name="bot" size={22} /></span>
+                    <span><b>Tu bot</b><span class="bc-tag">BOT</span><br /><span class="small muted">Jugando a tu evento</span></span>
+                </div>
+                <div class="bc-embed">
+                    <b>Soporte</b>
+                    <p class="small">Abre un ticket y te atendemos.</p>
+                    <div class="bc-btns"><span>Dudas</span><span>Reportar</span><span>Apelar</span></div>
+                </div>
+                <div class="bc-line small"><span class="kbd-code">/configurar</span> color, presencia y módulos</div>
+            </div>
+        </PageHero>
+
+        <section class="section-tight">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">Cómo funciona.</h2></div>
+                <Steps steps={[
+                    { title: 'Contratas', text: 'La licencia Base o el Pack Completo, los módulos y el hosting.' },
+                    { title: 'Pones tu token', text: 'En hosting.eventsmc.xyz → Startup: el token de tu aplicación de Discord, su ID y el de tu servidor.' },
+                    { title: 'Lo configuras en Discord', text: 'Un asistente pide color, presencia y módulos. El resto, con <span class="kbd-code">/configurar</span>.' },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section" id="modulos">
+            <div class="wrap mod-grid">
+                <div data-reveal>
+                    <h2 class="h2">Módulos.</h2>
+                    <p class="lead" style="margin-top:14px">Pago único. Puedes añadir más después.</p>
+                    <h3 class="incl-h">Siempre incluido</h3>
+                    <ul role="list" class="incl">
+                        <li><Icon name="check" size={16} /> Utils: comandos de utilidad, en todas las licencias</li>
+                        <li><Icon name="check" size={16} /> Nombre, color, logo, emojis y textos propios</li>
+                        <li><Icon name="check" size={16} /> Tickets, transcripciones y textos desde panel.eventsmc.xyz</li>
+                        <li><Icon name="check" size={16} /> Actualizaciones al arrancar y reinicio si se cae</li>
+                        <li><Icon name="check" size={16} /> Consola, tareas programadas y copias de seguridad</li>
+                    </ul>
+                </div>
+                <table class="mods" data-reveal style="--i:1">
+                    <caption class="sr-only">Módulos y precio de cada uno</caption>
+                    <tbody>
+                        {BOT.modules.map((m) => (
+                            <tr>
+                                <th scope="row"><b>{m.name}</b><span>{m.line}</span></th>
+                                <td class="tnum">{eur(m.price)}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section-tight" id="precios">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2 class="h2">Precios.</h2>
+                    <p class="lead">La licencia se paga una vez y la eliges al contratar. El hosting cuesta <b>{eur(BOT.hostingMonthly)} al mes</b>.</p>
+                </div>
+                <div class="lic">
+                    {BOT.licenses.map((l) => (
+                        <article class:list={['lic-card', { pick: l.pick }]}>
+                            <h3 class="h3">Licencia {l.name}</h3>
+                            <p class="muted small">{l.what}</p>
+                            <p class="lic-price"><span class="tnum">{eur(l.price)}</span><small>pago único</small></p>
+                            <p class="small muted">{l.pick ? `Por separado, ${eur(separate)}.` : l.note} + hosting</p>
+                            <ul role="list">
+                                {l.features.map((f) => <li><Icon name="check" size={16} />{f}</li>)}
+                            </ul>
+                            <a class:list={['btn', l.pick ? 'btn-primary' : 'btn-secondary']} href={BOT.checkout}>Contratar</a>
+                        </article>
+                    ))}
+                </div>
+                <div class="own" data-reveal>
+                    <div>
+                        <h3 class="own-t">¿Ya tienes tu propio bot?</h3>
+                        <p>Hosting para bots de Discord en Node.js, Python, Bun, Deno, Go, Java, Rust o C#, con archivos, consola y SFTP. Desde {eur(BOT.hostingMonthly)} al mes; copias de seguridad como extra.</p>
+                    </div>
+                    <a class="btn btn-secondary" href={BOT.hostingCheckout}>Contratar hosting</a>
+                </div>
+                <p class="small muted" style="margin-top:24px">Events BOT va siempre en nuestro hosting. Si lo vuelves a contratar para el mismo studio, no repagas la licencia: <a href={`${LINKS.clientes}/tickets/create`}>abre un ticket</a>. El bot nuevo empieza de cero.</p>
+            </div>
+        </section>
+    </div>
+</Base>
+
+<style>
+    .bot-card {
+        display: grid; gap: 14px; padding: 22px; border-radius: var(--r-xl); max-width: 460px; margin-inline: auto;
+        background: #1e1f24; color: #dbdee1; font-size: 0.92rem;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), var(--shadow-4), 0 0 100px -30px rgba(245, 166, 35, 0.35);
+    }
+    .bc-head { display: flex; gap: 12px; align-items: center; }
+    .bc-avatar { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--p-bot); color: #241500; }
+    .bc-head b { color: #fff; }
+    .bc-tag { margin-left: 6px; padding: 1px 5px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; background: #5865f2; color: #fff; vertical-align: 2px; }
+    .bc-embed { padding: 14px 16px; border-radius: 6px; background: #2b2d31; box-shadow: inset 4px 0 0 var(--p-bot); }
+    .bc-embed b { color: #fff; }
+    .bc-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .bc-btns span { padding: 6px 12px; border-radius: 4px; background: #4e5058; color: #fff; font-size: 0.82rem; font-weight: 500; }
+    .bc-line { color: #b5bac1; }
+
+    .mod-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+    .incl-h { font-family: var(--font-sans); font-size: var(--fs-small); color: var(--text-3); font-weight: 600; letter-spacing: 0; margin: 36px 0 14px; }
+    .incl { display: grid; gap: 10px; font-size: 0.94rem; }
+    .incl li, .lic-card li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; }
+    .incl :global(svg), .lic-card :global(svg) { color: var(--success); margin-top: 3px; }
+    .mods { width: 100%; border-collapse: collapse; }
+    .mods th, .mods td { padding: 18px 4px; border-top: 1px solid var(--border); vertical-align: top; }
+    .mods tr:last-child th, .mods tr:last-child td { border-bottom: 1px solid var(--border); }
+    .mods th { text-align: left; font-weight: 400; display: grid; gap: 4px; font-family: var(--font-sans); letter-spacing: 0; }
+    .mods th b { font-weight: 600; }
+    .mods th span { color: var(--text-3); font-size: 0.92rem; }
+    .mods td { text-align: right; color: var(--text); font-weight: 600; white-space: nowrap; padding-left: 24px; }
+    @media (max-width: 860px) { .mod-grid { grid-template-columns: 1fr; } }
+
+    .lic { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 860px; }
+    .lic-card { display: flex; flex-direction: column; gap: 6px; padding: 28px 26px; border-radius: var(--r-xl); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+    .lic-card.pick { box-shadow: inset 0 0 0 1px rgba(245, 166, 35, 0.4), var(--shadow-3); background: linear-gradient(180deg, rgba(245, 166, 35, 0.07), var(--surface) 40%); }
+    .lic-price { display: flex; align-items: baseline; gap: 8px; margin-top: 16px; }
+    .lic-price .tnum { font-family: var(--font-display); font-weight: 800; font-size: 2.2rem; color: var(--text); letter-spacing: -0.03em; }
+    .lic-price small { color: var(--text-3); }
+    .lic-card ul { display: grid; gap: 10px; margin: 18px 0 24px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 0.92rem; }
+    .lic-card .btn { margin-top: auto; }
+    @media (max-width: 700px) { .lic { grid-template-columns: 1fr; } }
+    .own { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; margin-top: 16px; max-width: 860px; padding: 24px 26px; border-radius: var(--r-xl); box-shadow: inset 0 0 0 1px var(--border); }
+    .own-t { font-family: var(--font-sans); font-size: 1.02rem; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; }
+    .own p { font-size: 0.94rem; }
+    @media (max-width: 640px) { .own { grid-template-columns: 1fr; } }
+</style>

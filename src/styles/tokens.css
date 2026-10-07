@@ -1,0 +1,107 @@
+/*
+ * Events — design tokens (v1, octubre 2026).
+ *
+ * The single source for every Events surface. clientes.eventsmc.xyz keeps a
+ * copy of this file ("copia de events-landing tokens v1"); change it here first.
+ *
+ * The line comes from Events Client: a night-blue ground, quiet surfaces, one
+ * blue that asks for action. The website adds the space around it — deeper
+ * blues and violets for atmosphere — but atmosphere never carries a control.
+ */
+:root {
+    color-scheme: dark;
+
+    /* ---- Ground and surfaces (deep space → raised panels) ---- */
+    --bg: #05060d;
+    --bg-raised: #090b18;
+    --surface: #0d1122;
+    --surface-2: #131a30;
+    --surface-3: #1b2340;
+
+    /* ---- Text ---- */
+    --text: #f2f4fc;
+    --text-2: #aab2cf; /* 8.9:1 on --surface */
+    --text-3: #8189ab; /* 5.3:1 on --surface */
+
+    /* ---- Lines ---- */
+    --border: rgba(170, 182, 255, 0.09);
+    --border-strong: rgba(170, 182, 255, 0.17);
+
+    /* ---- Action: the one blue. One per view asks for action. ---- */
+    --action: #5b8cff;            /* links, focus, progress, active states */
+    --action-solid: #4766e6;      /* filled buttons with white text, 4.8:1 */
+    --action-ink: #ffffff;
+    --action-soft: rgba(91, 140, 255, 0.14);
+    --action-line: rgba(91, 140, 255, 0.38);
+
+    /* ---- Atmosphere (never on controls) ---- */
+    --nebula-violet: #6b3cff;
+    --nebula-blue: #2348ff;
+    --nebula-deep: #140c3a;
+    --rim: #9d8cff;               /* the planet's lit edge */
+
+    /* ---- Semantic ---- */
+    --success: #34d17a;
+    --success-soft: rgba(52, 209, 122, 0.13);
+    --warning: #f5b03c;
+    --warning-soft: rgba(245, 176, 60, 0.13);
+    --danger: #f05468;
+    --danger-soft: rgba(240, 84, 104, 0.13);
+    --info: var(--action);
+
+    /* ---- Product tones: marks, 2px lines and small labels only ---- */
+    --p-client: #5b8cff;
+    --p-plus: #a78bfa;
+    --p-whitelist: #34d17a;
+    --p-blacklist: #f05468;
+    --p-calendar: #38d2f0;
+    --p-bot: #f5a623;
+    --p-allys: #c084fc;
+    --p-hosting: #7dd3fc;
+
+    /* ---- Type ---- */
+    --font-display: 'Poppins', 'Inter Variable', system-ui, sans-serif;
+    --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'Roboto Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+    --fs-display: clamp(2.6rem, 1.2rem + 5.4vw, 5rem);
+    --fs-h1: clamp(2.2rem, 1.3rem + 3.4vw, 3.6rem);
+    --fs-h2: clamp(1.75rem, 1.2rem + 2.1vw, 2.75rem);
+    --fs-h3: clamp(1.15rem, 1.05rem + 0.45vw, 1.4rem);
+    --fs-lead: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    --fs-body: 1rem;
+    --fs-small: 0.875rem;
+    --fs-xs: 0.78rem;
+
+    --lh-tight: 1.04;
+    --lh-heading: 1.15;
+    --lh-body: 1.6;
+
+    /* ---- Space: 4px scale ---- */
+    --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+    --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 144px;
+
+    /* ---- Layout ---- */
+    --wrap: 1200px;
+    --gutter: clamp(20px, 4vw, 40px);
+    --header-h: 64px;
+
+    /* ---- Shape ---- */
+    --r-xs: 6px; --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-full: 999px;
+
+    /* ---- Depth: tinted navy, never pure black ---- */
+    --shadow-1: 0 1px 2px rgba(2, 3, 12, 0.5);
+    --shadow-2: 0 8px 20px -6px rgba(2, 3, 14, 0.6);
+    --shadow-3: 0 24px 48px -16px rgba(3, 4, 20, 0.75);
+    --shadow-4: 0 48px 96px -24px rgba(4, 3, 28, 0.85);
+
+    /* ---- Motion (Events Client springs + strong ease-outs) ---- */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+    --spring: linear(0, .0575, .1804, .3209, .4553, .5731, .6712, .7502, .8123, .8602, .8967, .9241, .9445, .9597, .9708, .9789, .9848, .9891, .9922, .9945, .996, .9972, .998, .9986, 1);
+    --t-press: 120ms;
+    --t-fast: 180ms;
+    --t-base: 240ms;
+    --t-slow: 480ms;
+}

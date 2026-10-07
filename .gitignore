@@ -1,1 +1,7 @@
 apple-design-skill-main.zip
+node_modules
+dist
+.astro
+.vercel
+.impeccable/*.local.json
+.impeccable/questions/

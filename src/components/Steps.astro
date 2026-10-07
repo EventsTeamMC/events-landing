@@ -1,0 +1,35 @@
+---
+/* A short ordered sequence where the order is the information. */
+interface Step { title: string; text: string }
+interface Props { steps: Step[] }
+const { steps } = Astro.props;
+---
+<ol class="steps" role="list">
+    {steps.map((s, i) => (
+        <li class="st" data-reveal style={`--i:${i}`}>
+            <span class="st-n" aria-hidden="true">{i + 1}</span>
+            <h3 class="h3">{s.title}</h3>
+            <p set:html={s.text} />
+        </li>
+    ))}
+</ol>
+
+<style>
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; counter-reset: st; position: relative; }
+    .st { position: relative; display: grid; gap: 10px; align-content: start; padding: 0 clamp(16px, 3vw, 40px) 0 0; }
+    .st-n {
+        display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 10px; border-radius: 50%;
+        font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--text);
+        background: var(--bg); box-shadow: inset 0 0 0 1.5px var(--border-strong);
+        position: relative; z-index: 1;
+    }
+    .st:not(:last-child)::after {
+        content: ''; position: absolute; top: 18px; left: 44px; right: 8px; height: 1px;
+        background: linear-gradient(90deg, var(--border-strong), transparent);
+    }
+    .st p { max-width: 40ch; }
+    @media (max-width: 700px) {
+        .steps { grid-template-columns: 1fr; gap: 28px; }
+        .st:not(:last-child)::after { display: none; }
+    }
+</style>
