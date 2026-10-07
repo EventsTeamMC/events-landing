@@ -7,16 +7,6 @@ const live = PRODUCTS.filter((p) => p.status === 'on' && p.href.startsWith('/'))
 const year = new Date().getFullYear();
 ---
 <footer class="ft">
-    <svg class="ft-arc" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-            <linearGradient id="ft-rim" x1="0" x2="1">
-                <stop offset="0" stop-color="#6b3cff" stop-opacity="0" />
-                <stop offset=".5" stop-color="#9d8cff" stop-opacity=".55" />
-                <stop offset="1" stop-color="#2348ff" stop-opacity="0" />
-            </linearGradient>
-        </defs>
-        <path d="M0 120 Q720 -40 1440 120" fill="none" stroke="url(#ft-rim)" stroke-width="1.2" />
-    </svg>
     <div class="wrap ft-grid">
         <div class="ft-brand">
             <a class="ft-logo" href="/" aria-label="Events, página principal"><Logo size={34} /><span>Events</span></a>
@@ -62,8 +52,7 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-    .ft { position: relative; margin-top: clamp(40px, 6vw, 80px); padding-top: 72px; }
-    .ft-arc { position: absolute; top: 0; left: 0; width: 100%; height: 120px; }
+    .ft { position: relative; margin-top: clamp(40px, 6vw, 80px); padding-top: 56px; border-top: 1px solid var(--border); }
     .ft-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; padding-bottom: 48px; }
     .ft-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em; border-radius: 10px; }
     .ft-brand p { margin-top: 14px; color: var(--text-3); max-width: 30ch; }

@@ -2,7 +2,9 @@
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Horizon from '../components/Horizon.astro';
-import LauncherDemo from '../components/LauncherDemo.astro';
+import HeroStack from '../components/HeroStack.astro';
+import { Image } from 'astro:assets';
+import panelCards from '../assets/shots/panel-cards.png';
 import { PRODUCTS, PLUS_PLANS, LINKS, PLUS_GIFT, eur } from '../data/site';
 import { getDownloads, getUpcoming, eventWhen } from '../data/live';
 
@@ -34,13 +36,13 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
         <div class="wrap hero-grid">
             <div class="hero-copy">
                 <h1 class="h-display hero-h">
-                    <span class="hl">Monta el evento.</span>
-                    <span class="hl">Comparte el código.</span>
-                    <span class="hl hl-3">A jugar.</span>
+                    <span class="hl">Todo lo que necesita</span>
+                    <span class="hl">un evento de</span>
+                    <span class="hl hl-3">Minecraft.</span>
                 </h1>
                 <p class="lead hero-lead">
-                    Events es el launcher, el panel y los bots para eventos de Minecraft. Tus jugadores entran con un código
-                    y la instancia se prepara sola: versión, loader y mods.
+                    Launcher, panel, bots de Discord y calendario, conectados entre sí. El studio prepara el evento en un solo sitio
+                    y sus jugadores entran con un código, sin instalar nada a mano.
                 </p>
                 <div class="hero-cta">
                     <a class="btn btn-primary btn-lg" href="/download"><Icon name="download" /> Descargar Events Client</a>
@@ -52,8 +54,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
                 </p>
             </div>
             <div class="hero-demo">
-                <LauncherDemo event={next} />
-                <button class="replay" type="button" data-ld-replay hidden><Icon name="refresh" size={15} /> Volver a verlo</button>
+                <HeroStack />
             </div>
         </div>
         <Horizon id="hz-hero" />
@@ -88,12 +89,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
                 <article class="side side-studio" data-reveal style="--i:1">
                     <h3 class="h3">Quien organiza</h3>
                     <p class="side-lead">Prepara la instancia en el panel y decide quién entra.</p>
-                    <div class="mini-panel" aria-hidden="true">
-                        <div class="mp-row mp-head"><span>Instancia</span><span>Código</span><span>Jugando</span><span>Estado</span></div>
-                        <div class="mp-row"><span class="mp-name"><i style="--c:#ff7300"></i>Evento principal</span><span class="code mp-code">K7QX-···</span><span class="tnum">184</span><span class="status on">Abierta</span></div>
-                        <div class="mp-row"><span class="mp-name"><i style="--c:#7b5cff"></i>Ensayo del staff</span><span class="code mp-code">R2D9-···</span><span class="tnum">6</span><span class="status soon">Whitelist</span></div>
-                        <div class="mp-row"><span class="mp-name"><i style="--c:#38d2f0"></i>Próxima temporada</span><span class="code mp-code">—</span><span class="tnum">0</span><span class="status">Cerrada</span></div>
-                    </div>
+                    <figure class="mini-panel"><Image src={panelCards} alt="Instancias de un studio en el panel de Events" widths={[560, 860, 1200]} sizes="(max-width: 900px) 100vw, 560px" /></figure>
                     <ul role="list" class="side-list compact">
                         <li><Icon name="upload" /><span>Importa un .mrpack o sube los archivos con el editor.</span></li>
                         <li><Icon name="users" /><span>Códigos, whitelist y baneos por jugador o por IP.</span></li>
@@ -241,7 +237,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
     .hero { position: relative; padding-top: clamp(40px, 6vw, 88px); padding-bottom: clamp(160px, 22vw, 300px); overflow: clip; }
     .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
     .hero-copy { container-type: inline-size; }
-    .hero-h { display: grid; gap: 0.02em; font-size: min(4.6rem, 9.4cqi); }
+    .hero-h { display: grid; gap: 0.02em; font-size: min(4.4rem, 8.9cqi); }
     .hl { white-space: nowrap; }
     .hl { display: block; }
     @media (max-width: 980px) { .hero-h { font-size: clamp(2.5rem, 11.5cqi, 4.4rem); } .hl { white-space: normal; } }
@@ -253,12 +249,6 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
     .hero-meta { margin-top: 22px; color: var(--text-3); }
     .hero-meta .tnum { color: var(--text); font-weight: 600; }
     .hero-demo { position: relative; margin-right: calc(-1 * clamp(0px, 4vw, 64px)); }
-    .replay {
-        position: absolute; right: 8px; bottom: -44px; display: inline-flex; align-items: center; gap: 6px;
-        height: 32px; padding-inline: 12px; border-radius: 99px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-3);
-        transition: color var(--t-fast) ease, background-color var(--t-fast) ease;
-    }
-    .replay:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
     @media (max-width: 980px) {
         .hero-grid { grid-template-columns: 1fr; }
         .hero-demo { margin-right: 0; }
@@ -281,26 +271,13 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
         padding: 14px 8px; border-radius: 12px; font-size: 0.8rem;
         background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong);
     }
-    .mini-panel {
-        border-radius: var(--r-lg); padding: 6px; font-size: 0.84rem;
-        background: linear-gradient(180deg, var(--surface), var(--bg-raised));
-        box-shadow: 0 0 0 1px var(--border), var(--shadow-3);
-    }
-    .mp-row { display: grid; grid-template-columns: 1.6fr 1fr 0.7fr 0.9fr; gap: 10px; align-items: center; padding: 11px 12px; border-radius: 10px; color: var(--text-2); }
-    .mp-row + .mp-row { border-top: 1px solid var(--border); }
-    .mp-head { font-size: var(--fs-xs); color: var(--text-3); font-weight: 500; }
-    .mp-name { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-weight: 600; min-width: 0; }
-    .mp-name i { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c); box-shadow: 0 0 0 3px color-mix(in oklab, var(--c) 22%, transparent); }
-    .mp-code { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--text-2); }
+    .mini-panel { margin: 0; border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-3); }
+    .mini-panel :global(img) { width: 100%; height: auto; }
     @media (max-width: 900px) {
         .sides-grid { grid-template-columns: 1fr; }
         .sides-link { grid-template-rows: none; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0; }
         .sides-line { width: auto; height: 1px; background: linear-gradient(90deg, var(--border-strong), rgba(157, 140, 255, 0.5), var(--border-strong)); }
         .sides-code { writing-mode: horizontal-tb; transform: none; padding: 8px 14px; }
-    }
-    @media (max-width: 520px) {
-        .mp-row { grid-template-columns: 1.5fr 0.6fr 1fr; }
-        .mp-row > :nth-child(2) { display: none; }
     }
 
     /* ---------------- night */
