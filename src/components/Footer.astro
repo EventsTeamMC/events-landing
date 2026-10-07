@@ -1,0 +1,85 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { PRODUCTS, LINKS } from '../data/site';
+
+const live = PRODUCTS.filter((p) => p.status === 'on' && p.href.startsWith('/'));
+const year = new Date().getFullYear();
+---
+<footer class="ft">
+    <svg class="ft-arc" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+            <linearGradient id="ft-rim" x1="0" x2="1">
+                <stop offset="0" stop-color="#6b3cff" stop-opacity="0" />
+                <stop offset=".5" stop-color="#9d8cff" stop-opacity=".55" />
+                <stop offset="1" stop-color="#2348ff" stop-opacity="0" />
+            </linearGradient>
+        </defs>
+        <path d="M0 120 Q720 -40 1440 120" fill="none" stroke="url(#ft-rim)" stroke-width="1.2" />
+    </svg>
+    <div class="wrap ft-grid">
+        <div class="ft-brand">
+            <a class="ft-logo" href="/" aria-label="Events, página principal"><Logo size={34} /><span>Events</span></a>
+            <p>El ecosistema para los eventos de Minecraft.</p>
+            <div class="ft-social">
+                <a class="btn btn-secondary btn-sm" href={LINKS.discord} target="_blank" rel="noopener"><Icon name="discord" size={17} /> Discord</a>
+                <button class="btn btn-ghost btn-sm" type="button" data-suggest-open>Enviar una sugerencia</button>
+            </div>
+        </div>
+        <nav aria-label="Productos" class="ft-col">
+            <h2>Productos</h2>
+            <ul role="list">
+                {live.map((p) => <li><a href={p.href}>{p.name}</a></li>)}
+                <li><a href={LINKS.panel} target="_blank" rel="noopener">Panel para studios</a></li>
+            </ul>
+        </nav>
+        <nav aria-label="Recursos" class="ft-col">
+            <h2>Recursos</h2>
+            <ul role="list">
+                <li><a href="/download">Descargar Events Client</a></li>
+                <li><a href={LINKS.clientes}>Área de clientes</a></li>
+                <li><a href="/appeal">Apelar una sanción</a></li>
+                <li><a href={LINKS.calendar} target="_blank" rel="noopener">Abrir el calendario</a></li>
+                <li><a class="ft-status" href={LINKS.status} target="_blank" rel="noopener"><span class="ft-dot" aria-hidden="true"></span>Estado del servicio</a></li>
+            </ul>
+        </nav>
+        <nav aria-label="Legal" class="ft-col">
+            <h2>Legal</h2>
+            <ul role="list">
+                <li><a href="/client/terms">Términos de Events Client</a></li>
+                <li><a href="/client/privacy">Privacidad de Events Client</a></li>
+                <li><a href="/plus/condiciones">Condiciones de Events+</a></li>
+                <li><a href="/whitelist/terms">Whitelist</a> · <a href="/whitelist/privacy">privacidad</a></li>
+                <li><a href="/blacklist/terms">Blacklist</a> · <a href="/blacklist/privacy">privacidad</a></li>
+                <li><a href="/client/data-deletion">Eliminar mis datos</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="wrap ft-legal">
+        <span>© {year} Events Team</span>
+        <span>Producto no oficial. No afiliado a Mojang Studios, Microsoft ni Discord. Minecraft es una marca de Mojang Studios.</span>
+    </div>
+</footer>
+
+<style>
+    .ft { position: relative; margin-top: clamp(40px, 6vw, 80px); padding-top: 72px; }
+    .ft-arc { position: absolute; top: 0; left: 0; width: 100%; height: 120px; }
+    .ft-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; padding-bottom: 48px; }
+    .ft-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em; border-radius: 10px; }
+    .ft-brand p { margin-top: 14px; color: var(--text-3); max-width: 30ch; }
+    .ft-social { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .ft-col h2 { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 600; color: var(--text); letter-spacing: 0; margin-bottom: 14px; }
+    .ft-col ul { display: grid; gap: 9px; }
+    .ft-col a { color: var(--text-3); font-size: 0.9rem; transition: color var(--t-fast) ease; text-decoration: none; }
+    .ft-col li { color: var(--text-3); font-size: 0.9rem; }
+    .ft-col a:hover { color: var(--text); }
+    .ft-status { display: inline-flex; align-items: center; gap: 8px; }
+    .ft-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px var(--success-soft); }
+    .ft-legal {
+        display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+        padding-block: 22px 32px; border-top: 1px solid var(--border);
+        font-size: var(--fs-xs); color: var(--text-3);
+    }
+    @media (max-width: 860px) { .ft-grid { grid-template-columns: 1fr 1fr; } .ft-brand { grid-column: 1 / -1; } }
+    @media (max-width: 480px) { .ft-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,47 @@
+---
+/*
+ * The planet from the logo, seen from orbit: its lit edge under the hero and
+ * the ring crossing in front. It replaces the generic glow most pages use.
+ */
+interface Props { class?: string; id?: string }
+const { class: cls, id = 'hz' } = Astro.props;
+---
+<div class:list={['horizon', cls]} aria-hidden="true">
+    <svg viewBox="0 0 1600 520" preserveAspectRatio="xMidYMin slice">
+        <defs>
+            <radialGradient id={`${id}-body`} cx="50%" cy="0%" r="70%">
+                <stop offset="0" stop-color="#1a1650" />
+                <stop offset=".35" stop-color="#0c0b26" />
+                <stop offset="1" stop-color="#05060d" />
+            </radialGradient>
+            <linearGradient id={`${id}-rim`} x1="0" x2="1">
+                <stop offset="0" stop-color="#2348ff" stop-opacity="0" />
+                <stop offset=".3" stop-color="#6d7dff" stop-opacity=".9" />
+                <stop offset=".55" stop-color="#b9a8ff" />
+                <stop offset=".8" stop-color="#7b4dff" stop-opacity=".8" />
+                <stop offset="1" stop-color="#6b3cff" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id={`${id}-ring`} x1="0" x2="1">
+                <stop offset="0" stop-color="#9d8cff" stop-opacity="0" />
+                <stop offset=".25" stop-color="#9d8cff" stop-opacity=".55" />
+                <stop offset=".7" stop-color="#5b8cff" stop-opacity=".35" />
+                <stop offset="1" stop-color="#5b8cff" stop-opacity="0" />
+            </linearGradient>
+            <filter id={`${id}-glow`} x="-20%" y="-200%" width="140%" height="500%">
+                <feGaussianBlur stdDeviation="22" />
+            </filter>
+        </defs>
+        <!-- atmosphere -->
+        <ellipse class="hz-air" cx="800" cy="1500" rx="1180" ry="1180" fill="none" stroke={`url(#${id}-rim)`} stroke-width="70" opacity=".35" filter={`url(#${id}-glow)`} />
+        <!-- planet -->
+        <circle cx="800" cy="1500" r="1160" fill={`url(#${id}-body)`} />
+        <circle class="hz-rim" cx="800" cy="1500" r="1160" fill="none" stroke={`url(#${id}-rim)`} stroke-width="1.6" />
+        <!-- ring, in front of the planet -->
+        <ellipse class="hz-ring" cx="800" cy="420" rx="1020" ry="96" fill="none" stroke={`url(#${id}-ring)`} stroke-width="1.2" transform="rotate(-7 800 420)" />
+    </svg>
+</div>
+
+<style>
+    .horizon { position: absolute; inset: auto 0 0 0; height: clamp(220px, 34vw, 520px); pointer-events: none; overflow: hidden; }
+    .horizon svg { width: 100%; height: 100%; }
+</style>

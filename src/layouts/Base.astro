@@ -1,0 +1,78 @@
+---
+import '@fontsource/poppins/latin-600.css';
+import '@fontsource/poppins/latin-700.css';
+import '@fontsource/poppins/latin-800.css';
+import '@fontsource-variable/inter';
+import '@fontsource/roboto-mono/latin-500.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SuggestDialog from '../components/SuggestDialog.astro';
+
+interface Props {
+    title: string;
+    description: string;
+    image?: string;
+    imageAlt?: string;
+    noindex?: boolean;
+    jsonld?: object[];
+}
+const { title, description, image = '/og.png', imageAlt = 'Events, el ecosistema para los eventos de Minecraft', noindex = false, jsonld = [] } = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '');
+const canonical = new URL(path === '/' ? '/' : path.replace(/\/$/, ''), 'https://www.eventsmc.xyz').href;
+const ogImage = new URL(image, 'https://www.eventsmc.xyz').href;
+---
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/icon.png" />
+    <link rel="apple-touch-icon" href="/icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#05060d" />
+    <meta name="color-scheme" content="dark" />
+    <meta property="og:site_name" content="Events" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
+    <script is:inline>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+    <script is:inline src="/splash.js"></script>
+    <div class="sky" aria-hidden="true"></div>
+    <a class="skip" href="#main">Saltar al contenido</a>
+    <Header />
+    <main id="main" tabindex="-1">
+        <slot />
+    </main>
+    <Footer />
+    <SuggestDialog />
+
+    <script>
+        // Arrivals: content is visible without JS; this only adds the motion.
+        const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+        if ('IntersectionObserver' in window && els.length) {
+            const io = new IntersectionObserver((entries) => {
+                for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+            els.forEach((el) => io.observe(el));
+        } else els.forEach((el) => el.classList.add('in'));
+    </script>
+    <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

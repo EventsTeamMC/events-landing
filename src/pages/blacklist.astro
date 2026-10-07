@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import FeatureList from '../components/FeatureList.astro';
+import Steps from '../components/Steps.astro';
+import Commands from '../components/Commands.astro';
+import Callout from '../components/Callout.astro';
+import { product, LINKS } from '../data/site';
+
+const p = product('blacklist');
+---
+<Base
+    title="Events Blacklist · Baneos compartidos entre comunidades"
+    description="Un baneo en un servidor, un aviso en todos. Base de datos anónima de baneos activos para Discord. Gratis para siempre."
+>
+    <div style={`--tone:${p.tone}`}>
+        <PageHero product={p} title="Un baneo en un servidor." titleDim="Un aviso en todos." lead="Events Blacklist comparte entre comunidades una base de datos anónima de baneos activos. Cuando alguien conflictivo entra en tu servidor, tu staff lo sabe al momento, y nadie sabe quién lo reportó.">
+            <Fragment slot="actions">
+                <a class="btn btn-primary btn-lg" href={LINKS.blacklistInvite}><Icon name="discord" /> Añadir a Discord</a>
+                <a class="btn btn-ghost btn-lg" href="#privacidad">Privacidad</a>
+            </Fragment>
+            <Fragment slot="meta"><span>Gratis para siempre. No hay versión de pago.</span></Fragment>
+            <div slot="visual" class="alert-card" aria-hidden="true">
+                <div class="ac-head"><span class="ac-ic"><Icon name="shield" size={18} /></span><b>Events Blacklist</b><span class="ac-tag">BOT</span></div>
+                <div class="ac-embed">
+                    <b>Usuario con baneos activos</b>
+                    <p><span class="code">@usuario</span> acaba de entrar en el servidor.</p>
+                    <dl class="ac-stats">
+                        <div><dt>Baneos activos</dt><dd class="tnum">4</dd></div>
+                        <div><dt>Comunidades distintas</dt><dd class="tnum">3</dd></div>
+                        <div><dt>Origen</dt><dd>Oculto</dd></div>
+                    </dl>
+                </div>
+            </div>
+        </PageHero>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2 class="h2">El mismo problemático, de servidor en servidor.</h2>
+                    <p class="lead">Lo banean en una comunidad, entra en la siguiente con otro nombre y el staff empieza de cero. Sin memoria compartida, siempre vas un paso por detrás.</p>
+                </div>
+                <FeatureList items={[
+                    { icon: 'refresh', title: 'Sincronización automática', text: 'Cada baneo se comparte con la red leyendo el registro de auditoría. Sin comandos.' },
+                    { icon: 'bell', title: 'Aviso al entrar', text: 'Si entra alguien con baneos activos, tu staff recibe un aviso en el canal que elijas.' },
+                    { icon: 'eye-off', title: 'Origen anónimo', text: 'El servidor que reporta se guarda cifrado. Ningún comando lo muestra.' },
+                    { icon: 'chart', title: 'Cifras agregadas', text: 'Cuántas comunidades distintas lo han baneado y cuántos baneos acumula. Nunca por servidor.' },
+                    { icon: 'settings', title: 'A tu medida', text: 'Canal de avisos, roles autorizados, umbral de aviso y baneo automático.' },
+                    { icon: 'list-checks', title: 'Registro de auditoría', text: 'Cada acción queda registrada, también con el origen cifrado.' },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section-tight">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">Cómo funciona.</h2></div>
+                <Steps steps={[
+                    { title: 'Invita el bot', text: 'Con el Server Members Intent. Elige el canal donde quieres los avisos.' },
+                    { title: 'Banea como siempre', text: 'El bot detecta el baneo en el registro de auditoría y lo sincroniza con el origen cifrado.' },
+                    { title: 'Recibe avisos', text: 'Si esa persona entra en otra comunidad de la red, su staff recibe el aviso.' },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section" id="privacidad">
+            <div class="wrap priv">
+                <div class="priv-lead" data-reveal>
+                    <h2 class="h2">Ningún comando revela quién originó un baneo.</h2>
+                    <p class="lead" style="margin-top:16px">Todo el sistema parte de ahí. Reportas sin exponerte a represalias.</p>
+                </div>
+                <dl class="priv-list">
+                    <div data-reveal><dt><Icon name="hash" size={18} /> El origen se hashea</dt><dd>El ID del servidor que reporta pasa por HMAC-SHA256 antes de guardarse. Es irreversible: solo sirve para no contar dos veces y para decir «N comunidades distintas».</dd></div>
+                    <div data-reveal style="--i:1"><dt><Icon name="message" size={18} /> No leemos mensajes</dt><dd>El bot no pide el Message Content Intent ni entra en canales privados. Solo guarda IDs de Discord de usuarios baneados.</dd></div>
+                    <div data-reveal><dt><Icon name="chart" size={18} /> Solo datos agregados</dt><dd><code>/lookup</code> y <code>/stats</code> devuelven número de baneos, motivos y fechas. Nunca un desglose por servidor.</dd></div>
+                    <div data-reveal style="--i:1"><dt><Icon name="scale" size={18} /> Auditable contra abusos</dt><dd>Cada baneo tiene un ID propio. Si alguien intenta inflar baneos falsos, se puede rastrear y frenar.</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="section-tight" id="comandos">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2 class="h2">Comandos.</h2>
+                    <p class="lead">Solo para el staff: administradores o roles autorizados.</p>
+                </div>
+                <Commands groups={[
+                    { title: 'Consulta', items: [['/lookup', 'Baneos de un usuario'], ['/stats', 'Cifras de la red'], ['/config scan', 'Revisa a todos tus miembros de golpe']] },
+                    { title: 'Configuración', items: [['/config setup', 'Canal de avisos y roles'], ['/config alert-threshold', 'Con cuántos baneos se avisa'], ['/config auto-ban', 'Banea solo a los reincidentes']] },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section-tight">
+            <div class="wrap end">
+                <div class="end-row" data-reveal>
+                    <div>
+                        <h2 class="h2">Protege tu comunidad hoy.</h2>
+                        <p class="small muted" style="margin-top:10px">Gratis del todo. Ninguna función está detrás de Events+, ni lo estará. <a href="/blacklist/privacy">Privacidad</a> · <a href="/blacklist/terms">Condiciones</a></p>
+                    </div>
+                    <a class="btn btn-primary btn-lg" href={LINKS.blacklistInvite}><Icon name="discord" /> Añadir a Discord</a>
+                </div>
+                <Callout icon="scale" title="¿Te ha baneado un servidor de la red?" text="Si crees que el baneo es falso o injusto, apélalo y revisamos el registro con la comunidad que lo originó." href="/appeal?type=blacklist" cta="Apelar un baneo" />
+            </div>
+        </section>
+    </div>
+</Base>
+
+<style>
+    .alert-card {
+        display: grid; gap: 12px; padding: 20px; border-radius: var(--r-xl); max-width: 460px; margin-inline: auto;
+        background: #313338; color: #dbdee1; font-size: 0.9rem;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), var(--shadow-4), 0 0 100px -30px rgba(240, 84, 104, 0.4);
+    }
+    .ac-head { display: flex; align-items: center; gap: 10px; }
+    .ac-head b { color: #f2f3f5; }
+    .ac-ic { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--p-blacklist); color: #2a0007; }
+    .ac-tag { padding: 1px 5px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; background: #5865f2; color: #fff; }
+    .ac-embed { display: grid; gap: 6px; padding: 14px 16px; border-radius: 4px; background: #2b2d31; box-shadow: inset 4px 0 0 var(--p-blacklist); }
+    .ac-embed b { color: #f2f3f5; }
+    .ac-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+    .ac-stats dt { font-size: 0.72rem; color: #949ba4; font-weight: 600; }
+    .ac-stats dd { margin: 2px 0 0; color: #f2f3f5; font-weight: 600; }
+
+    .priv { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+    .priv-lead { position: sticky; top: calc(var(--header-h) + 40px); }
+    .priv-list { display: grid; gap: 0; }
+    .priv-list > div { padding-block: 22px; border-top: 1px solid var(--border); }
+    .priv-list dt { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 600; }
+    .priv-list dt :global(svg) { color: var(--tone); }
+    .priv-list dd { margin: 8px 0 0; max-width: 56ch; }
+    @media (max-width: 900px) { .priv { grid-template-columns: 1fr; } .priv-lead { position: static; } }
+    .end { display: grid; gap: 32px; }
+    .end-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+</style>

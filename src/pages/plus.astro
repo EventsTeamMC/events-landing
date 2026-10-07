@@ -1,0 +1,305 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import FeatureList from '../components/FeatureList.astro';
+import Steps from '../components/Steps.astro';
+import { product, PLUS_PLANS, LINKS, PLUS_GIFT, eur } from '../data/site';
+
+const p = product('plus');
+const Y = 'yes', N = 'no';
+type Cell = string;
+const TABLE: { group: string; rows: [string, Cell, Cell, Cell, Cell, Cell][] }[] = [
+    { group: 'En el launcher', rows: [
+        ['Instancias activas', '1', '1', '3', '5', 'Las acordadas'],
+        ['Jugadores a la vez (suma de todas tus instancias)', '100', 'Sin tope', 'Sin tope', 'Sin tope', 'Sin tope'],
+        ['Cola prioritaria', N, Y, Y, Y, Y],
+        ['Prioridad de descarga', 'Estándar', 'Estándar', 'Doble', 'Máxima', 'A medida'],
+        ['Archivos por instancia', '500 MB', '1 GB', '2 GB', '4 GB', 'A medida'],
+        ['Enlace corto que instala y canjea', N, Y, Y, Y, Y],
+        ['Canales de instancia', N, N, Y, Y, Y],
+        ['Mods protegidos en RAM · próximamente', N, Y, Y, Y, Y],
+    ] },
+    { group: 'En el panel', rows: [
+        ['Cuentas de staff', '2', '3', '8', '20', 'A medida'],
+        ['Estadísticas del evento', N, '7 días', '30 días', '3 meses', '3 meses'],
+        ['Aperturas programadas', N, N, Y, Y, Y],
+        ['Códigos masivos y CSV', N, N, Y, Y, Y],
+        ['Webhooks por instancia', '1', '1', '5', 'Sin límite', 'Sin límite'],
+        ['Vigilancia de servidores', N, N, '3', '10', 'A medida'],
+    ] },
+    { group: 'Fuera del launcher', rows: [
+        ['Destaque en Explorar', N, N, '1 al mes', '3 al mes', 'A medida'],
+        ['Destaque en Calendar y Discord', N, N, N, Y, Y],
+        ['Whitelist ampliada', N, N, Y, Y, Y],
+        ['Events Blacklist', 'Gratis', 'Gratis', 'Gratis', 'Gratis', 'Gratis'],
+    ] },
+    { group: 'Lo demás', rows: [
+        ['Soporte', 'Comunidad', 'Comunidad', 'Prioritario', 'Prioritario', 'Dedicado'],
+        ['Canal Beta del launcher', N, N, N, Y, Y],
+    ] },
+];
+const COLS = ['Gratis', 'Events+ 1', 'Events+ 3', 'Events+ 5', 'Custom'];
+
+const FAQ = [
+    ['¿Los jugadores tienen que pagar?', 'No. Ni para entrar a un evento, ni para descargar el launcher. Events+ lo paga quien organiza.'],
+    ['¿Qué incluye el plan gratuito?', 'Desde el 1 de octubre de 2026: 1 instancia, 500 MB de archivos, 2 cuentas de staff y 100 jugadores a la vez sumando todas tus instancias. Códigos, whitelist, baneos y Blacklist, sin recortes.'],
+    ['¿Cuánto cuesta?', '0,99 €, 1,99 € y 3,99 € al mes, o 2,97 €, 5,97 € y 11,97 € al trimestre. Custom y SelfHosted, a convenir.'],
+    ['¿Dónde se contrata?', 'Desde los botones de esta página, en clientes.eventsmc.xyz. Al pagar se pide el código de tu studio, que está en el panel → Events+.'],
+    ['¿Y si no renuevo?', 'El studio vuelve al plan gratuito. Las instancias por encima de ese plan se suspenden sin borrar nada y vuelven al renovar.'],
+    ['¿Y si necesito más de 5 instancias?', 'Events+ Custom: nos cuentas qué montas y acordamos los números.'],
+    ['¿Qué pierdo con Events SelfHosted?', 'Los destaques, que viven en el launcher y en Calendar. El panel es el mismo: tu servidor se registra como un nodo.'],
+    ['¿Se enteran mis jugadores de que me autohospedo?', 'Sí. El launcher les dice de qué servidor descargan y que no lo gestiona el equipo de Events.'],
+];
+---
+<Base
+    title="Events+ · Planes para studios"
+    description="Más instancias, sin tope de jugadores y cola prioritaria. Desde 0,99 € al mes. Events+ 5 gratis para todos los studios hasta el 1 de enero de 2027."
+>
+    <div style={`--tone:${p.tone}`}>
+        <PageHero product={p} title="Tu evento, con todo a favor." lead="La suscripción del studio que organiza: más instancias, sin tope de jugadores a la vez y cola prioritaria. Se paga por studio, no por evento ni por jugador. Los jugadores no pagan nada." horizon={false}>
+            <Fragment slot="actions">
+                <a class="btn btn-primary btn-lg" href="#planes">Ver los planes</a>
+                <a class="btn btn-ghost btn-lg" href="#comparar">Comparar</a>
+            </Fragment>
+            <Fragment slot="meta"><span class="gift"><Icon name="sparkle" size={15} /> {PLUS_GIFT}</span></Fragment>
+        </PageHero>
+
+        <!-- ============================================================ plans -->
+        <section class="section-tight" id="planes">
+            <div class="wrap">
+                <div class="plans-head">
+                    <h2 class="h2">Los planes.</h2>
+                    <fieldset class="seg js-only" aria-label="Periodo de pago">
+                        <label><input type="radio" name="period" value="monthly" checked /><span>Mensual</span></label>
+                        <label><input type="radio" name="period" value="quarterly" /><span>Trimestral</span></label>
+                    </fieldset>
+                </div>
+                <div class="plans">
+                    {PLUS_PLANS.map((pl) => (
+                        <article class:list={['plan', { pick: pl.pick }]} aria-labelledby={`pl-${pl.id}`}>
+                            {pl.pick && <span class="plan-tag">El habitual</span>}
+                            <h3 class="plan-name" id={`pl-${pl.id}`}>{pl.name}</h3>
+                            <p class="plan-what">{pl.instances === 1 ? '1 instancia' : `${pl.instances} instancias`}</p>
+                            <p class="plan-price">
+                                <span class="tnum" data-m={eur(pl.monthly)} data-q={eur(pl.monthly * 3)}>{eur(pl.monthly)}</span>
+                                <small data-m="/ mes" data-q="/ trimestre">/ mes</small>
+                            </p>
+                            <p class="plan-alt small" data-m={`o ${eur(pl.monthly * 3)} al trimestre`} data-q={`${eur(pl.monthly)} al mes`}>o {eur(pl.monthly * 3)} al trimestre</p>
+                            <p class="plan-note">{pl.note}</p>
+                            <ul role="list" class="plan-list">
+                                {pl.features.map((f) => <li><Icon name="check" size={16} />{f}</li>)}
+                            </ul>
+                            <a class:list={['btn', pl.pick ? 'btn-primary' : 'btn-secondary']} href={pl.href.monthly} data-m={pl.href.monthly} data-q={pl.href.quarterly}>Contratar {pl.name}</a>
+                        </article>
+                    ))}
+                </div>
+
+                <div class="talk">
+                    <div class="talk-row">
+                        <div>
+                            <h3 class="talk-t">Events+ Custom</h3>
+                            <p>Las instancias, el espacio y la prioridad que necesite tu studio, acordados contigo. Soporte dedicado y facturación para studios, marcas y patrocinadores.</p>
+                        </div>
+                        <a class="btn btn-secondary" href={LINKS.discord} target="_blank" rel="noopener">Hablar con ventas</a>
+                    </div>
+                    <div class="talk-row">
+                        <div>
+                            <h3 class="talk-t">Events SelfHosted</h3>
+                            <p>El backend en tu máquina, registrado como un nodo del mismo panel. Sin cola ni límite de descarga, tus archivos en tu casa. Te lo montamos y lo mantenemos.</p>
+                        </div>
+                        <a class="btn btn-secondary" href={LINKS.discord} target="_blank" rel="noopener">Hablar con ventas</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ free -->
+        <section class="section-tight">
+            <div class="wrap free" data-reveal>
+                <div>
+                    <h2 class="h3">El plan gratuito: Events</h2>
+                    <p class="small muted" style="margin-top:6px">Con límites desde el 1 de octubre de 2026. Nada se borra: lo que pase del plan se suspende y vuelve al contratar.</p>
+                </div>
+                <ul role="list" class="free-list">
+                    <li><b class="tnum">1</b> instancia</li>
+                    <li><b class="tnum">500 MB</b> de archivos</li>
+                    <li><b class="tnum">2</b> cuentas de staff</li>
+                    <li><b class="tnum">100</b> jugadores a la vez</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============================================================ perks -->
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2 class="h2">Dónde se nota.</h2>
+                    <p class="lead">En la máquina de tus jugadores, en tu panel y en el resto de Events.</p>
+                </div>
+                <h3 class="group-h">En el launcher</h3>
+                <FeatureList items={[
+                    { icon: 'zap', title: 'Tus jugadores saltan la cola', text: 'Cuando cientos de personas descargan a la vez, las de tu studio entran por la vía prioritaria.' },
+                    { icon: 'download', title: 'Más prioridad de descarga', text: 'El día del estreno, tus instancias no comparten el límite general con todo el mundo.' },
+                    { icon: 'arrow-up-right', title: 'Un enlace que lo hace todo', text: 'Abre el launcher, añade tu instancia y canjea el código de una vez.' },
+                    { icon: 'layers', title: 'Canales de instancia', text: 'Una copia solo para el staff, para ensayar sin tocar la que se juega.' },
+                    { icon: 'lock', title: 'Mods protegidos en RAM', text: 'Los mods se cargan en memoria y no llegan al disco del jugador.', tag: 'Próximamente' },
+                ]} />
+                <h3 class="group-h">En el panel</h3>
+                <FeatureList items={[
+                    { icon: 'chart', title: 'Estadísticas con histórico', text: 'Pico de jugadores, descargas completadas y crashes por versión, hasta 3 meses.' },
+                    { icon: 'users', title: 'Cuentas para todo el staff', text: 'Cada persona con su usuario y sus permisos, y un registro de quién hizo qué.' },
+                    { icon: 'key', title: 'Códigos a lo grande', text: 'Miles de códigos de un solo uso, con caducidad y exportación en CSV.' },
+                    { icon: 'clock', title: 'Aperturas programadas', text: 'La instancia se abre sola a la hora del evento y se cierra al acabar.' },
+                    { icon: 'activity', title: 'Vigilancia de servidores', text: 'Aviso en Discord si uno de tus servidores de Minecraft se cae durante el evento.' },
+                    { icon: 'bell', title: 'Más webhooks', text: 'Entradas, salidas, crashes y canjes en los canales que elijas.' },
+                ]} />
+                <h3 class="group-h">En el resto de Events</h3>
+                <FeatureList items={[
+                    { icon: 'sparkle', title: 'Destaque en el launcher', text: 'Tu evento arriba en Explorar, delante de todos los jugadores.' },
+                    { icon: 'calendar', title: 'Destaque en Calendar y Discord', text: 'Posición destacada y anuncio en el Discord de Events al publicar.' },
+                    { icon: 'list-checks', title: 'Whitelist ampliada', text: 'Más whitelists a la vez y más nicks por lista.' },
+                    { icon: 'shield', title: 'Blacklist, gratis para todos', text: 'Ninguna función de Events Blacklist está detrás de Events+, ni lo estará.' },
+                ]} />
+            </div>
+        </section>
+
+        <!-- ============================================================ compare -->
+        <section class="section-tight" id="comparar">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">Todo, uno al lado del otro.</h2></div>
+                <div class="tbl-wrap" tabindex="0" role="region" aria-label="Comparativa de planes">
+                    <table class="tbl">
+                        <thead>
+                            <tr><th scope="col"><span class="sr-only">Qué incluye</span></th>{COLS.map((c, i) => <th scope="col" class:list={{ pick: i === 2 }}>{c}</th>)}</tr>
+                        </thead>
+                        {TABLE.map((g) => (
+                            <tbody>
+                                <tr class="grp"><th scope="colgroup" colspan={6}>{g.group}</th></tr>
+                                {g.rows.map(([label, ...cells]) => (
+                                    <tr>
+                                        <th scope="row">{label}</th>
+                                        {cells.map((c, i) => (
+                                            <td class:list={{ pick: i === 2 }}>
+                                                {c === Y ? <Icon name="check" size={17} label="Incluido" class="yes" /> : c === N ? <Icon name="minus" size={17} label="No incluido" class="no" /> : c}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        ))}
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ how -->
+        <section class="section-tight">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">Cómo se activa.</h2></div>
+                <Steps steps={[
+                    { title: 'Eliges plan y periodo', text: 'Al mes o al trimestre. Al pagar se pide el código de tu studio, que está en el panel → Events+.' },
+                    { title: 'Se activa al momento', text: 'Sobre todas tus instancias, también las que ya tienes. El panel muestra el plan y cuánto le queda.' },
+                    { title: 'Tus jugadores lo notan', text: 'Mismo launcher y mismo código. Les va más rápido y esperan menos.' },
+                ]} />
+            </div>
+        </section>
+
+        <!-- ============================================================ faq -->
+        <section class="section-tight">
+            <div class="wrap-narrow">
+                <h2 class="h2" data-reveal>Preguntas.</h2>
+                <div class="faq">
+                    {FAQ.map(([q, a]) => (
+                        <details class="qa">
+                            <summary>{q}<Icon name="plus" size={18} /></summary>
+                            <p>{a}</p>
+                        </details>
+                    ))}
+                </div>
+                <p class="small muted" style="margin-top:28px">La suscripción se gestiona y se cancela desde el <a href={LINKS.clientes}>área de clientes</a>. <a href="/plus/condiciones">Condiciones de Events+</a>.</p>
+            </div>
+        </section>
+    </div>
+</Base>
+
+<style>
+    .gift { display: inline-flex; align-items: center; gap: 8px; color: #c9bcff; }
+    .plans-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
+    .seg { display: inline-flex; padding: 4px; border: 0; border-radius: 14px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+    .seg label { position: relative; }
+    .seg input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .seg span { display: block; padding: 9px 18px; border-radius: 10px; font-size: var(--fs-small); font-weight: 600; color: var(--text-2); transition: background-color var(--t-fast) ease, color var(--t-fast) ease; }
+    .seg input:checked + span { background: var(--surface-3); color: var(--text); box-shadow: var(--shadow-1); }
+    .seg input:focus-visible + span { outline: 2px solid var(--action); outline-offset: 2px; }
+    :global(html:not(.js)) .js-only { display: none; }
+
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+    .plan {
+        position: relative; display: flex; flex-direction: column; gap: 6px; padding: 28px 26px;
+        border-radius: var(--r-xl); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border);
+    }
+    .plan.pick { background: linear-gradient(180deg, rgba(167, 139, 250, 0.1), var(--surface) 40%); box-shadow: inset 0 0 0 1px rgba(167, 139, 250, 0.4), var(--shadow-3); }
+    .plan-tag { position: absolute; top: 22px; right: 22px; font-size: var(--fs-xs); font-weight: 600; color: #d4c8ff; padding: 4px 10px; border-radius: 99px; background: rgba(167, 139, 250, 0.14); }
+    .plan-name { font-size: 1.3rem; }
+    .plan-what { color: var(--text-3); font-size: var(--fs-small); }
+    .plan-price { margin-top: 18px; display: flex; align-items: baseline; gap: 6px; }
+    .plan-price .tnum { font-family: var(--font-display); font-weight: 800; font-size: 2.4rem; color: var(--text); letter-spacing: -0.03em; line-height: 1; }
+    .plan-price small { color: var(--text-3); font-size: var(--fs-small); }
+    .plan-alt { color: var(--text-3); }
+    .plan-note { margin-top: 12px; color: var(--text-2); }
+    .plan-list { display: grid; gap: 10px; margin: 18px 0 26px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 0.92rem; }
+    .plan-list li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; }
+    .plan-list :global(svg) { color: var(--p-plus); margin-top: 3px; }
+    .plan .btn { margin-top: auto; }
+    @media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 520px; } }
+
+    .talk { margin-top: 16px; border-radius: var(--r-xl); box-shadow: inset 0 0 0 1px var(--border); }
+    .talk-row { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding: 24px 26px; }
+    .talk-row + .talk-row { border-top: 1px solid var(--border); }
+    .talk-t { font-family: var(--font-sans); font-size: 1.02rem; font-weight: 600; letter-spacing: 0; margin-bottom: 4px; }
+    .talk-row p { max-width: 70ch; font-size: 0.94rem; }
+    @media (max-width: 640px) { .talk-row { grid-template-columns: 1fr; } }
+
+    .free { display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: center; padding: 28px; border-radius: var(--r-xl); background: var(--bg-raised); box-shadow: inset 0 0 0 1px var(--border); }
+    .free-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .free-list li { display: grid; color: var(--text-3); font-size: var(--fs-small); }
+    .free-list b { font-family: var(--font-display); font-size: 1.5rem; color: var(--text); font-weight: 700; letter-spacing: -0.02em; }
+    @media (max-width: 860px) { .free { grid-template-columns: 1fr; } .free-list { grid-template-columns: 1fr 1fr; } }
+
+    .group-h { font-family: var(--font-sans); font-size: var(--fs-small); font-weight: 600; color: var(--text-3); letter-spacing: 0; margin: 40px 0 4px; }
+    .group-h:first-of-type { margin-top: 0; }
+
+    .tbl-wrap { overflow-x: auto; border-radius: var(--r-lg); box-shadow: inset 0 0 0 1px var(--border); }
+    .tbl { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 0.9rem; }
+    .tbl th, .tbl td { padding: 13px 16px; text-align: center; border-bottom: 1px solid var(--border); }
+    .tbl thead th { position: sticky; top: 0; background: var(--bg-raised); color: var(--text); font-weight: 600; font-family: var(--font-sans); letter-spacing: 0; }
+    .tbl tbody th[scope='row'] { text-align: left; font-weight: 500; color: var(--text-2); font-family: var(--font-sans); letter-spacing: 0; position: sticky; left: 0; background: var(--bg); min-width: 220px; }
+    .tbl td { color: var(--text); }
+    .tbl .grp th { text-align: left; font-size: var(--fs-xs); color: var(--text-3); font-weight: 600; background: var(--bg-raised); font-family: var(--font-sans); letter-spacing: 0; }
+    .tbl .pick { background: rgba(167, 139, 250, 0.06); }
+    .tbl :global(.yes) { display: inline; color: var(--success); }
+    .tbl :global(.no) { display: inline; color: var(--text-3); opacity: 0.6; }
+
+    .faq { margin-top: 24px; }
+    .qa { border-top: 1px solid var(--border); }
+    .qa:last-child { border-bottom: 1px solid var(--border); }
+    .qa summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 2px; cursor: pointer; list-style: none; color: var(--text); font-weight: 600; }
+    .qa summary::-webkit-details-marker { display: none; }
+    .qa summary :global(svg) { flex: none; color: var(--text-3); transition: transform var(--t-fast) var(--ease-out); }
+    .qa[open] summary :global(svg) { transform: rotate(45deg); }
+    .qa p { padding: 0 2px 22px; max-width: 64ch; }
+</style>
+
+<script>
+    // Monthly / quarterly: every element carrying data-m/data-q swaps its text
+    // (or href) so prices and checkout links always match the chosen period.
+    const radios = document.querySelectorAll<HTMLInputElement>('input[name="period"]');
+    const apply = (period: 'm' | 'q') => {
+        document.querySelectorAll<HTMLElement>('[data-m][data-q]').forEach((el) => {
+            const v = el.dataset[period]!;
+            if (el instanceof HTMLAnchorElement) el.href = v; else el.textContent = v;
+        });
+    };
+    radios.forEach((r) => r.addEventListener('change', () => apply(r.value === 'quarterly' ? 'q' : 'm')));
+</script>

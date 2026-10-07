@@ -1,0 +1,188 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Steps from '../components/Steps.astro';
+---
+<Base
+    title="Apelar una sanción · Events"
+    description="Apela un baneo del Discord de Events, una sanción de Events Client o un baneo de la red de Events Blacklist."
+>
+    <section class="ap-hero">
+        <div class="wrap-narrow">
+            <h1 class="h1">Apelar una sanción.</h1>
+            <p class="lead" style="margin-top:18px">La revisa una persona del staff y te respondemos por Discord. Cuanto más concreto seas, antes se resuelve.</p>
+        </div>
+    </section>
+
+    <section class="section-tight">
+        <div class="wrap-narrow">
+            <form id="appeal-form" class="ap" novalidate aria-describedby="ap-status">
+                <fieldset class="ap-step">
+                    <legend class="h3">Qué quieres apelar</legend>
+                    <div class="ap-cats">
+                        <label class="ap-cat"><input type="radio" name="category" value="discord" required /><span class="ap-cat-in"><Icon name="discord" /><b>Baneo del Discord</b><small>Servidor de Discord de Events</small></span></label>
+                        <label class="ap-cat"><input type="radio" name="category" value="launcher" /><span class="ap-cat-in"><Icon name="gamepad" /><b>Sanción del launcher</b><small>Events Client</small></span></label>
+                        <label class="ap-cat"><input type="radio" name="category" value="blacklist" /><span class="ap-cat-in"><Icon name="shield" /><b>Baneo falso</b><small>Red de Events Blacklist</small></span></label>
+                    </div>
+                    <p class="hint">Si no tienes claro cuál es, elige el más parecido y explícalo abajo.</p>
+                </fieldset>
+
+                <fieldset class="ap-step">
+                    <legend class="h3">Quién eres</legend>
+                    <div class="ap-row">
+                        <div class="field"><label for="ap-discord">Usuario de Discord</label><input class="input" id="ap-discord" name="discord" maxlength="60" autocomplete="off" required aria-describedby="ap-discord-e" /><span class="error" id="ap-discord-e"></span></div>
+                        <div class="field"><label for="ap-id">ID de Discord</label><input class="input tnum" id="ap-id" name="discordId" inputmode="numeric" maxlength="20" placeholder="123456789012345678" autocomplete="off" required aria-describedby="ap-id-h ap-id-e" /><span class="hint" id="ap-id-h">Ajustes → Avanzado → Modo desarrollador. Después, clic derecho en tu perfil → Copiar ID de usuario.</span><span class="error" id="ap-id-e"></span></div>
+                    </div>
+                    <div class="field" data-only="launcher" hidden><label for="ap-nick">Nick de Minecraft</label><input class="input" id="ap-nick" name="mcnick" maxlength="16" autocomplete="off" aria-describedby="ap-nick-e" /><span class="error" id="ap-nick-e"></span></div>
+                    <div class="field" data-only="blacklist" hidden><label for="ap-guild">Servidor que te baneó</label><input class="input" id="ap-guild" name="guild" maxlength="100" placeholder="Nombre del servidor o su ID" autocomplete="off" aria-describedby="ap-guild-e" /><span class="error" id="ap-guild-e"></span></div>
+                </fieldset>
+
+                <fieldset class="ap-step">
+                    <legend class="h3">La sanción</legend>
+                    <div class="ap-row">
+                        <div class="field"><label for="ap-reason">Motivo que te dieron</label><input class="input" id="ap-reason" name="reason" maxlength="300" placeholder="Si no lo sabes, escríbelo" autocomplete="off" required aria-describedby="ap-reason-e" /><span class="error" id="ap-reason-e"></span></div>
+                        <div class="field"><label for="ap-when">Cuándo fue <span class="muted">(opcional)</span></label><input class="input" id="ap-when" name="when" maxlength="60" placeholder="Hace 2 semanas" autocomplete="off" /></div>
+                    </div>
+                    <div class="field">
+                        <label for="ap-text">Tu apelación</label>
+                        <textarea class="input" id="ap-text" name="appeal" rows="7" maxlength="1500" required aria-describedby="ap-count ap-text-e" placeholder="Qué pasó desde tu punto de vista y por qué crees que la sanción es injusta o desproporcionada."></textarea>
+                        <span class="hint tnum" id="ap-count">0 / 1500 · mínimo 40</span>
+                        <span class="error" id="ap-text-e"></span>
+                    </div>
+                    <div class="field"><label for="ap-ev">Pruebas <span class="muted">(opcional)</span></label><input class="input" id="ap-ev" name="evidence" maxlength="300" inputmode="url" placeholder="https://" autocomplete="off" aria-describedby="ap-ev-h ap-ev-e" /><span class="hint" id="ap-ev-h">Un enlace público: Imgur, YouTube, Google Drive con permiso de lectura.</span><span class="error" id="ap-ev-e"></span></div>
+                </fieldset>
+
+                <div class="ap-send">
+                    <label class="ap-check"><input type="checkbox" name="agree" required aria-describedby="ap-agree-e" /><span>Confirmo que lo que cuento es cierto y que soy la persona sancionada. Las apelaciones falsas o repetidas pueden cerrar esta vía.</span></label>
+                    <span class="error" id="ap-agree-e"></span>
+                    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                    <p class="ap-status" id="ap-status" role="status"></p>
+                    <button class="btn btn-primary btn-lg" type="submit">Enviar apelación</button>
+                    <p class="small muted">Solo se envía lo que escribes aquí, a un canal privado del staff.</p>
+                </div>
+            </form>
+            <div class="ap-done" id="ap-done" hidden tabindex="-1">
+                <span class="done-ic"><Icon name="check" size={24} /></span>
+                <h2 class="h2">Apelación enviada.</h2>
+                <p>La revisamos a mano y te respondemos por Discord. Ten los mensajes directos abiertos. No hace falta que la envíes otra vez.</p>
+                <a class="btn btn-secondary" href="/">Volver al inicio</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-tight">
+        <div class="wrap">
+            <div class="section-head" data-reveal><h2 class="h2">Qué pasa después.</h2></div>
+            <Steps steps={[
+                { title: 'Llega al staff', text: 'Tu apelación aparece en un canal privado del equipo, con tu ID para localizar la sanción.' },
+                { title: 'Se revisa el caso', text: 'Miramos el registro y, si viene de otra comunidad, hablamos con ella. Puede llevar unos días.' },
+                { title: 'Te respondemos', text: 'Por Discord, con la decisión. Si no se acepta, te decimos por qué.' },
+            ]} />
+        </div>
+    </section>
+</Base>
+
+<style>
+    .ap-hero { padding-top: clamp(48px, 7vw, 96px); }
+    .ap { display: grid; gap: 40px; }
+    .ap-step { display: grid; gap: 18px; border: 0; padding: 0; min-width: 0; }
+    .ap-step legend { margin-bottom: 18px; padding: 0; }
+    .ap-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .ap-row { grid-template-columns: 1fr; } }
+    .ap-cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 640px) { .ap-cats { grid-template-columns: 1fr; } }
+    .ap-cat { position: relative; cursor: pointer; }
+    .ap-cat input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+    .ap-cat-in {
+        display: grid; gap: 4px; height: 100%; padding: 16px; border-radius: var(--r-md);
+        background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong);
+        transition: box-shadow var(--t-fast) ease, background-color var(--t-fast) ease;
+    }
+    .ap-cat-in :global(svg) { color: var(--text-3); margin-bottom: 6px; }
+    .ap-cat-in b { color: var(--text); font-weight: 600; }
+    .ap-cat-in small { color: var(--text-3); font-size: var(--fs-xs); }
+    .ap-cat:hover .ap-cat-in { background: var(--surface-2); }
+    .ap-cat input:checked + .ap-cat-in { box-shadow: inset 0 0 0 1.5px var(--action); background: rgba(91, 140, 255, 0.07); }
+    .ap-cat input:checked + .ap-cat-in :global(svg) { color: var(--action); }
+    .ap-cat input:focus-visible + .ap-cat-in { outline: 2px solid var(--action); outline-offset: 3px; }
+    .ap-send { display: grid; gap: 14px; justify-items: start; padding-top: 28px; border-top: 1px solid var(--border); }
+    .ap-check { display: grid; grid-template-columns: 20px 1fr; gap: 12px; cursor: pointer; font-size: 0.94rem; }
+    .ap-check input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--action-solid); }
+    .ap-status:empty { display: none; }
+    .ap-status { color: #ff8a99; font-weight: 500; }
+    .ap-done { display: grid; justify-items: start; gap: 16px; padding: 32px; border-radius: var(--r-xl); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+    .ap-done[hidden] { display: none; }
+    .done-ic { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; color: var(--success); background: var(--success-soft); }
+</style>
+
+<script>
+    // Validation mirrors /api/appeal so a half-filled form doesn't spend a send.
+    // The resend limit lives only on the server.
+    const form = document.getElementById('appeal-form') as HTMLFormElement;
+    const status = document.getElementById('ap-status')!;
+    const submit = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    const text = form.querySelector<HTMLTextAreaElement>('textarea[name=appeal]')!;
+    const count = document.getElementById('ap-count')!;
+    const el = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
+    const v = (n: string) => (el(n)?.value || '').trim();
+    const ERR_IDS: Record<string, string> = { discord: 'ap-discord-e', discordId: 'ap-id-e', mcnick: 'ap-nick-e', guild: 'ap-guild-e', reason: 'ap-reason-e', appeal: 'ap-text-e', evidence: 'ap-ev-e', agree: 'ap-agree-e' };
+
+    const sync = () => {
+        const cat = (form.querySelector<HTMLInputElement>('input[name=category]:checked') || {}).value;
+        form.querySelectorAll<HTMLElement>('[data-only]').forEach((b) => {
+            const mine = b.dataset.only === cat;
+            b.hidden = !mine;
+            const i = b.querySelector('input')!;
+            i.required = mine;
+            if (!mine) i.value = '';
+        });
+    };
+    form.querySelectorAll('input[name=category]').forEach((r) => r.addEventListener('change', sync));
+    const hint = (new URLSearchParams(location.search).get('type') || location.hash.slice(1)).toLowerCase().replace(/[^a-z]/g, '');
+    const preset = form.querySelector<HTMLInputElement>(`input[name=category][value="${hint}"]`);
+    if (preset) preset.checked = true;
+    sync();
+    text.addEventListener('input', () => { count.textContent = `${text.value.trim().length} / 1500 · mínimo 40`; });
+
+    const setErr = (name: string, msg: string) => {
+        const out = document.getElementById(ERR_IDS[name]); if (out) out.textContent = msg;
+        const i = el(name); if (i) { if (msg) i.setAttribute('aria-invalid', 'true'); else i.removeAttribute('aria-invalid'); }
+        return !msg;
+    };
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.textContent = '';
+        const checked = form.querySelector<HTMLInputElement>('input[name=category]:checked');
+        if (!checked) { status.textContent = 'Elige qué quieres apelar.'; form.querySelector<HTMLInputElement>('input[name=category]')!.focus(); return; }
+        const cat = checked.value;
+        const body = {
+            category: cat, discord: v('discord'), discordId: v('discordId').replace(/\D/g, ''), reason: v('reason'), when: v('when'),
+            appeal: v('appeal'), evidence: v('evidence'), mcnick: v('mcnick'), guild: v('guild'),
+            agree: (el('agree') as HTMLInputElement).checked, website: v('website'),
+        };
+        const checks = [
+            setErr('discord', body.discord.length < 2 ? 'Escribe tu usuario de Discord.' : ''),
+            setErr('discordId', /^\d{17,20}$/.test(body.discordId) ? '' : 'Es el número de 17 a 20 dígitos, no el @usuario.'),
+            setErr('mcnick', cat === 'launcher' && !/^[A-Za-z0-9_]{3,16}$/.test(body.mcnick) ? 'De 3 a 16 caracteres, sin espacios.' : ''),
+            setErr('guild', cat === 'blacklist' && body.guild.length < 2 ? 'Indica en qué servidor te banearon.' : ''),
+            setErr('reason', body.reason.length < 2 ? 'Indica qué motivo te dieron.' : ''),
+            setErr('appeal', body.appeal.length < 40 ? 'Explícalo con algo más de detalle (mínimo 40 caracteres).' : ''),
+            setErr('evidence', body.evidence && !/^https?:\/\/\S+$/i.test(body.evidence) ? 'Tiene que empezar por https://' : ''),
+            setErr('agree', body.agree ? '' : 'Confirma que lo que cuentas es cierto.'),
+        ];
+        if (checks.includes(false)) { form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus(); return; }
+        submit.disabled = true;
+        try {
+            const r = await fetch('/api/appeal', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            const j = await r.json().catch(() => ({}));
+            if (!r.ok) throw new Error(j.error || 'No se pudo enviar la apelación.');
+            form.hidden = true;
+            const done = document.getElementById('ap-done')!;
+            done.hidden = false; done.focus();
+        } catch (x) {
+            status.textContent = x instanceof TypeError ? 'Sin conexión. Revisa tu red.' : (x as Error).message;
+            submit.disabled = false;
+        }
+    });
+</script>

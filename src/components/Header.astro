@@ -1,0 +1,199 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { PRODUCTS, LINKS } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const live = PRODUCTS.filter((p) => p.status === 'on' && p.id !== 'plus');
+const isProduct = live.some((p) => p.href === path);
+---
+<header class="hdr" id="hdr">
+    <div class="wrap hdr-row">
+        <a class="brand" href="/" aria-label="Events, página principal">
+            <Logo size={30} class="brand-logo" />
+            <span class="brand-word">Events</span>
+        </a>
+
+        <nav class="hdr-nav" aria-label="Principal">
+            <div class="dd" data-dd>
+                <button class="hdr-link dd-btn" type="button" aria-expanded="false" aria-controls="dd-products" aria-current={isProduct ? 'page' : undefined}>
+                    Productos <Icon name="chevron-down" size={16} class="dd-chev" />
+                </button>
+                <div class="dd-panel" id="dd-products" hidden>
+                    <ul role="list" class="dd-grid">
+                        {live.map((p) => (
+                            <li>
+                                <a class="dd-item" href={p.href} target={p.external ? '_blank' : undefined} rel={p.external ? 'noopener' : undefined} aria-current={p.href === path ? 'page' : undefined}>
+                                    <span class="mark" style={`--tone:${p.tone}`}><Icon name={p.icon as any} /></span>
+                                    <span class="dd-copy">
+                                        <span class="dd-name">{p.name}{p.external && <Icon name="arrow-up-right" size={13} class="dd-ext" />}</span>
+                                        <span class="dd-line">{p.line}</span>
+                                    </span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            <a class="hdr-link" href="/plus" aria-current={path === '/plus' ? 'page' : undefined}>Events+</a>
+            <a class="hdr-link" href="/calendar" aria-current={path === '/calendar' ? 'page' : undefined}>Calendario</a>
+        </nav>
+
+        <div class="hdr-end">
+            <a class="hdr-link hdr-clients" href={LINKS.clientes}>Área de clientes</a>
+            <a class="btn btn-primary btn-sm hdr-dl" href="/download" aria-current={path === '/download' ? 'page' : undefined}>
+                <Icon name="download" size={17} /> Descargar
+            </a>
+            <button class="hdr-burger" type="button" aria-label="Abrir el menú" aria-controls="menu" aria-expanded="false" data-menu-open>
+                <Icon name="menu" size={22} />
+            </button>
+        </div>
+    </div>
+</header>
+
+<dialog class="sheet" id="menu" aria-label="Menú">
+    <div class="sheet-head">
+        <a class="brand" href="/"><Logo size={28} class="brand-logo" /><span class="brand-word">Events</span></a>
+        <button class="dlg-close" type="button" aria-label="Cerrar el menú" data-menu-close><Icon name="x" /></button>
+    </div>
+    <nav aria-label="Menú móvil">
+        <ul role="list" class="sheet-list">
+            {live.map((p) => (
+                <li>
+                    <a class="sheet-item" href={p.href} target={p.external ? '_blank' : undefined} rel={p.external ? 'noopener' : undefined} aria-current={p.href === path ? 'page' : undefined}>
+                        <span class="mark" style={`--tone:${p.tone}`}><Icon name={p.icon as any} /></span>
+                        <span>{p.name}</span>
+                    </a>
+                </li>
+            ))}
+            <li><a class="sheet-item" href="/plus" aria-current={path === '/plus' ? 'page' : undefined}><span class="mark" style="--tone:var(--p-plus)"><Icon name="sparkle" /></span><span>Events+</span></a></li>
+        </ul>
+        <div class="sheet-foot">
+            <a class="btn btn-primary btn-lg" href="/download"><Icon name="download" /> Descargar Events Client</a>
+            <a class="btn btn-secondary btn-lg" href={LINKS.clientes}>Área de clientes</a>
+        </div>
+    </nav>
+</dialog>
+
+<style>
+    .hdr {
+        position: sticky; top: 0; z-index: 50;
+        view-transition-name: site-header;
+        transition: background-color var(--t-base) ease, box-shadow var(--t-base) ease, backdrop-filter var(--t-base) ease;
+    }
+    .hdr.stuck {
+        background: rgba(5, 6, 13, 0.86);
+        backdrop-filter: blur(16px) saturate(150%);
+        -webkit-backdrop-filter: blur(16px) saturate(150%);
+        box-shadow: 0 1px 0 var(--border);
+    }
+    .hdr-row { height: var(--header-h); display: flex; align-items: center; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); flex: none; border-radius: 10px; }
+    .brand-word { font-family: var(--font-display); font-weight: 700; font-size: 1.12rem; letter-spacing: -0.02em; }
+    :global(.brand-logo) { color: #fff; }
+
+    .hdr-nav { display: flex; align-items: center; gap: 2px; }
+    .hdr-link {
+        display: inline-flex; align-items: center; gap: 4px;
+        height: 38px; padding-inline: 12px; border-radius: 10px;
+        font-size: 0.92rem; font-weight: 500; color: var(--text-2);
+        transition: color var(--t-fast) ease, background-color var(--t-fast) ease;
+    }
+    .hdr-link:hover, .hdr-link[aria-expanded='true'] { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+    .hdr-link[aria-current='page'] { color: var(--text); }
+    :global(.dd-chev) { transition: transform var(--t-fast) var(--ease-out); color: var(--text-3); }
+    .dd-btn[aria-expanded='true'] :global(.dd-chev) { transform: rotate(180deg); }
+
+    .dd { position: relative; }
+    .dd-panel {
+        position: absolute; top: calc(100% + 10px); left: -16px;
+        width: min(640px, 92vw); padding: 10px;
+        background: rgba(12, 15, 32, 0.96);
+        backdrop-filter: blur(20px) saturate(150%);
+        border-radius: var(--r-lg);
+        box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-4);
+        transform-origin: 40px top;
+        opacity: 1; transform: none;
+        transition: opacity var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+    }
+    .dd-panel[hidden] { display: block; visibility: hidden; opacity: 0; transform: translateY(-4px) scale(0.98); pointer-events: none; }
+    .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .dd-item {
+        display: flex; gap: 14px; align-items: flex-start; padding: 12px; border-radius: var(--r-md);
+        transition: background-color var(--t-fast) ease;
+    }
+    .dd-item:hover, .dd-item[aria-current='page'] { background: rgba(255, 255, 255, 0.045); }
+    .dd-copy { display: grid; gap: 2px; min-width: 0; }
+    .dd-name { display: inline-flex; align-items: center; gap: 4px; color: var(--text); font-weight: 600; font-size: 0.92rem; }
+    :global(.dd-ext) { color: var(--text-3); }
+    .dd-line { font-size: 0.82rem; line-height: 1.45; color: var(--text-3); }
+
+    .hdr-end { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+    .hdr-burger {
+        display: none; place-items: center; width: 42px; height: 42px; border-radius: 12px; color: var(--text);
+        transition: background-color var(--t-fast) ease, transform var(--t-press) var(--ease-out);
+    }
+    .hdr-burger:hover { background: rgba(255, 255, 255, 0.06); }
+    .hdr-burger:active { transform: scale(0.94); }
+
+    @media (max-width: 920px) {
+        .hdr-nav, .hdr-clients { display: none; }
+        .hdr-burger { display: grid; }
+    }
+    @media (max-width: 420px) { .hdr-dl { display: none; } }
+
+    /* Mobile menu: a native <dialog> sliding from the top. */
+    .sheet {
+        width: 100%; max-width: 100%; max-height: 100dvh; margin: 0; inset: 0 0 auto 0;
+        padding: 12px var(--gutter) 24px; border: 0; border-radius: 0 0 24px 24px;
+        background: #0a0d1c; color: var(--text-2);
+        box-shadow: 0 1px 0 var(--border-strong), var(--shadow-4);
+        transform: none; opacity: 1;
+        transition: transform 320ms var(--ease-out), opacity 200ms ease, overlay 320ms allow-discrete, display 320ms allow-discrete;
+    }
+    .sheet:not([open]) { transform: translateY(-24px); opacity: 0; }
+    @starting-style { .sheet[open] { transform: translateY(-24px); opacity: 0; } }
+    .sheet::backdrop { background: rgba(3, 4, 12, 0.6); backdrop-filter: blur(4px); }
+    .sheet-head { display: flex; align-items: center; justify-content: space-between; height: 52px; margin-bottom: 12px; }
+    .sheet-list { display: grid; gap: 2px; }
+    .sheet-item {
+        display: flex; align-items: center; gap: 14px; padding: 10px 8px; border-radius: 14px;
+        color: var(--text); font-weight: 600; font-size: 1.02rem;
+    }
+    .sheet-item[aria-current='page'] { background: rgba(255, 255, 255, 0.05); }
+    .sheet-foot { display: grid; gap: 10px; margin-top: 20px; }
+    @media (prefers-reduced-motion: reduce) { .sheet, .dd-panel { transition-duration: 0.01ms; } }
+</style>
+
+<script>
+    const hdr = document.getElementById('hdr')!;
+    const onScroll = () => hdr.classList.toggle('stuck', window.scrollY > 8);
+    onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
+
+    // Products dropdown: a disclosure. Click or Enter toggles, Escape and a
+    // click outside close it, focus goes back to the button.
+    for (const dd of document.querySelectorAll<HTMLElement>('[data-dd]')) {
+        const btn = dd.querySelector('button')!;
+        const panel = dd.querySelector<HTMLElement>('.dd-panel')!;
+        let closeTimer = 0;
+        const set = (open: boolean) => { btn.setAttribute('aria-expanded', String(open)); panel.hidden = !open; };
+        btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+        if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            dd.addEventListener('pointerenter', () => { clearTimeout(closeTimer); set(true); });
+            dd.addEventListener('pointerleave', () => { closeTimer = window.setTimeout(() => set(false), 140); });
+        }
+        dd.addEventListener('keydown', (e) => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+        document.addEventListener('click', (e) => { if (!dd.contains(e.target as Node)) set(false); });
+        dd.addEventListener('focusout', (e) => { if (!dd.contains(e.relatedTarget as Node)) set(false); });
+    }
+
+    // Mobile menu.
+    const menu = document.getElementById('menu') as HTMLDialogElement;
+    const opener = document.querySelector<HTMLButtonElement>('[data-menu-open]')!;
+    opener.addEventListener('click', () => { menu.showModal(); opener.setAttribute('aria-expanded', 'true'); });
+    menu.querySelector('[data-menu-close]')!.addEventListener('click', () => menu.close());
+    menu.addEventListener('close', () => { opener.setAttribute('aria-expanded', 'false'); });
+    menu.addEventListener('click', (e) => { if (e.target === menu) menu.close(); });
+    matchMedia('(min-width: 921px)').addEventListener('change', (e) => { if (e.matches && menu.open) menu.close(); });
+</script>

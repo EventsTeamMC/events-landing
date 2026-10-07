@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import FeatureList from '../components/FeatureList.astro';
+import Steps from '../components/Steps.astro';
+import Commands from '../components/Commands.astro';
+import { product, LINKS } from '../data/site';
+
+const p = product('whitelist');
+---
+<Base
+    title="Events Whitelist · La whitelist de tu evento, desde Discord"
+    description="Tus jugadores escriben su nick de Minecraft en Discord y el bot comprueba la cuenta y los añade a la whitelist. Gratis."
+>
+    <div style={`--tone:${p.tone}`}>
+        <PageHero product={p} title="Escribe tu nick en Discord." titleDim="Entra directo al servidor." lead="Los jugadores se registran solos: escriben su nick en el canal que elijas, el bot comprueba si la cuenta es Premium y los añade a la whitelist. Sin formularios ni hojas de cálculo.">
+            <Fragment slot="actions">
+                <a class="btn btn-primary btn-lg" href={LINKS.whitelistInvite}><Icon name="discord" /> Añadir a Discord</a>
+                <a class="btn btn-ghost btn-lg" href="#como">Cómo funciona</a>
+            </Fragment>
+            <div slot="visual" class="dc" aria-hidden="true">
+                <div class="dc-ch"><Icon name="hash" size={16} /> whitelist-evento</div>
+                <div class="dc-msg">
+                    <span class="dc-av">S</span>
+                    <div><b>steve_2011</b> <span class="dc-time">hoy a las 21:04</span><p>Steve2011</p><span class="dc-react"><Icon name="check" size={13} /> 1</span></div>
+                </div>
+                <div class="dc-msg">
+                    <span class="dc-av bot"><Icon name="list-checks" size={18} /></span>
+                    <div>
+                        <b>Events Whitelist</b> <span class="dc-tag">BOT</span>
+                        <div class="dc-embed">
+                            <b>Añadido a la whitelist</b>
+                            <p>Steve2011 · Cuenta Premium</p>
+                            <p class="dc-dim">Whitelist «Evento principal» · 184 / 300</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </PageHero>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2 class="h2">Whitelists sin trabajo manual.</h2>
+                    <p class="lead">Formularios que nadie revisa a tiempo, nicks mal escritos y una lista final copiada a mano. Cada evento, otra vez.</p>
+                </div>
+                <FeatureList items={[
+                    { icon: 'message', title: 'Registro por canal', text: 'El jugador escribe su nick en el canal que elijas. Sin comandos ni formularios externos.' },
+                    { icon: 'shield', title: 'Verificación Premium', text: 'El bot comprueba la cuenta contra Mojang y, si hace falta, confirma con un botón.' },
+                    { icon: 'layers', title: 'Varias whitelists a la vez', text: 'Evento, beta y staff, cada una con su canal, su límite de nicks y su tipo de cuenta.' },
+                    { icon: 'refresh', title: 'Cambios de nick', text: 'Si alguien llega a su límite, elige qué nick antiguo reemplazar.' },
+                    { icon: 'upload', title: 'Exportación al momento', text: 'En texto plano, EasyWhitelist o el whitelist.json de Vanilla.' },
+                    { icon: 'plug', title: 'Vinculación con tu servidor', text: 'Un plugin recibe cada alta y baja al instante, sin exportar nada.' },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section-tight" id="como">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">Cómo funciona.</h2></div>
+                <Steps steps={[
+                    { title: 'Crea una whitelist', text: 'Elige el canal, cuántos nicks admite cada persona y qué cuentas aceptas.' },
+                    { title: 'Escriben su nick', text: 'El bot valida el formato, consulta si es Premium y confirma si hace falta.' },
+                    { title: 'Queda registrado', text: 'Reacciona al mensaje, publica la bienvenida y lo añade a la whitelist.' },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section" id="vincular">
+            <div class="wrap link-grid">
+                <div data-reveal>
+                    <h2 class="h2">Conecta tu servidor de Minecraft.</h2>
+                    <p class="lead" style="margin-top:14px">Opcional. Con el plugin, la whitelist de tu servidor siempre está al día.</p>
+                    <ul role="list" class="link-list">
+                        <li><Icon name="key" size={18} /><span><b>Clave propia</b> para tu servidor, con acceso solo a las whitelists que elijas.</span></li>
+                        <li><Icon name="zap" size={18} /><span><b>Altas y bajas al instante</b>, sin esperar a exportar.</span></li>
+                        <li><Icon name="folder" size={18} /><span><b>Tu formato</b>: texto plano, EasyWhitelist o Vanilla.</span></li>
+                    </ul>
+                    <a class="btn btn-secondary btn-lg" href={LINKS.whitelistPlugin} style="margin-top:28px"><Icon name="download" /> Descargar el plugin (.jar)</a>
+                    <p class="small muted" style="margin-top:10px">Siempre la última versión publicada.</p>
+                </div>
+                <div data-reveal style="--i:1">
+                    <Commands groups={[
+                        { title: 'Para el staff', items: [['/whitelist', 'Crea, edita y configura tus whitelists'], ['/nick', 'Añade o quita nicks a mano'], ['/export', 'Descarga la whitelist en tu formato'], ['/server-link', 'Vincula un servidor de Minecraft']] },
+                        { title: 'Para los jugadores', items: [['/mis-nicks', 'Consulta y quita tus nicks'], ['/info', 'Qué es el bot'], ['/support', 'Servidor de soporte']] },
+                    ]} />
+                </div>
+            </div>
+        </section>
+
+        <section class="section-tight">
+            <div class="wrap end-row" data-reveal>
+                <div>
+                    <h2 class="h2">Registra tu primer evento hoy.</h2>
+                    <p class="small muted" style="margin-top:10px">Gratis. <a href="/whitelist/privacy">Privacidad</a> · <a href="/whitelist/terms">Condiciones</a></p>
+                </div>
+                <a class="btn btn-primary btn-lg" href={LINKS.whitelistInvite}><Icon name="discord" /> Añadir a Discord</a>
+            </div>
+        </section>
+    </div>
+</Base>
+
+<style>
+    .dc {
+        display: grid; gap: 16px; padding: 18px 20px 22px; border-radius: var(--r-xl); max-width: 480px; margin-inline: auto;
+        background: #313338; color: #dbdee1; font-size: 0.9rem;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), var(--shadow-4), 0 0 100px -30px rgba(52, 209, 122, 0.35);
+    }
+    .dc-ch { display: flex; align-items: center; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); color: #f2f3f5; font-weight: 600; }
+    .dc-msg { display: grid; grid-template-columns: 40px 1fr; gap: 12px; }
+    .dc-av { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #5865f2; color: #fff; font-weight: 700; }
+    .dc-av.bot { background: var(--p-whitelist); color: #04210f; }
+    .dc-msg b { color: #f2f3f5; font-weight: 600; }
+    .dc-time { color: #949ba4; font-size: 0.75rem; margin-left: 4px; }
+    .dc-tag { padding: 1px 5px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; background: #5865f2; color: #fff; vertical-align: 2px; }
+    .dc-react { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; padding: 2px 8px; border-radius: 8px; background: rgba(88, 101, 242, 0.15); box-shadow: inset 0 0 0 1px #5865f2; font-size: 0.8rem; color: #dee0fc; }
+    .dc-react :global(svg) { color: var(--p-whitelist); }
+    .dc-embed { margin-top: 6px; padding: 12px 14px; border-radius: 4px; background: #2b2d31; box-shadow: inset 4px 0 0 var(--p-whitelist); }
+    .dc-dim { color: #949ba4; font-size: 0.8rem; margin-top: 4px; }
+
+    .link-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+    .link-list { display: grid; gap: 14px; margin-top: 26px; }
+    .link-list li { display: grid; grid-template-columns: 20px 1fr; gap: 12px; }
+    .link-list :global(svg) { color: var(--tone); margin-top: 3px; }
+    @media (max-width: 900px) { .link-grid { grid-template-columns: 1fr; } }
+    .end-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+</style>

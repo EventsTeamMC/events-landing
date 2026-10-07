@@ -1,0 +1,54 @@
+---
+/*
+ * Product page opening: the product's mark and name as a quiet label row (not
+ * an eyebrow above the heading — it is the page's identity), the heading, one
+ * paragraph, the actions, and the product itself on the right.
+ */
+import Icon from './Icon.astro';
+import Horizon from './Horizon.astro';
+
+interface Props {
+    product?: { name: string; icon: string; tone: string };
+    title: string;
+    titleDim?: string;
+    lead: string;
+    horizon?: boolean;
+    split?: boolean;
+}
+const { product, title, titleDim, lead, horizon = true, split = true } = Astro.props;
+const hasVisual = Astro.slots.has('visual');
+---
+<section class:list={['ph', { 'ph-split': split && hasVisual, 'ph-hz': horizon }]} style={product ? `--tone:${product.tone}` : ''}>
+    <div class="wrap ph-grid">
+        <div class="ph-copy">
+            {product && (
+                <p class="ph-id"><span class="mark"><Icon name={product.icon as any} /></span>{product.name}</p>
+            )}
+            <h1 class="h1 ph-h">{title}{titleDim && <><br /><span class="ph-dim">{titleDim}</span></>}</h1>
+            <p class="lead ph-lead">{lead}</p>
+            {Astro.slots.has('actions') && <div class="ph-actions"><slot name="actions" /></div>}
+            {Astro.slots.has('meta') && <div class="ph-meta small"><slot name="meta" /></div>}
+        </div>
+        {hasVisual && <div class="ph-visual"><slot name="visual" /></div>}
+    </div>
+    {horizon && <Horizon id={`hz-${(product?.name || title).replace(/\W+/g, '').toLowerCase()}`} />}
+</section>
+
+<style>
+    .ph { position: relative; padding-top: clamp(40px, 6vw, 88px); padding-bottom: clamp(56px, 7vw, 96px); overflow: clip; }
+    .ph-hz { padding-bottom: clamp(150px, 20vw, 260px); }
+    .ph-grid { position: relative; z-index: 1; display: grid; gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .ph-split .ph-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+    .ph:not(.ph-split) .ph-copy { max-width: 46rem; }
+    .ph-id {
+        display: inline-flex; align-items: center; gap: 12px; margin-bottom: 26px;
+        color: var(--text); font-weight: 600; font-size: 0.95rem;
+    }
+    .ph-id .mark { --tone: inherit; }
+    .ph-dim { color: var(--text-3); }
+    .ph-lead { margin-top: 22px; }
+    .ph-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .ph-meta { margin-top: 20px; color: var(--text-3); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    .ph-visual { position: relative; }
+    @media (max-width: 960px) { .ph-split .ph-grid { grid-template-columns: 1fr; } }
+</style>

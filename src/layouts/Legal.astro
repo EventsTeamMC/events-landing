@@ -1,0 +1,74 @@
+---
+/*
+ * Legal documents. The text comes untouched from src/content/legal/*.html;
+ * this adds the page frame, heading ids and a table of contents (h2s, or h3s
+ * when a document is organised one level down).
+ */
+import Base from './Base.astro';
+import meta from '../content/legal/meta.json';
+
+interface Props { slug: keyof typeof meta; html: string }
+const { slug, html } = Astro.props;
+const m = meta[slug];
+
+const slugify = (s: string) => s.replace(/<[^>]+>/g, '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+const level = (html.match(/<h2\b/g) || []).length >= 4 ? 'h2' : 'h3';
+const toc: { id: string; text: string }[] = [];
+const seen = new Set<string>();
+const body = html.replace(new RegExp(`<${level}>([\\s\\S]*?)</${level}>`, 'g'), (_, inner: string) => {
+    let id = slugify(inner) || 'seccion';
+    while (seen.has(id)) id += '-2';
+    seen.add(id);
+    toc.push({ id, text: inner.replace(/<[^>]+>/g, '').trim() });
+    return `<${level} id="${id}">${inner}</${level}>`;
+});
+---
+<Base title={m.title} description={m.description} noindex={m.noindex}>
+    <article class="lg">
+        <header class="wrap lg-head">
+            <p class="lg-product">{m.productName}</p>
+            <h1 class="h1">{m.h1}</h1>
+            {m.updated && <p class="lg-updated">{m.updated}</p>}
+        </header>
+        <div class="wrap lg-grid">
+            {toc.length > 3 && (
+                <nav class="lg-toc" aria-label="Índice">
+                    <p class="lg-toc-h">En esta página</p>
+                    <ol role="list">
+                        {toc.map((t) => <li><a href={`#${t.id}`}>{t.text}</a></li>)}
+                    </ol>
+                </nav>
+            )}
+            <div class="prose" set:html={body} />
+        </div>
+    </article>
+</Base>
+
+<style>
+    .lg-head { padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(32px, 4vw, 56px); border-bottom: 1px solid var(--border); }
+    .lg-product { font-weight: 600; color: var(--text-2); margin-bottom: 14px; }
+    .lg-updated { margin-top: 14px; color: var(--text-3); max-width: 70ch; }
+    .lg-grid { display: grid; grid-template-columns: 240px minmax(0, 720px); gap: clamp(32px, 6vw, 88px); padding-top: clamp(32px, 4vw, 56px); padding-bottom: 40px; }
+    .lg-toc { position: sticky; top: calc(var(--header-h) + 24px); align-self: start; max-height: calc(100dvh - var(--header-h) - 48px); overflow: auto; padding-right: 8px; }
+    .lg-toc-h { font-size: var(--fs-xs); font-weight: 600; color: var(--text-3); margin-bottom: 10px; }
+    .lg-toc ol { display: grid; gap: 2px; }
+    .lg-toc a { display: block; padding: 5px 0; font-size: 0.85rem; line-height: 1.35; color: var(--text-3); transition: color var(--t-fast) ease; }
+    .lg-toc a:hover { color: var(--text); }
+    @media (max-width: 960px) { .lg-grid { grid-template-columns: 1fr; } .lg-toc { display: none; } }
+
+    .prose { color: var(--text-2); font-size: 1rem; line-height: 1.7; }
+    .prose :global(> * + *) { margin-top: 1em; }
+    .prose :global(h2) { font-size: 1.45rem; margin-top: 2.2em; scroll-margin-top: calc(var(--header-h) + 24px); }
+    .prose :global(h3) { font-size: 1.12rem; margin-top: 1.8em; font-family: var(--font-display); scroll-margin-top: calc(var(--header-h) + 24px); }
+    .prose :global(h2 + *), .prose :global(h3 + *) { margin-top: 0.6em; }
+    .prose :global(.doc-title) { font-family: var(--font-display); font-weight: 700; color: var(--text); letter-spacing: 0.01em; font-size: 1.05rem; }
+    .prose :global(ul), .prose :global(ol) { padding-left: 1.3em; }
+    .prose :global(li + li) { margin-top: 0.4em; }
+    .prose :global(li::marker) { color: var(--text-3); }
+    .prose :global(blockquote) { padding: 14px 18px; border-radius: var(--r-md); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); color: var(--text); font-size: 0.92rem; }
+    .prose :global(table) { width: 100%; border-collapse: collapse; font-size: 0.92rem; display: block; overflow-x: auto; }
+    .prose :global(th), .prose :global(td) { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+    .prose :global(th) { color: var(--text); font-weight: 600; }
+    .prose :global(code) { color: var(--text); }
+    .prose :global(hr) { border: 0; border-top: 1px solid var(--border); margin-block: 2em; }
+</style>

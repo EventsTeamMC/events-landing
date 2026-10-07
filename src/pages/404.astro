@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import Horizon from '../components/Horizon.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Página no encontrada · Events" description="Esta página no existe." noindex>
+    <section class="nf">
+        <div class="wrap nf-in">
+            <Logo size={120} class="nf-logo" />
+            <h1 class="h1">Esta página se ha salido de órbita.</h1>
+            <p class="lead">No existe o ha cambiado de dirección.</p>
+            <div class="nf-cta">
+                <a class="btn btn-primary btn-lg" href="/">Ir al inicio</a>
+                <a class="btn btn-secondary btn-lg" href="/download"><Icon name="download" /> Descargar Events Client</a>
+            </div>
+        </div>
+        <Horizon id="hz-404" />
+    </section>
+</Base>
+
+<style>
+    .nf { position: relative; min-height: calc(100dvh - var(--header-h)); display: grid; align-items: start; padding-top: clamp(56px, 9vw, 120px); padding-bottom: clamp(180px, 24vw, 320px); overflow: clip; text-align: center; }
+    .nf-in { position: relative; z-index: 1; display: grid; justify-items: center; gap: 18px; }
+    :global(.nf-logo) { color: #fff; opacity: 0.9; margin-bottom: 18px; filter: drop-shadow(0 0 40px rgba(157, 140, 255, 0.35)); }
+    @media (prefers-reduced-motion: no-preference) {
+        :global(.nf-logo) { animation: drift 7s ease-in-out infinite alternate; }
+    }
+    @keyframes drift { from { transform: translateY(-4px) rotate(-3deg); } to { transform: translateY(6px) rotate(3deg); } }
+    .nf-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 16px; }
+</style>

@@ -1,103 +1,38 @@
-# Events — Landing
+# events-landing
 
-Sitio estático e **independiente** (sin backend, sin build step). Pensado para Vercel.
-Es un *hub* multi-producto: la home lista todos los productos del ecosistema Events y cada
-uno tiene su propia página de presentación.
-
-```
-landing/
-├── vercel.json        # headers + cleanUrls
-├── api/               # funciones serverless (Node) — el único "backend" del sitio
-│   ├── suggest.js         # buzón de sugerencias anónimo (home)
-│   ├── access-request.js  # solicitud de acceso al panel del calendario
-│   └── appeal.js          # apelaciones de baneos (/appeal)
-└── public/            # ← lo que se publica
-    ├── index.html     # hub: todos los productos (Blacklist, Client, y "Próximamente")
-    ├── blacklist.html # presentación de Events Blacklist (/blacklist)
-    ├── client.html    # presentación de Events Client (/client)
-    ├── plus.html      # Events+, la suscripción para Studios (/plus)
-    ├── download.html  # descargas de Events Client (/download)
-    ├── appeal.html    # apelar un baneo: Discord, launcher o Blacklist (/appeal)
-    ├── appeal.js      # lógica del formulario de apelaciones
-    ├── blacklist/     # legales de Blacklist (terms, privacy)
-    ├── styles.css
-    ├── main.js
-    ├── icon.png
-    ├── logo.svg
-    └── shots/         # capturas reales del launcher/panel
-```
-
-> `cleanUrls: true` sirve `client.html` en `/client`, `blacklist.html` en `/blacklist`, etc.
-
-## Variables de entorno (Vercel → Settings → Environment Variables)
-
-Las URLs de los webhooks **solo** viven aquí: nunca en el código ni en el navegador.
-Si falta una, su formulario responde un 500 con un mensaje claro en vez de romperse.
-
-| Variable | Para qué |
-|---|---|
-| `SUGGESTIONS_WEBHOOK_URL` | Buzón de sugerencias de la home (`/api/suggest`) |
-| `ACCESS_WEBHOOK_URL` | Solicitudes de acceso al panel del calendario (`/api/access-request`) |
-| `APPEAL_WEBHOOK_URL` | Apelaciones de baneos de `/appeal` (`/api/appeal`) |
-
-Todas son webhooks de Discord (`https://discord.com/api/webhooks/…`). Después de
-añadirlas o cambiarlas hay que **redeploy**: las funciones leen `process.env` al arrancar.
-
-### Apelaciones (`/appeal`)
-
-Una página normal de la web, no un producto: sin hero ni color propios. Es un solo
-formulario para las tres categorías —baneo del Discord de Events, sanción de Events
-Client y baneo falso en la red de Blacklist—, y se puede enlazar con la categoría ya
-elegida: `/appeal?type=discord`, `?type=launcher`, `?type=blacklist`. Desde
-`/client` y `/blacklist` se enlaza con una banda al final de la página.
-
-### Events+ (`/plus`)
-
-La **suscripción para Studios**, todavía sin precio ni fecha. No es un producto:
-por eso no tiene tarjeta en el grid de la home — allí solo hay un guiño
-(`.plus-teaser`) que lleva aquí. La página entera vive de `styles.css` con el
-tema `.pl` (violeta → oro) sobre los mismos componentes de las páginas de
-producto (`.hero`, `.feat`, `.cols2`, `.steps`, `.priv`, `.cta`).
-
-Como no hay nada que comprar, **no lleva `Product`/`Offer` en el JSON-LD** ni
-botón de pago: la única acción real es el Discord. La letra pequeña del final
-(`.pl-fine`) es parte del trato — describe intenciones, no una oferta.
-
-Límite de **una apelación cada 5 minutos por IP** (`WINDOW_MS` en `api/appeal.js`),
-más un campo trampa anti-bots y `allowed_mentions: []` para que ningún texto de un
-desconocido pueda pingar al canal. La ventana **no se dice en ningún sitio de la
-web**: los mensajes de error hablan de "hace poco", nunca de minutos, para no darle
-el cronómetro a quien esté midiendo cada cuánto puede reenviar.
-
-## Desplegar en Vercel
-
-**Opción A — desde el dashboard (más fácil)**
-1. vercel.com → *Add New… → Project* → importa este repo.
-2. **Root Directory**: `landing`
-3. **Framework Preset**: `Other`
-4. Build Command: *(vacío)* · Output Directory: `public`
-5. Deploy.
-
-**Opción B — CLI**
-```bash
-npm i -g vercel
-cd landing
-vercel            # preview
-vercel --prod     # producción
-```
-
-## Antes de publicar
-
-Edita `public/main.js`:
-- `DISCORD` → tu invitación real de Discord.
-- `RELEASES` → si el repo de releases cambia.
-
-> El botón de descarga detecta el SO del visitante y apunta a la *release* más
-> reciente. **Si el repo de GitHub es privado, ese enlace dará 404 a los
-> visitantes** — usa un repo público solo para releases (ver más abajo).
-
-## Actualizar las capturas
+La web pública de Events, [eventsmc.xyz](https://www.eventsmc.xyz). Está hecha con Astro, se genera como HTML estático y se despliega en Vercel.
 
 ```bash
-cp ../docs/screenshots/*.png public/shots/
+npm install
+npm run dev       # http://localhost:4321
+npm run build     # genera dist/
+npm run preview   # sirve dist/
 ```
+
+## Estructura
+
+```
+src/
+  styles/tokens.css    tokens de diseño de Events (fuente única; clientes lleva una copia)
+  styles/global.css    base, botones, formularios, diálogos y transiciones de página
+  data/site.ts         enlaces, productos, estados, precios e IDs de planes de Paymenter
+  data/live.ts         datos en directo de api.eventsmc.xyz leídos al compilar
+  components/          Header, Footer, Logo, Icon, LauncherDemo, Horizon, PageHero…
+  layouts/             Base (todas las páginas) y Legal (textos legales)
+  pages/               una página por URL; las URLs no cambian
+  content/legal/       textos legales tal cual, en HTML
+  scripts/             JS de cliente: portada (GSAP) y contador de descargas
+  assets/shots/        capturas; Astro las sirve en WebP con srcset
+public/                se sirve tal cual: splash.js, access-request.js, icon.png, og.png…
+api/                   funciones de Vercel: sugerencias, solicitudes de acceso, apelaciones
+```
+
+## Reglas que no se ven en el código
+
+- **Precios y enlaces:** salen solo de `src/data/site.ts`. Los números de Events+ los fija `events-server/backend/plans.js`; si no coinciden, manda ese archivo. Cada «Contratar» lleva directamente al checkout de clientes.eventsmc.xyz con el periodo elegido (`?plan=<id>`).
+- **`public/access-request.js`:** también lo carga calendar.eventsmc.xyz. No se borra ni se renombra.
+- **`public/splash.js`:** es la pantalla de arranque compartida con el panel. Al terminar, el logo vuela hasta el de la cabecera. Con movimiento reducido no aparece.
+- **Variables de entorno en Vercel:** `SUGGESTIONS_WEBHOOK_URL`, `ACCESS_WEBHOOK_URL` y `APPEAL_WEBHOOK_URL`.
+- **`plus/condiciones`:** todavía tiene los datos del titular sin rellenar.
+
+La documentación de diseño está en `PRODUCT.md`, en `DESIGN.md` y en `docs/`.

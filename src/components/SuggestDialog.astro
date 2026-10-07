@@ -1,0 +1,78 @@
+---
+import Icon from './Icon.astro';
+---
+<dialog class="dlg" id="suggest" aria-labelledby="suggest-title">
+    <form class="dlg-body" id="suggest-form" novalidate>
+        <div class="dlg-head">
+            <h2 class="h3" id="suggest-title">Enviar una sugerencia</h2>
+            <button class="dlg-close" type="button" aria-label="Cerrar" data-suggest-close><Icon name="x" /></button>
+        </div>
+        <p class="small muted">Es anónima: no guardamos tu nombre ni tu IP. Las leemos todas.</p>
+        <div class="field" style="margin-top:20px">
+            <label for="suggest-msg">Tu idea</label>
+            <textarea class="input" id="suggest-msg" name="message" minlength="3" maxlength="500" rows="5" required aria-describedby="suggest-count suggest-error" placeholder="Me gustaría que Events tuviera…"></textarea>
+            <div class="suggest-meta">
+                <span class="error" id="suggest-error" role="alert"></span>
+                <span class="hint tnum" id="suggest-count">0 / 500</span>
+            </div>
+        </div>
+        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="suggest-actions">
+            <button class="btn btn-ghost" type="button" data-suggest-close>Cancelar</button>
+            <button class="btn btn-primary" type="submit"><span class="suggest-label">Enviar</span></button>
+        </div>
+        <p class="suggest-done" hidden role="status">Enviada. Gracias.</p>
+    </form>
+</dialog>
+
+<style>
+    .suggest-meta { display: flex; justify-content: space-between; gap: 12px; min-height: 18px; }
+    .suggest-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 24px; }
+    .suggest-done { margin-top: 16px; color: var(--success); font-weight: 600; }
+</style>
+
+<script>
+    const dlg = document.getElementById('suggest') as HTMLDialogElement;
+    const form = document.getElementById('suggest-form') as HTMLFormElement;
+    const msg = document.getElementById('suggest-msg') as HTMLTextAreaElement;
+    const err = document.getElementById('suggest-error')!;
+    const count = document.getElementById('suggest-count')!;
+    const done = form.querySelector<HTMLElement>('.suggest-done')!;
+    const submit = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+
+    document.querySelectorAll('[data-suggest-open]').forEach((b) => b.addEventListener('click', () => {
+        done.hidden = true; err.textContent = ''; msg.removeAttribute('aria-invalid');
+        dlg.showModal();
+    }));
+    dlg.querySelectorAll('[data-suggest-close]').forEach((b) => b.addEventListener('click', () => dlg.close()));
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    msg.addEventListener('input', () => { count.textContent = `${msg.value.length} / 500`; });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const text = msg.value.trim();
+        if (text.length < 3) {
+            err.textContent = 'Escribe al menos 3 caracteres.';
+            msg.setAttribute('aria-invalid', 'true');
+            msg.focus();
+            return;
+        }
+        err.textContent = ''; msg.removeAttribute('aria-invalid');
+        submit.disabled = true;
+        try {
+            const r = await fetch('/api/suggest', {
+                method: 'POST', headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({ message: text, website: (form.elements.namedItem('website') as HTMLInputElement).value }),
+            });
+            if (r.status === 429) throw new Error('Has enviado una hace muy poco. Prueba en un momento.');
+            if (!r.ok) throw new Error('No se pudo enviar. Vuelve a intentarlo.');
+            form.reset(); count.textContent = '0 / 500';
+            done.hidden = false;
+            setTimeout(() => dlg.close(), 1400);
+        } catch (x) {
+            err.textContent = (x as Error).message.startsWith('Has') || (x as Error).message.startsWith('No se') ? (x as Error).message : 'Sin conexión. Revisa tu red.';
+        } finally {
+            submit.disabled = false;
+        }
+    });
+</script>
