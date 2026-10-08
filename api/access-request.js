@@ -28,7 +28,7 @@ function getClientIp(req) {
 }
 const str = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
 
   const origin = req.headers.origin;
