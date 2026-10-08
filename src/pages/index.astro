@@ -16,7 +16,7 @@ const NIGHT = [
     { t: 'Una semana antes', icon: 'calendar', tone: 'var(--p-calendar)', product: 'Events Calendar', title: 'Lo publicas', text: 'El evento sale en Events Calendar y en Explorar, dentro del launcher de todos los jugadores.' },
     { t: 'Dos días antes', icon: 'list-checks', tone: 'var(--p-whitelist)', product: 'Events Whitelist', title: 'Se apuntan', text: 'Cada jugador escribe su nick en tu Discord. El bot comprueba la cuenta y lo añade a la whitelist.' },
     { t: 'La víspera', icon: 'download', tone: 'var(--p-client)', product: 'Events Client', title: 'Descargan antes', text: 'Con el código, la instancia se descarga antes de abrir.' },
-    { t: '22:00', icon: 'panel', tone: 'var(--p-client)', product: 'Panel', title: 'Abres', text: 'Un botón en el panel y todos pulsan Jugar a la vez, con los mismos archivos. Con Events+ 3, se abre sola a su hora.' },
+    { t: '22:00', icon: 'panel', tone: 'var(--p-client)', product: 'Panel', title: 'Abres', text: 'Un botón en el panel y todos pulsan Jugar a la vez, con los mismos archivos. Con Events+ Pro, se abre sola a su hora.' },
     { t: 'Durante', icon: 'shield', tone: 'var(--p-blacklist)', product: 'Panel y Events Blacklist', title: 'Moderas', text: 'Ves quién está dentro y lo desconectas si hace falta. Si entra alguien baneado en otras comunidades, tu staff recibe un aviso.' },
     { t: 'Después', icon: 'chart', tone: 'var(--p-plus)', product: 'Events+', title: 'Lo mides', text: 'Pico de jugadores a la vez, descargas completadas y crashes por versión, con histórico.' },
 ];
@@ -200,7 +200,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
                 </div>
             </div>
             <ul role="list" class="plus-tiers" data-reveal style="--i:1">
-                {PLUS_PLANS.map((p) => (
+                {PLUS_PLANS.filter((p) => !p.soon).map((p) => (
                     <li class:list={['tier', { pick: p.pick }]}>
                         <span class="tier-n">{p.instances}</span>
                         <span class="tier-copy">

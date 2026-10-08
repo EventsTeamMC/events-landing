@@ -39,7 +39,7 @@ const TABLE: { group: string; rows: [string, Cell, Cell, Cell, Cell, Cell][] }[]
         ['Canal Beta del launcher', N, N, N, Y, Y],
     ] },
 ];
-const COLS = ['Gratis', 'Events+ 1', 'Events+ 3', 'Events+ 5', 'Custom'];
+const COLS = ['Gratis', 'Lite', 'Pro', 'Max', 'Custom'];
 
 const FAQ = [
     ['¿Los jugadores tienen que pagar?', 'No. Ni para entrar a un evento, ni para descargar el launcher. Events+ lo paga quien organiza.'],
@@ -71,7 +71,14 @@ const FAQ = [
                     <h2 class="h2">Los planes.</h2>
                 </div>
                 <div class="plans">
-                    {PLUS_PLANS.map((pl) => (
+                    {PLUS_PLANS.map((pl) => pl.soon ? (
+                        <article class="plan soon" aria-labelledby={`pl-${pl.id}`}>
+                            <h3 class="plan-name" id={`pl-${pl.id}`}>{pl.name}</h3>
+                            <p class="plan-what">Próximamente</p>
+                            <p class="plan-price"><span class="soon-price">Próximamente</span></p>
+                            <span class="btn btn-secondary" aria-disabled="true">Próximamente</span>
+                        </article>
+                    ) : (
                         <article class:list={['plan', { pick: pl.pick }]} aria-labelledby={`pl-${pl.id}`}>
                             {pl.pick && <span class="plan-tag">El habitual</span>}
                             <h3 class="plan-name" id={`pl-${pl.id}`}>{pl.name}</h3>
@@ -219,7 +226,12 @@ const FAQ = [
 <style>
     .plans-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
 
-    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+    .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
+    @media (max-width: 1180px) { .plans { grid-template-columns: repeat(2, 1fr); } }
+    .plan.soon { background: transparent; box-shadow: inset 0 0 0 1px var(--border); }
+    .plan.soon .plan-name { color: var(--text-2); }
+    .soon-price { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: var(--text-3); }
+    .plan.soon .btn { margin-top: auto; opacity: 0.55; pointer-events: none; }
     .plan {
         position: relative; display: flex; flex-direction: column; gap: 6px; padding: 28px 26px;
         border-radius: var(--r-xl); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border);

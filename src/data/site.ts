@@ -60,7 +60,7 @@ export const product = (id: ProductId) => PRODUCTS.find((p) => p.id === id)!;
 const checkout = (slug: string, plan: number) => `${LINKS.clientes}/products/events-plus/${slug}/checkout?plan=${plan}`;
 
 export interface PlusPlan {
-    id: 'plus1' | 'plus3' | 'plus5';
+    id: 'plus1' | 'plus3' | 'plus5' | 'ultra';
     name: string;
     instances: number;
     monthly: number;
@@ -68,26 +68,32 @@ export interface PlusPlan {
     href: string;
     features: string[];
     pick?: boolean;
+    /** Announced, not on sale: its card reads Próximamente. */
+    soon?: boolean;
 }
 
 export const PLUS_PLANS: PlusPlan[] = [
     {
-        id: 'plus1', name: 'Events+ 1', instances: 1, monthly: 0.99,
+        id: 'plus1', name: 'Events+ Lite', instances: 1, monthly: 0.99,
         note: 'Para el studio que monta un evento cada vez.',
         href: checkout('events-plus-1', 37),
         features: ['1 instancia activa', 'Sin tope de jugadores a la vez', 'Cola prioritaria para tus jugadores', '1 GB de archivos por instancia', 'Estadísticas de 7 días', '3 cuentas de staff', 'Enlace corto que instala y canjea'],
     },
     {
-        id: 'plus3', name: 'Events+ 3', instances: 3, monthly: 1.99, pick: true,
+        id: 'plus3', name: 'Events+ Pro', instances: 3, monthly: 1.99, pick: true,
         note: 'El evento en marcha, el ensayo y el siguiente.',
         href: checkout('events-plus-3', 38),
-        features: ['3 instancias activas', 'Todo lo de Events+ 1', 'Descargas con prioridad doble', '2 GB por instancia', 'Estadísticas de 30 días', '8 cuentas de staff', 'Aperturas programadas y códigos masivos', '1 destaque al mes en Explorar', 'Soporte prioritario'],
+        features: ['3 instancias activas', 'Todo lo de Lite', 'Descargas con prioridad doble', '2 GB por instancia', 'Estadísticas de 30 días', '8 cuentas de staff', 'Aperturas programadas y códigos masivos', '1 destaque al mes en Explorar', 'Soporte prioritario'],
     },
     {
-        id: 'plus5', name: 'Events+ 5', instances: 5, monthly: 3.99,
+        id: 'plus5', name: 'Events+ Max', instances: 5, monthly: 3.99,
         note: 'Varios eventos vivos y un equipo detrás.',
         href: checkout('events-plus-5', 39),
-        features: ['5 instancias activas', 'Todo lo de Events+ 3', 'Prioridad de descarga máxima', '4 GB por instancia', 'Estadísticas de 3 meses', '20 cuentas de staff', '3 destaques al mes y destaque en Calendar y Discord', 'Acceso al canal Beta'],
+        features: ['5 instancias activas', 'Todo lo de Pro', 'Prioridad de descarga máxima', '4 GB por instancia', 'Estadísticas de 3 meses', '20 cuentas de staff', '3 destaques al mes y destaque en Calendar y Discord', 'Acceso al canal Beta'],
+    },
+    {
+        id: 'ultra', name: 'Events+ Ultra', instances: 0, monthly: 0, soon: true,
+        note: '', href: '', features: [],
     },
 ];
 
