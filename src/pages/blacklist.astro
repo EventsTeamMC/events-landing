@@ -12,15 +12,14 @@ const p = product('blacklist');
 ---
 <Base
     title="Events Blacklist · Baneos compartidos entre comunidades"
-    description="Un baneo en un servidor, un aviso en todos. Base de datos anónima de baneos activos para Discord. Gratis para siempre."
+    description="Baneos activos compartidos entre comunidades de Discord, con el origen anónimo."
 >
     <div style={`--tone:${p.tone}`}>
-        <PageHero product={p} title="Un baneo en un servidor." titleDim="Un aviso en todos." lead="Events Blacklist comparte entre comunidades una base de datos anónima de baneos activos. Cuando alguien conflictivo entra en tu servidor, tu staff lo sabe al momento, y nadie sabe quién lo reportó.">
+        <PageHero product={p} title="Un baneo en un servidor." titleDim="Un aviso en todos." lead="Baneos activos compartidos entre comunidades de Discord. Cuando entra alguien con baneos, tu staff recibe un aviso.">
             <Fragment slot="actions">
                 <a class="btn btn-primary btn-lg" href={LINKS.blacklistInvite}><Icon name="discord" /> Añadir a Discord</a>
                 <a class="btn btn-ghost btn-lg" href="#privacidad">Privacidad</a>
             </Fragment>
-            <Fragment slot="meta"><span>Gratis para siempre. No hay versión de pago.</span></Fragment>
             <div slot="visual" class="alert-card" aria-hidden="true">
                 <div class="ac-head"><span class="ac-ic"><Icon name="shield" size={18} /></span><b>Events Blacklist</b><span class="ac-tag">BOT</span></div>
                 <div class="ac-embed">
@@ -38,16 +37,15 @@ const p = product('blacklist');
         <section class="section">
             <div class="wrap">
                 <div class="section-head" data-reveal>
-                    <h2 class="h2">El mismo problemático, de servidor en servidor.</h2>
-                    <p class="lead">Lo banean en una comunidad, entra en la siguiente con otro nombre y el staff empieza de cero. Sin memoria compartida, siempre vas un paso por detrás.</p>
+                    <h2 class="h2">Lo que se banea en una comunidad, se sabe en todas.</h2>
                 </div>
                 <FeatureList items={[
-                    { icon: 'refresh', title: 'Sincronización automática', text: 'Cada baneo se comparte con la red leyendo el registro de auditoría. Sin comandos.' },
-                    { icon: 'bell', title: 'Aviso al entrar', text: 'Si entra alguien con baneos activos, tu staff recibe un aviso en el canal que elijas.' },
-                    { icon: 'eye-off', title: 'Origen anónimo', text: 'El servidor que reporta se guarda cifrado. Ningún comando lo muestra.' },
-                    { icon: 'chart', title: 'Cifras agregadas', text: 'Cuántas comunidades distintas lo han baneado y cuántos baneos acumula. Nunca por servidor.' },
-                    { icon: 'settings', title: 'A tu medida', text: 'Canal de avisos, roles autorizados, umbral de aviso y baneo automático.' },
-                    { icon: 'list-checks', title: 'Registro de auditoría', text: 'Cada acción queda registrada, también con el origen cifrado.' },
+                    { icon: 'refresh', title: 'Sincronización automática', text: 'Desde el registro de auditoría. Sin comandos.' },
+                    { icon: 'bell', title: 'Aviso al entrar', text: 'En el canal que elijas.' },
+                    { icon: 'eye-off', title: 'Origen anónimo', text: 'Ningún comando muestra qué servidor reportó.' },
+                    { icon: 'chart', title: 'Totales de la red', text: 'Baneos y comunidades, sin decir cuáles.' },
+                    { icon: 'settings', title: 'A tu medida', text: 'Canal de avisos, roles, umbral y baneo automático.' },
+                    { icon: 'list-checks', title: 'Registro de auditoría', text: 'Cada acción queda registrada.' },
                 ]} />
             </div>
         </section>
@@ -56,9 +54,9 @@ const p = product('blacklist');
             <div class="wrap">
                 <div class="section-head" data-reveal><h2 class="h2">Cómo funciona.</h2></div>
                 <Steps steps={[
-                    { title: 'Invita el bot', text: 'Con el Server Members Intent. Elige el canal donde quieres los avisos.' },
-                    { title: 'Banea como siempre', text: 'El bot detecta el baneo en el registro de auditoría y lo sincroniza con el origen cifrado.' },
-                    { title: 'Recibe avisos', text: 'Si esa persona entra en otra comunidad de la red, su staff recibe el aviso.' },
+                    { title: 'Invita el bot', text: 'Con el Server Members Intent, y elige el canal de avisos.' },
+                    { title: 'Banea como siempre', text: 'El baneo se comparte con la red.' },
+                    { title: 'Recibe avisos', text: 'Cuando entra alguien baneado en otra comunidad.' },
                 ]} />
             </div>
         </section>
@@ -67,13 +65,12 @@ const p = product('blacklist');
             <div class="wrap priv">
                 <div class="priv-lead" data-reveal>
                     <h2 class="h2">Ningún comando revela quién originó un baneo.</h2>
-                    <p class="lead" style="margin-top:16px">Todo el sistema parte de ahí. Reportas sin exponerte a represalias.</p>
                 </div>
                 <dl class="priv-list">
-                    <div data-reveal><dt><Icon name="hash" size={18} /> El origen se hashea</dt><dd>El ID del servidor que reporta pasa por HMAC-SHA256 antes de guardarse. Es irreversible: solo sirve para no contar dos veces y para decir «N comunidades distintas».</dd></div>
-                    <div data-reveal style="--i:1"><dt><Icon name="message" size={18} /> No leemos mensajes</dt><dd>El bot no pide el Message Content Intent ni entra en canales privados. Solo guarda IDs de Discord de usuarios baneados.</dd></div>
-                    <div data-reveal><dt><Icon name="chart" size={18} /> Solo datos agregados</dt><dd><code>/lookup</code> y <code>/stats</code> devuelven número de baneos, motivos y fechas. Nunca un desglose por servidor.</dd></div>
-                    <div data-reveal style="--i:1"><dt><Icon name="scale" size={18} /> Auditable contra abusos</dt><dd>Cada baneo tiene un ID propio. Si alguien intenta inflar baneos falsos, se puede rastrear y frenar.</dd></div>
+                    <div data-reveal><dt><Icon name="hash" size={18} /> Origen cifrado</dt><dd>El servidor que reporta se guarda con un hash irreversible.</dd></div>
+                    <div data-reveal style="--i:1"><dt><Icon name="message" size={18} /> No leemos mensajes</dt><dd>Sin acceso al contenido de los mensajes ni a canales privados. Solo IDs de usuarios baneados.</dd></div>
+                    <div data-reveal><dt><Icon name="chart" size={18} /> Solo datos agregados</dt><dd><code>/lookup</code> y <code>/stats</code> devuelven totales, motivos y fechas.</dd></div>
+                    <div data-reveal style="--i:1"><dt><Icon name="scale" size={18} /> Auditable</dt><dd>Cada baneo tiene su ID y se puede rastrear.</dd></div>
                 </dl>
             </div>
         </section>
@@ -96,11 +93,11 @@ const p = product('blacklist');
                 <div class="end-row" data-reveal>
                     <div>
                         <h2 class="h2">Protege tu comunidad hoy.</h2>
-                        <p class="small muted" style="margin-top:10px">Gratis del todo. Ninguna función está detrás de Events+, ni lo estará. <a href="/blacklist/privacy">Privacidad</a> · <a href="/blacklist/terms">Condiciones</a></p>
+                        <p class="small muted" style="margin-top:10px"><a href="/blacklist/privacy">Privacidad</a> · <a href="/blacklist/terms">Condiciones</a></p>
                     </div>
                     <a class="btn btn-primary btn-lg" href={LINKS.blacklistInvite}><Icon name="discord" /> Añadir a Discord</a>
                 </div>
-                <Callout icon="scale" title="¿Te ha baneado un servidor de la red?" text="Si crees que el baneo es falso o injusto, apélalo y revisamos el registro con la comunidad que lo originó." href="/appeal?type=blacklist" cta="Apelar un baneo" />
+                <Callout icon="scale" title="¿Te ha baneado un servidor de la red?" text="Lo revisamos con la comunidad que lo originó." href="/appeal?type=blacklist" cta="Apelar un baneo" />
             </div>
         </section>
     </div>

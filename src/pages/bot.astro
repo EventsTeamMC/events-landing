@@ -15,7 +15,7 @@ const separate = BOT.licenses[0].price + BOT.modules.reduce((s, m) => s + m.pric
     jsonld={[{ '@context': 'https://schema.org', '@type': 'Product', name: 'Events BOT', offers: { '@type': 'Offer', price: '3.00', priceCurrency: 'EUR' } }]}
 >
     <div style={`--tone:${p.tone}`}>
-        <PageHero product={p} title="Tu propio bot de Discord." titleDim="Con tu nombre y tus colores." lead="Tickets, logging, niveles, sorteos y más. Eliges los módulos, pagas la licencia una vez y el bot corre en nuestro hosting, siempre actualizado.">
+        <PageHero product={p} title="Tu propio bot de Discord." titleDim="Con tu nombre y tus colores." lead="Tickets, logging, niveles, sorteos y más. Eliges los módulos y lo alojamos nosotros.">
             <Fragment slot="actions">
                 <a class="btn btn-primary btn-lg" href="#precios">Ver precios</a>
                 <a class="btn btn-ghost btn-lg" href="#modulos">Módulos</a>
@@ -77,7 +77,7 @@ const separate = BOT.licenses[0].price + BOT.modules.reduce((s, m) => s + m.pric
             <div class="wrap">
                 <div class="section-head" data-reveal>
                     <h2 class="h2">Precios.</h2>
-                    <p class="lead">La licencia se paga una vez y la eliges al contratar. El hosting cuesta <b>{eur(BOT.hostingMonthly)} al mes</b>.</p>
+                    <p class="lead">Licencia de pago único. Hosting: <b>{eur(BOT.hostingMonthly)} al mes</b>.</p>
                 </div>
                 <div class="lic">
                     {BOT.licenses.map((l) => (

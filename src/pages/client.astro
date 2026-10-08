@@ -19,13 +19,13 @@ const downloads = await getDownloads();
 ---
 <Base
     title="Events Client · El launcher de los eventos de Minecraft"
-    description="Escribe el código del evento y juega. Versión, loader y mods se instalan solos. Gratis para Windows, macOS y Linux."
+    description="Escribe el código del evento y juega. Para Windows, macOS y Linux."
     jsonld={[{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'Events Client', applicationCategory: 'GameApplication', operatingSystem: 'Windows, macOS, Linux', offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' }, url: 'https://www.eventsmc.xyz/client' }]}
 >
     <div style={`--tone:${p.tone}`}>
-        <PageHero product={p} title="El launcher de los eventos de Minecraft." lead="Escribe el código del evento y juega. Versión, loader y mods se instalan solos, y cada jugador tiene exactamente los mismos archivos.">
+        <PageHero product={p} title="El launcher de los eventos de Minecraft." lead="Escribe el código del evento y juega. Todos con los mismos archivos.">
             <Fragment slot="actions">
-                <a class="btn btn-primary btn-lg" href="/download"><Icon name="download" /> Descargar gratis</a>
+                <a class="btn btn-primary btn-lg" href="/download"><Icon name="download" /> Descargar</a>
                 <a class="btn btn-ghost btn-lg" href="#como">Cómo funciona</a>
             </Fragment>
             <Fragment slot="meta">
@@ -41,8 +41,7 @@ const downloads = await getDownloads();
         <section class="section">
             <div class="wrap">
                 <div class="section-head" data-reveal>
-                    <h2 class="h2">Entrar a un evento no debería ser un examen técnico.</h2>
-                    <p class="lead">Sin launcher, cada evento es un .zip por Discord, la versión exacta de Forge a mano y doscientas personas diciendo «a mí no me abre».</p>
+                    <h2 class="h2">Entrar a un evento, sin instalar nada a mano.</h2>
                 </div>
                 <FeatureList items={[
                     { icon: 'key', title: 'Acceso por código', text: 'Las instancias son privadas. El studio reparte códigos y solo entra quien debe.' },

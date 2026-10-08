@@ -183,8 +183,9 @@
       librerías del equipo, ni los archivos personales, ni el contenido del dispositivo fuera de las carpetas de Events
       Client y sus instancias.</p>
     <p>Según lo que haya configurado el Studio, una detección puede quedar solo registrada y notificada, o provocar el
-      cierre de la sesión de juego en esa instancia. El Studio ve las detecciones de sus instancias. Los registros de
-      detección se conservan de forma acotada por instancia. Base jurídica: interés legítimo en garantizar el juego
+      cierre de la sesión de juego en esa instancia. El Studio ve las detecciones de sus instancias. Los cambios que el propio
+      juego hace en sus archivos de configuración no se registran. Por instancia se conservan como máximo las últimas
+      1.000 detecciones y los últimos 300 avisos. Base jurídica: interés legítimo en garantizar el juego
       limpio y proteger el trabajo de los Studios en eventos; el usuario es informado antes de jugar.</p>
 
     <h3>10. Instancias y actividad reciente</h3>
@@ -287,10 +288,12 @@
       sea necesaria; <strong>el identificador técnico del dispositivo cuando sea necesario para hacer cumplir un
       bloqueo de dispositivo</strong>; Discord ID cuando sea aplicable; motivo y duración de la sanción; pruebas
       mínimas necesarias; e intentos de evasión.</p>
-    <p>Determinados mecanismos de seguridad (por ejemplo, señuelos internos que detectan la manipulación no
-      autorizada de los archivos del Client) pueden aplicar un bloqueo <strong>automático y provisional</strong>
-      del dispositivo o de la IP implicados. Estos bloqueos son reversibles y quedan sujetos a la revisión humana
-      y al procedimiento de apelación.</p>
+    <p>Los servidores de Events Team detectan el uso automatizado de su API: el acceso a direcciones que Events
+      Client no utiliza y la petición de muchas instancias a las que no se tiene acceso en poco tiempo. Estas
+      comprobaciones se hacen en los servidores, no en el dispositivo del usuario. Cuando se producen, se aplica un
+      bloqueo <strong>automático y provisional</strong> del dispositivo, de la cuenta o, si no hay otro dato, de la
+      dirección IP durante 7 días. Estos bloqueos son reversibles, quedan registrados como automáticos, los revisa una
+      persona de Events Team y pueden apelarse en eventsmc.xyz/appeal con la referencia que muestra el Client.</p>
     <p>Los plazos serán: <strong>sanciones ordinarias</strong>, hasta 12 meses desde la finalización de la
       sanción; <strong>infracciones graves o evasiones reiteradas</strong>, hasta 3 años desde la última actuación
       relacionada; <strong>ataques, malware o accesos ilícitos</strong>, durante el tiempo necesario para proteger

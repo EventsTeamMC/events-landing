@@ -5,6 +5,9 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/calendar", "destination": "https://calendar.eventsmc.xyz", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/sitemap-index.xml" }
   ],

@@ -5,7 +5,7 @@ import Horizon from '../components/Horizon.astro';
 import HeroStack from '../components/HeroStack.astro';
 import { Image } from 'astro:assets';
 import panelCards from '../assets/shots/panel-cards.png';
-import { PRODUCTS, PLUS_PLANS, LINKS, PLUS_GIFT, eur } from '../data/site';
+import { PRODUCTS, PLUS_PLANS, LINKS, eur } from '../data/site';
 import { getDownloads, getUpcoming, eventWhen } from '../data/live';
 
 const [downloads, upcoming] = await Promise.all([getDownloads(), getUpcoming()]);
@@ -15,7 +15,7 @@ const fmt = (n: number) => n.toLocaleString('es-ES');
 const NIGHT = [
     { t: 'Una semana antes', icon: 'calendar', tone: 'var(--p-calendar)', product: 'Events Calendar', title: 'Lo publicas', text: 'El evento sale en Events Calendar y en Explorar, dentro del launcher de todos los jugadores.' },
     { t: 'Dos días antes', icon: 'list-checks', tone: 'var(--p-whitelist)', product: 'Events Whitelist', title: 'Se apuntan', text: 'Cada jugador escribe su nick en tu Discord. El bot comprueba la cuenta y lo añade a la whitelist.' },
-    { t: 'La víspera', icon: 'download', tone: 'var(--p-client)', product: 'Events Client', title: 'Descargan antes', text: 'Con el código, la instancia se descarga antes de abrir. El día del evento nadie espera colas.' },
+    { t: 'La víspera', icon: 'download', tone: 'var(--p-client)', product: 'Events Client', title: 'Descargan antes', text: 'Con el código, la instancia se descarga antes de abrir.' },
     { t: '22:00', icon: 'panel', tone: 'var(--p-client)', product: 'Panel', title: 'Abres', text: 'Un botón en el panel y todos pulsan Jugar a la vez, con los mismos archivos. Con Events+ 3, se abre sola a su hora.' },
     { t: 'Durante', icon: 'shield', tone: 'var(--p-blacklist)', product: 'Panel y Events Blacklist', title: 'Moderas', text: 'Ves quién está dentro y lo desconectas si hace falta. Si entra alguien baneado en otras comunidades, tu staff recibe un aviso.' },
     { t: 'Después', icon: 'chart', tone: 'var(--p-plus)', product: 'Events+', title: 'Lo mides', text: 'Pico de jugadores a la vez, descargas completadas y crashes por versión, con histórico.' },
@@ -50,7 +50,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
                 </div>
                 <p class="hero-meta small">
                     {downloads !== null && <><span class="tnum" data-dl-count>{fmt(downloads)}</span> descargas<span class="sep" aria-hidden="true"></span></>}
-                    Windows, macOS y Linux<span class="sep" aria-hidden="true"></span>Gratis para jugadores
+                    Windows, macOS y Linux
                 </p>
             </div>
             <div class="hero-demo">
@@ -75,7 +75,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
                         <li><Icon name="key" /><span>Entra con el código que le pasa el studio.</span></li>
                         <li><Icon name="layers" /><span>Versión, loader y mods se instalan solos: Vanilla, Forge, Fabric, NeoForge o Quilt.</span></li>
                         <li><Icon name="refresh" /><span>Solo descarga lo que cambia, verificado por hash. Sus ajustes y su VoiceChat se conservan.</span></li>
-                        <li><Icon name="lock" /><span>Cuenta Microsoft u offline vinculada a Discord. Nunca paga nada.</span></li>
+                        <li><Icon name="lock" /><span>Cuenta Microsoft u offline, vinculada a Discord.</span></li>
                     </ul>
                     <a class="go" href="/client">Conocer Events Client <Icon name="arrow-right" /></a>
                 </article>
@@ -194,8 +194,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
         <div class="wrap plus-grid">
             <div data-reveal>
                 <h2 class="h2">Events+, para quien organiza.</h2>
-                <p class="lead" style="margin-top:16px">Más instancias vivas, sin tope de jugadores a la vez y cola prioritaria. Lo paga el studio; los jugadores no pagan nada.</p>
-                <p class="plus-gift small"><Icon name="sparkle" size={16} /> {PLUS_GIFT}</p>
+                <p class="lead" style="margin-top:16px">Más instancias, sin tope de jugadores a la vez y cola prioritaria.</p>
                 <div class="plus-cta">
                     <a class="btn btn-secondary btn-lg" href="/plus">Ver los planes <Icon name="arrow-right" class="arrow" /></a>
                 </div>
@@ -330,7 +329,7 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
     .sys-copy { display: grid; gap: 3px; min-width: 0; }
     .sys-name { color: var(--text); font-weight: 600; }
     .sys-kind { color: var(--text-3); font-weight: 400; font-size: var(--fs-small); margin-left: 6px; }
-    .sys-line { color: var(--text-3); font-size: 0.92rem; }
+    .sys-line { color: var(--text-3); font-size: 0.92rem; line-height: 1.5; min-height: 3em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     :global(.sys-go) { color: var(--text-3); transition: transform var(--t-fast) var(--ease-out), color var(--t-fast) ease; }
     a.sys-link:hover :global(.sys-go) { color: var(--text); transform: translateX(3px); }
     .sys-row.soon .mark { filter: saturate(0.4); opacity: 0.75; }
@@ -364,7 +363,6 @@ const products = PRODUCTS.filter((p) => p.id !== 'plus');
 
     /* ---------------- events+ */
     .plus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
-    .plus-gift { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: #c9bcff; }
     .plus-cta { margin-top: 28px; }
     .plus-tiers { display: grid; gap: 10px; }
     .tier {

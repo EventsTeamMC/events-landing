@@ -4,7 +4,7 @@ import Icon from '../components/Icon.astro';
 import PageHero from '../components/PageHero.astro';
 import FeatureList from '../components/FeatureList.astro';
 import Steps from '../components/Steps.astro';
-import { product, PLUS_PLANS, LINKS, PLUS_GIFT, eur } from '../data/site';
+import { product, PLUS_PLANS, LINKS, eur } from '../data/site';
 
 const p = product('plus');
 const Y = 'yes', N = 'no';
@@ -54,15 +54,14 @@ const FAQ = [
 ---
 <Base
     title="Events+ · Planes para studios"
-    description="Más instancias, sin tope de jugadores y cola prioritaria. Desde 0,99 € al mes. Events+ 5 gratis para todos los studios hasta el 1 de enero de 2027."
+    description="Más instancias, sin tope de jugadores y cola prioritaria. Desde 0,99 € al mes."
 >
     <div style={`--tone:${p.tone}`}>
-        <PageHero product={p} title="Tu evento, con todo a favor." lead="La suscripción del studio que organiza: más instancias, sin tope de jugadores a la vez y cola prioritaria. Se paga por studio, no por evento ni por jugador. Los jugadores no pagan nada." horizon={false}>
+        <PageHero product={p} title="Tu evento, con todo a favor." lead="La suscripción del studio: más instancias, sin tope de jugadores a la vez y cola prioritaria." horizon={false}>
             <Fragment slot="actions">
                 <a class="btn btn-primary btn-lg" href="#planes">Ver los planes</a>
                 <a class="btn btn-ghost btn-lg" href="#comparar">Comparar</a>
             </Fragment>
-            <Fragment slot="meta"><span class="gift"><Icon name="sparkle" size={15} /> {PLUS_GIFT}</span></Fragment>
         </PageHero>
 
         <!-- ============================================================ plans -->
@@ -134,7 +133,7 @@ const FAQ = [
                 </div>
                 <h3 class="group-h">En el launcher</h3>
                 <FeatureList items={[
-                    { icon: 'zap', title: 'Tus jugadores saltan la cola', text: 'Cuando cientos de personas descargan a la vez, las de tu studio entran por la vía prioritaria.' },
+                    { icon: 'zap', title: 'Tus jugadores saltan la cola', text: 'Tus jugadores descargan por la vía prioritaria.' },
                     { icon: 'download', title: 'Más prioridad de descarga', text: 'El día del estreno, tus instancias no comparten el límite general con todo el mundo.' },
                     { icon: 'arrow-up-right', title: 'Un enlace que lo hace todo', text: 'Abre el launcher, añade tu instancia y canjea el código de una vez.' },
                     { icon: 'layers', title: 'Canales de instancia', text: 'Una copia solo para el staff, para ensayar sin tocar la que se juega.' },
@@ -154,7 +153,6 @@ const FAQ = [
                     { icon: 'sparkle', title: 'Destaque en el launcher', text: 'Tu evento arriba en Explorar, delante de todos los jugadores.' },
                     { icon: 'calendar', title: 'Destaque en Calendar y Discord', text: 'Posición destacada y anuncio en el Discord de Events al publicar.' },
                     { icon: 'list-checks', title: 'Whitelist ampliada', text: 'Más whitelists a la vez y más nicks por lista.' },
-                    { icon: 'shield', title: 'Blacklist, gratis para todos', text: 'Ninguna función de Events Blacklist está detrás de Events+, ni lo estará.' },
                 ]} />
             </div>
         </section>
@@ -219,7 +217,6 @@ const FAQ = [
 </Base>
 
 <style>
-    .gift { display: inline-flex; align-items: center; gap: 8px; color: #c9bcff; }
     .plans-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
 
     .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
