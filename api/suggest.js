@@ -21,7 +21,7 @@ function getClientIp(req) {
   return (req.socket && req.socket.remoteAddress) || 'unknown';
 }
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
 
   if (req.method !== 'POST') {

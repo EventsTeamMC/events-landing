@@ -71,7 +71,7 @@ function prune(now) {
   if (lastSubmission.size >= MAX_TRACKED_IPS) lastSubmission.clear();
 }
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
 
   if (req.method !== 'POST') { res.status(405).json({ error: 'Método no permitido' }); return; }
