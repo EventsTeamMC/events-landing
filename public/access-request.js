@@ -20,67 +20,66 @@
    * CSS; carrying it here is the only way it looks the same everywhere.
    * Values are literal rather than var(--…) for exactly the same reason. */
   var CSS = [
-    '.ar-veil{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:20px;',
-    'background:rgba(4,6,12,.72);backdrop-filter:blur(6px);overflow-y:auto;',
-    'font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}',
-    '.ar-modal{position:relative;width:min(520px,100%);max-height:92vh;overflow-y:auto;background:#111729;',
-    'border:1px solid #2a3552;border-radius:16px;padding:28px 26px;box-shadow:0 30px 80px rgba(0,0,0,.6);color:#eef2fb}',
+    // Events' design tokens, as literals (see above). Space navy surfaces, one
+    // blue for the action, Poppins for the title when the page has it.
+    '.ar-veil{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:16px;',
+    'background:rgba(3,4,12,.66);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;',
+    'font-family:"Inter","Inter Variable",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}',
+    '.ar-modal{position:relative;width:min(560px,100%);max-height:calc(100dvh - 32px);overflow-y:auto;background:#0c1022;',
+    'border-radius:24px;padding:28px;color:#aab2cf;',
+    'box-shadow:0 0 0 1px rgba(170,182,255,.17),0 40px 90px -20px rgba(3,2,20,.9)}',
     '.ar-modal *{box-sizing:border-box}',
-    '.ar-modal h2{font-family:"Outfit",system-ui,sans-serif;font-size:23px;margin:0 0 6px;font-weight:800;color:#eef2fb}',
-    '.ar-sub{color:#93a0bd;font-size:14px;margin:0 0 20px}',
-    // 36px, not 30: the recommended control size is 44pt on touch and 28pt on
-    // desktop, and this dialog is used on both.
-    '.ar-x{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:10px;background:#1e2740;',
-    'border:1px solid #2a3552;color:#eef2fb;cursor:pointer;font-size:14px;line-height:1;padding:0}',
-    '.ar-x:hover{border-color:#22d3ee;color:#67e8f9}',
-    '.ar-f{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}',
-    '.ar-f>span{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#5f6b8a}',
-    '.ar-f input,.ar-f textarea{padding:11px 13px;background:#0b1020;border:1px solid #2a3552;border-radius:10px;',
-    'color:#eef2fb;font-size:14px;font-family:inherit;resize:vertical;width:100%}',
-    '.ar-f input:focus,.ar-f textarea:focus{outline:none;border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.16)}',
+    '.ar-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:4px}',
+    '.ar-modal h2{font-family:"Poppins",system-ui,sans-serif;font-size:22px;line-height:1.25;margin:0;font-weight:700;color:#f2f4fc;letter-spacing:-.01em}',
+    '.ar-sub{color:#8189ab;font-size:14px;margin:6px 0 22px}',
+    '.ar-x{flex:none;display:grid;place-items:center;width:36px;height:36px;margin:-6px -6px 0 0;border-radius:10px;background:transparent;',
+    'border:0;color:#8189ab;cursor:pointer;padding:0;font-size:16px}',
+    '.ar-x:hover{background:rgba(255,255,255,.06);color:#f2f4fc}',
+    '.ar-x:focus-visible,.ar-send:focus-visible{outline:2px solid #5b8cff;outline-offset:2px}',
+    // The calendar's own step puts the close button straight in the modal.
+    '.ar-modal>.ar-x{position:absolute;top:18px;right:18px;margin:0}',
+    '.ar-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px}',
+    '.ar-f{display:flex;flex-direction:column;gap:6px}',
+    '.ar-f.ar-wide{grid-column:1/-1}',
+    '.ar-f>span{font-size:13px;font-weight:600;color:#f2f4fc}',
+    '.ar-f>span i{font-style:normal;font-weight:400;color:#8189ab}',
+    '.ar-f input,.ar-f textarea{padding:11px 13px;background:#070915;border:1px solid rgba(170,182,255,.17);border-radius:12px;',
+    'color:#f2f4fc;font-size:14px;font-family:inherit;resize:vertical;width:100%}',
+    '.ar-f input::placeholder,.ar-f textarea::placeholder{color:#5d6588}',
+    '.ar-f input:focus,.ar-f textarea:focus{outline:none;border-color:#5b8cff;box-shadow:0 0 0 3px rgba(91,140,255,.2)}',
     '.ar-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}',
-    '.ar-msg{min-height:18px;font-size:13px;margin-bottom:6px}',
-    '.ar-msg.bad{color:#ff8080}',
-    '.ar-send{width:100%;padding:13px;border-radius:10px;border:0;cursor:pointer;font-weight:700;font-size:15px;',
-    'font-family:inherit;background:linear-gradient(135deg,#67e8f9,#22d3ee);color:#04222a}',
-    '.ar-send:hover{filter:brightness(1.06)}',
+    '.ar-msg{min-height:20px;font-size:13px;margin:12px 0 4px}',
+    '.ar-msg.bad{color:#ff8a9a}',
+    '.ar-send{display:block;width:100%;padding:13px 18px;border-radius:12px;border:0;cursor:pointer;font-weight:600;font-size:15px;',
+    'font-family:inherit;background:#4766e6;color:#fff;box-shadow:0 10px 30px -10px rgba(71,102,230,.7)}',
+    '.ar-send:hover{background:#5274f0}',
     '.ar-send:disabled{opacity:.6;cursor:default}',
-    '.ar-alt{background:#1e2740!important;color:#eef2fb!important;margin-top:10px}',
-    '.ar-alt:hover{background:#26304d!important}',
-    '.ar-done{text-align:center;padding:10px 0}',
-    '.ar-done-ic{font-size:40px;margin-bottom:10px}',
-    '.ar-done h3{font-family:"Outfit",system-ui,sans-serif;font-size:19px;margin:0 0 8px}',
-    '.ar-done p{color:#93a0bd;font-size:14px;margin:0 0 18px}',
-    // Motion. The blur and the scale animate together so the veil reads as a
-    // material arriving rather than a grey box fading in, and the dialog leaves
-    // along the path it came by instead of vanishing — if it grew out of the
-    // middle of the screen, that is where it has to shrink back to.
-    '@keyframes ar-veil-in{from{opacity:0;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px)}',
-    'to{opacity:1;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}}',
-    '@keyframes ar-veil-out{from{opacity:1;backdrop-filter:blur(6px)}to{opacity:0;backdrop-filter:blur(0px)}}',
-    '@keyframes ar-card-in{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}',
-    '@keyframes ar-card-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(16px) scale(.96)}}',
-    // Enter and exit are the same curve read in opposite directions, so the way
-    // back retraces the way in.
+    '.ar-alt{background:rgba(255,255,255,.06)!important;color:#f2f4fc!important;box-shadow:none!important;margin-top:10px}',
+    '.ar-alt:hover{background:rgba(255,255,255,.1)!important}',
+    '.ar-done{text-align:center;padding:12px 0 4px}',
+    '.ar-done-ic{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:50%;margin-bottom:14px;',
+    'background:rgba(52,211,153,.14);color:#34d399}',
+    '.ar-done h3{font-family:"Poppins",system-ui,sans-serif;font-size:19px;margin:0 0 6px;color:#f2f4fc}',
+    '.ar-done p{color:#8189ab;font-size:14px;margin:0 0 20px}',
+    // Motion: enter and exit on the same curve, read in opposite directions.
+    '@keyframes ar-veil-in{from{opacity:0}to{opacity:1}}',
+    '@keyframes ar-veil-out{from{opacity:1}to{opacity:0}}',
+    '@keyframes ar-card-in{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}',
+    '@keyframes ar-card-out{from{opacity:1;transform:none}to{opacity:0;transform:translateY(12px) scale(.97)}}',
     '.ar-veil{animation:ar-veil-in .2s cubic-bezier(.32,.72,0,1) both}',
-    '.ar-modal{animation:ar-card-in .34s cubic-bezier(.32,.72,0,1) both}',
-    '.ar-veil.ar-out{animation:ar-veil-out .2s cubic-bezier(1,0,.68,.28) both}',
-    '.ar-veil.ar-out .ar-modal{animation:ar-card-out .24s cubic-bezier(1,0,.68,.28) both}',
-    '.ar-send,.ar-x{transition:transform .1s cubic-bezier(.32,.72,0,1),filter .13s,background .13s,border-color .13s}',
+    '.ar-modal{animation:ar-card-in .32s cubic-bezier(.32,.72,0,1) both}',
+    '.ar-veil.ar-out{animation:ar-veil-out .18s cubic-bezier(1,0,.68,.28) both}',
+    '.ar-veil.ar-out .ar-modal{animation:ar-card-out .2s cubic-bezier(1,0,.68,.28) both}',
+    '.ar-send,.ar-x{transition:transform .1s cubic-bezier(.32,.72,0,1),background .13s,color .13s}',
     '.ar-send:active,.ar-x:active{transform:scale(.97)}',
-    '.ar-f input,.ar-f textarea{transition:border-color .14s,box-shadow .14s,background .14s}',
-    '@keyframes ar-pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}',
-    '.ar-done-ic{display:inline-block;animation:ar-pop .45s cubic-bezier(.16,1,.3,1) both}',
-    // Reduced motion keeps the fade — the thing that says something happened —
-    // and drops the travel. The blur is applied outright rather than animated:
-    // moving in and out of a blur is itself a motion trigger.
-    '@media (prefers-reduced-motion:reduce){.ar-modal,.ar-done-ic{animation:none!important}',
-    '@keyframes ar-veil-in-flat{from{opacity:0}to{opacity:1}}',
-    '@keyframes ar-veil-out-flat{from{opacity:1}to{opacity:0}}',
-    '.ar-veil{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:ar-veil-in-flat .12s linear both}',
-    '.ar-veil.ar-out{animation:ar-veil-out-flat .12s linear both}}',
-    '@media (max-width:520px){.ar-modal{padding:22px 18px}}',
+    '.ar-f input,.ar-f textarea{transition:border-color .14s,box-shadow .14s}',
+    '@keyframes ar-pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}',
+    '.ar-done-ic{animation:ar-pop .4s cubic-bezier(.16,1,.3,1) both}',
+    '@media (prefers-reduced-motion:reduce){.ar-modal,.ar-done-ic,.ar-veil.ar-out .ar-modal{animation:none!important}}',
+    '@media (max-width:560px){.ar-modal{padding:22px 18px;border-radius:20px}.ar-grid{grid-template-columns:1fr}}',
   ].join('');
+  var ICON_X = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+  var ICON_OK = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
   function ensureStyles() {
     if (document.getElementById('ar-styles')) return;
     var st = document.createElement('style');
@@ -120,15 +119,17 @@
     v.className = 'ar-veil';
     v.innerHTML =
       '<div class="ar-modal" role="dialog" aria-modal="true" aria-labelledby="ar-h">' +
-        '<button class="ar-x" id="ar-x" aria-label="Cerrar">✕</button>' +
-        '<h2 id="ar-h">Solicitar acceso</h2>' +
-        '<p class="ar-sub">Las cuentas se aprueban a mano. Cuéntanos quién eres y te escribimos por Discord.</p>' +
+        '<div class="ar-head"><h2 id="ar-h">Publicar en el calendario</h2>' +
+        '<button type="button" class="ar-x" id="ar-x" aria-label="Cerrar">' + ICON_X + '</button></div>' +
+        '<p class="ar-sub">Las cuentas de studio se aprueban a mano. Te escribimos por Discord.</p>' +
         '<form id="ar-form" novalidate>' +
-          '<label class="ar-f"><span>Tu usuario de Discord *</span><input name="discord" maxlength="60" placeholder="usuario" required></label>' +
-          '<label class="ar-f"><span>Nombre del studio *</span><input name="studio" maxlength="80" placeholder="Mi Studio" required></label>' +
-          '<label class="ar-f"><span>Miembros de la comunidad *</span><input name="members" type="number" min="1" max="100000000" placeholder="250" required></label>' +
-          '<label class="ar-f"><span>Invitación a vuestro Discord *</span><input name="invite" maxlength="200" placeholder="https://discord.gg/…" required></label>' +
-          '<label class="ar-f"><span>¿Algo que añadir? (opcional)</span><textarea name="note" rows="3" maxlength="700" placeholder="Qué tipo de eventos organizáis…"></textarea></label>' +
+          '<div class="ar-grid">' +
+          '<label class="ar-f"><span>Tu usuario de Discord</span><input name="discord" maxlength="60" placeholder="usuario" autocomplete="username" required></label>' +
+          '<label class="ar-f"><span>Nombre del studio</span><input name="studio" maxlength="80" placeholder="Mi Studio" autocomplete="organization" required></label>' +
+          '<label class="ar-f"><span>Miembros de la comunidad</span><input name="members" type="number" inputmode="numeric" min="1" max="100000000" placeholder="250" required></label>' +
+          '<label class="ar-f"><span>Invitación a vuestro Discord</span><input name="invite" maxlength="200" placeholder="https://discord.gg/…" inputmode="url" required></label>' +
+          '<label class="ar-f ar-wide"><span>Algo más <i>(opcional)</i></span><textarea name="note" rows="3" maxlength="700" placeholder="Qué eventos organizáis"></textarea></label>' +
+          '</div>' +
           // Honeypot: hidden from people, bots fill everything they find.
           '<input name="website" tabindex="-1" autocomplete="off" class="ar-hp" aria-hidden="true">' +
           '<div class="ar-msg" id="ar-msg" role="alert"></div>' +
@@ -157,15 +158,15 @@
       };
       msg.className = 'ar-msg';
       if (!body.discord.trim() || !body.studio.trim() || !body.members || !body.invite.trim()) {
-        msg.textContent = 'Rellena los campos marcados con *'; msg.classList.add('bad'); return;
+        msg.textContent = 'Faltan campos por rellenar.'; msg.classList.add('bad'); return;
       }
       btn.disabled = true; btn.textContent = 'Enviando…';
       fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
         .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (r) {
           if (!r.ok) throw new Error((r.j && r.j.error) || 'No se pudo enviar');
-          f.innerHTML = '<div class="ar-done"><div class="ar-done-ic">✅</div>' +
-            '<h3>Solicitud enviada</h3><p>La revisamos a mano y te escribimos por Discord. Gracias por publicar en el calendario.</p>' +
+          f.innerHTML = '<div class="ar-done"><div class="ar-done-ic">' + ICON_OK + '</div>' +
+            '<h3>Solicitud enviada</h3><p>Te escribimos por Discord.</p>' +
             '<button type="button" class="ar-send" id="ar-close2">Cerrar</button></div>';
           document.getElementById('ar-close2').addEventListener('click', close);
         })

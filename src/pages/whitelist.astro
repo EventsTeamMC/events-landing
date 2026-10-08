@@ -11,10 +11,10 @@ const p = product('whitelist');
 ---
 <Base
     title="Events Whitelist · La whitelist de tu evento, desde Discord"
-    description="Tus jugadores escriben su nick de Minecraft en Discord y el bot comprueba la cuenta y los añade a la whitelist. Gratis."
+    description="Tus jugadores escriben su nick de Minecraft en Discord y quedan en la whitelist."
 >
     <div style={`--tone:${p.tone}`}>
-        <PageHero product={p} title="Escribe tu nick en Discord." titleDim="Entra directo al servidor." lead="Los jugadores se registran solos: escriben su nick en el canal que elijas, el bot comprueba si la cuenta es Premium y los añade a la whitelist. Sin formularios ni hojas de cálculo.">
+        <PageHero product={p} title="Escribe tu nick en Discord." titleDim="Entra directo al servidor." lead="Los jugadores escriben su nick en Discord y quedan en la whitelist.">
             <Fragment slot="actions">
                 <a class="btn btn-primary btn-lg" href={LINKS.whitelistInvite}><Icon name="discord" /> Añadir a Discord</a>
                 <a class="btn btn-ghost btn-lg" href="#como">Cómo funciona</a>
@@ -43,7 +43,6 @@ const p = product('whitelist');
             <div class="wrap">
                 <div class="section-head" data-reveal>
                     <h2 class="h2">Whitelists sin trabajo manual.</h2>
-                    <p class="lead">Formularios que nadie revisa a tiempo, nicks mal escritos y una lista final copiada a mano. Cada evento, otra vez.</p>
                 </div>
                 <FeatureList items={[
                     { icon: 'message', title: 'Registro por canal', text: 'El jugador escribe su nick en el canal que elijas. Sin comandos ni formularios externos.' },
@@ -71,7 +70,7 @@ const p = product('whitelist');
             <div class="wrap link-grid">
                 <div data-reveal>
                     <h2 class="h2">Conecta tu servidor de Minecraft.</h2>
-                    <p class="lead" style="margin-top:14px">Opcional. Con el plugin, la whitelist de tu servidor siempre está al día.</p>
+                    <p class="lead" style="margin-top:14px">Plugin opcional para tu servidor.</p>
                     <ul role="list" class="link-list">
                         <li><Icon name="key" size={18} /><span><b>Clave propia</b> para tu servidor, con acceso solo a las whitelists que elijas.</span></li>
                         <li><Icon name="zap" size={18} /><span><b>Altas y bajas al instante</b>, sin esperar a exportar.</span></li>
@@ -93,7 +92,7 @@ const p = product('whitelist');
             <div class="wrap end-row" data-reveal>
                 <div>
                     <h2 class="h2">Registra tu primer evento hoy.</h2>
-                    <p class="small muted" style="margin-top:10px">Gratis. <a href="/whitelist/privacy">Privacidad</a> · <a href="/whitelist/terms">Condiciones</a></p>
+                    <p class="small muted" style="margin-top:10px"><a href="/whitelist/privacy">Privacidad</a> · <a href="/whitelist/terms">Condiciones</a></p>
                 </div>
                 <a class="btn btn-primary btn-lg" href={LINKS.whitelistInvite}><Icon name="discord" /> Añadir a Discord</a>
             </div>

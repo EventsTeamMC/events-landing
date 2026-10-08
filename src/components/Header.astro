@@ -36,7 +36,7 @@ const isProduct = live.some((p) => p.href === path);
                 </div>
             </div>
             <a class="hdr-link" href="/plus" aria-current={path === '/plus' ? 'page' : undefined}>Events+</a>
-            <a class="hdr-link" href="/calendar" aria-current={path === '/calendar' ? 'page' : undefined}>Calendario</a>
+            <a class="hdr-link" href={LINKS.calendar}>Calendario</a>
         </nav>
 
         <div class="hdr-end">
@@ -107,7 +107,7 @@ const isProduct = live.some((p) => p.href === path);
     .dd { position: relative; }
     .dd-panel {
         position: absolute; top: calc(100% + 10px); left: -16px;
-        width: min(640px, 92vw); padding: 10px;
+        width: min(760px, 92vw); padding: 10px;
         background: rgba(12, 15, 32, 0.96);
         backdrop-filter: blur(20px) saturate(150%);
         border-radius: var(--r-lg);
@@ -126,7 +126,7 @@ const isProduct = live.some((p) => p.href === path);
     .dd-copy { display: grid; gap: 2px; min-width: 0; }
     .dd-name { display: inline-flex; align-items: center; gap: 4px; color: var(--text); font-weight: 600; font-size: 0.92rem; }
     :global(.dd-ext) { color: var(--text-3); }
-    .dd-line { font-size: 0.82rem; line-height: 1.45; color: var(--text-3); }
+    .dd-line { font-size: 0.82rem; line-height: 1.45; color: var(--text-3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
     .hdr-end { margin-left: auto; display: flex; align-items: center; gap: 6px; }
     .hdr-burger {

@@ -237,6 +237,8 @@ textarea.input { resize: vertical; min-height: 120px; line-height: 1.5; }
 
 /* ================================================================ dialog */
 dialog.dlg {
+    /* `* { margin: 0 }` above removes the UA's margin:auto that centres a modal dialog. */
+    margin: auto;
     width: min(100% - 32px, 520px); padding: 0; border: 0; border-radius: var(--r-xl);
     background: #0c1022; color: var(--text-2);
     box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-4);

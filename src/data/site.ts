@@ -43,14 +43,14 @@ export interface Product {
 }
 
 export const PRODUCTS: Product[] = [
-    { id: 'client', name: 'Events Client', kind: 'Launcher', line: 'Los jugadores entran a la instancia del evento con un código.', href: '/client', icon: 'gamepad', tone: 'var(--p-client)', status: 'on' },
-    { id: 'panel', name: 'Panel', kind: 'Para studios', line: 'Instancias, archivos, códigos, whitelist y baneos del evento.', href: LINKS.panel, external: true, icon: 'panel', tone: 'var(--p-client)', status: 'on' },
-    { id: 'whitelist', name: 'Events Whitelist', kind: 'Bot de Discord', line: 'Los jugadores escriben su nick en Discord y quedan registrados.', href: '/whitelist', icon: 'list-checks', tone: 'var(--p-whitelist)', status: 'on' },
-    { id: 'blacklist', name: 'Events Blacklist', kind: 'Bot de Discord', line: 'Baneos compartidos entre comunidades, sin revelar quién reporta.', href: '/blacklist', icon: 'shield', tone: 'var(--p-blacklist)', status: 'on' },
-    { id: 'calendar', name: 'Events Calendar', kind: 'Calendario', line: 'Todos los eventos de los studios, en un calendario público.', href: '/calendar', icon: 'calendar', tone: 'var(--p-calendar)', status: 'on' },
-    { id: 'bot', name: 'Events BOT', kind: 'Bot propio', line: 'Tu bot de Discord con tu nombre: tickets, logs, niveles y más.', href: '/bot', icon: 'bot', tone: 'var(--p-bot)', status: 'on' },
-    { id: 'plus', name: 'Events+', kind: 'Suscripción', line: 'Más instancias, sin tope de jugadores y cola prioritaria.', href: '/plus', icon: 'sparkle', tone: 'var(--p-plus)', status: 'on' },
-    { id: 'allys', name: 'Events Allys', kind: 'Red de alianzas', line: 'Comunidades aliadas que comparten recursos y eventos.', href: '', icon: 'users', tone: 'var(--p-allys)', status: 'soon' },
+    { id: 'client', name: 'Events Client', kind: 'Launcher', line: 'Entra a cualquier evento con un código.', href: '/client', icon: 'gamepad', tone: 'var(--p-client)', status: 'on' },
+    { id: 'panel', name: 'Panel', kind: 'Para studios', line: 'Instancias, archivos, códigos y whitelist.', href: LINKS.panel, external: true, icon: 'panel', tone: 'var(--p-client)', status: 'on' },
+    { id: 'whitelist', name: 'Events Whitelist', kind: 'Bot de Discord', line: 'Registro de nicks desde Discord.', href: '/whitelist', icon: 'list-checks', tone: 'var(--p-whitelist)', status: 'on' },
+    { id: 'blacklist', name: 'Events Blacklist', kind: 'Bot de Discord', line: 'Baneos compartidos entre comunidades.', href: '/blacklist', icon: 'shield', tone: 'var(--p-blacklist)', status: 'on' },
+    { id: 'calendar', name: 'Events Calendar', kind: 'Calendario', line: 'Todos los eventos, en un calendario.', href: 'https://calendar.eventsmc.xyz', icon: 'calendar', tone: 'var(--p-calendar)', status: 'on' },
+    { id: 'bot', name: 'Events BOT', kind: 'Bot propio', line: 'Tu bot de Discord: tickets, logs y más.', href: '/bot', icon: 'bot', tone: 'var(--p-bot)', status: 'on' },
+    { id: 'plus', name: 'Events+', kind: 'Suscripción', line: 'Más instancias y cola prioritaria.', href: '/plus', icon: 'sparkle', tone: 'var(--p-plus)', status: 'on' },
+    { id: 'allys', name: 'Events Allys', kind: 'Red de alianzas', line: 'Comunidades aliadas que comparten eventos.', href: '', icon: 'users', tone: 'var(--p-allys)', status: 'soon' },
     { id: 'hosting', name: 'Hosting de Minecraft', kind: 'Servidores', line: 'Servidores de Minecraft para tus eventos.', href: '', icon: 'server', tone: 'var(--p-hosting)', status: 'soon' },
 ];
 
@@ -92,7 +92,6 @@ export const PLUS_PLANS: PlusPlan[] = [
 ];
 
 export const FREE_LIMITS = 'Plan gratuito: 1 instancia, 500 MB, 2 cuentas de staff y 100 jugadores a la vez por studio.';
-export const PLUS_GIFT = 'Events+ 5 gratis para todos los studios hasta el 1 de enero de 2027.';
 
 /* ------------------------------------------------------------ Events BOT */
 export const BOT = {
