@@ -44,7 +44,7 @@ const COLS = ['Gratis', 'Events+ 1', 'Events+ 3', 'Events+ 5', 'Custom'];
 const FAQ = [
     ['¿Los jugadores tienen que pagar?', 'No. Ni para entrar a un evento, ni para descargar el launcher. Events+ lo paga quien organiza.'],
     ['¿Qué incluye el plan gratuito?', 'Desde el 1 de octubre de 2026: 1 instancia, 500 MB de archivos, 2 cuentas de staff y 100 jugadores a la vez sumando todas tus instancias. Códigos, whitelist, baneos y Blacklist, sin recortes.'],
-    ['¿Cuánto cuesta?', '0,99 €, 1,99 € y 3,99 € al mes, o 2,97 €, 5,97 € y 11,97 € al trimestre. Custom y SelfHosted, a convenir.'],
+    ['¿Cuánto cuesta?', '0,99 €, 1,99 € y 3,99 € al mes. Custom y SelfHosted, a convenir.'],
     ['¿Dónde se contrata?', 'Desde los botones de esta página, en clientes.eventsmc.xyz. Al pagar se pide el código de tu studio, que está en el panel → Events+.'],
     ['¿Y si no renuevo?', 'El studio vuelve al plan gratuito. Las instancias por encima de ese plan se suspenden sin borrar nada y vuelven al renovar.'],
     ['¿Y si necesito más de 5 instancias?', 'Events+ Custom: nos cuentas qué montas y acordamos los números.'],
@@ -70,10 +70,6 @@ const FAQ = [
             <div class="wrap">
                 <div class="plans-head">
                     <h2 class="h2">Los planes.</h2>
-                    <fieldset class="seg js-only" aria-label="Periodo de pago">
-                        <label><input type="radio" name="period" value="monthly" checked /><span>Mensual</span></label>
-                        <label><input type="radio" name="period" value="quarterly" /><span>Trimestral</span></label>
-                    </fieldset>
                 </div>
                 <div class="plans">
                     {PLUS_PLANS.map((pl) => (
@@ -82,15 +78,14 @@ const FAQ = [
                             <h3 class="plan-name" id={`pl-${pl.id}`}>{pl.name}</h3>
                             <p class="plan-what">{pl.instances === 1 ? '1 instancia' : `${pl.instances} instancias`}</p>
                             <p class="plan-price">
-                                <span class="tnum" data-m={eur(pl.monthly)} data-q={eur(pl.monthly * 3)}>{eur(pl.monthly)}</span>
-                                <small data-m="/ mes" data-q="/ trimestre">/ mes</small>
+                                <span class="tnum">{eur(pl.monthly)}</span>
+                                <small>/ mes</small>
                             </p>
-                            <p class="plan-alt small" data-m={`o ${eur(pl.monthly * 3)} al trimestre`} data-q={`${eur(pl.monthly)} al mes`}>o {eur(pl.monthly * 3)} al trimestre</p>
                             <p class="plan-note">{pl.note}</p>
                             <ul role="list" class="plan-list">
                                 {pl.features.map((f) => <li><Icon name="check" size={16} />{f}</li>)}
                             </ul>
-                            <a class:list={['btn', pl.pick ? 'btn-primary' : 'btn-secondary']} href={pl.href.monthly} data-m={pl.href.monthly} data-q={pl.href.quarterly}>Contratar {pl.name}</a>
+                            <a class:list={['btn', pl.pick ? 'btn-primary' : 'btn-secondary']} href={pl.href}>Contratar {pl.name}</a>
                         </article>
                     ))}
                 </div>
@@ -198,7 +193,7 @@ const FAQ = [
             <div class="wrap">
                 <div class="section-head" data-reveal><h2 class="h2">Cómo se activa.</h2></div>
                 <Steps steps={[
-                    { title: 'Eliges plan y periodo', text: 'Al mes o al trimestre. Al pagar se pide el código de tu studio, que está en el panel → Events+.' },
+                    { title: 'Eliges tu plan', text: 'Se paga al mes. Al pagar se pide el código de tu studio, que está en el panel → Events+.' },
                     { title: 'Se activa al momento', text: 'Sobre todas tus instancias, también las que ya tienes. El panel muestra el plan y cuánto le queda.' },
                     { title: 'Tus jugadores lo notan', text: 'Mismo launcher y mismo código. Les va más rápido y esperan menos.' },
                 ]} />
@@ -226,13 +221,6 @@ const FAQ = [
 <style>
     .gift { display: inline-flex; align-items: center; gap: 8px; color: #c9bcff; }
     .plans-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 36px; }
-    .seg { display: inline-flex; padding: 4px; border: 0; border-radius: 14px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
-    .seg label { position: relative; }
-    .seg input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-    .seg span { display: block; padding: 9px 18px; border-radius: 10px; font-size: var(--fs-small); font-weight: 600; color: var(--text-2); transition: background-color var(--t-fast) ease, color var(--t-fast) ease; }
-    .seg input:checked + span { background: var(--surface-3); color: var(--text); box-shadow: var(--shadow-1); }
-    .seg input:focus-visible + span { outline: 2px solid var(--action); outline-offset: 2px; }
-    :global(html:not(.js)) .js-only { display: none; }
 
     .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
     .plan {
@@ -246,7 +234,6 @@ const FAQ = [
     .plan-price { margin-top: 18px; display: flex; align-items: baseline; gap: 6px; }
     .plan-price .tnum { font-family: var(--font-display); font-weight: 800; font-size: 2.4rem; color: var(--text); letter-spacing: -0.03em; line-height: 1; }
     .plan-price small { color: var(--text-3); font-size: var(--fs-small); }
-    .plan-alt { color: var(--text-3); }
     .plan-note { margin-top: 12px; color: var(--text-2); }
     .plan-list { display: grid; gap: 10px; margin: 18px 0 26px; padding-top: 18px; border-top: 1px solid var(--border); font-size: 0.92rem; }
     .plan-list li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; }
@@ -291,15 +278,3 @@ const FAQ = [
     .qa p { padding: 0 2px 22px; max-width: 64ch; }
 </style>
 
-<script>
-    // Monthly / quarterly: every element carrying data-m/data-q swaps its text
-    // (or href) so prices and checkout links always match the chosen period.
-    const radios = document.querySelectorAll<HTMLInputElement>('input[name="period"]');
-    const apply = (period: 'm' | 'q') => {
-        document.querySelectorAll<HTMLElement>('[data-m][data-q]').forEach((el) => {
-            const v = el.dataset[period]!;
-            if (el instanceof HTMLAnchorElement) el.href = v; else el.textContent = v;
-        });
-    };
-    radios.forEach((r) => r.addEventListener('change', () => apply(r.value === 'quarterly' ? 'q' : 'm')));
-</script>

@@ -30,7 +30,7 @@ La portada se diseña para los dos públicos a partes iguales.
 | `/` | Hero con capturas reales (Events Client, Panel, Calendar), los dos lados de un evento, la noche de un evento hora a hora, el directorio de productos, datos en directo (descargas y próximo evento), Events+ y cierre |
 | `/client` | El launcher con capturas reales, funciones, pasos y el panel para studios |
 | `/download` | Detección del sistema, la descarga principal, todas las plataformas y el canal Beta |
-| `/plus` | Precios: Mensual o Trimestral, planes 1, 3 y 5, Custom y SelfHosted, plan gratuito, ventajas, comparativa y preguntas |
+| `/plus` | Precios al mes (de momento solo mensual), planes 1, 3 y 5, Custom y SelfHosted, plan gratuito, ventajas, comparativa y preguntas |
 | `/bot` | Licencias, módulos con precio y hosting de bots, con enlace directo a la compra |
 | `/whitelist`, `/blacklist`, `/calendar` | Producto, funciones, pasos, comandos y privacidad |
 | `/appeal` | Formulario de apelación accesible |

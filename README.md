@@ -29,7 +29,7 @@ api/                   funciones de Vercel: sugerencias, solicitudes de acceso, 
 
 ## Reglas que no se ven en el código
 
-- **Precios y enlaces:** salen solo de `src/data/site.ts`. Los números de Events+ los fija `events-server/backend/plans.js`; si no coinciden, manda ese archivo. Cada «Contratar» lleva directamente al checkout de clientes.eventsmc.xyz con el periodo elegido (`?plan=<id>`).
+- **Precios y enlaces:** salen solo de `src/data/site.ts`. Los números de Events+ los fija `events-server/backend/plans.js`; si no coinciden, manda ese archivo. Cada «Contratar» lleva directamente al checkout de clientes.eventsmc.xyz con el plan mensual (`?plan=<id>`). De momento no se vende trimestral ni anual.
 - **`public/access-request.js`:** también lo carga calendar.eventsmc.xyz. No se borra ni se renombra.
 - **`public/splash.js`:** es la pantalla de arranque compartida con el panel. Al terminar, el logo vuela hasta el de la cabecera. Con movimiento reducido no aparece.
 - **Variables de entorno en Vercel:** `SUGGESTIONS_WEBHOOK_URL`, `ACCESS_WEBHOOK_URL` y `APPEAL_WEBHOOK_URL`.

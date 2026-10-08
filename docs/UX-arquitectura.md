@@ -22,7 +22,7 @@
 |---|---|---|
 | Jugador | Enlace de su studio, buscador | `/` o `/client` → «Descargar» → `/download` (detecta el sistema) |
 | Studio nuevo | `/` | «Organizo eventos» → «Un evento tiene dos lados» → Abrir el panel o `/plus` |
-| Studio que paga | `/plus` | Mensual o Trimestral → «Contratar Events+ N» → `clientes…/products/events-plus/events-plus-N/checkout?plan=ID` |
+| Studio que paga | `/plus` | «Contratar Events+ N» → `clientes…/products/events-plus/events-plus-N/checkout?plan=ID` |
 | Bot propio | `/bot` | Contratar → `clientes…/products/hosting/events-bot/checkout` |
 | Sancionado | Launcher, bot, pie | `/appeal?type=launcher\|blacklist\|discord` (la categoría llega ya marcada) |
 
