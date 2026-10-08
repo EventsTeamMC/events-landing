@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Events · Guía de marca</title>
+<style>
+@font-face { font-family: 'Poppins'; font-weight: 600; src: url(../node_modules/@fontsource/poppins/files/poppins-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Poppins'; font-weight: 700; src: url(../node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Poppins'; font-weight: 800; src: url(../node_modules/@fontsource/poppins/files/poppins-latin-800-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 100 900; src: url(../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Roboto Mono'; font-weight: 500; src: url(../node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-500-normal.woff2) format('woff2'); }
+
+@page { size: A4; margin: 0; }
+:root {
+  --bg: #05060d; --surface: #0d1122; --surface-2: #131a30; --surface-3: #1b2340;
+  --text: #f2f4fc; --text-2: #aab2cf; --text-3: #8189ab;
+  --action: #5b8cff; --action-solid: #4766e6; --rim: #b9a8ff;
+  --paper: #ffffff; --ink: #0b0e1c; --ink-2: #4a5272; --ink-3: #7a819c; --line: #e3e6f0;
+}
+* { box-sizing: border-box; margin: 0; }
+body { font-family: 'Inter', sans-serif; color: var(--ink); background: #ccd; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 210mm; height: 297mm; padding: 18mm 18mm 16mm; background: var(--paper); position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; }
+.page.dark { background: var(--bg); color: var(--text); }
+h1, h2, h3 { font-family: 'Poppins', sans-serif; letter-spacing: -0.02em; line-height: 1.08; }
+h2 { font-size: 30pt; font-weight: 800; margin-bottom: 8mm; }
+h3 { font-size: 12pt; font-weight: 700; margin-bottom: 2.5mm; letter-spacing: -0.01em; }
+p, li { font-size: 9.6pt; line-height: 1.55; color: var(--ink-2); }
+.dark p, .dark li { color: var(--text-2); }
+b { color: var(--ink); font-weight: 600; } .dark b { color: var(--text); }
+.top { display: flex; justify-content: space-between; align-items: center; font-size: 8pt; color: var(--ink-3); padding-bottom: 5mm; margin-bottom: 9mm; border-bottom: 1.5px solid var(--ink); }
+.dark .top { color: var(--text-3); border-color: var(--text); }
+.top .brand { display: flex; align-items: center; gap: 2mm; font-family: 'Poppins'; font-weight: 700; font-size: 11pt; color: var(--ink); }
+.dark .top .brand { color: var(--text); }
+.top .brand svg { height: 3.4mm; width: auto; }
+.foot { margin-top: auto; display: flex; justify-content: space-between; font-size: 7.5pt; color: var(--ink-3); padding-top: 5mm; border-top: 1px solid var(--line); }
+.dark .foot { color: var(--text-3); border-color: rgba(255,255,255,.1); }
+.lead { font-size: 12pt; line-height: 1.5; color: var(--ink-2); max-width: 150mm; margin-bottom: 10mm; }
+.dark .lead { color: var(--text-2); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6mm; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5mm; }
+.label { font-size: 7.5pt; font-weight: 600; letter-spacing: .02em; color: var(--ink-3); margin-bottom: 2.5mm; }
+.dark .label { color: var(--text-3); }
+.box { border: 1px solid var(--line); border-radius: 4mm; padding: 6mm; }
+.dark .box { border-color: rgba(170,182,255,.14); background: var(--surface); }
+ul.clean { padding-left: 4.5mm; } ul.clean li + li { margin-top: 1.6mm; }
+.yes, .no { border-radius: 4mm; padding: 6mm; }
+.yes { background: #eefaf3; } .no { background: #fdeef0; }
+.yes h3 { color: #12804a; } .no h3 { color: #c32b42; }
+.yes li::marker { color: #12804a; } .no li::marker { color: #c32b42; }
+.sky { background:
+  radial-gradient(120mm 80mm at 90% -5%, rgba(107,60,255,.28), transparent 70%),
+  radial-gradient(110mm 90mm at -10% 35%, rgba(35,72,255,.16), transparent 70%), var(--bg); }
+.stars::before { content: ''; position: absolute; inset: 0; opacity: .55; pointer-events: none;
+  background-image: radial-gradient(1px 1px at 22px 34px, #fff 50%, transparent 51%), radial-gradient(1px 1px at 141px 92px, #cdd6ff 50%, transparent 51%), radial-gradient(1px 1px at 87px 171px, #fff 50%, transparent 51%), radial-gradient(1px 1px at 196px 13px, #b9b0ff 50%, transparent 51%), radial-gradient(1px 1px at 230px 150px, #dfe4ff 50%, transparent 51%);
+  background-size: 250px 240px; }
+.horizon { position: absolute; left: -20%; right: -20%; bottom: -150mm; height: 230mm; border-radius: 50%;
+  background: radial-gradient(70% 60% at 50% 0%, #1a1650, #0c0b26 45%, #05060d 75%);
+  box-shadow: 0 -1px 0 0 #b9a8ff, 0 -10px 60px -10px rgba(157,140,255,.55); }
+.swatch { border-radius: 3.5mm; overflow: hidden; border: 1px solid var(--line); }
+.swatch i { display: block; height: 22mm; }
+.swatch div { padding: 3mm 3.5mm; font-size: 8pt; line-height: 1.45; color: var(--ink-2); }
+.swatch b { display: block; font-size: 9pt; }
+.chip { display: inline-flex; align-items: center; gap: 2mm; padding: 1.2mm 3mm; border-radius: 99px; font-size: 8pt; font-weight: 600; }
+.btnx { display: inline-flex; align-items: center; justify-content: center; height: 11mm; padding: 0 5mm; border-radius: 3.2mm; font-weight: 600; font-size: 9pt; }
+.btn-p { background: var(--action-solid); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 6px 18px -6px rgba(71,102,230,.7); }
+.btn-s { background: rgba(255,255,255,.05); color: var(--text); border: 1px solid rgba(170,182,255,.2); }
+.btn-g { color: var(--text-2); }
+.field { height: 11mm; border-radius: 3.2mm; background: #090b18; border: 1px solid rgba(170,182,255,.2); padding: 0 4mm; display: flex; align-items: center; font-size: 9pt; color: var(--text-3); }
+.field.focus { border-color: var(--action); box-shadow: 0 0 0 1.2mm rgba(91,140,255,.16); color: var(--text); }
+.mono { font-family: 'Roboto Mono', monospace; letter-spacing: .12em; }
+.logo-white { color: #fff; } .logo-ink { color: var(--ink); }
+.big { font-family: 'Poppins'; font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
+.tiny { font-size: 7.5pt; color: var(--ink-3); }
+.dark .tiny { color: var(--text-3); }
+.num { font-family: 'Poppins'; font-weight: 800; color: var(--action); font-size: 9pt; margin-bottom: 2mm; }
+.col-note { font-size: 8.5pt; }
+</style>
+</head>
+<body>
+
+<!-- ================================================================ 1 portada -->
+<section class="page dark sky stars">
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%">
+    <div style="display:flex;justify-content:space-between;font-size:8pt;color:var(--text-3)"><span>Guía de marca</span><span>Versión 1 · octubre de 2026</span></div>
+    <div style="margin-top:62mm">
+      <svg class="logo-white" style="height:28mm;width:auto" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>
+      <h1 class="big" style="font-size:64pt;margin-top:12mm">Events</h1>
+      <p style="font-size:14pt;color:var(--text-2);margin-top:5mm;max-width:120mm">El ecosistema para los eventos de Minecraft. Cómo se ve y cómo habla la marca.</p>
+    </div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+<!-- ================================================================ 2 la marca -->
+<section class="page">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>01 · La marca</span></div>
+  <h2>Quién es Events</h2>
+  <p class="lead">Events reúne en un solo sitio lo que necesita un evento de Minecraft: un launcher, un panel para el studio, bots de Discord y un calendario público. El studio prepara el evento y sus jugadores entran con un código, sin instalar nada a mano.</p>
+  <div class="grid2" style="margin-bottom:10mm">
+    <div class="box"><h3>Para quién</h3><p><b>Studios y organizadores</b> que montan eventos, a veces con cientos de jugadores, y pagan Events+ o Events BOT. <b>Jugadores</b>, que entran gratis con Events Client.</p></div>
+    <div class="box"><h3>Qué promete</h3><p>Que entrar a un evento sea tan simple como escribir un código, y que quien organiza lo controle todo desde un panel: acceso, whitelist, baneos y jugadores en directo.</p></div>
+  </div>
+  <div class="label">Personalidad</div>
+  <div class="grid4" style="margin-bottom:10mm">
+    <div><div class="num">Directa</div><p>Dice qué es y qué hacer. Sin rodeos ni relleno.</p></div>
+    <div><div class="num">Técnica, no fría</div><p>Precisa con los datos; cercana con quien juega.</p></div>
+    <div><div class="num">Nocturna</div><p>Los eventos pasan de noche. La marca vive en azul noche.</p></div>
+    <div><div class="num">Sobria</div><p>Un solo color de acción. Deja hablar al producto.</p></div>
+  </div>
+  <div class="label">Familia de productos</div>
+  <div class="grid3">
+    <p><b>Events Client</b><br>El launcher. Los jugadores entran con un código.</p>
+    <p><b>Panel</b><br>Instancias, archivos, códigos, whitelist y baneos.</p>
+    <p><b>Events+</b><br>La suscripción del studio que organiza.</p>
+    <p><b>Events Whitelist</b><br>Registro de jugadores desde Discord.</p>
+    <p><b>Events Blacklist</b><br>Baneos compartidos entre comunidades.</p>
+    <p><b>Events Calendar · Events BOT</b><br>Calendario público y bot propio.</p>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>2</span></div>
+</section>
+
+<!-- ================================================================ 3 logo -->
+<section class="page">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>02 · Logo</span></div>
+  <h2>El logo</h2>
+  <p class="lead">Un planeta con su anillo, en un solo color. Va solo (el símbolo) o junto al nombre escrito en Poppins Bold. Usa siempre los archivos originales: no se redibuja ni se recompone.</p>
+  <div class="grid2" style="grid-template-columns:1.35fr 1fr;margin-bottom:8mm">
+    <div class="box sky" style="height:58mm;display:flex;align-items:center;justify-content:center;gap:5mm;border:0">
+      <svg class="logo-white" style="height:14mm;width:auto" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>
+      <span style="font-family:Poppins;font-weight:700;font-size:28pt;color:#fff;letter-spacing:-.02em">Events</span>
+    </div>
+    <div class="box" style="height:58mm;display:flex;align-items:center;justify-content:center;gap:4mm">
+      <svg class="logo-ink" style="height:11mm;width:auto" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>
+      <span style="font-family:Poppins;font-weight:700;font-size:22pt;color:var(--ink);letter-spacing:-.02em">Events</span>
+    </div>
+  </div>
+  <div class="grid2" style="grid-template-columns:1.35fr 1fr;margin-bottom:10mm">
+    <p class="tiny">Horizontal sobre fondo oscuro. La versión por defecto.</p>
+    <p class="tiny">Horizontal sobre fondo claro, en tinta.</p>
+  </div>
+  <div class="grid3">
+    <div>
+      <div class="label">Espacio libre</div>
+      <div class="box" style="display:flex;justify-content:center;align-items:center;height:44mm;position:relative">
+        <div style="position:relative;padding:7mm;outline:1px dashed #9aa3c2">
+          <svg class="logo-ink" style="height:12mm;width:auto;display:block" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>
+        </div>
+      </div>
+      <p class="col-note" style="margin-top:3mm">Alrededor, como mínimo, la mitad de la altura del símbolo. Nada entra en ese margen.</p>
+    </div>
+    <div>
+      <div class="label">Tamaño mínimo</div>
+      <div class="box" style="display:flex;justify-content:center;align-items:center;gap:6mm;height:44mm">
+        <svg class="logo-ink" style="height:5mm;width:auto" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>
+        <span style="display:flex;align-items:center;gap:1.5mm"><svg class="logo-ink" style="height:3.4mm;width:auto" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg><span style="font-family:Poppins;font-weight:700;font-size:8pt">Events</span></span>
+      </div>
+      <p class="col-note" style="margin-top:3mm">Símbolo: 16 px de ancho en pantalla, 6 mm impreso. Con el nombre: 80 px o 20 mm.</p>
+    </div>
+    <div>
+      <div class="label">Avatar e icono</div>
+      <div class="box" style="display:flex;justify-content:center;align-items:center;height:44mm">
+        <div style="width:24mm;height:24mm;border-radius:6mm;background:var(--bg);display:grid;place-items:center;box-shadow:inset 0 0 0 1px rgba(170,182,255,.2)">
+          <svg class="logo-white" style="width:14mm;height:auto" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>
+        </div>
+      </div>
+      <p class="col-note" style="margin-top:3mm">Con poco espacio, solo el símbolo blanco sobre azul noche.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>3</span></div>
+</section>
+
+<!-- ================================================================ 4 usos -->
+<section class="page">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>03 · Usos del logo y del nombre</span></div>
+  <h2>Qué sí y qué no</h2>
+  <div class="grid2" style="margin-bottom:9mm">
+    <div class="yes"><h3>Qué sí</h3><ul class="clean">
+      <li>El logo en <b>blanco sobre fondos oscuros</b> y en tinta sobre fondos claros.</li>
+      <li>El nombre se escribe <b>Events</b>, y los productos <b>Events Client</b>, <b>Events+</b>, <b>Events BOT</b>… siempre con espacio.</li>
+      <li>Respetar el espacio libre y el tamaño mínimo.</li>
+      <li>Con poco sitio, el símbolo solo.</li>
+      <li>Sobre fotos, solo donde la imagen sea oscura y lisa.</li>
+    </ul></div>
+    <div class="no"><h3>Qué no</h3><ul class="clean">
+      <li>Estirar, girar, recortar ni cambiar las proporciones.</li>
+      <li>Rellenar el logo con degradados, sombras, brillos o contornos.</li>
+      <li>Colorearlo con el azul de acción o con los colores de producto.</li>
+      <li>Escribir «EventsClient», «EVENTS» o «events» en un texto.</li>
+      <li>Ponerlo sobre fondos con mucho detalle o poco contraste.</li>
+    </ul></div>
+  </div>
+  <div class="grid4">
+    <div class="box" style="height:34mm;display:grid;place-items:center"><svg class="logo-ink" style="height:9mm;width:auto;transform:scaleX(1.6)" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg></div>
+    <div class="box" style="height:34mm;display:grid;place-items:center"><svg style="height:10mm;width:auto;transform:rotate(-24deg);color:#5b8cff" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg></div>
+    <div class="box" style="height:34mm;display:grid;place-items:center"><svg style="height:10mm;width:auto;color:var(--ink);filter:drop-shadow(0 2mm 2mm rgba(91,140,255,.8))" viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg></div>
+    <div class="box" style="height:34mm;display:grid;place-items:center;font-family:Poppins;font-weight:800;font-size:13pt">EventsClient</div>
+  </div>
+  <div class="grid4" style="margin-top:2.5mm">
+    <p class="tiny">No estirar.</p><p class="tiny">No girar ni recolorear.</p><p class="tiny">No añadir efectos.</p><p class="tiny">No juntar los nombres.</p>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>4</span></div>
+</section>
+
+<!-- ================================================================ 5 color -->
+<section class="page">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>04 · Color</span></div>
+  <h2>Color</h2>
+  <p class="lead">Una noche de azul muy oscuro, superficies que apenas se separan del fondo y <b>un solo azul que pide acción</b>. Los morados y azules intensos son atmósfera: nunca se usan en botones ni en texto.</p>
+  <div class="label">Base</div>
+  <div class="grid4" style="margin-bottom:7mm">
+    <div class="swatch"><i style="background:#05060d"></i><div><b>Noche</b>#05060d · fondo</div></div>
+    <div class="swatch"><i style="background:#0d1122"></i><div><b>Superficie</b>#0d1122 · paneles</div></div>
+    <div class="swatch"><i style="background:#f2f4fc;border-bottom:1px solid var(--line)"></i><div><b>Texto</b>#f2f4fc</div></div>
+    <div class="swatch"><i style="background:#aab2cf"></i><div><b>Texto secundario</b>#aab2cf</div></div>
+  </div>
+  <div class="label">Acción y atmósfera</div>
+  <div class="grid4" style="margin-bottom:7mm">
+    <div class="swatch"><i style="background:#5b8cff"></i><div><b>Azul de acción</b>#5b8cff · enlaces, foco, activo</div></div>
+    <div class="swatch"><i style="background:#4766e6"></i><div><b>Azul sólido</b>#4766e6 · botón con texto blanco</div></div>
+    <div class="swatch"><i style="background:#6b3cff"></i><div><b>Nebulosa</b>#6b3cff · solo atmósfera</div></div>
+    <div class="swatch"><i style="background:#b9a8ff"></i><div><b>Borde del planeta</b>#b9a8ff · luz y énfasis</div></div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="label">Productos</div>
+      <p style="margin-bottom:3mm">Cada producto tiene un tono para reconocerlo. Va solo en su símbolo, en líneas finas y en etiquetas pequeñas.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:2mm">
+        <span class="chip" style="background:#5b8cff22;color:#3561d8">Client</span>
+        <span class="chip" style="background:#a78bfa24;color:#7a5cd6">Events+</span>
+        <span class="chip" style="background:#34d17a22;color:#11804a">Whitelist</span>
+        <span class="chip" style="background:#f0546822;color:#c32b42">Blacklist</span>
+        <span class="chip" style="background:#38d2f022;color:#0d8aa6">Calendar</span>
+        <span class="chip" style="background:#f5a62324;color:#a96a00">BOT</span>
+      </div>
+    </div>
+    <div>
+      <div class="label">Proporción en una pantalla</div>
+      <div style="display:flex;height:10mm;border-radius:2.5mm;overflow:hidden;margin-bottom:3mm">
+        <i style="flex:86;background:#05060d"></i><i style="flex:10;background:#0d1122"></i><i style="flex:2.5;background:#5b8cff"></i><i style="flex:1.5;background:#6b3cff"></i>
+      </div>
+      <p class="col-note">Casi todo noche y superficie. El azul aparece en una sola acción principal por vista.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>5</span></div>
+</section>
+
+<!-- ================================================================ 6 tipografía -->
+<section class="page">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>05 · Tipografía</span></div>
+  <h2>Tipografía</h2>
+  <div class="grid3" style="margin-bottom:10mm">
+    <div class="box"><div class="label">Titulares</div><div style="font-family:Poppins;font-weight:800;font-size:34pt;letter-spacing:-.03em;line-height:1">Aa</div><p style="margin-top:3mm"><b>Poppins</b> 600, 700 y 800. Apretada (−2 a −3,5 %), en frases cortas.</p></div>
+    <div class="box"><div class="label">Texto e interfaz</div><div style="font-family:Inter;font-weight:500;font-size:34pt;letter-spacing:-.02em;line-height:1">Aa</div><p style="margin-top:3mm"><b>Inter</b>. Texto corrido, botones, etiquetas y tablas.</p></div>
+    <div class="box"><div class="label">Códigos y cifras</div><div class="mono" style="font-weight:500;font-size:26pt;line-height:1.15;letter-spacing:.02em">K7QX</div><p style="margin-top:3mm"><b>Roboto Mono</b>, solo para códigos de acceso, versiones y comandos.</p></div>
+  </div>
+  <div class="label">Jerarquía</div>
+  <div style="display:grid;gap:5mm">
+    <div style="display:flex;align-items:baseline;gap:8mm"><span class="tiny" style="width:28mm">Display · 64–80 px</span><span style="font-family:Poppins;font-weight:800;font-size:30pt;letter-spacing:-.035em;line-height:1">Todo lo que necesita</span></div>
+    <div style="display:flex;align-items:baseline;gap:8mm"><span class="tiny" style="width:28mm">Título · 36–44 px</span><span style="font-family:Poppins;font-weight:700;font-size:20pt;letter-spacing:-.028em">Un evento tiene dos lados.</span></div>
+    <div style="display:flex;align-items:baseline;gap:8mm"><span class="tiny" style="width:28mm">Subtítulo · 18–22 px</span><span style="font-family:Poppins;font-weight:600;font-size:13pt;letter-spacing:-.012em">Quien organiza</span></div>
+    <div style="display:flex;align-items:baseline;gap:8mm"><span class="tiny" style="width:28mm">Texto · 16 px</span><span style="font-size:10.5pt;color:var(--ink-2)">Tus jugadores entran con un código y la instancia se prepara sola.</span></div>
+    <div style="display:flex;align-items:baseline;gap:8mm"><span class="tiny" style="width:28mm">Código · 14 px</span><span class="mono" style="font-size:10pt">K7QX-29PL-EV4M</span></div>
+  </div>
+  <div class="grid2" style="margin-top:10mm">
+    <div class="yes"><h3>Qué sí</h3><ul class="clean"><li>Titulares cortos, de una idea.</li><li>Cifras con números tabulares en tablas y precios.</li><li>Más espacio encima de un título que debajo.</li></ul></div>
+    <div class="no"><h3>Qué no</h3><ul class="clean"><li>Texto con degradado.</li><li>Etiquetas en mayúsculas encima de cada título.</li><li>Monoespaciada para decorar.</li></ul></div>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>6</span></div>
+</section>
+
+<!-- ================================================================ 7 iconos e imagen -->
+<section class="page dark sky stars">
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>06 · Iconos e imagen</span></div>
+  <h2>Iconos e imagen</h2>
+  <div class="grid2" style="margin-bottom:10mm">
+    <div>
+      <div class="label">Iconos</div>
+      <div style="display:flex;gap:4mm;margin-bottom:4mm">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#aab2cf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4"/><path d="M8 9v4"/><path d="M15 12h.01"/><path d="M18 10h.01"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#aab2cf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="M13 8h5"/><path d="M13 12h5"/><path d="M13 16h3"/></svg>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#aab2cf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#aab2cf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#aab2cf" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+      </div>
+      <p>Línea de 1,8 px en una rejilla de 24, con extremos redondeados: el mismo dibujo que Events Client. Un color por icono. <b>Nunca emojis</b> en su lugar.</p>
+    </div>
+    <div>
+      <div class="label">Imagen</div>
+      <p>Se enseña el producto de verdad: <b>capturas reales</b> del launcher, del panel y del calendario, y el arte de los eventos de los studios. Sin ilustraciones genéricas, sin fotos de banco y sin maquetas inventadas.</p>
+      <p style="margin-top:3mm">El fondo de la marca es un cielo: estrellas finas, dos nebulosas suaves y, en los momentos importantes, <b>el horizonte del planeta</b> del logo.</p>
+    </div>
+  </div>
+  <div class="box" style="background:transparent;border-color:rgba(170,182,255,.18);height:70mm;position:relative;overflow:hidden">
+    <div class="horizon" style="bottom:-200mm;height:250mm"></div>
+    <p style="position:relative;max-width:90mm"><b>El horizonte.</b> El arco del anillo del logo convertido en luz. Va al pie de las portadas y de los cierres, nunca detrás del texto que hay que leer.</p>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>7</span></div>
+  </div>
+</section>
+
+<!-- ================================================================ 8 interfaz -->
+<section class="page dark" style="background:var(--bg)">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>07 · Interfaz</span></div>
+  <h2>Interfaz y componentes</h2>
+  <p class="lead">Las mismas piezas en la web, el área de clientes y los paneles. Superficies sólidas, bordes finos, radios de 10 a 28 px y un solo botón azul por vista.</p>
+  <div class="grid2" style="margin-bottom:9mm">
+    <div>
+      <div class="label">Botones</div>
+      <div style="display:flex;flex-wrap:wrap;gap:3mm;margin-bottom:3mm"><span class="btnx btn-p">Descargar</span><span class="btnx btn-s">Organizo eventos</span><span class="btnx btn-g">Cómo funciona</span></div>
+      <p class="col-note">Principal, secundario y discreto. Al pulsar encogen un 3 %; no se levantan.</p>
+    </div>
+    <div>
+      <div class="label">Campos</div>
+      <div style="display:grid;gap:3mm"><div class="field">Código de tu studio</div><div class="field focus mono" style="letter-spacing:.14em">EVP-7Q2K-</div></div>
+      <p class="col-note" style="margin-top:3mm">Etiqueta encima, foco con anillo azul y error escrito bajo el campo.</p>
+    </div>
+  </div>
+  <div class="grid2" style="margin-bottom:9mm">
+    <div>
+      <div class="label">Estados</div>
+      <div style="display:flex;gap:5mm;flex-wrap:wrap;font-size:9pt;font-weight:600">
+        <span style="display:inline-flex;align-items:center;gap:2mm;color:var(--text)"><i style="width:2mm;height:2mm;border-radius:50%;background:#34d17a"></i>Activo</span>
+        <span style="display:inline-flex;align-items:center;gap:2mm;color:#f8c56b"><i style="width:2mm;height:2mm;border-radius:50%;background:#f5b03c"></i>Pendiente</span>
+        <span style="display:inline-flex;align-items:center;gap:2mm;color:#ff8a99"><i style="width:2mm;height:2mm;border-radius:50%;background:#f05468"></i>Suspendido</span>
+        <span style="display:inline-flex;align-items:center;gap:2mm;color:var(--text-2)"><i style="width:2mm;height:2mm;border-radius:50%;background:#8189ab"></i>Cerrado</span>
+      </div>
+      <p class="col-note" style="margin-top:3mm">Siempre con texto, nunca solo con un color.</p>
+    </div>
+    <div>
+      <div class="label">Tarjeta de plan</div>
+      <div class="box" style="padding:5mm;background:linear-gradient(180deg,rgba(167,139,250,.12),var(--surface) 45%);border-color:rgba(167,139,250,.45)">
+        <div style="font-family:Poppins;font-weight:700;font-size:12pt;color:var(--text)">Events+ 3</div>
+        <div class="tiny">3 instancias</div>
+        <div style="font-family:Poppins;font-weight:800;font-size:20pt;color:var(--text);margin-top:2mm">1,99 € <span style="font-family:Inter;font-weight:400;font-size:8pt;color:var(--text-3)">/ mes</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="label">Una fila del área de clientes</div>
+  <div class="box" style="display:flex;align-items:center;gap:4mm;padding:4mm 5mm">
+    <span style="width:10mm;height:10mm;border-radius:3mm;background:rgba(167,139,250,.14);display:grid;place-items:center;color:#a78bfa;font-weight:700">+</span>
+    <span style="flex:1"><b style="display:block;font-size:9.5pt">Events+ 3</b><span class="tiny">Mensual · <span class="mono" style="letter-spacing:.06em">EVP-7Q2K-RT4M</span> · se renueva el 8 nov 2026</span></span>
+    <span style="font-weight:600;color:var(--text);font-size:9.5pt">1,99 €</span>
+    <span style="display:inline-flex;align-items:center;gap:2mm;color:var(--text);font-size:8.5pt;font-weight:600"><i style="width:2mm;height:2mm;border-radius:50%;background:#34d17a"></i>Activo</span>
+    <span class="btnx btn-s" style="height:8.5mm;font-size:8pt">Abrir el panel</span>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>8</span></div>
+</section>
+
+<!-- ================================================================ 9 movimiento -->
+<section class="page">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>08 · Movimiento</span></div>
+  <h2>Movimiento</h2>
+  <p class="lead">El movimiento explica un cambio, confirma una acción o orienta. Si no hace ninguna de las tres cosas, no se anima.</p>
+  <div class="grid3" style="margin-bottom:10mm">
+    <div class="box"><div class="num">120 ms</div><h3>Pulsar</h3><p>Los controles encogen al 97 % al pulsarlos. Escala, nunca elevación.</p></div>
+    <div class="box"><div class="num">180–240 ms</div><h3>Interfaz</h3><p>Menús, diálogos, avisos y pestañas. Entran con ease-out y salen más rápido.</p></div>
+    <div class="box"><div class="num">400–600 ms</div><h3>Momentos</h3><p>Cambio de página, la entrada de una portada o la pantalla de arranque.</p></div>
+  </div>
+  <div class="grid2" style="margin-bottom:10mm">
+    <div class="box"><h3>La pantalla de arranque</h3><p>El logo se dibuja trazo a trazo mientras la página carga y, al terminar, vuela hasta su sitio en la cabecera. Es la firma de todas las webs de Events.</p></div>
+    <div class="box"><h3>Movimiento reducido</h3><p>Si el sistema pide menos movimiento, se quitan los desplazamientos y las escalas y se mantienen solo los fundidos. La pantalla de arranque no aparece.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="yes"><h3>Qué sí</h3><ul class="clean"><li>Una entrada coordinada por pantalla.</li><li>Transiciones que se pueden interrumpir.</li><li>Paralaje leve en las capturas del producto.</li></ul></div>
+    <div class="no"><h3>Qué no</h3><ul class="clean"><li>Animaciones infinitas fuera de una carga.</li><li>Brillos que laten, colores que rotan, elementos flotando sin motivo.</li><li>Animar acciones de teclado que se repiten.</li></ul></div>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>9</span></div>
+</section>
+
+<!-- ================================================================ 10 tono -->
+<section class="page">
+  <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>09 · Tono</span></div>
+  <h2>Cómo habla Events</h2>
+  <p class="lead">Concisa, natural y profesional, como un equipo de producto. Dice qué es o qué ha pasado y, si hace falta, qué hacer. Nada más.</p>
+  <div class="grid2" style="margin-bottom:9mm">
+    <div class="yes"><h3>Así</h3><ul class="clean">
+      <li><b>Sin conexión con el servidor.</b> Revisa tu conexión.</li>
+      <li><b>Error del servidor.</b> Vuelve a intentarlo en un momento.</li>
+      <li>Caché de medios · 8 archivos · 54 MB · <b>Vaciar</b></li>
+      <li>Escribe el código del evento y juega.</li>
+      <li>Un dato concreto (hora, tamaño, código) en vez de una frase de acompañamiento.</li>
+    </ul></div>
+    <div class="no"><h3>Así no</h3><ul class="clean">
+      <li>«No te preocupes, no es cosa de tu conexión».</li>
+      <li>«Esto automáticamente hará que…», «así no tendrás que…».</li>
+      <li>Explicar lo que hace un botón obvio.</li>
+      <li>Puntos suspensivos decorativos y «archivo(s)».</li>
+      <li>Promesas que no salen en eventsmc.xyz.</li>
+    </ul></div>
+  </div>
+  <div class="label">Nombres</div>
+  <div class="grid3">
+    <p><b>Events</b><br>La marca. Nunca «EVENTS» ni «events».</p>
+    <p><b>Events Client</b><br>Siempre separado, también si «Client» va en otro color.</p>
+    <p><b>Events+</b><br>Con el «+» pegado. Planes: Events+ 1, 3 y 5.</p>
+    <p><b>studio</b><br>En minúscula en un texto: «el studio que organiza».</p>
+    <p><b>instancia</b><br>Lo que el jugador abre para jugar un evento.</p>
+    <p><b>código de acceso</b><br>XXXX-XXXX-XXXX. En monoespaciada.</p>
+  </div>
+  <div class="foot"><span>Events · Guía de marca</span><span>10</span></div>
+</section>
+
+<!-- ================================================================ 11 contacto -->
+<section class="page dark sky stars">
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%">
+    <div class="top"><span class="brand"><svg viewBox="112 258 792 548" fill="currentColor"><use href="#mark"/></svg>Events</span><span>10 · Recursos</span></div>
+    <h2>Recursos</h2>
+    <div class="grid2" style="margin-bottom:10mm">
+      <div class="box"><h3>Archivos</h3><p>Logo en SVG (blanco y tinta), icono de 256 px y esta guía en PDF. Pídelos por Discord o por ticket.</p></div>
+      <div class="box"><h3>Dónde se ve la marca</h3><p>eventsmc.xyz · clientes.eventsmc.xyz · panel.eventsmc.xyz · hosting.eventsmc.xyz · calendar.eventsmc.xyz · Events Client.</p></div>
+    </div>
+    <div class="box"><h3>¿Dudas o necesitas otra pieza?</h3><p>Escríbenos en <b>discord.gg/2T7DDmpxYr</b> o en <b>support@eventsmc.xyz</b>. Si una pieza no encaja en esta guía, la decidimos juntos antes de publicarla.</p></div>
+    <div class="foot" style="margin-top:auto"><span>Events · Guía de marca · v1</span><span>11</span></div>
+  </div>
+  <div class="horizon"></div>
+</section>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="mark" transform="translate(0,1024) scale(0.1,-0.1)"><path d="M7880 6995c114-18 171-34 254-75 254-125 323-396 190-745-286-745-1430-1713-2891-2444-382-191-864-401-1198-521-545-197-918-298-1325-361-176-27-517-37-639-19-238 35-386 122-454 269-40 84-49 227-22 347 67 307 330 727 688 1102 62 64 126 129 143 144l31 28 6-193c4-105 12-221 20-257l13-65-33-67c-59-120-76-232-49-322 93-307 598-310 1521-9 527 172 1189 477 1650 761 638 392 1188 853 1462 1223 23 31 64 96 92 144 163 285 124 478-114 559-61 21-209 30-290 19l-60-9-95 80c-52 43-128 102-168 130l-72 50 27 15c46 24 281 100 403 131 131 33 359 76 470 89 122 14 338 12 440-4z"/><path d="M5490 6935c410-62 826-246 1125-497 166-139 311-297 408-442l45-68-26-37c-63-85-166-211-172-211-4 0-26 30-50 66-61 95-128 176-238 288-555 567-1383 755-2118 480-759-283-1264-1022-1264-1849 0-267 49-510 156-773 9-23 15-44 13-46-9-9-311-28-318-20-25 28-95 243-124 379-43 202-57 554-29 750 85 598 364 1108 817 1490 325 273 759 454 1215 504 117 13 433 5 560-14z"/></g>
+  </defs>
+</svg>
+</body>
+</html>
