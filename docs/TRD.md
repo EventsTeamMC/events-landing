@@ -10,7 +10,7 @@
 
 | Origen | Cuándo | Uso |
 |---|---|---|
-| `src/data/site.ts` | Al compilar | Enlaces, productos, estados, precios de Events+ (con los IDs de plan de Paymenter: 37/40, 38/41 y 39/42) y precios del BOT |
+| `src/data/site.ts` | Al compilar | Enlaces, productos, estados, precios de Events+ (solo mensual; IDs de plan de Paymenter 37, 38 y 39) y precios del BOT |
 | `api.eventsmc.xyz/api/downloads` | Al compilar y cada 60 s con la pestaña visible | Contador de descargas |
 | `api.eventsmc.xyz/api/events` | Al compilar | Próximo evento (portada y Calendar) |
 | `POST api.eventsmc.xyz/api/downloads/hit` | Al pulsar una descarga | `{ cid }`: id anónimo guardado en `localStorage.ec_dl_id`; el backend espera una hora por persona |
