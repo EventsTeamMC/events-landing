@@ -35,6 +35,15 @@
     "productName": "Events+",
     "productId": "plus"
   },
+  "capas/condiciones": {
+    "title": "Condiciones de venta de las capas · Events",
+    "description": "Condiciones de compra de las capas de Events: entrega, desistimiento, ediciones limitadas y reembolsos.",
+    "noindex": true,
+    "h1": "Condiciones de venta de las capas",
+    "updated": "Última actualización: 18 de octubre de 2026 · Versión 1.0",
+    "productName": "Events Connect",
+    "productId": "capas"
+  },
   "whitelist/terms": {
     "title": "Términos y Condiciones · Events Whitelist",
     "description": "Términos y Condiciones de uso de Events Whitelist.",
