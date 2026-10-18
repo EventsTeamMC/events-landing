@@ -74,8 +74,12 @@ const FAQ = [
                     {PLUS_PLANS.map((pl) => pl.soon ? (
                         <article class="plan soon" aria-labelledby={`pl-${pl.id}`}>
                             <h3 class="plan-name" id={`pl-${pl.id}`}>{pl.name}</h3>
-                            <p class="plan-what">Próximamente</p>
+                            <p class="plan-what">{pl.instances === 1 ? '1 instancia' : `${pl.instances} instancias`}</p>
                             <p class="plan-price"><span class="soon-price">Próximamente</span></p>
+                            <p class="plan-note">{pl.note}</p>
+                            <ul role="list" class="plan-list">
+                                {pl.features.map((f) => <li><Icon name="check" size={16} />{f}</li>)}
+                            </ul>
                             <span class="btn btn-secondary" aria-disabled="true">Próximamente</span>
                         </article>
                     ) : (
