@@ -8,6 +8,9 @@ import { getDownloads } from '../data/live';
 
 const downloads = await getDownloads();
 const order = ['windows', 'mac', 'linux'] as const;
+// In every release since 1.0.0. The rest (.msi, portable, .deb, .rpm, .tar.gz)
+// are shown only once the latest stable release actually ships them.
+const ALWAYS = new Set(['Events-Client-win-arm64.exe', 'Events-Client-mac-universal.zip']);
 ---
 <Base
     title="Descargar Events Client · Windows, macOS y Linux"
@@ -44,13 +47,16 @@ const order = ['windows', 'mac', 'linux'] as const;
                             <span class="plat-ic"><Icon name={k === 'mac' ? 'apple' : k} size={22} /></span>
                             <span class="plat-copy"><b>{d.label}</b><span class="small muted">{d.req}</span></span>
                             <span class="plat-actions">
-                                {d.alt && <a class="link small" data-dl={`${k}-alt`} href={d.alt.href}>{d.alt.label}</a>}
+                                {d.alts.map((alt) => (
+                                    <a class="link small" data-dl={`${k}-alt`} data-asset={alt.href.split('/').pop()} href={alt.href} hidden={!ALWAYS.has(alt.href.split('/').pop()!)}>{alt.label}</a>
+                                ))}
                                 <a class="btn btn-secondary btn-sm" data-dl={k} href={d.href}><Icon name="download" size={16} /> {d.file}</a>
                             </span>
                         </li>
                     );
                 })}
             </ul>
+            <p class="small muted linux-hint" data-noauto hidden>El .msi y el portable no se actualizan solos.</p>
             <p class="small muted linux-hint">En Linux, dale permisos de ejecución y ábrelo: <code class="kbd-code">chmod +x Events-Client-*.AppImage</code></p>
 
             <details class="beta">
@@ -102,7 +108,7 @@ const order = ['windows', 'mac', 'linux'] as const;
     .plat-ic { color: var(--text-2); }
     .plat-copy { display: grid; }
     .plat-copy b { font-weight: 600; }
-    .plat-actions { display: flex; align-items: center; gap: 16px; }
+    .plat-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 8px 16px; }
     .linux-hint { margin-top: 14px; }
     @media (max-width: 560px) { .plat-row { grid-template-columns: auto 1fr; } .plat-actions { grid-column: 1 / -1; justify-content: flex-end; } }
 
@@ -137,4 +143,12 @@ const order = ['windows', 'mac', 'linux'] as const;
     row?.classList.add('current');
     refreshDownloads();
     countDownloadClicks();
+    fetch('https://api.eventsmc.xyz/api/downloads')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => {
+            const have = new Set<string>(j?.data?.files || []);
+            document.querySelectorAll<HTMLElement>('a[data-asset][hidden]').forEach((a) => { if (have.has(a.dataset.asset!)) a.hidden = false; });
+            if (have.has('Events-Client-win-x64.msi') || have.has('Events-Client-win-portable.exe')) document.querySelector<HTMLElement>('[data-noauto]')!.hidden = false;
+        })
+        .catch(() => {});
 </script>
