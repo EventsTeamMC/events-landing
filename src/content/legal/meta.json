@@ -58,7 +58,7 @@
     "description": "Qué datos trata Events Whitelist y con qué finalidad.",
     "noindex": false,
     "h1": "Política de Privacidad",
-    "updated": "Última actualización: 22 de julio de 2026",
+    "updated": "Última actualización: 18 de octubre de 2026 · Versión 1.1",
     "productName": "Events Whitelist",
     "productId": "whitelist"
   },
@@ -76,7 +76,7 @@
     "description": "Qué datos trata Events Blacklist y con qué finalidad.",
     "noindex": false,
     "h1": "Política de Privacidad",
-    "updated": "Última actualización: 22 de julio de 2026",
+    "updated": "Última actualización: 18 de octubre de 2026 · Versión 1.1",
     "productName": "Events Blacklist",
     "productId": "blacklist"
   }
