@@ -17,7 +17,7 @@ interface Props {
     noindex?: boolean;
     jsonld?: object[];
 }
-const { title, description, image = '/og.png', imageAlt = 'Events, el ecosistema para los eventos de Minecraft', noindex = false, jsonld = [] } = Astro.props;
+const { title, description, image = '/og.png?v=2', imageAlt = 'Events, el ecosistema para los eventos de Minecraft', noindex = false, jsonld = [] } = Astro.props;
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '');
 const canonical = new URL(path === '/' ? '/' : path.replace(/\/$/, ''), 'https://www.eventsmc.xyz').href;
 const ogImage = new URL(image, 'https://www.eventsmc.xyz').href;
