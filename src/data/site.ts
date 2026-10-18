@@ -23,9 +23,9 @@ export const LINKS = {
 
 const DL = 'https://github.com/EventsTeamMC/events-client-releases/releases/latest/download';
 export const DOWNLOADS = {
-    windows: { label: 'Windows', req: 'Windows 10 u 11 · 64 bits', file: '.exe', href: `${DL}/Events-Client-win-x64.exe`, alt: { label: 'ARM64', href: `${DL}/Events-Client-win-arm64.exe` } },
-    mac: { label: 'macOS', req: 'macOS 11 o superior · Apple Silicon e Intel', file: '.dmg', href: `${DL}/Events-Client-mac-universal.dmg`, alt: { label: '.zip', href: `${DL}/Events-Client-mac-universal.zip` } },
-    linux: { label: 'Linux', req: 'AppImage · x86_64', file: '.AppImage', href: `${DL}/Events-Client-linux-x86_64.AppImage`, alt: null },
+    windows: { label: 'Windows', req: 'Windows 10 u 11 · 64 bits', file: '.exe', href: `${DL}/Events-Client-win-x64.exe`, alts: [{ label: 'ARM64', href: `${DL}/Events-Client-win-arm64.exe` }, { label: '.msi', href: `${DL}/Events-Client-win-x64.msi` }, { label: 'Portable', href: `${DL}/Events-Client-win-portable.exe` }] },
+    mac: { label: 'macOS', req: 'macOS 11 o superior · Apple Silicon e Intel', file: '.dmg', href: `${DL}/Events-Client-mac-universal.dmg`, alts: [{ label: '.zip', href: `${DL}/Events-Client-mac-universal.zip` }] },
+    linux: { label: 'Linux', req: 'AppImage · x86_64', file: '.AppImage', href: `${DL}/Events-Client-linux-x86_64.AppImage`, alts: [{ label: '.deb', href: `${DL}/Events-Client-linux-amd64.deb` }, { label: '.rpm', href: `${DL}/Events-Client-linux-x86_64.rpm` }, { label: '.tar.gz', href: `${DL}/Events-Client-linux-x64.tar.gz` }] },
 } as const;
 
 export type ProductId = 'client' | 'panel' | 'whitelist' | 'blacklist' | 'calendar' | 'bot' | 'plus' | 'allys' | 'hosting';
