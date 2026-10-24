@@ -92,8 +92,10 @@ export const PLUS_PLANS: PlusPlan[] = [
         features: ['5 instancias activas', 'Todo lo de Pro', 'Prioridad de descarga máxima', '4 GB por instancia', 'Estadísticas de 3 meses', '20 cuentas de staff', '3 destaques al mes y destaque en Calendar y Discord', 'Acceso al canal Beta'],
     },
     {
-        id: 'ultra', name: 'Events+ Ultra', instances: 0, monthly: 0, soon: true,
-        note: '', href: '', features: [],
+        id: 'ultra', name: 'Events+ Ultra', instances: 5, monthly: 5.99,
+        note: 'El studio con su propio launcher.',
+        href: checkout('events-ultra', 127),
+        features: ['Todo lo de Max', 'EVAC+: directo de la ventana del juego', 'Launcher propio con la marca del studio'],
     },
 ];
 
