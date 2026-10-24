@@ -9,42 +9,44 @@ import { product, PLUS_PLANS, LINKS, eur } from '../data/site';
 const p = product('plus');
 const Y = 'yes', N = 'no';
 type Cell = string;
-const TABLE: { group: string; rows: [string, Cell, Cell, Cell, Cell, Cell][] }[] = [
+const TABLE: { group: string; rows: [string, Cell, Cell, Cell, Cell, Cell, Cell][] }[] = [
     { group: 'En el launcher', rows: [
-        ['Instancias activas', '1', '1', '3', '5', 'Las acordadas'],
-        ['Jugadores a la vez (suma de todas tus instancias)', '100', 'Sin tope', 'Sin tope', 'Sin tope', 'Sin tope'],
-        ['Cola prioritaria', N, Y, Y, Y, Y],
-        ['Prioridad de descarga', 'Estándar', 'Estándar', 'Doble', 'Máxima', 'A medida'],
-        ['Archivos por instancia', '500 MB', '1 GB', '2 GB', '4 GB', 'A medida'],
-        ['Enlace corto que instala y canjea', N, Y, Y, Y, Y],
-        ['Canales de instancia', N, N, Y, Y, Y],
-        ['Mods protegidos en RAM · próximamente', N, Y, Y, Y, Y],
+        ['Instancias activas', '1', '1', '3', '5', '5', 'Las acordadas'],
+        ['Jugadores a la vez (suma de todas tus instancias)', '100', 'Sin tope', 'Sin tope', 'Sin tope', 'Sin tope', 'Sin tope'],
+        ['Cola prioritaria', N, Y, Y, Y, Y, Y],
+        ['Prioridad de descarga', 'Estándar', 'Estándar', 'Doble', 'Máxima', 'Máxima', 'A medida'],
+        ['Archivos por instancia', '500 MB', '1 GB', '2 GB', '4 GB', '4 GB', 'A medida'],
+        ['Enlace corto que instala y canjea', N, Y, Y, Y, Y, Y],
+        ['Canales de instancia', N, N, Y, Y, Y, Y],
+        ['EVAC+: directo de la ventana del juego', N, N, N, N, Y, 'A medida'],
+        ['Launcher propio con la marca del studio', N, N, N, N, Y, 'A medida'],
+        ['Mods protegidos en RAM · próximamente', N, Y, Y, Y, Y, Y],
     ] },
     { group: 'En el panel', rows: [
-        ['Cuentas de staff', '2', '3', '8', '20', 'A medida'],
-        ['Estadísticas del evento', N, '7 días', '30 días', '3 meses', '3 meses'],
-        ['Aperturas programadas', N, N, Y, Y, Y],
-        ['Códigos masivos y CSV', N, N, Y, Y, Y],
-        ['Webhooks por instancia', '1', '1', '5', 'Sin límite', 'Sin límite'],
-        ['Vigilancia de servidores', N, N, '3', '10', 'A medida'],
+        ['Cuentas de staff', '2', '3', '8', '20', '20', 'A medida'],
+        ['Estadísticas del evento', N, '7 días', '30 días', '3 meses', '3 meses', '3 meses'],
+        ['Aperturas programadas', N, N, Y, Y, Y, Y],
+        ['Códigos masivos y CSV', N, N, Y, Y, Y, Y],
+        ['Webhooks por instancia', '1', '1', '5', 'Sin límite', 'Sin límite', 'Sin límite'],
+        ['Vigilancia de servidores', N, N, '3', '10', '10', 'A medida'],
     ] },
     { group: 'Fuera del launcher', rows: [
-        ['Destaque en Explorar', N, N, '1 al mes', '3 al mes', 'A medida'],
-        ['Destaque en Calendar y Discord', N, N, N, Y, Y],
-        ['Whitelist ampliada', N, N, Y, Y, Y],
-        ['Events Blacklist', 'Gratis', 'Gratis', 'Gratis', 'Gratis', 'Gratis'],
+        ['Destaque en Explorar', N, N, '1 al mes', '3 al mes', '3 al mes', 'A medida'],
+        ['Destaque en Calendar y Discord', N, N, N, Y, Y, Y],
+        ['Whitelist ampliada', N, N, Y, Y, Y, Y],
+        ['Events Blacklist', 'Gratis', 'Gratis', 'Gratis', 'Gratis', 'Gratis', 'Gratis'],
     ] },
     { group: 'Lo demás', rows: [
-        ['Soporte', 'Comunidad', 'Comunidad', 'Prioritario', 'Prioritario', 'Dedicado'],
-        ['Canal Beta del launcher', N, N, N, Y, Y],
+        ['Soporte', 'Comunidad', 'Comunidad', 'Prioritario', 'Prioritario', 'Prioritario', 'Dedicado'],
+        ['Canal Beta del launcher', N, N, N, Y, Y, Y],
     ] },
 ];
-const COLS = ['Gratis', 'Lite', 'Pro', 'Max', 'Custom'];
+const COLS = ['Gratis', 'Lite', 'Pro', 'Max', 'Ultra', 'Custom'];
 
 const FAQ = [
     ['¿Los jugadores tienen que pagar?', 'No. Ni para entrar a un evento, ni para descargar el launcher. Events+ lo paga quien organiza.'],
     ['¿Qué incluye el plan gratuito?', 'Desde el 1 de octubre de 2026: 1 instancia, 500 MB de archivos, 2 cuentas de staff y 100 jugadores a la vez sumando todas tus instancias. Códigos, whitelist, baneos y Blacklist, sin recortes.'],
-    ['¿Cuánto cuesta?', '0,99 €, 1,99 € y 3,99 € al mes. Custom y SelfHosted, a convenir.'],
+    ['¿Cuánto cuesta?', '0,99 €, 1,99 €, 3,99 € y 5,99 € al mes. Custom y SelfHosted, a convenir.'],
     ['¿Dónde se contrata?', 'Desde los botones de esta página, en clientes.eventsmc.xyz. Al pagar se pide el código de tu studio, que está en el panel → Events+.'],
     ['¿Y si no renuevo?', 'El studio vuelve al plan gratuito. Las instancias por encima de ese plan se suspenden sin borrar nada y vuelven al renovar.'],
     ['¿Y si necesito más de 5 instancias?', 'Events+ Custom: nos cuentas qué montas y acordamos los números.'],
@@ -175,7 +177,7 @@ const FAQ = [
                         </thead>
                         {TABLE.map((g) => (
                             <tbody>
-                                <tr class="grp"><th scope="colgroup" colspan={6}>{g.group}</th></tr>
+                                <tr class="grp"><th scope="colgroup" colspan={7}>{g.group}</th></tr>
                                 {g.rows.map(([label, ...cells]) => (
                                     <tr>
                                         <th scope="row">{label}</th>
