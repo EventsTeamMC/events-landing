@@ -21,7 +21,8 @@
       <li>Dirección IP.</li>
       <li>Un identificador técnico del dispositivo (huella derivada del hardware), utilizado exclusivamente para
         aplicar los bloqueos de seguridad, prevenir la evasión de sanciones y relacionar los avisos de EVAC con el
-        equipo (ver apartados 9 bis, 11 y 18).</li>
+        equipo y, en forma de hash, limitar los abusos de los anuncios con recompensa (ver apartados 9 bis, 11,
+        12 bis y 18).</li>
       <li>Fechas y registros de inicio o cierre de sesión.</li>
       <li>Autorizaciones e instancias asociadas.</li>
       <li>Registros técnicos e informes de errores enviados voluntariamente.</li>
@@ -30,6 +31,7 @@
       <li>Avisos del anticheat (EVAC) y, en los de gravedad media o alta, una captura de la ventana del juego.</li>
       <li>Registros de seguridad de Events Database.</li>
       <li>Las capas compradas y el nombre de Minecraft que las tiene.</li>
+      <li>El saldo y los movimientos de Evos, y los anuncios con recompensa vistos.</li>
       <li>Publicaciones, comentarios y «me gusta» en el Feed de las instancias, y los avisos sobre esas
         publicaciones.</li>
     </ul>
@@ -39,7 +41,7 @@
     <p>Los datos podrán utilizarse para: autenticar al usuario; verificar su perfil de Minecraft; mantener
       sesiones; gestionar el acceso a instancias; proteger Events Client y su infraestructura; prevenir fraude,
       ataques y evasión de sanciones; resolver incidencias técnicas; tramitar soporte y apelaciones; administrar
-      Studios y sus planes; y cumplir obligaciones legales.</p>
+      Studios y sus planes; gestionar los Evos; y cumplir obligaciones legales.</p>
 
     <h3>Bases jurídicas</h3>
     <p>Los tratamientos podrán basarse en la ejecución de los Términos y Condiciones de Events Client, la
@@ -67,6 +69,8 @@
       <li>Avisos de EVAC y el identificador del dispositivo que llevan: 12 meses.</li>
       <li>Events Database: 12 meses desde la última vez que se vio al jugador (la IP en claro, 30 días).</li>
       <li>Capas compradas: mientras la capa siga a nombre del jugador; los datos de facturación, hasta 6 años.</li>
+      <li>Evos: el saldo y los movimientos, mientras exista el saldo o la cuenta; los de compras, hasta 6 años. El
+        hash del dispositivo y de la IP de los anuncios con recompensa, 48 horas.</li>
       <li>Feed: mientras el Studio no lo borre, hasta 500 publicaciones por instancia.</li>
       <li>Avisos al jugador: 30 días, 50 como máximo por jugador.</li>
       <li>Comunicaciones de soporte y apelaciones: hasta 30 días después de cerrar el caso.</li>
@@ -93,7 +97,8 @@
       destinado a Studios mediante Discord; d) el acceso y autorización en instancias; e) la seguridad del Client
       y su infraestructura; f) los informes de errores; g) el soporte y las apelaciones; h) los servicios web
       asociados que remitan a esta política; i) el anticheat EVAC y EVAC+; j) la compra de capas; k) los launchers
-      propios de los Studios construidos con Events Client; l) el Feed de las instancias.</p>
+      propios de los Studios construidos con Events Client; l) el Feed de las instancias; m) la moneda virtual de
+      Events (Evos).</p>
     <p>Esta política no regula los tratamientos realizados independientemente por los servidores de Minecraft,
       Studios, páginas web o servicios externos que no sean administrados por Events Team.</p>
 
@@ -291,11 +296,12 @@
       habitual del Client, comportamiento del jugador, historial de navegación, actividad en otras aplicaciones,
       ni publicidad o intereses comerciales.</p>
     <p><strong>Identificador técnico del dispositivo (huella).</strong> Con la única finalidad de aplicar y hacer
-      cumplir los bloqueos de seguridad, prevenir la evasión de sanciones (ver apartado 18) y relacionar con el equipo
-      los avisos de EVAC (apartado 9 bis), Events Client
+      cumplir los bloqueos de seguridad, prevenir la evasión de sanciones (ver apartado 18), relacionar con el equipo
+      los avisos de EVAC (apartado 9 bis) y, en forma de hash que se borra a las 48 horas, limitar los abusos de los
+      anuncios con recompensa (apartado 12 bis), Events Client
       calcula un identificador técnico derivado de características del hardware del equipo (principalmente el
-      identificador de la placa base). Este identificador se utiliza <strong>exclusivamente</strong> para ese fin
-      de seguridad; no se emplea para elaborar un perfil del equipo, para telemetría ni para seguimiento entre
+      identificador de la placa base). Este identificador se utiliza <strong>exclusivamente</strong> para esos
+      fines de seguridad; no se emplea para elaborar un perfil del equipo, para telemetría ni para seguimiento entre
       servicios. Por su naturaleza, deja de coincidir si se cambian componentes de hardware. Cuando se confirma un
       bloqueo de dispositivo, el Client puede guardar en el propio equipo una pequeña marca que impide su arranque
       y elimina los datos y archivos gestionados por el propio Events Client; <strong>no accede, modifica ni
@@ -331,6 +337,27 @@
       skin o capa tiene una página de perfil pública con la vista en 3D, el modelo y el nombre de la capa, que es la
       misma información pública descrita arriba. Al copiar la skin de un jugador premium desde la web, Events Team
       la consulta a Mojang por su nombre y no guarda nada hasta que el usuario la aplica o la guarda.</p>
+
+    <h3>12 bis. Moneda virtual (Evos)</h3>
+    <p>La moneda virtual de Events (en adelante, los «Evos» o el nombre que Events le dé en cada momento) se
+      obtiene con misiones, viendo anuncios con recompensa en Events Client o comprándola, y se gasta en capas y otros
+      cosméticos de Events (Términos y Condiciones, cláusula 22 bis).</p>
+    <p><strong>Saldo y movimientos.</strong> Se guarda un saldo por nombre de Minecraft (y su UUID, si la cuenta es
+      premium) y un registro de movimientos con: a) la fecha; b) la cantidad; c) el motivo: misión, anuncio, compra,
+      gasto, devolución o ajuste de un administrador de Events Team, con su nota; d) el origen: la misión, el anuncio,
+      el servicio de la tienda o el artículo. Se conservan mientras exista el saldo o la cuenta; los movimientos de
+      compras, el plazo que exija la legislación fiscal y mercantil (hasta 6 años). Base jurídica: ejecución de los
+      Términos y Condiciones y, en las compras, obligación legal en lo fiscal.</p>
+    <p><strong>Anuncios con recompensa.</strong> Son vídeos propios de Events Team, iguales para todos: no se usan
+      datos para elegirlos ni para publicidad personalizada. Se guarda qué anuncio se vio, cuándo y si se terminó.
+      Para limitar abusos se guarda además un hash del identificador del dispositivo (apartado 11) y de la dirección
+      IP, que se borra a las 48 horas. Las estadísticas de cada anuncio (vistas y Evos entregados) son totales, sin
+      datos personales. Base jurídica: ejecución de los Términos y Condiciones, para entregar la recompensa, e interés
+      legítimo en impedir el fraude. Si en el futuro los anuncios los sirve un proveedor externo, se avisará antes y
+      se actualizará esta política.</p>
+    <p><strong>Compras.</strong> Los paquetes de Evos se compran en el área de clientes clientes.eventsmc.xyz, que
+      trata los datos de la compra como se describe en el apartado 19.</p>
+    <p>Los datos de los Evos no se ceden a terceros.</p>
 
     <h3>13. Capturas de pantalla</h3>
     <p>Las capturas se almacenan localmente en la carpeta correspondiente a cada instancia dentro del dispositivo
@@ -510,7 +537,9 @@
       días. <strong>Avisos de EVAC e identificador del dispositivo:</strong> 12 meses. <strong>Events
       Database:</strong> 12 meses desde la última vez que se vio al jugador; la IP en claro, 30 días.
       <strong>Retransmisiones de EVAC+:</strong> no se guardan; el registro de quién miró sigue el plazo del registro
-      de actividad. <strong>Capas compradas:</strong> mientras la capa siga a nombre del jugador. <strong>Feed:</strong> mientras
+      de actividad. <strong>Capas compradas:</strong> mientras la capa siga a nombre del jugador. <strong>Evos:</strong>
+      el saldo y los movimientos, mientras exista el saldo o la cuenta (los de compras, hasta 6 años); el hash del
+      dispositivo y de la IP de los anuncios con recompensa, 48 horas. <strong>Feed:</strong> mientras
       el Studio no lo borre, hasta 500 publicaciones por instancia. <strong>Avisos al jugador:</strong> 30 días, 50
       como máximo por jugador.
       <strong>Copias de seguridad:</strong> hasta 7 días adicionales, sin uso ordinario.
@@ -552,7 +581,8 @@
       otorgado o autorizado por sus padres o representantes legales, salvo que otra base jurídica permita el
       tratamiento o exista una norma específica aplicable. Los menores deberán utilizar Events Client con la
       autorización o supervisión correspondiente cuando sea necesaria. Events Team no utiliza conscientemente
-      datos de menores para publicidad personalizada. Un representante legal podrá solicitar la revisión o
+      datos de menores para publicidad personalizada. Los menores necesitan el permiso de sus padres o tutores para
+      comprar Evos; la compra la hace un adulto con su propio medio de pago (apartado 12 bis). Un representante legal podrá solicitar la revisión o
       eliminación de los datos de un menor mediante support@eventsmc.xyz.</p>
 
     <h3>29. Comunicaciones</h3>
