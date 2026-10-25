@@ -13,6 +13,7 @@ export const LINKS = {
     calendar: 'https://calendar.eventsmc.xyz',
     status: 'https://status.eventsmc.xyz',
     clientes: 'https://clientes.eventsmc.xyz',
+    tienda: 'https://tienda.eventsmc.xyz',
     hosting: 'https://hosting.eventsmc.xyz',
     releases: 'https://github.com/EventsTeamMC/events-client-releases/releases',
     whitelistInvite: 'https://discord.com/oauth2/authorize?client_id=1529559292938555405',

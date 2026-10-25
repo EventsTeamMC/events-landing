@@ -37,6 +37,7 @@ const isProduct = live.some((p) => p.href === path);
             </div>
             <a class="hdr-link" href="/plus" aria-current={path === '/plus' ? 'page' : undefined}>Events+</a>
             <a class="hdr-link" href={LINKS.calendar}>Calendario</a>
+            <a class="hdr-link" href={LINKS.tienda}>Tienda</a>
         </nav>
 
         <div class="hdr-end">
@@ -67,6 +68,7 @@ const isProduct = live.some((p) => p.href === path);
                 </li>
             ))}
             <li><a class="sheet-item" href="/plus" aria-current={path === '/plus' ? 'page' : undefined}><span class="mark" style="--tone:var(--p-plus)"><Icon name="sparkle" /></span><span>Events+</span></a></li>
+            <li><a class="sheet-item" href={LINKS.tienda}><span class="mark" style="--tone:var(--p-bot)"><Icon name="bag" /></span><span>Tienda</span></a></li>
         </ul>
         <div class="sheet-foot">
             <a class="btn btn-primary btn-lg" href="/download"><Icon name="download" /> Descargar Events Client</a>
