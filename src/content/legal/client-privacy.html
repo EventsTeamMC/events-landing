@@ -35,6 +35,12 @@
       <li>El historial de skins de Events Skins y lo necesario para desbloquear capas (tiempo jugado, partidas,
         etiqueta de servidor de Discord, zona horaria).</li>
       <li>El saldo y los movimientos de Evos, y los anuncios con recompensa que el jugador empezó o vio entero.</li>
+      <li>Para elegir los anuncios: el idioma de Events Client, la zona horaria, si la cuenta es premium, desde qué
+        launcher se juega y las versiones y horas jugadas en los últimos 30 días.</li>
+      <li>En las cajas y la ruleta: la fecha en que el jugador declaró tener 18 años o más, las aperturas y las
+        tiradas, con las semillas para comprobar el resultado.</li>
+      <li>Los intercambios de capas y Evos, con un hash del dispositivo y de la IP.</li>
+      <li>Los nombres de Minecraft que un Studio silencia en las noticias de su launcher.</li>
       <li>Publicaciones, comentarios y «me gusta» en el Feed de las instancias, y los avisos al jugador.</li>
       <li>En las cuentas no premium protegidas con contraseña, la contraseña cifrada (hash).</li>
     </ul>
@@ -55,7 +61,7 @@
     <h3>Proveedores</h3>
     <p>Events Team utiliza o puede utilizar servicios de: Microsoft y Mojang Studios, Discord, OVHcloud,
       Cloudflare, GitHub, Modrinth, Zoho y, para cobrar los planes de los Studios y las capas, PayPal. Events Team no vende
-      datos personales ni los utiliza para publicidad personalizada.</p>
+      datos personales ni los cede a anunciantes.</p>
 
     <h3>Conservación general</h3>
     <ul>
@@ -76,8 +82,13 @@
       <li>Events Database: 12 meses desde la última vez que se vio al jugador (la IP en claro, 30 días).</li>
       <li>Capas compradas: mientras la capa siga a nombre del jugador; los datos de facturación, hasta 6 años.</li>
       <li>Evos: el saldo y los movimientos, mientras exista el saldo o la cuenta; los de compras, hasta 6 años. El
-        hash del dispositivo y de la IP de los anuncios con recompensa, 48 horas. Quién empezó cada anuncio y las
-        veces, mientras exista el anuncio.</li>
+        hash del dispositivo y de la IP de los anuncios con recompensa, 48 horas. Quién empezó cada anuncio, las
+        veces y los clics, mientras exista el anuncio.</li>
+      <li>Desbloqueo de las cajas y la ruleta (fecha de la declaración de edad): mientras exista la cuenta.</li>
+      <li>Aperturas de cajas: mientras exista la cuenta; las pagadas con dinero, hasta 6 años.</li>
+      <li>Tiradas de la ruleta: 12 meses.</li>
+      <li>Intercambios, con el hash del dispositivo y de la IP: 12 meses desde que se cierran.</li>
+      <li>Lista de silenciados de las noticias: mientras el Studio no quite al jugador.</li>
       <li>Feed: mientras el Studio no lo borre, hasta 500 publicaciones por instancia.</li>
       <li>Avisos al jugador: 30 días, 50 como máximo por jugador.</li>
       <li>Comunicaciones de soporte y apelaciones: hasta 30 días después de cerrar el caso.</li>
@@ -329,6 +340,11 @@
       hay, un enlace); Events Team guarda qué envió, a quién y cuándo, y puede retirarlo. Solo se entrega a una sesión
       verificada de Events Client con ese nombre de Minecraft. Se conservan 30 días, con un máximo de 50 por jugador. Base jurídica: ejecución de los Términos y
       Condiciones.</p>
+    <p><strong>Noticias de los launchers propios.</strong> En el Inicio del launcher de una marca (apartado 22), el
+      Studio puede publicar noticias que los jugadores comentan y marcan con «me gusta», con los mismos datos que el
+      Feed. El Studio puede silenciar a un jugador para que no comente: su nombre de Minecraft queda en la lista de
+      silenciados de ese launcher (500 como máximo) hasta que el Studio lo quite, y el cambio queda en el registro de
+      actividad del panel. Base jurídica: interés legítimo del Studio en moderar sus noticias.</p>
 
     <h3>11. Datos del dispositivo</h3>
     <p>Events Client no recopila de forma general información destinada a crear un perfil del hardware o del
@@ -411,21 +427,29 @@
 
     <h3>12 bis. Moneda virtual (Evos)</h3>
     <p>La moneda virtual de Events (en adelante, los «Evos» o el nombre que Events le dé en cada momento) se
-      obtiene con misiones, viendo anuncios con recompensa en Events Client o comprándola, y se gasta en capas y otros
-      cosméticos de Events (Términos y Condiciones, cláusula 22 bis).</p>
+      obtiene con misiones, viendo anuncios con recompensa en Events Client o comprándola, y se gasta en capas, cajas,
+      la ruleta y otros cosméticos de Events (Términos y Condiciones, cláusulas 22 bis y 22 ter).</p>
     <p><strong>Saldo y movimientos.</strong> Se guarda un saldo por nombre de Minecraft (y su UUID, si la cuenta es
       premium) y un registro de movimientos con: a) la fecha; b) la cantidad; c) el motivo: misión, anuncio, compra,
       gasto, donación, devolución o ajuste de un administrador de Events Team, con su nota; d) el origen: la misión, el anuncio,
       el servicio de la tienda, el artículo o la meta. Se conservan mientras exista el saldo o la cuenta; los movimientos de
       compras, el plazo que exija la legislación fiscal y mercantil (hasta 6 años). Base jurídica: ejecución de los
       Términos y Condiciones y, en las compras, obligación legal en lo fiscal.</p>
-    <p><strong>Anuncios con recompensa.</strong> Son vídeos propios de Events Team, iguales para todos: no se usan
-      datos para elegirlos ni para publicidad personalizada. Cada anuncio visto entero queda en los movimientos (qué
-      anuncio y cuándo). Cada anuncio guarda también qué nombres de Minecraft lo empezaron y cuántas veces, para
+    <p><strong>Anuncios con recompensa.</strong> Son vídeos que publica Events Team, propios o de anunciantes que se
+      los contratan. Para elegir qué anuncios ve cada jugador se usan: a) el idioma de Events Client, que el launcher
+      indica en cada petición; b) la zona horaria (apartado 12), de la que se deduce el país; c) si la cuenta es
+      premium; d) si juega desde Events Client o desde el launcher de una marca, y desde cuál; e) las versiones de
+      Minecraft y las horas jugadas en los últimos 30 días, según los registros de sesión. Si no hay zona horaria, se
+      usa el país que Cloudflare asocia a la conexión (cf-ipcountry), que se lee en ese momento y no se guarda. Para
+      esto no se guarda ningún dato nuevo ni se crean perfiles, y los anunciantes no reciben datos de los jugadores.
+      Cada anuncio visto entero queda en los movimientos (qué anuncio y cuándo). Cada anuncio guarda también qué nombres de Minecraft lo empezaron y cuántas veces, para
       pagarlo una sola vez por jugador; se conserva mientras exista el anuncio. Para limitar abusos se cuenta cuántos
       anuncios se ven al día por jugador, por un hash del identificador del dispositivo (apartado 11) y por un hash de
       la dirección IP; ese recuento se borra al día siguiente (en 48 horas como mucho). Las estadísticas de cada
-      anuncio que ve Events Team (jugadores, vistas completas y Evos entregados) son totales, sin nombres. Base jurídica: ejecución de los Términos y Condiciones, para entregar la recompensa, e interés
+      anuncio que ven Events Team y el anunciante (jugadores, vistas completas, clics y Evos entregados) son totales,
+      sin nombres. Los clics en «Más información» se cuentan con una huella del monedero (un hash con clave del
+      nombre de Minecraft), nunca con el nombre, para contar cada jugador una vez; se conservan mientras exista el
+      anuncio. Base jurídica: ejecución de los Términos y Condiciones, para entregar la recompensa, e interés
       legítimo en impedir el fraude. Si en el futuro los anuncios los sirve un proveedor externo, se avisará antes y
       se actualizará esta política.</p>
     <p><strong>Compras.</strong> Los paquetes de Evos se compran en el área de clientes clientes.eventsmc.xyz, que
@@ -441,15 +465,22 @@
       todas. Se conservan mientras exista la meta; las metas cerradas se borran a los 12 meses de cerrarse (las
       donaciones siguen en los movimientos). Base jurídica: ejecución de los Términos y Condiciones y, para mostrar el
       nombre, el consentimiento del jugador, que puede no darlo.</p>
+    <p><strong>Desbloqueo de las cajas y la ruleta.</strong> Las cajas y la ruleta solo se abren con el código de
+      desbloqueo y la declaración de tener 18 años o más. Se guarda, por nombre de Minecraft, la fecha de esa
+      declaración, mientras exista la cuenta. En cada apertura o tirada se comprueba el país de la conexión (lo indica
+      Cloudflare) y la zona horaria del jugador (apartado 12); ese país no se guarda. Base jurídica: obligación legal
+      en la protección de los menores y en las restricciones por país.</p>
     <p><strong>Cajas de capas.</strong> De cada apertura se guarda el nombre de Minecraft, la fecha, la caja, la
       capa obtenida, el precio, cómo se pagó, si era una apertura de pago y los datos que permiten comprobar el
       resultado (la semilla de Events Team, su resumen, la semilla del launcher y el número de apertura). El jugador
-      los ve en su historial. Para las aperturas de pago se guarda, una vez, la fecha en que el jugador declaró tener
-      18 años o más, y en cada intento se comprueba el país de la conexión (lo indica Cloudflare) y la zona horaria del
-      jugador (apartado 12); ese país no se guarda. Las aperturas se conservan mientras exista la cuenta, para el
+      los ve en su historial. Las aperturas se conservan mientras exista la cuenta, para el
       historial y la comprobación de los resultados; las pagadas con dinero, el plazo que exija la legislación fiscal y
       mercantil. Base jurídica: ejecución de los Términos y Condiciones (cláusula 22 ter) y obligación legal en la
       protección de los menores y en las restricciones por país.</p>
+    <p><strong>Ruleta.</strong> De cada tirada se guarda el nombre de Minecraft, la fecha, las apuestas, el número
+      que sale, el premio y las semillas que permiten comprobar el resultado (la de Events Team, su resumen, la del
+      launcher y el número de tirada). Lo apostado y lo ganado quedan también en los movimientos de Evos. Las tiradas
+      se conservan 12 meses. Base jurídica: ejecución de los Términos y Condiciones (cláusula 22 ter).</p>
     <p><strong>Inventario.</strong> Cada copia de una capa se guarda con su dueño, cómo se obtuvo y la fecha del último
       intercambio. Se conserva mientras el jugador tenga la capa.</p>
     <p><strong>Intercambios.</strong> De cada intercambio se guarda quién lo propone y a quién, lo que da y pide cada
@@ -459,7 +490,7 @@
       intercambiables de un jugador por su nombre. Se conservan mientras el intercambio está abierto y 12 meses
       después de cerrarse (los Evos que se movieron siguen en los movimientos). Base jurídica: ejecución de los
       Términos y Condiciones e interés legítimo en impedir el fraude.</p>
-    <p>Los datos de los Evos, las cajas y los intercambios no se ceden a terceros.</p>
+    <p>Los datos de los Evos, las cajas, la ruleta y los intercambios no se ceden a terceros.</p>
 
     <h3>13. Capturas de pantalla</h3>
     <p>Las capturas se almacenan localmente en la carpeta correspondiente a cada instancia dentro del dispositivo
@@ -603,10 +634,11 @@
       <strong>Medal:</strong> reproducción de los clips de Medal compartidos en el Feed; recibe la dirección IP de
       quien los ve. <strong>mc-heads.net:</strong> imagen de la cabeza de la skin de un jugador en el panel de los Studios y de
       Events Team, a partir de su nombre de Minecraft, que es público.</p>
-    <p><strong>Nodos de los Studios.</strong> Un Studio puede servir los archivos de sus instancias desde su propio
-      servidor. En ese caso, Events Client descarga esos archivos desde el servidor del Studio, que recibe la
-      dirección IP del usuario como en cualquier descarga; el launcher indica cuándo una instancia se sirve desde
-      un servidor que no gestiona Events Team.</p>
+    <p><strong>Buckets de los Studios.</strong> Un Studio con Events+ puede conectar su propio bucket de Cloudflare
+      R2 u otro almacenamiento compatible con S3 para alojar los archivos de sus instancias. Events Client los descarga
+      de allí con enlaces firmados que caducan, y el proveedor del bucket recibe la dirección IP del usuario como en
+      cualquier descarga. Las claves del bucket se guardan cifradas. Si el bucket no tiene un archivo, se descarga de
+      Cloudflare R2 de Events Team o de sus servidores.</p>
 
     <h3>22. Studios y terceros independientes</h3>
     <p>Los Studios pueden administrar servidores, eventos, bots, Discords, webs o formularios independientes.
@@ -652,8 +684,12 @@
       <strong>Retransmisiones de EVAC+:</strong> no se guardan; el registro de quién miró sigue el plazo del registro
       de actividad. <strong>Capas compradas:</strong> mientras la capa siga a nombre del jugador. <strong>Evos:</strong>
       el saldo y los movimientos, mientras exista el saldo o la cuenta (los de compras, hasta 6 años); el hash del
-      dispositivo y de la IP de los anuncios con recompensa, 48 horas como mucho; las donaciones de una meta, hasta 12
-      meses después de cerrarse. <strong>Feed:</strong> mientras
+      dispositivo y de la IP de los anuncios con recompensa, 48 horas como mucho; los clics de un anuncio, mientras
+      exista el anuncio; las donaciones de una meta, hasta 12 meses después de cerrarse. <strong>Desbloqueo de las
+      cajas y la ruleta:</strong> mientras exista la cuenta. <strong>Aperturas de cajas:</strong> mientras exista la
+      cuenta (las pagadas con dinero, hasta 6 años). <strong>Tiradas de la ruleta:</strong> 12 meses.
+      <strong>Intercambios:</strong> 12 meses desde que se cierran. <strong>Silenciados en las noticias:</strong>
+      hasta que el Studio quite al jugador. <strong>Feed:</strong> mientras
       el Studio no lo borre, hasta 500 publicaciones por instancia. <strong>Avisos al jugador:</strong> 30 días, 50
       como máximo por jugador. <strong>Historial de skins:</strong> hasta 50, mientras exista el perfil de Events Skins
       o hasta que el usuario lo vacíe. <strong>Zona horaria:</strong> 12 meses desde la última partida. <strong>Etiqueta de servidor de
@@ -700,8 +736,9 @@
       mismos con carácter general en España. Para usuarios menores de 14 años, el consentimiento deberá ser
       otorgado o autorizado por sus padres o representantes legales, salvo que otra base jurídica permita el
       tratamiento o exista una norma específica aplicable. Los menores deberán utilizar Events Client con la
-      autorización o supervisión correspondiente cuando sea necesaria. Events Team no utiliza conscientemente
-      datos de menores para publicidad personalizada. Los menores necesitan el permiso de sus padres o tutores para
+      autorización o supervisión correspondiente cuando sea necesaria. Los anuncios se eligen solo con los
+      datos del apartado 12 bis, sin perfiles publicitarios. Las cajas y la ruleta solo están disponibles para mayores
+      de 18 años. Los menores necesitan el permiso de sus padres o tutores para
       comprar Evos; la compra la hace un adulto con su propio medio de pago (apartado 12 bis). Un representante legal podrá solicitar la revisión o
       eliminación de los datos de un menor mediante support@eventsmc.xyz.</p>
 
