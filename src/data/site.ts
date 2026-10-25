@@ -83,7 +83,7 @@ export const PLUS_PLANS: PlusPlan[] = [
         id: 'plus3', name: 'Events+ Pro', instances: 3, monthly: 1.99, pick: true,
         note: 'El evento en marcha, el ensayo y el siguiente.',
         href: checkout('events-plus-3', 38),
-        features: ['3 instancias activas', 'Todo lo de Lite', 'Descargas con prioridad doble', '2 GB por instancia', 'Estadísticas de 30 días', '8 cuentas de staff', 'Aperturas programadas y códigos masivos', '1 destaque al mes en Explorar', 'Soporte prioritario'],
+        features: ['3 instancias activas', 'Todo lo de Lite', 'Mods protegidos con Events Loader', 'Descargas con prioridad doble', '2 GB por instancia', 'Estadísticas de 30 días', '8 cuentas de staff', 'Aperturas programadas y códigos masivos', '1 destaque al mes en Explorar', 'Soporte prioritario'],
     },
     {
         id: 'plus5', name: 'Events+ Max', instances: 5, monthly: 3.99,
