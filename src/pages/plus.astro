@@ -20,7 +20,7 @@ const TABLE: { group: string; rows: [string, Cell, Cell, Cell, Cell, Cell, Cell]
         ['Canales de instancia', N, N, Y, Y, Y, Y],
         ['EVAC+: directo de la ventana del juego', N, N, N, N, Y, 'A medida'],
         ['Launcher propio con la marca del studio', N, N, N, N, Y, 'A medida'],
-        ['Mods protegidos en RAM · próximamente', N, Y, Y, Y, Y, Y],
+        ['Mods protegidos con Events Loader', N, N, Y, Y, Y, Y],
     ] },
     { group: 'En el panel', rows: [
         ['Cuentas de staff', '2', '3', '8', '20', '20', 'A medida'],
@@ -146,7 +146,7 @@ const FAQ = [
                     { icon: 'download', title: 'Más prioridad de descarga', text: 'El día del estreno, tus instancias no comparten el límite general con todo el mundo.' },
                     { icon: 'arrow-up-right', title: 'Un enlace que lo hace todo', text: 'Abre el launcher, añade tu instancia y canjea el código de una vez.' },
                     { icon: 'layers', title: 'Canales de instancia', text: 'Una copia solo para el staff, para ensayar sin tocar la que se juega.' },
-                    { icon: 'lock', title: 'Mods protegidos en RAM', text: 'Los mods se cargan en memoria y no llegan al disco del jugador.', tag: 'Próximamente' },
+                    { icon: 'lock', title: 'Mods protegidos', text: 'Los mods del studio llegan al juego por Events Loader, sin pasar por la carpeta mods/.' },
                 ]} />
                 <h3 class="group-h">En el panel</h3>
                 <FeatureList items={[
