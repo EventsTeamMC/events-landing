@@ -344,19 +344,27 @@
       cosméticos de Events (Términos y Condiciones, cláusula 22 bis).</p>
     <p><strong>Saldo y movimientos.</strong> Se guarda un saldo por nombre de Minecraft (y su UUID, si la cuenta es
       premium) y un registro de movimientos con: a) la fecha; b) la cantidad; c) el motivo: misión, anuncio, compra,
-      gasto, devolución o ajuste de un administrador de Events Team, con su nota; d) el origen: la misión, el anuncio,
-      el servicio de la tienda o el artículo. Se conservan mientras exista el saldo o la cuenta; los movimientos de
+      gasto, donación, devolución o ajuste de un administrador de Events Team, con su nota; d) el origen: la misión, el anuncio,
+      el servicio de la tienda, el artículo o la meta. Se conservan mientras exista el saldo o la cuenta; los movimientos de
       compras, el plazo que exija la legislación fiscal y mercantil (hasta 6 años). Base jurídica: ejecución de los
       Términos y Condiciones y, en las compras, obligación legal en lo fiscal.</p>
     <p><strong>Anuncios con recompensa.</strong> Son vídeos propios de Events Team, iguales para todos: no se usan
-      datos para elegirlos ni para publicidad personalizada. Se guarda qué anuncio se vio, cuándo y si se terminó.
-      Para limitar abusos se guarda además un hash del identificador del dispositivo (apartado 11) y de la dirección
-      IP, que se borra a las 48 horas. Las estadísticas de cada anuncio (vistas y Evos entregados) son totales, sin
+      datos para elegirlos ni para publicidad personalizada. Cada anuncio visto entero queda en los movimientos (qué
+      anuncio y cuándo). Para limitar abusos se cuenta cuántos anuncios se ven al día por jugador, por un hash del
+      identificador del dispositivo (apartado 11) y por un hash de la dirección IP; ese recuento se borra al día
+      siguiente (en 48 horas como mucho). Un visionado empezado y no terminado no se guarda. Las estadísticas de cada anuncio (vistas y Evos entregados) son totales, sin
       datos personales. Base jurídica: ejecución de los Términos y Condiciones, para entregar la recompensa, e interés
       legítimo en impedir el fraude. Si en el futuro los anuncios los sirve un proveedor externo, se avisará antes y
       se actualizará esta política.</p>
     <p><strong>Compras.</strong> Los paquetes de Evos se compran en el área de clientes clientes.eventsmc.xyz, que
       trata los datos de la compra como se describe en el apartado 19.</p>
+    <p><strong>Hucha del Studio.</strong> Al donar Evos a una meta del Studio cuyo código de referido usó el
+      jugador, se guarda en la meta su nombre de Minecraft, lo que ha donado, la fecha y si acepta que su nombre se
+      muestre. Los donantes destacados se muestran a los jugadores referidos por ese Studio con su nombre solo si lo
+      aceptaron (si no, como «Anónimo»); el Studio ve las donaciones con ese mismo criterio y Events Team las ve
+      todas. Se conservan mientras exista la meta; las metas cerradas se borran a los 12 meses de cerrarse (las
+      donaciones siguen en los movimientos). Base jurídica: ejecución de los Términos y Condiciones y, para mostrar el
+      nombre, el consentimiento del jugador, que puede no darlo.</p>
     <p>Los datos de los Evos no se ceden a terceros.</p>
 
     <h3>13. Capturas de pantalla</h3>
@@ -539,7 +547,8 @@
       <strong>Retransmisiones de EVAC+:</strong> no se guardan; el registro de quién miró sigue el plazo del registro
       de actividad. <strong>Capas compradas:</strong> mientras la capa siga a nombre del jugador. <strong>Evos:</strong>
       el saldo y los movimientos, mientras exista el saldo o la cuenta (los de compras, hasta 6 años); el hash del
-      dispositivo y de la IP de los anuncios con recompensa, 48 horas. <strong>Feed:</strong> mientras
+      dispositivo y de la IP de los anuncios con recompensa, 48 horas como mucho; las donaciones de una meta, hasta 12
+      meses después de cerrarse. <strong>Feed:</strong> mientras
       el Studio no lo borre, hasta 500 publicaciones por instancia. <strong>Avisos al jugador:</strong> 30 días, 50
       como máximo por jugador.
       <strong>Copias de seguridad:</strong> hasta 7 días adicionales, sin uso ordinario.
