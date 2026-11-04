@@ -34,6 +34,7 @@
       <li>Las capas compradas y el nombre de Minecraft que las tiene.</li>
       <li>El historial de skins de Events Skins y lo necesario para desbloquear capas (tiempo jugado, partidas,
         etiqueta de servidor de Discord, zona horaria).</li>
+      <li>Los cosméticos y la insignia que lleva puestos, con su sello de procedencia. Son públicos.</li>
       <li>El saldo y los movimientos de Evos, y los anuncios con recompensa que el jugador empezó o vio entero.</li>
       <li>Para elegir los anuncios: el idioma de Events Client, la zona horaria, si la cuenta es premium, desde qué
         launcher se juega y las versiones y horas jugadas en los últimos 30 días.</li>
@@ -76,6 +77,7 @@
       <li>Informes de errores (F1): 30 días.</li>
       <li>Capturas y grabaciones de EVAC: 30 días.</li>
       <li>Historial de skins: hasta 50 skins, mientras exista el perfil de Events Skins o hasta que el usuario lo vacíe.</li>
+      <li>Cosméticos, insignias y su sello de procedencia: mientras exista el perfil de Events Skins.</li>
       <li>Zona horaria: 12 meses desde la última partida.</li>
       <li>Avisos en canales de Discord de Events Team: 30 días.</li>
       <li>Avisos de EVAC y el identificador del dispositivo que llevan: 12 meses.</li>
@@ -370,7 +372,8 @@
     <p>Con una
       cuenta premium, al aplicar una skin: a) el archivo se envía directamente desde su dispositivo a la API oficial
       de Minecraft; b) se utiliza el token del propio usuario; c) el archivo no pasa por los servidores de Events
-      Team. Después, Events Client envía una copia a Events Skins para el historial de skins (ver más abajo). El
+      Team. Después, Events Client envía una copia a Events Skins, que pasa a ser su skin allí y entra en el historial
+      de skins (ver más abajo). El
       tratamiento realizado por Mojang Studios o Microsoft se regirá por sus propias políticas.</p>
     <p><strong>Capas de Minecraft.</strong> Con una cuenta premium, Events Client muestra las capas oficiales de la
       cuenta y permite elegir cuál lleva en Minecraft. Para ello usa el token de Microsoft del propio usuario
@@ -385,10 +388,18 @@
       launcher, y las imágenes que ya no se usan ni están en el historial se eliminan en ese momento. Events Team puede
       retirar una skin que incumpla las normas; el usuario recibe un aviso en el launcher. Las capas de Events solo
       las crea Events Team y se obtienen con un código, como premio, comprándolas o cumpliendo sus condiciones.</p>
+    <p><strong>Skin premium en Events Skins.</strong> Si una cuenta premium no tiene skin en Events Skins, Events Skins
+      lee de Mojang la skin pública de ese perfil, guarda una copia y la sirve por el nombre del jugador, para que se
+      vea en los servidores que no la reciben de Mojang. Base jurídica: interés legítimo en que la skin se vea en las
+      instancias de Events.</p>
+    <p><strong>Cosméticos e insignias.</strong> Los cosméticos que el usuario lleva puestos y su insignia, con su texto
+      y su color, son públicos: los mods y las instancias los consultan por el nombre del jugador, y la insignia se ve
+      junto a su nombre en la lista de jugadores. Cada pieza lleva un sello de procedencia, también público: el puesto de su copia entre las de esa pieza, la fecha en que la consiguió y, si vino de un evento o de una
+      instancia, su nombre. El usuario puede quitarse una pieza u ocultar todas a los demás. Base jurídica: ejecución de
+      los Términos y Condiciones, para la función que el usuario decide usar.</p>
     <p><strong>Historial de skins.</strong> Cada skin que el usuario se pone en Events Skins queda en su historial con
       su modelo y la fecha, hasta 50 (las más antiguas salen al pasar de ahí). En las cuentas premium también entran
-      las skins que el usuario aplica en Mojang desde Events Client: la imagen y su modelo se guardan en Events Skins,
-      sin cambiar la skin que tenga allí. El historial es público, como la skin, y
+      las skins que el usuario aplica en Mojang desde Events Client: la imagen y su modelo se guardan en Events Skins. El historial es público, como la skin, y
       se muestra en la página de perfil del jugador. Se conserva mientras exista su perfil de Events Skins; el usuario
       puede vaciarlo cuando quiera desde la web de Events Skins o desde Events Client. Base jurídica: ejecución de los Términos y Condiciones, para la función que
       el usuario decide usar.</p>
