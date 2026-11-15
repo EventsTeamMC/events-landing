@@ -6,7 +6,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/calendar", "destination": "https://calendar.eventsmc.xyz", "permanent": true }
+    { "source": "/calendar", "destination": "https://calendar.eventsmc.xyz", "permanent": true },
+    { "source": "/mac", "destination": "https://api.eventsmc.xyz/api/download/mac", "permanent": false }
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/sitemap-index.xml" }
