@@ -133,16 +133,17 @@ const groups = [
                 </div>
                 <p class="note small">Apertura: hasta tener cargados la sesión, las instancias y el Inicio, en el mismo PC con Windows. El motor de la 2.0 es Tauri; el de 1.x, Electron.</p>
 
-                <div class="vs">
-                    <figure class="vs-item" data-reveal>
-                        <figcaption><span class="vs-tag">1.x</span></figcaption>
-                        <div class="shot"><Image src={v1} alt="Events Client 1.x: Explorar" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /></div>
-                    </figure>
-                    <figure class="vs-item" data-reveal style="--i:1">
-                        <figcaption><span class="vs-tag new">2.0</span></figcaption>
-                        <div class="shot"><Image src={home} alt="Events Client 2.0: Inicio con el tema Events" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /></div>
-                    </figure>
-                </div>
+                <figure class="vs" data-reveal>
+                    <div class="shot vs-box" data-vs style="--pos:50%">
+                        <Image class="vs-new" src={home} alt="Inicio de Events Client 2.0" widths={[800, 1280]} sizes="(max-width: 1240px) 100vw, 1200px" />
+                        <Image class="vs-old" src={v1} alt="Inicio de Events Client 1.x" widths={[800, 1280]} sizes="(max-width: 1240px) 100vw, 1200px" />
+                        <span class="vs-line" aria-hidden="true"><span class="vs-knob"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6-6 6 6 6"/><path d="m15 6 6 6-6 6"/></svg></span></span>
+                        <span class="vs-tag vs-l" aria-hidden="true">1.x</span>
+                        <span class="vs-tag new vs-r" aria-hidden="true">2.0</span>
+                        <input class="vs-range" type="range" min="0" max="100" value="50" step="1" aria-label="Comparar el Inicio de 1.x (izquierda) y 2.0 (derecha)" />
+                    </div>
+                    <figcaption class="note small">El Inicio, en 1.x y en 2.0. Arrastra para comparar.</figcaption>
+                </figure>
             </div>
         </section>
 
@@ -249,8 +250,20 @@ const groups = [
     :global(.js) .cmp-row.in .bar + .bar .bar-fill { transition-delay: 350ms; }
     .note { margin-top: 20px; color: var(--text-3); max-width: 70ch; }
 
-    .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: clamp(40px, 5vw, 64px); }
-    .vs-item { margin: 0; display: grid; gap: 12px; }
+    .vs { margin: clamp(40px, 5vw, 64px) 0 0; }
+    .vs-box { position: relative; aspect-ratio: 16 / 9; touch-action: pan-y; }
+    .vs-box :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .vs-box :global(.vs-old) { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+    .vs-line { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--text); pointer-events: none; }
+    .vs-knob {
+        position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+        transform: translate(-50%, -50%); color: var(--bg); background: var(--text); box-shadow: var(--shadow-3);
+    }
+    .vs-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+    .vs-box:has(.vs-range:focus-visible) .vs-knob { outline: 2px solid var(--action); outline-offset: 3px; }
+    .vs-l, .vs-r { position: absolute; bottom: 14px; pointer-events: none; backdrop-filter: blur(8px); }
+    .vs-l { left: 14px; }
+    .vs-r { right: 14px; }
     .vs-tag { display: inline-block; padding: 4px 10px; border-radius: var(--r-full); font-family: var(--font-mono, monospace); font-size: var(--fs-small); color: var(--text-2); background: var(--surface-2); }
     .vs-tag.new { color: var(--text); background: color-mix(in oklab, var(--action) 22%, transparent); }
 
@@ -307,4 +320,11 @@ const groups = [
     }
     tick();
     if (!gates[0]?.classList.contains('open')) timer = window.setInterval(tick, 1000);
+</script>
+
+<script>
+    document.querySelectorAll<HTMLElement>('[data-vs]').forEach((box) => {
+        const r = box.querySelector<HTMLInputElement>('.vs-range')!;
+        r.addEventListener('input', () => box.style.setProperty('--pos', `${r.value}%`));
+    });
 </script>
