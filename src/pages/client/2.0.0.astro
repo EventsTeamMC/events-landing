@@ -6,40 +6,109 @@ import PageHero from '../../components/PageHero.astro';
 import FeatureList from '../../components/FeatureList.astro';
 import { product } from '../../data/site';
 import home from '../../assets/shots/v2/home.png';
+import v1 from '../../assets/shots/v2/v1.png';
 import onboarding from '../../assets/shots/v2/onboarding.png';
+import themes from '../../assets/shots/v2/themes.png';
+import skins from '../../assets/shots/v2/skins.png';
+import gallery from '../../assets/shots/v2/gallery.png';
 import evacLive from '../../assets/shots/v2/evac-live.png';
-import evacPanel from '../../assets/shots/v2/evac-panel.png';
 
 const p = product('client');
-const BETA = 'https://github.com/EventsTeamMC/events-client-releases/releases/tag/v2.0.0-beta.1t';
+const BETA = 'https://github.com/EventsTeamMC/events-client-releases/releases/tag/v2.0.0-beta.1';
+// 20:00 en Madrid del 15 de noviembre de 2026.
+const OPENS = '2026-11-15T19:00:00Z';
 
-// Medido: instalador de Windows de 1.2.7 (96,9 MiB) y de 2.0.0-beta.1 (15,2 MB). La apertura de la
-// 2.0 ([boot] datos cargados) da 1,7-2,2 s; falta medir la 1.x en el mismo equipo para compararla.
+// Medido en el mismo PC con Windows: launcher.log, línea «[boot] datos cargados» (1.2.7: 5405 ms;
+// 2.0.0-beta.1: 2156 y 1656 ms, mediana 1906) y tamaño de los instaladores (1.2.7: 96,9 MiB).
 const bars = [
-    { label: 'Instalador de Windows', unit: 'MB', v1: 96.9, v2: 15.2 },
+    { label: 'Apertura', unit: 's', v1: 5.4, v2: 1.9, word: 'más rápido' },
+    { label: 'Instalador de Windows', unit: 'MB', v1: 96.9, v2: 15.2, word: 'más ligero' },
 ];
 const fmt = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 1 });
+
+const groups = [
+    {
+        title: 'Inicio y amigos',
+        img: onboarding, alt: 'Primer arranque de Events Client 2.0: vincular Discord',
+        items: [
+            { icon: 'home', text: 'Inicio nuevo con las noticias de Events y tus instancias' },
+            { icon: 'discord', text: 'Amigos de Discord: chat, quién juega, unirse e invitar a jugar' },
+            { icon: 'users', text: 'Envía instancias y capturas a tus amigos' },
+            { icon: 'bell', text: 'Avisos de amigos que puedes silenciar' },
+            { icon: 'sparkle', text: 'Primer arranque nuevo y tutorial del Inicio' },
+        ],
+    },
+    {
+        title: 'Temas',
+        img: themes, alt: 'Ajustes de Events Client 2.0: temas Events, Clásico y Minimal',
+        items: [
+            { icon: 'layers', text: 'Tema Events: cristal, barra lateral flotante e isla que se abre con el juego' },
+            { icon: 'settings', text: 'Clásico, Minimal y OLED, con tu color de acento' },
+            { icon: 'panel', text: 'Elige qué sale en la barra lateral; tus instancias recientes, a un clic' },
+        ],
+    },
+    {
+        title: 'Skins',
+        img: skins, alt: 'Skins en Events Client 2.0: biblioteca, historial y vista 3D',
+        items: [
+            { icon: 'image', text: 'Biblioteca e historial de skins, con vista 3D' },
+            { icon: 'sparkle', text: 'Vestuario con capas animadas y mascotas' },
+            { icon: 'upload', text: 'Editor, y sube tu PNG arrastrándolo' },
+        ],
+    },
+    {
+        title: 'Galería y Explorar',
+        img: gallery, alt: 'Galería de capturas de Events Client 2.0',
+        items: [
+            { icon: 'image', text: 'Galería con visor a pantalla completa' },
+            { icon: 'arrow-up-right', text: 'Envía capturas a un amigo o al Feed, o cópialas' },
+            { icon: 'compass', text: 'Explorar por pestañas: Eventos, Set-Ups, Modpacks y Networks' },
+        ],
+    },
+    {
+        title: 'Al jugar',
+        img: evacLive, alt: 'Instancia en marcha con el aviso En directo y el botón Detener',
+        items: [
+            { icon: 'gamepad', text: 'Detener cierra el juego guardando el mundo' },
+            { icon: 'shield', text: 'EVAC+: el staff puede ver la partida en directo contra las trampas, con aviso «En directo» en el juego' },
+            { icon: 'download', text: 'Mods y paquetes .eventspack más rápidos; ábrelos o arrástralos al launcher' },
+            { icon: 'message', text: 'Valora la beta al terminar una partida' },
+        ],
+    },
+] as const;
 ---
 <Base
     title="Events Client 2.0 · Beta pública"
-    description="Events Client 2.0: motor nuevo, más ligero y rápido de abrir. Inicio con amigos de Discord, galería, Explorar y EVAC+."
+    description="Events Client 2.0: motor nuevo, más ligero y rápido de abrir. Inicio con amigos de Discord, temas, skins, galería y Explorar."
 >
     <div style={`--tone:${p.tone}`}>
-        <PageHero product={{ ...p, name: 'Events Client 2.0 · Beta' }} title="Events Client 2.0." titleDim="Más ligero. Más rápido." lead="Un motor nuevo y nativo, un Inicio rediseñado y todo lo que ya usabas, en un launcher seis veces más ligero que abre en menos de dos segundos.">
+        <PageHero product={{ ...p, name: 'Events Client 2.0 · Beta' }} title="Events Client 2.0." titleDim="Más ligero. Más rápido." lead="Motor nuevo y nativo, Inicio con tus amigos de Discord y un tema nuevo. Abre en 1,9 segundos y pesa seis veces menos.">
             <Fragment slot="actions">
-                <a class="btn btn-primary btn-lg" href={BETA} target="_blank" rel="noopener"><Icon name="download" /> Descargar la beta</a>
-                <a class="btn btn-ghost btn-lg" href="/mac"><Icon name="apple" /> Para Mac</a>
+                <div class="gate" data-gate>
+                    <div class="cd" data-cd role="timer" aria-label="Tiempo hasta la apertura de la beta">
+                        <div class="cd-digits tnum" aria-hidden="true">
+                            <span class="cd-u"><b data-cd-h>00</b><small>horas</small></span><i>:</i>
+                            <span class="cd-u"><b data-cd-m>00</b><small>min</small></span><i>:</i>
+                            <span class="cd-u"><b data-cd-s>00</b><small>seg</small></span>
+                        </div>
+                        <p class="cd-t">La beta abre a las 20:00</p>
+                    </div>
+                    <div class="dl" data-dl-btns>
+                        <a class="btn btn-primary btn-lg" href={BETA} target="_blank" rel="noopener"><Icon name="download" /> Descargar la beta</a>
+                        <a class="btn btn-ghost btn-lg" href="/mac"><Icon name="apple" /> Para Mac</a>
+                    </div>
+                </div>
             </Fragment>
             <Fragment slot="meta">
                 <span>Windows, macOS (Apple Silicon e Intel) y Linux</span>
-                <span>Desde 1.x se actualiza solo, sin volver a iniciar sesión</span>
+                <span>Desde 1.x en Windows se actualiza solo, sin volver a iniciar sesión</span>
             </Fragment>
             <figure slot="visual" class="shot shot-hero">
-                <Image src={home} alt="Inicio de Events Client 2.0 con noticias, amigos de Discord y el tutorial de bienvenida" widths={[640, 960, 1280]} sizes="(max-width: 960px) 100vw, 640px" loading="eager" fetchpriority="high" />
+                <Image src={home} alt="Inicio de Events Client 2.0 con la portada de la instancia, noticias y amigos de Discord" widths={[640, 960, 1280]} sizes="(max-width: 960px) 100vw, 640px" loading="eager" fetchpriority="high" />
             </figure>
         </PageHero>
 
-        <section class="section" id="velocidad">
+        <section class="section" id="comparativa">
             <div class="wrap">
                 <div class="section-head" data-reveal>
                     <h2 class="h2">2.0 frente a 1.x.</h2>
@@ -58,40 +127,57 @@ const fmt = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 1 
                                 <span class="bar-track"><span class="bar-fill" style="--w:100%"></span></span>
                                 <b class="bar-val tnum old">{fmt(b.v1)} {b.unit}</b>
                             </div>
-                            <p class="cmp-x"><b class="tnum">{fmt(b.v1 / b.v2)}×</b> {b.unit === 's' ? 'más rápido' : 'más ligero'}</p>
+                            <p class="cmp-x"><b class="tnum">{fmt(b.v1 / b.v2)}×</b> {b.word}</p>
                         </div>
                     ))}
                 </div>
-                <p class="note small">Tiempo hasta tener cargados la sesión, las instancias y el Inicio, medido en el mismo PC con Windows. El motor de la 2.0 es Tauri; el de 1.x, Electron.</p>
+                <p class="note small">Apertura: hasta tener cargados la sesión, las instancias y el Inicio, en el mismo PC con Windows. El motor de la 2.0 es Tauri; el de 1.x, Electron.</p>
+
+                <div class="vs">
+                    <figure class="vs-item" data-reveal>
+                        <figcaption><span class="vs-tag">1.x</span></figcaption>
+                        <div class="shot"><Image src={v1} alt="Events Client 1.x: Explorar" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /></div>
+                    </figure>
+                    <figure class="vs-item" data-reveal style="--i:1">
+                        <figcaption><span class="vs-tag new">2.0</span></figcaption>
+                        <div class="shot"><Image src={home} alt="Events Client 2.0: Inicio con el tema Events" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /></div>
+                    </figure>
+                </div>
             </div>
         </section>
 
         <section class="section">
             <div class="wrap">
                 <div class="section-head" data-reveal><h2 class="h2">Novedades.</h2></div>
-                <FeatureList items={[
-                    { icon: 'zap', title: 'Motor nuevo', text: 'Nativo, más ligero y rápido de abrir.' },
-                    { icon: 'home', title: 'Inicio rediseñado', text: 'Noticias y tus amigos de Discord: chatea, mira quién juega y únete a su partida.' },
-                    { icon: 'image', title: 'Galería de capturas', text: 'Todas tus capturas en un sitio, con visor a pantalla completa.' },
-                    { icon: 'compass', title: 'Explorar por categorías', text: 'Eventos, set-ups, modpacks y networks.' },
-                    { icon: 'shield', title: 'EVAC+', text: 'El staff puede ver tu partida en directo para combatir trampas. En el juego aparece el aviso «En directo».' },
-                    { icon: 'gamepad', title: 'Detener guarda el mundo', text: 'Cierra el juego guardando antes, sin perder progreso.' },
-                    { icon: 'download', title: 'Descargas más rápidas', text: 'Los mods y los paquetes .eventspack se instalan antes.' },
-                    { icon: 'settings', title: 'Temas y personalización', text: 'Cambia el aspecto del launcher y el color de acento.' },
-                    { icon: 'sparkle', title: 'Tutorial de bienvenida', text: 'Un recorrido corto la primera vez que lo abres.' },
-                    { icon: 'globe', title: 'Windows, macOS y Linux', text: 'macOS en Apple Silicon e Intel. Desde 1.x en Windows, el paso es automático.' },
-                ]} />
+                <div class="groups">
+                    {groups.map((g, gi) => (
+                        <article class:list={['grp', { flip: gi % 2 }]}>
+                            <div class="grp-copy" data-reveal>
+                                <h3 class="h3">{g.title}</h3>
+                                <ul role="list" class="grp-list">
+                                    {g.items.map((it) => (
+                                        <li><span class="grp-ic"><Icon name={it.icon} size={18} /></span>{it.text}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <figure class="shot" data-reveal style="--i:1">
+                                <Image src={g.img} alt={g.alt} widths={[640, 1000, 1280]} sizes="(max-width: 960px) 100vw, 660px" />
+                            </figure>
+                        </article>
+                    ))}
+                </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section-tight">
             <div class="wrap">
-                <div class="section-head" data-reveal><h2 class="h2">Así se ve.</h2></div>
-                <div class="gallery">
-                    <figure class="shot" data-reveal><Image src={onboarding} alt="Primer arranque de Events Client 2.0: vincular Discord" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /><figcaption>Tus amigos de Discord, desde el primer arranque.</figcaption></figure>
-                    <figure class="shot" data-reveal style="--i:1"><Image src={evacLive} alt="Instancia en ejecución con el aviso En directo y el botón Detener" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /><figcaption>Aviso «En directo» y Detener que guarda el mundo.</figcaption></figure>
-                    <figure class="shot wide" data-reveal><Image src={evacPanel} alt="Panel de Events con EVAC+: partidas de jugadores en directo" widths={[800, 1400]} sizes="(max-width: 760px) 100vw, 1200px" /><figcaption>EVAC+ en el panel: el staff ve las partidas en directo.</figcaption></figure>
-                </div>
+                <div class="section-head" data-reveal><h2 class="h2">En todos tus equipos.</h2></div>
+                <FeatureList items={[
+                    { icon: 'zap', title: 'Motor nuevo', text: 'Nativo y más ligero. Las actualizaciones se buscan en segundo plano.' },
+                    { icon: 'refresh', title: 'Paso automático desde 1.x', text: 'En Windows, la 2.0 sustituye a la 1.x sin volver a iniciar sesión.' },
+                    { icon: 'apple', title: 'macOS', text: 'Apple Silicon e Intel.' },
+                    { icon: 'linux', title: 'Windows y Linux', text: 'Instalador de Windows de 15,2 MB. En Linux, AppImage, .deb y .rpm.' },
+                ]} />
             </div>
         </section>
 
@@ -99,9 +185,19 @@ const fmt = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 1 
             <div class="wrap">
                 <div class="end-row" data-reveal>
                     <h2 class="h2">Prueba la 2.0.</h2>
-                    <div class="end-actions">
-                        <a class="btn btn-primary btn-lg" href={BETA} target="_blank" rel="noopener"><Icon name="download" /> Descargar la beta</a>
-                        <a class="btn btn-secondary btn-lg" href="/mac"><Icon name="apple" /> Para Mac</a>
+                    <div class="gate gate-end" data-gate>
+                        <div class="cd cd-sm" data-cd role="timer" aria-label="Tiempo hasta la apertura de la beta">
+                            <div class="cd-digits tnum" aria-hidden="true">
+                                <span class="cd-u"><b data-cd-h>00</b></span><i>:</i>
+                                <span class="cd-u"><b data-cd-m>00</b></span><i>:</i>
+                                <span class="cd-u"><b data-cd-s>00</b></span>
+                            </div>
+                            <p class="cd-t">La beta abre a las 20:00</p>
+                        </div>
+                        <div class="dl" data-dl-btns>
+                            <a class="btn btn-primary btn-lg" href={BETA} target="_blank" rel="noopener"><Icon name="download" /> Descargar la beta</a>
+                            <a class="btn btn-secondary btn-lg" href="/mac"><Icon name="apple" /> Para Mac</a>
+                        </div>
                     </div>
                 </div>
                 <p class="note small">Es una beta: si algo falla, repórtalo con <span class="kbd-code">F1</span> desde el launcher.</p>
@@ -114,7 +210,27 @@ const fmt = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 1 
     .shot { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-3); }
     .shot :global(img) { width: 100%; height: auto; display: block; }
     .shot-hero { box-shadow: 0 0 0 1px rgba(170, 182, 255, 0.16), var(--shadow-4), 0 0 120px -30px rgba(107, 60, 255, 0.45); }
-    .shot figcaption { padding: 14px 16px; font-size: var(--fs-small); color: var(--text-2); }
+
+    /* Contador / botones: sin JS se ven los botones; con JS decide el script. */
+    .gate { display: grid; gap: 12px; }
+    .dl { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cd { display: none; }
+    :global(.js) .gate:not(.open) .cd { display: grid; gap: 10px; }
+    :global(.js) .gate:not(.open) .dl { display: none; }
+    .gate.open .dl { animation: dl-in var(--t-slow) var(--ease-out); }
+    @keyframes dl-in { from { opacity: 0; transform: translateY(8px); } }
+    .cd-digits { display: flex; align-items: flex-start; gap: 6px; font-family: var(--font-display); color: var(--text); }
+    .cd-u { display: grid; justify-items: center; gap: 6px; }
+    .cd-u b {
+        display: block; min-width: 2.1ch; padding: 10px 14px; border-radius: var(--r-md);
+        font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; text-align: center;
+        background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong);
+    }
+    .cd-u small { font-family: var(--font-sans); font-size: var(--fs-xs); color: var(--text-3); text-transform: lowercase; }
+    .cd-digits i { font-style: normal; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.5; color: var(--text-3); }
+    .cd-t { font-weight: 600; color: var(--text-2); }
+    .cd-sm .cd-u b { font-size: clamp(1.6rem, 3.4vw, 2.2rem); padding: 8px 12px; }
+    .cd-sm .cd-digits i { font-size: 1.6rem; line-height: 1.4; }
 
     .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); }
     .cmp-row { display: grid; gap: 14px; padding: 28px; border-radius: var(--r-xl); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
@@ -131,16 +247,64 @@ const fmt = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 1 
     :global(.js) .cmp-row .bar-fill { width: 0; transition: width 1100ms var(--ease-out) 200ms; }
     :global(.js) .cmp-row.in .bar-fill { width: var(--w); }
     :global(.js) .cmp-row.in .bar + .bar .bar-fill { transition-delay: 350ms; }
-    @media (prefers-reduced-motion: reduce) { :global(.js) .cmp-row .bar-fill { transition: none; width: var(--w); } }
     .note { margin-top: 20px; color: var(--text-3); max-width: 70ch; }
 
-    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .gallery .wide { grid-column: 1 / -1; }
+    .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: clamp(40px, 5vw, 64px); }
+    .vs-item { margin: 0; display: grid; gap: 12px; }
+    .vs-tag { display: inline-block; padding: 4px 10px; border-radius: var(--r-full); font-family: var(--font-mono, monospace); font-size: var(--fs-small); color: var(--text-2); background: var(--surface-2); }
+    .vs-tag.new { color: var(--text); background: color-mix(in oklab, var(--action) 22%, transparent); }
+
+    .groups { display: grid; gap: clamp(56px, 8vw, 112px); }
+    .grp { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+    .grp.flip .grp-copy { order: 2; }
+    .grp-list { display: grid; gap: 14px; margin-top: 22px; }
+    .grp-list li { display: grid; grid-template-columns: 32px 1fr; gap: 14px; align-items: start; color: var(--text-2); }
+    .grp-ic {
+        display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px;
+        color: var(--tone, var(--action)); background: color-mix(in oklab, var(--tone, var(--action)) 11%, transparent);
+    }
+    .grp-list li { line-height: 1.5; padding-top: 4px; }
+    .grp-list li .grp-ic { margin-top: -4px; }
 
     .end-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
-    .end-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    @media (prefers-reduced-motion: reduce) {
+        :global(.js) .cmp-row .bar-fill { transition: none; width: var(--w); }
+        .gate.open .dl { animation: none; }
+    }
+    @media (max-width: 960px) {
+        .grp { grid-template-columns: 1fr; }
+        .grp.flip .grp-copy { order: 0; }
+    }
     @media (max-width: 760px) {
-        .cmp, .gallery { grid-template-columns: 1fr; }
+        .cmp, .vs { grid-template-columns: 1fr; }
         .cmp-row { padding: 20px; }
     }
 </style>
+
+<script>
+    const OPENS = Date.parse('2026-11-15T19:00:00Z');
+    // Solo en local: ?ahora=<fecha ISO> para probar el contador.
+    const fake = ['localhost', '127.0.0.1'].includes(location.hostname) ? new URLSearchParams(location.search).get('ahora') : null;
+    const offset = fake ? Date.parse(fake) - Date.now() : 0;
+    const gates = document.querySelectorAll<HTMLElement>('[data-gate]');
+    const pad = (n: number) => String(n).padStart(2, '0');
+    let timer = 0;
+    function tick() {
+        const left = OPENS - (Date.now() + offset);
+        if (left <= 0) {
+            gates.forEach((g) => g.classList.add('open'));
+            clearInterval(timer);
+            return;
+        }
+        const s = Math.floor(left / 1000);
+        const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+        gates.forEach((g) => {
+            g.querySelector('[data-cd-h]')!.textContent = pad(h);
+            g.querySelector('[data-cd-m]')!.textContent = pad(m);
+            g.querySelector('[data-cd-s]')!.textContent = pad(sec);
+        });
+    }
+    tick();
+    if (!gates[0]?.classList.contains('open')) timer = window.setInterval(tick, 1000);
+</script>
