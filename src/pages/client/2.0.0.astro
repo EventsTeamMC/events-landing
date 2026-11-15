@@ -1,0 +1,146 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import FeatureList from '../../components/FeatureList.astro';
+import { product } from '../../data/site';
+import home from '../../assets/shots/v2/home.png';
+import onboarding from '../../assets/shots/v2/onboarding.png';
+import evacLive from '../../assets/shots/v2/evac-live.png';
+import evacPanel from '../../assets/shots/v2/evac-panel.png';
+
+const p = product('client');
+const BETA = 'https://github.com/EventsTeamMC/events-client-releases/releases/tag/v2.0.0-beta.1t';
+
+// Arranques medidos en launcher.log ([boot] datos cargados): 1.2.7 y 2.0.0-beta.1.
+const bars = [
+    { label: 'Abrir y cargar tus datos', unit: 's', v1: 5.4, v2: 1.9 },
+    { label: 'Instalador de Windows', unit: 'MB', v1: 96.9, v2: 15.2 },
+];
+const fmt = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 1 });
+---
+<Base
+    title="Events Client 2.0 · Beta pública"
+    description="Events Client 2.0: motor nuevo, más ligero y rápido de abrir. Inicio con amigos de Discord, galería, Explorar y EVAC+."
+>
+    <div style={`--tone:${p.tone}`}>
+        <PageHero product={{ ...p, name: 'Events Client 2.0 · Beta' }} title="Events Client 2.0." titleDim="Más ligero. Más rápido." lead="Un motor nuevo y nativo, un Inicio rediseñado y todo lo que ya usabas, en un launcher que abre casi tres veces más rápido.">
+            <Fragment slot="actions">
+                <a class="btn btn-primary btn-lg" href={BETA} target="_blank" rel="noopener"><Icon name="download" /> Descargar la beta</a>
+                <a class="btn btn-ghost btn-lg" href="/mac"><Icon name="apple" /> Para Mac</a>
+            </Fragment>
+            <Fragment slot="meta">
+                <span>Windows, macOS (Apple Silicon e Intel) y Linux</span>
+                <span>Desde 1.x se actualiza solo, sin volver a iniciar sesión</span>
+            </Fragment>
+            <figure slot="visual" class="shot shot-hero">
+                <Image src={home} alt="Inicio de Events Client 2.0 con noticias, amigos de Discord y el tutorial de bienvenida" widths={[640, 960, 1280]} sizes="(max-width: 960px) 100vw, 640px" loading="eager" fetchpriority="high" />
+            </figure>
+        </PageHero>
+
+        <section class="section" id="velocidad">
+            <div class="wrap">
+                <div class="section-head" data-reveal>
+                    <h2 class="h2">2.0 frente a 1.x.</h2>
+                </div>
+                <div class="cmp">
+                    {bars.map((b, i) => (
+                        <div class="cmp-row" data-reveal style={`--i:${i}`}>
+                            <h3 class="cmp-t">{b.label}</h3>
+                            <div class="bar">
+                                <span class="bar-name">2.0</span>
+                                <span class="bar-track"><span class="bar-fill new" style={`--w:${(b.v2 / b.v1) * 100}%`}></span></span>
+                                <b class="bar-val tnum">{fmt(b.v2)} {b.unit}</b>
+                            </div>
+                            <div class="bar">
+                                <span class="bar-name">1.x</span>
+                                <span class="bar-track"><span class="bar-fill" style="--w:100%"></span></span>
+                                <b class="bar-val tnum old">{fmt(b.v1)} {b.unit}</b>
+                            </div>
+                            <p class="cmp-x"><b class="tnum">{fmt(b.v1 / b.v2)}×</b> {b.unit === 's' ? 'más rápido' : 'más ligero'}</p>
+                        </div>
+                    ))}
+                </div>
+                <p class="note small">Tiempo hasta tener cargados la sesión, las instancias y el Inicio, medido en el mismo PC con Windows. El motor de la 2.0 es Tauri; el de 1.x, Electron.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">Novedades.</h2></div>
+                <FeatureList items={[
+                    { icon: 'zap', title: 'Motor nuevo', text: 'Nativo, más ligero y rápido de abrir.' },
+                    { icon: 'home', title: 'Inicio rediseñado', text: 'Noticias y tus amigos de Discord: chatea, mira quién juega y únete a su partida.' },
+                    { icon: 'image', title: 'Galería de capturas', text: 'Todas tus capturas en un sitio, con visor a pantalla completa.' },
+                    { icon: 'compass', title: 'Explorar por categorías', text: 'Eventos, set-ups, modpacks y networks.' },
+                    { icon: 'shield', title: 'EVAC+', text: 'El staff puede ver tu partida en directo para combatir trampas. En el juego aparece el aviso «En directo».' },
+                    { icon: 'gamepad', title: 'Detener guarda el mundo', text: 'Cierra el juego guardando antes, sin perder progreso.' },
+                    { icon: 'download', title: 'Descargas más rápidas', text: 'Los mods y los paquetes .eventspack se instalan antes.' },
+                    { icon: 'settings', title: 'Temas y personalización', text: 'Cambia el aspecto del launcher y el color de acento.' },
+                    { icon: 'sparkle', title: 'Tutorial de bienvenida', text: 'Un recorrido corto la primera vez que lo abres.' },
+                    { icon: 'globe', title: 'Windows, macOS y Linux', text: 'macOS en Apple Silicon e Intel. Desde 1.x en Windows, el paso es automático.' },
+                ]} />
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="wrap">
+                <div class="section-head" data-reveal><h2 class="h2">Así se ve.</h2></div>
+                <div class="gallery">
+                    <figure class="shot" data-reveal><Image src={onboarding} alt="Primer arranque de Events Client 2.0: vincular Discord" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /><figcaption>Tus amigos de Discord, desde el primer arranque.</figcaption></figure>
+                    <figure class="shot" data-reveal style="--i:1"><Image src={evacLive} alt="Instancia en ejecución con el aviso En directo y el botón Detener" widths={[640, 1000]} sizes="(max-width: 760px) 100vw, 580px" /><figcaption>Aviso «En directo» y Detener que guarda el mundo.</figcaption></figure>
+                    <figure class="shot wide" data-reveal><Image src={evacPanel} alt="Panel de Events con EVAC+: partidas de jugadores en directo" widths={[800, 1400]} sizes="(max-width: 760px) 100vw, 1200px" /><figcaption>EVAC+ en el panel: el staff ve las partidas en directo.</figcaption></figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-tight">
+            <div class="wrap">
+                <div class="end-row" data-reveal>
+                    <h2 class="h2">Prueba la 2.0.</h2>
+                    <div class="end-actions">
+                        <a class="btn btn-primary btn-lg" href={BETA} target="_blank" rel="noopener"><Icon name="download" /> Descargar la beta</a>
+                        <a class="btn btn-secondary btn-lg" href="/mac"><Icon name="apple" /> Para Mac</a>
+                    </div>
+                </div>
+                <p class="note small">Es una beta: si algo falla, repórtalo con <span class="kbd-code">F1</span> desde el launcher.</p>
+            </div>
+        </section>
+    </div>
+</Base>
+
+<style>
+    .shot { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--surface); box-shadow: 0 0 0 1px var(--border-strong), var(--shadow-3); }
+    .shot :global(img) { width: 100%; height: auto; display: block; }
+    .shot-hero { box-shadow: 0 0 0 1px rgba(170, 182, 255, 0.16), var(--shadow-4), 0 0 120px -30px rgba(107, 60, 255, 0.45); }
+    .shot figcaption { padding: 14px 16px; font-size: var(--fs-small); color: var(--text-2); }
+
+    .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); }
+    .cmp-row { display: grid; gap: 14px; padding: 28px; border-radius: var(--r-xl); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+    .cmp-t { font-family: var(--font-sans); font-size: 1.02rem; font-weight: 600; }
+    .bar { display: grid; grid-template-columns: 36px 1fr auto; align-items: center; gap: 14px; }
+    .bar-name { font-family: var(--font-mono, monospace); font-size: var(--fs-small); color: var(--text-3); }
+    .bar-track { height: 12px; border-radius: var(--r-full); background: var(--bg-raised); overflow: hidden; }
+    .bar-fill { display: block; height: 100%; width: var(--w); border-radius: inherit; background: var(--surface-3); }
+    .bar-fill.new { background: var(--action); }
+    .bar-val { min-width: 4.5em; text-align: right; color: var(--text); }
+    .bar-val.old { color: var(--text-3); font-weight: 500; }
+    .cmp-x { font-family: var(--font-display); font-size: var(--fs-h3); color: var(--text-2); letter-spacing: -0.02em; }
+    .cmp-x b { color: var(--text); font-weight: 700; }
+    :global(.js) .cmp-row .bar-fill { width: 0; transition: width 1100ms var(--ease-out) 200ms; }
+    :global(.js) .cmp-row.in .bar-fill { width: var(--w); }
+    :global(.js) .cmp-row.in .bar + .bar .bar-fill { transition-delay: 350ms; }
+    @media (prefers-reduced-motion: reduce) { :global(.js) .cmp-row .bar-fill { transition: none; width: var(--w); } }
+    .note { margin-top: 20px; color: var(--text-3); max-width: 70ch; }
+
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .gallery .wide { grid-column: 1 / -1; }
+
+    .end-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+    .end-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    @media (max-width: 760px) {
+        .cmp, .gallery { grid-template-columns: 1fr; }
+        .cmp-row { padding: 20px; }
+    }
+</style>
